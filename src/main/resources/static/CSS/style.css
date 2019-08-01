@@ -122,3 +122,15 @@ ion-icon:hover {
     text-transform: uppercase;
     font-weight: 700;
 }
+
+/* ------------- PAGE TRAVAUX ------------- */
+
+.travaux-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.travaux-container table {
+    margin: 2vh 0 4vh 0;
+}
