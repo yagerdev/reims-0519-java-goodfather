@@ -1,0 +1,161 @@
+/* ------------- Charte graphique ------------- */
+
+.bg-vert-gf {
+    background-color: #328080;
+}
+
+.bg-yellow-gf {
+    background-color: #ffcc00;
+}
+
+.vert-gf {
+    color: #328080;
+}
+
+.yellow-gf {
+    color: #ffcc00;
+}
+
+/* ------------- Configuration générale ------------- */
+
+body {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height:100vh;
+    color: #333333;
+    line-height: 1.5em;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.gf-logo {
+    width: 50%;
+}
+
+@media screen and (min-width: 1000px) {
+    .gf-logo {
+        width: 30%;
+    }
+}
+
+/* ------------- Footer ------------- */
+
+footer {
+    width: 100%;
+    padding: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333333;
+}
+
+footer .footer-social {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 1000px) {
+    footer .footer-social {
+        width: 20%;
+    }
+}
+
+ion-icon {
+    height: 30px;
+    width: 30px;
+    color: white;
+    margin: 0;
+}
+
+ion-icon:hover {
+    color: #ffcc00;
+    transition: .5s;
+}
+
+/* ------------- Header ------------- */
+
+.navbar {
+    width: 100vw;
+}
+
+.navbar ul {
+    padding: 5vh 0;
+    width: 90%;
+    margin: auto;
+}
+
+.navbar ul li {
+    padding: 1vh 2vh;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+}
+
+.navbar ul li:hover {
+    background-color: rgba(255, 255, 255, .5);
+}
+
+.navbar h1 {
+    color: white;
+    font-size: 12pt;
+    font-weight: lighter;
+    margin: 0;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255, 255, 255, .8);
+}
+
+/* ------------- PAGE ACCUEIL ------------- */
+
+.home-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.home-container h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* ------------- PAGE ROOM ------------- */
+
+.room-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.room-container h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.room-container form {
+    background-color: whitesmoke;
+    padding: 3vh;
+    margin-bottom: 2vh;
+    max-width: 300px;
+    margin: auto;
+}
+
+.room-container .input-group {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.room-container .input-group-prepend {
+    min-width: 100px;
+}
+
+.room-container .input-group-prepend .input-group-text {
+    min-width: 100px;
+    justify-content: center;
+}
+
