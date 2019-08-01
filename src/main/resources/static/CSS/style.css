@@ -122,3 +122,22 @@ ion-icon:hover {
     text-transform: uppercase;
     font-weight: 700;
 }
+
+/* ------------- PAGE PROFIL ------------- */
+
+.profil-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.profil-container h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.profil-container form {
+    background-color: whitesmoke;
+    padding: 3vh;
+    margin-bottom: 2vh;
+}
