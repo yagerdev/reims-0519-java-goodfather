@@ -123,33 +123,39 @@ ion-icon:hover {
     font-weight: 700;
 }
 
-/* ------------- PAGE PROFIL ------------- */
+/* ------------- PAGE ROOM ------------- */
 
-.profil-container {
+.room-container {
     text-align: center;
     margin: auto;
     padding: 4vh 1vh;
 }
 
-.profil-container h2 {
+.room-container h2 {
     text-transform: uppercase;
     font-weight: 700;
 }
 
-.profil-container form {
+.room-container form {
     background-color: whitesmoke;
     padding: 3vh;
     margin-bottom: 2vh;
-}
-
-/* ------------- PAGE TRAVAUX ------------- */
-
-.travaux-container {
-    text-align: center;
+    max-width: 300px;
     margin: auto;
-    padding: 4vh 1vh;
 }
 
-.travaux-container table {
-    margin: 2vh 0 4vh 0;
+.room-container .input-group {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
+.room-container .input-group-prepend {
+    min-width: 100px;
+}
+
+.room-container .input-group-prepend .input-group-text {
+    min-width: 100px;
+    justify-content: center;
+}
+
