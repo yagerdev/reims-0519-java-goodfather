@@ -32,3 +32,5 @@ build/
 
 ## DS STORE ###
 .DS_Store
+
+application.properties
