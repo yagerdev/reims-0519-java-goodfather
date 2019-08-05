@@ -153,3 +153,39 @@ ion-icon:hover {
 .travaux-container table {
     margin: 2vh 0 4vh 0;
 }
+
+/* ------------- PAGE ROOM ------------- */
+
+.room-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.room-container h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.room-container form {
+    background-color: whitesmoke;
+    padding: 3vh;
+    margin-bottom: 2vh;
+    max-width: 300px;
+    margin: auto;
+}
+
+.room-container .input-group {
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.room-container .input-group-prepend {
+    min-width: 100px;
+}
+
+.room-container .input-group-prepend .input-group-text {
+    min-width: 100px;
+    justify-content: center;
+}
