@@ -17,10 +17,14 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
     
+    @Column(length = 20)
     private String name;
+
     private String address;
+
+    @Column(length = 45)
     private String city;
 
     @Column(name="postal_code", length = 5)
@@ -32,7 +36,7 @@ public class Project {
 
     public Project() { }
 
-    public Project(int id, String name, String address, String city, int postalCode, Date createDate) {
+    public Project(Long id, String name, String address, String city, int postalCode, Date createDate) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -41,11 +45,11 @@ public class Project {
         this.creationDate = createDate;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
