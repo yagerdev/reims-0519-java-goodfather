@@ -23,10 +23,10 @@ public class Project {
     private String address;
     private String city;
 
-    @Temporal(TemporalType.DATE)
     @Column(name="postal_code")
     private int postalCode;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="creation_date")
     private Date creationDate;
 
