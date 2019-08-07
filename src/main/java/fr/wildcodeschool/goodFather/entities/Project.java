@@ -23,7 +23,7 @@ public class Project {
     private String address;
     private String city;
 
-    @Column(name="postal_code")
+    @Column(name="postal_code", length = 5)
     private int postalCode;
 
     @Temporal(TemporalType.DATE)
