@@ -1,18 +1,36 @@
 package fr.wildcodeschool.goodFather.entities;
 
-import java.sql.Date;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "projects")
 public class Project {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
     private String name;
     private String address;
     private String city;
-    private int postalCode;
-    private Date createDate;
 
-    public Project() {
-    }
+    @Temporal(TemporalType.DATE)
+    @Column(name="postal_code")
+    private int postalCode;
+
+    @Column(name="creation_date")
+    private Date creationDate;
+
+    public Project() { }
 
     public Project(int id, String name, String address, String city, int postalCode, Date createDate) {
         this.id = id;
@@ -20,7 +38,7 @@ public class Project {
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
-        this.createDate = createDate;
+        this.creationDate = createDate;
     }
 
     public int getId() {
@@ -64,11 +82,11 @@ public class Project {
     }
 
     public Date getCreateDate() {
-        return createDate;
+        return creationDate;
     }
 
     public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+        this.creationDate = createDate;
     }
     
 }
