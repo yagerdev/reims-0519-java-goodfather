@@ -142,6 +142,33 @@ ion-icon:hover {
     margin-bottom: 2vh;
 }
 
+/* --------------PAGE PROJECT-------------- */
+
+image {
+    width: 100%;
+    height: 500px;
+}
+
+.sdb {
+    background-image: url('../IMG/sdb.jpg');
+}
+
+.couloir {
+    background-image: url('../IMG/couloir.jpg');
+}
+
+.sejour {
+    background-image: url('../IMG/salonsejour.jpg');
+}
+
+.chambre {
+    background-image: url('../IMG/chambre.jpg');
+}
+
+.cuisine {
+    background-image: url('../IMG/cuisine.jpg');
+}
+
 /* ------------- PAGE TRAVAUX ------------- */
 
 .travaux-container {
