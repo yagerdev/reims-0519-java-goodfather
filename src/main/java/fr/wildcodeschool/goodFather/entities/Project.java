@@ -43,7 +43,12 @@ public class Project {
         this.creationDate = createDate;
     }
 
-    
+    public Project(String name, String address, String city, String postalCode) {
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.postalCode = postalCode;
+    }
 
     public Long getId() {
         return id;
@@ -91,13 +96,6 @@ public class Project {
 
     public void setCreateDate(Date createDate) {
         this.creationDate = createDate;
-    }
-
-    public Project(String name, String address, String city, String postalCode) {
-        this.name = name;
-        this.address = address;
-        this.city = city;
-        this.postalCode = postalCode;
     }
     
 }
