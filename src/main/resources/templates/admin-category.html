@@ -61,7 +61,7 @@
             </h2>
 
             <section>
-                <p>
+                <p class="group-button-category">
                     <button 
                         class="btn btn-outline-info"
                         type="button"
@@ -72,8 +72,40 @@
                     >
                         Créer
                     </button>
+                    
+                    <button 
+                        class="btn btn-outline-info"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#collapseShowCategory"
+                        aria-expanded="false"
+                        aria-controls="collapseShowCategory"
+                    >
+                        Afficher
+                    </button>
                 </p>
+
                 <div class="collapse" id="collapseFormCategory">
+                    <div class="card card-body">
+                        <form action="/admin-category" method="POST">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputCategory">Catégorie</label>
+                                </div>
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Entrez une catégorie..."
+                                    aria-label="Username" 
+                                    aria-describedby="inputCategory"
+                                >
+                            </div>
+                            <button type="submit" class="btn btn-outline-warning">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="collapse" id="collapseShowCategory">
                     <div class="card card-body">
                         Anim pariatur cliche reprehenderit.
                     </div>
