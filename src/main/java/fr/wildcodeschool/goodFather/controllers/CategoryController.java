@@ -9,15 +9,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class CategoryController {
 
-    @GetMapping("/admin-category")
-    public String showAdminCategory() {
-        return "admin-category";
+    @GetMapping("/categories")
+    public String showCategories() {
+        //Todo : check if user is admin
+        return "categories";
     }
 
-    @PostMapping("/admin-category")
+    @PostMapping("/categories")
     public String createCategory(@RequestParam String name) {
+        //Todo : check if user is admin
         Category category = new Category(name);
         CategoryRepository.save(category);
-        return "redirect:/admin-category";
+        return "redirect:/categories";
     }
 }
