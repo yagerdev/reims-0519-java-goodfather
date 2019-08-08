@@ -28,7 +28,7 @@ public class Project {
     private String city;
 
     @Column(name="postal_code", length = 5)
-    private int postalCode;
+    private String postalCode;
 
     @Temporal(TemporalType.DATE)
     @Column(name="creation_date")
@@ -36,7 +36,7 @@ public class Project {
 
     public Project() { }
 
-    public Project(Long id, String name, String address, String city, int postalCode, Date createDate) {
+    public Project(Long id, String name, String address, String city, String postalCode, Date createDate) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -77,11 +77,11 @@ public class Project {
         this.city = city;
     }
 
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
