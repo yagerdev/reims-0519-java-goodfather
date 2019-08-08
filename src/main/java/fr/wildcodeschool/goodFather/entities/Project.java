@@ -19,7 +19,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(length = 20)
+    @Column(length = 30)
     private String name;
 
     private String address;
