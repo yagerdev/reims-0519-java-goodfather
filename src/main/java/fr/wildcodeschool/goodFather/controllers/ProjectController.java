@@ -24,7 +24,7 @@ public class ProjectController {
         return "project-create";
     }
 
-    @GetMapping("project/{id}/edit")
+    @GetMapping("projects/{id}/edit")
     public String showCatetories(@PathVariable("id") Long projectId, @RequestParam Long categoryId){
         if(categoryId == null) {
             return "categories";
