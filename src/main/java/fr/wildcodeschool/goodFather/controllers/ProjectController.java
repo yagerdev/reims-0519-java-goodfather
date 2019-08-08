@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class ProjectController {
 
-    @GetMapping("/project")
+    @GetMapping("/projects")
     public String showProject() {
         return "project";
     }
     
-    @PostMapping("/project")
+    @PostMapping("/projects")
     public String createProject(@RequestParam String name, @RequestParam String address, @RequestParam String city, @RequestParam String postalCode) {
         Project project = new Project(name, address, city, postalCode);
         ProjectRepository.save(project);
         return "redirect:/rooms";
     }
-
+    
 }
