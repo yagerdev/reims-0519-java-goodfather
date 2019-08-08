@@ -25,11 +25,10 @@ public class Project {
     @Column(length = 45)
     private String city;
 
-    @Column(name="postal_code", length = 5)
+    @Column(length = 5)
     private String postalCode;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="creation_date")
     private Date creationDate;
 
     public Project() { }
