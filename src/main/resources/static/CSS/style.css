@@ -209,3 +209,43 @@ ion-icon:hover {
     width: 30%;
 }
 
+/* --------------PAGE PROJECT-------------- */
+
+.categories-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.categories-container .col-lg-4 {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 200px;
+    border-radius: 1em;
+}
+
+.categories-container .col-lg-4 p {
+    margin-top: 10rem;
+    background-color: rgba(255, 255, 255, .75);
+    border-radius: 2em;
+}
+
+.categories-container .sdb {
+    background-image: url('../IMG/sdb.jpg');
+}
+
+.categories-container .couloir {
+    background-image: url('../IMG/couloir.jpg');
+}
+
+.categories-container .sejour {
+    background-image: url('../IMG/salonsejour.jpg');
+}
+
+.categories-container .chambre {
+    background-image: url('../IMG/chambre.jpg');
+}
+
+.categories-container .cuisine {
+    background-image: url('../IMG/cuisine.jpg');
+}
