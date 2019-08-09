@@ -39,6 +39,4 @@ public class ProjectController {
             return "redirect:/rooms/create?projectId="+projectId+"&categoryId="+categoryId;
         }
     }
-    
-    
 }
