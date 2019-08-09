@@ -12,15 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public class ProjectController {
     
-    @PostMapping("/projects/create")
+    @PostMapping("/projects")
     public String createProject(@RequestParam String name, @RequestParam String address, @RequestParam String city, @RequestParam String postalCode) {
         Project project = new Project(name, address, city, postalCode);
         ProjectRepository.save(project);
-        return "redirect:/project/id/edit";
+        Long id = project.getId();
+        return "redirect:/project/"+id+"/edit";
     }
 
     @GetMapping("/projects/create")
-    public String showProject() {
+    public String showCreateProjectForm() {
         return "project-create";
     }
 
@@ -30,7 +31,7 @@ public class ProjectController {
             return "categories";
         }
         else {
-            return "redirect:/rooms/create?projectId={categoryId}";
+            return "redirect:/rooms/create?projectId="+projectId+"&categoryId="+categoryId;
         }
     }
     
