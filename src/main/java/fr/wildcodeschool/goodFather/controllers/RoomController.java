@@ -30,13 +30,9 @@ public class RoomController {
         @RequestParam("category") Long categoryId
         ) {
             Room room = new Room(wallA, wallB, height, categoryId);
-            roomRepository.save(room);
+            room = roomRepository.save(room);
             Long id = room.getId();
             return "redirect:/rooms/"+id+"/edit";
     }
 
-    @GetMapping("/rooms/{id}/edit")
-    public String showWorksForm() {
-        return "works";
-    }
 }
