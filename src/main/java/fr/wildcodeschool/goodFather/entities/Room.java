@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Room {
@@ -22,24 +24,29 @@ public class Room {
     @Column(length = 5)
     double height;
 
+    @OneToOne
+    Long categoryId;
+
     public Room() {
 
     }
 
-    public Room(double wallA, double wallB, double height) {
+    public Room(double wallA, double wallB, double height, Long categoryId) {
 
         this.setWallA(wallA);
         this.setWallB(wallB);
         this.setHeight(height);
+        this.setCategoryId(categoryId);
 
     }
 
-    public Room(Long id, double wallA, double wallB, double height) {
+    public Room(Long id, double wallA, double wallB, double height, Long categoryId) {
 
         this.setId(id);
         this.setWallA(wallA);
         this.setWallB(wallB);
         this.setHeight(height);
+        this.setCategoryId(categoryId);
 
     }
 
@@ -73,6 +80,14 @@ public class Room {
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
 }
