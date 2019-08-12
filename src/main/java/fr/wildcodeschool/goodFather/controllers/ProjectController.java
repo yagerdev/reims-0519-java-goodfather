@@ -38,7 +38,11 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}/edit")
-    public String showCategories(Model model, @PathVariable("id") Long projectId, @RequestParam(required=false) Long categoryId) {
+    public String showCategories(
+            Model model,
+            @PathVariable("id") Long projectId,
+            @RequestParam(required=false) Long categoryId
+        ) {
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
         if(categoryId == null) {
