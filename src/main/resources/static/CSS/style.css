@@ -272,7 +272,7 @@ ion-icon:hover {
     text-transform: uppercase;
 }
 
-.categories-container .sdb {
+.categories-container .salle-de-bain {
     background-image: url('../IMG/sdb.jpg');
 }
 
@@ -280,7 +280,7 @@ ion-icon:hover {
     background-image: url('../IMG/couloir.jpg');
 }
 
-.categories-container .sejour {
+.categories-container .salon-sjour {
     background-image: url('../IMG/salonsejour.jpg');
 }
 

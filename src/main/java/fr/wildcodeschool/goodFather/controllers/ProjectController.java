@@ -1,10 +1,15 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,13 +20,21 @@ public class ProjectController {
     
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
     
     @PostMapping("/projects")
-    public String createProject(@RequestParam String name, @RequestParam String address, @RequestParam String city, @RequestParam String postalCode) {
+    public String createProject(
+        @RequestParam String name,
+        @RequestParam String address,
+        @RequestParam String city,
+        @RequestParam String postalCode
+    ) {
         Project project = new Project(name, address, city, postalCode);
         project = projectRepository.save(project);
         Long id = project.getId();
-        return "redirect:/project/"+id+"/edit";
+        return "redirect:/projects/"+id+"/edit";
     }
 
     @GetMapping("/projects/create")
@@ -29,9 +42,15 @@ public class ProjectController {
         return "project-create";
     }
 
-    @GetMapping("projects/{id}/edit")
-    public String showCatetories(@PathVariable("id") Long projectId, @RequestParam Long categoryId){
+    @GetMapping("/projects/{projectId}/edit")
+    public String showCategories(
+            Model model,
+            Long projectId,
+            @RequestParam(required=false) Long categoryId
+        ) {
         if(categoryId == null) {
+            List<Category> categoryList = categoryRepository.findAll();
+            model.addAttribute("categories", categoryList);    
             return "categories";
         }
         else {
