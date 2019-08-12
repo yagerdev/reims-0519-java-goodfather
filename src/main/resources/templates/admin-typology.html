@@ -79,7 +79,12 @@
                     <button type="submit" class="btn btn-info">Créer</button>
                 </form>
             </section>
-
+            <section class="section-list">
+                <h3>Liste des typologies créées :</h3>
+                <ul class="list-group" th:each="typology : ${typologies}">
+                    <li class="list-group-item" th:text="${typology.name}">Nom de la typologie</li>
+                </ul>
+            </section>
         </main>
 
         <footer>
