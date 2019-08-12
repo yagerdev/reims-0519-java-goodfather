@@ -209,3 +209,77 @@ ion-icon:hover {
     width: 30%;
 }
 
+/* ------------- PAGE CATEGORIES ------------- */
+
+.categories-container {
+    text-align: center;
+    margin: auto;
+    padding: 4vh 1vh;
+}
+
+.categories-container h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 2vh;
+}
+
+.categories-container .group-image {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.categories-container .image {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    border-radius: 1em;
+    display: flex;
+    width: 100%;
+    margin: 1vh 0;
+}
+
+@media only screen and (min-width : 1224px){
+
+    .categories-container .group-image {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .categories-container .image {
+        width: 200px;
+        margin: auto;
+    }
+}
+
+.categories-container .image p {
+    width: 90%;
+    margin: auto auto 1.5em auto;
+    background-color: rgba(255, 255, 255, .9);
+    border-radius: 0.5em;
+    padding: 0.3em;
+    text-transform: uppercase;
+}
+
+.categories-container .sdb {
+    background-image: url('../IMG/sdb.jpg');
+}
+
+.categories-container .couloir {
+    background-image: url('../IMG/couloir.jpg');
+}
+
+.categories-container .sejour {
+    background-image: url('../IMG/salonsejour.jpg');
+}
+
+.categories-container .chambre {
+    background-image: url('../IMG/chambre.jpg');
+}
+
+.categories-container .cuisine {
+    background-image: url('../IMG/cuisine.jpg');
+}
