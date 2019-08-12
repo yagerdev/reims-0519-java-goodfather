@@ -27,22 +27,18 @@ public class Room {
     }
 
     public Room(double wallA, double wallB, double height, Category category) {
-
         this.setWallA(wallA);
         this.setWallB(wallB);
         this.setHeight(height);
         this.setCategory(category);
-
     }
 
     public Room(Long id, double wallA, double wallB, double height, Category category) {
-
         this.setId(id);
         this.setWallA(wallA);
         this.setWallB(wallB);
         this.setHeight(height);
         this.setCategory(category);
-
     }
 
 	public Long getId() {
