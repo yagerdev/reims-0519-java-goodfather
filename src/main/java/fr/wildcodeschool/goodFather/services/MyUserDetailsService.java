@@ -28,15 +28,15 @@ public class MyUserDetailsService implements UserDetailsService {
     private String role;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         if(userRepository.count() == 0) {
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             User adminDefault = new User(email, encoder.encode(password), role);
             userRepository.save(adminDefault);
         }
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(email);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(email);
         }
         return user;
 	}
