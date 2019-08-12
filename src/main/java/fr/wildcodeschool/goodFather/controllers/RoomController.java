@@ -1,5 +1,6 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 
@@ -27,9 +28,9 @@ public class RoomController {
         @RequestParam("wallb") Double wallB,
         @RequestParam("height") Double height,
         @RequestParam("project")Long projectId,
-        @RequestParam("category") Long categoryId
+        @RequestParam("category") Category category
         ) {
-            Room room = new Room(wallA, wallB, height, categoryId);
+            Room room = new Room(wallA, wallB, height, category);
             room = roomRepository.save(room);
             Long id = room.getId();
             return "redirect:/rooms/"+id+"/edit";
