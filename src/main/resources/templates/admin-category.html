@@ -78,6 +78,10 @@
                     </div>
                     <button type="submit" class="btn btn-info">Créer</button>
                 </form>
+
+                <ul class="list-group" th:each="category : ${categories}">
+                    <li class="list-group-item" th:text="${category.name}">Nom de la catégorie</li>
+                </ul>
             </section>
 
         </main>
