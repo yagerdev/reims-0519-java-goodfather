@@ -18,15 +18,21 @@ public class RoomController {
     
     @GetMapping("/rooms/create")
     public String showCreateRoomForm(){
-
         return"room-create";
     }
-    @PostMapping("/rooms/create")
-    public String createRoom(@RequestParam("walla") Double wallA, @RequestParam("wallb") Double wallB, @RequestParam("height") Double height, @RequestParam("project")Long projectId, @RequestParam("category") Long categoryId) {
-        Room room = new Room(wallA, wallB, height, categoryId);
-        roomRepository.save(room);
-        Long id = room.getId();
-        return "redirect:/rooms/"+id+"/edit";
+
+    @PostMapping("/rooms")
+    public String createRoom(
+        @RequestParam("walla") Double wallA,
+        @RequestParam("wallb") Double wallB,
+        @RequestParam("height") Double height,
+        @RequestParam("project")Long projectId,
+        @RequestParam("category") Long categoryId
+        ) {
+            Room room = new Room(wallA, wallB, height, categoryId);
+            roomRepository.save(room);
+            Long id = room.getId();
+            return "redirect:/rooms/"+id+"/edit";
     }
 
     @GetMapping("/rooms/{id}/edit")
