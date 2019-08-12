@@ -3,3 +3,8 @@ spring.datasource.username = #######
 spring.datasource.password = #######
 
 spring.jpa.hibernate.ddl-auto = update
+
+# Custom property
+user.email = ########@######.##
+user.password = ########
+user.role = ADMIN
