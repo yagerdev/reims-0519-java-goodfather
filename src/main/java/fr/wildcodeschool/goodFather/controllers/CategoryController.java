@@ -3,6 +3,8 @@ package fr.wildcodeschool.goodFather.controllers;
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,11 @@ public class CategoryController {
     CategoryRepository categoryRepository;
 
     @GetMapping("/categories")
-    public String showCategories() {
+    public String showCategories(Model model) {
         //Todo : check if user is admin
-        return "categories";
+        List<Category> categoryList = categoryRepository.findAll();
+        model.addAttribute("categories", categoryList);
+        return "admin-category";
     }
 
     @PostMapping("/categories")
