@@ -25,7 +25,12 @@ public class ProjectController {
     CategoryRepository categoryRepository;
     
     @PostMapping("/projects")
-    public String createProject(@RequestParam String name, @RequestParam String address, @RequestParam String city, @RequestParam String postalCode) {
+    public String createProject(
+        @RequestParam String name,
+        @RequestParam String address,
+        @RequestParam String city,
+        @RequestParam String postalCode
+    ) {
         Project project = new Project(name, address, city, postalCode);
         project = projectRepository.save(project);
         Long id = project.getId();
