@@ -19,7 +19,7 @@ public class ProjectController {
     @PostMapping("/projects")
     public String createProject(@RequestParam String name, @RequestParam String address, @RequestParam String city, @RequestParam String postalCode) {
         Project project = new Project(name, address, city, postalCode);
-        projectRepository.save(project);
+        project = projectRepository.save(project);
         Long id = project.getId();
         return "redirect:/project/"+id+"/edit";
     }
