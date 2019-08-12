@@ -10,14 +10,14 @@
             crossorigin="anonymous"
         >
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap" rel="stylesheet">         
-        <link rel="stylesheet" href="../static/CSS/style.css">
+        <link rel="stylesheet" href="../CSS/style.css">
 
         <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
         <title>GoodFather</title>
     </head>
     <body>
-        <img src="../static/IMG/logo.png" alt="Goodfather" class="gf-logo">
+        <img src="../IMG/logo.png" alt="Goodfather" class="gf-logo">
         
         <header class="sticky-top">
             <nav class="navbar bg-vert-gf navbar-dark">
@@ -78,6 +78,12 @@
                     </div>
                     <button type="submit" class="btn btn-info">Créer</button>
                 </form>
+            </section>
+            <section class="section-categories-list">
+                <h3>Liste des catégories créées :</h3>
+                <ul class="list-group" th:each="category : ${categories}">
+                    <li class="list-group-item" th:text="${category.name}">Nom de la catégorie</li>
+                </ul>
             </section>
 
         </main>
