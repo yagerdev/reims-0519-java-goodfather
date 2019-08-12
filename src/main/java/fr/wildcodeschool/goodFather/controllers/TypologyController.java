@@ -18,10 +18,10 @@ public class TypologyController {
     @GetMapping("/typologies")
     public String showTypologies() {
         //Todo : check if user is admin
-        return "categories";
+        return "admin-typology";
     }
 
-    @PostMapping("/categories")
+    @PostMapping("/typologies")
     public String createTypology(@RequestParam String name) {
         //Todo : check if user is admin
         Typology typology = new Typologie(name);
