@@ -7,8 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Category {
-
+public class Typology {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,16 +16,15 @@ public class Category {
     @Column(length = 30)
     private String name;
 
-    public Category(){
-
-    }
-    
-    public Category(String name){
-        this.name= name;
+    public Typology() {
     }
 
-    public Category(Long id, String name) {
+    public Typology(Long id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Typology(String name) {
         this.name = name;
     }
 
