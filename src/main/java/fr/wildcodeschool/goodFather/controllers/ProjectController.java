@@ -42,15 +42,15 @@ public class ProjectController {
         return "project-create";
     }
 
-    @GetMapping("projects/{id}/edit")
+    @GetMapping("/projects/{projectId}/edit")
     public String showCategories(
             Model model,
-            @PathVariable("id") Long projectId,
+            Long projectId,
             @RequestParam(required=false) Long categoryId
         ) {
-        List<Category> categoryList = categoryRepository.findAll();
-        model.addAttribute("categories", categoryList);
         if(categoryId == null) {
+            List<Category> categoryList = categoryRepository.findAll();
+            model.addAttribute("categories", categoryList);    
             return "categories";
         }
         else {
