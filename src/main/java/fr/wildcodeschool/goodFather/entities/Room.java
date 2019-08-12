@@ -13,13 +13,13 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column
+    @Column(length = 5)
     double wallA;
 
-    @Column
+    @Column(length = 5)
     double wallB;
 
-    @Column
+    @Column(length = 5)
     double height;
 
     public Room() {
