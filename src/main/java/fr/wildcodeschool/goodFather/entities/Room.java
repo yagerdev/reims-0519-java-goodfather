@@ -35,7 +35,7 @@ public class Room {
 
     }
 
-    public Room(Long id, double wallA, double wallB, double height, Long categoryId) {
+    public Room(Long id, double wallA, double wallB, double height, Category category) {
 
         this.setId(id);
         this.setWallA(wallA);
