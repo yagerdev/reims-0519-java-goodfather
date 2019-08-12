@@ -209,6 +209,14 @@ ion-icon:hover {
     width: 30%;
 }
 
+.section-categories-list {
+    padding-top: 3vh;
+}
+
+.section-categories-list h3 {
+    font-size: 1rem;
+}
+
 /* ------------- PAGE CATEGORIES ------------- */
 
 .categories-container {
