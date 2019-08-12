@@ -29,7 +29,7 @@ public class TypologyController {
     @PostMapping("/typologies")
     public String createTypology(@RequestParam String name) {
         //Todo : check if user is admin
-        Typology typology = new Typologie(name);
+        Typology typology = new Typology(name);
         typologyRepository.save(typology);
         return "redirect:/typologies";
     }
