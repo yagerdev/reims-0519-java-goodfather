@@ -2,45 +2,60 @@ package fr.wildcodeschool.goodFather.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import fr.wildcodeschool.goodFather.services.MyUserDetailsService;
 
 @EnableWebSecurity
-public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+@Configuration
+public class MySecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+            .addResourceHandler("/resources/**")
+            .addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+            .ignoring()
+            .antMatchers("/resources/**");
+    }
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/", "/CSS/**", "/IMG/**").permitAll()
-            .antMatchers("/").permitAll()
-            .antMatchers("/admin").hasRole("ADMIN")
-            .antMatchers("/categories").hasRole("ADMIN")
-            .antMatchers("/typologies").hasRole("ADMIN")
-            .antMatchers("/materials").hasRole("ADMIN")
-            .antMatchers("/works").hasRole("ADMIN")
-            .antMatchers("/tasks").hasRole("ADMIN")
-            .antMatchers("/users").hasRole("ADMIN")
-            .antMatchers("/projects/**").access("hasRole('ADMIN') and hasRole('USER')")
-            .antMatchers("/rooms/**").access("hasRole('ADMIN') and hasRole('USER')") 
-            .antMatchers("/home/**").access("hasRole('ADMIN') and hasRole('USER')")
+            .antMatchers("/admin").hasAuthority("ADMIN")
+            .antMatchers(HttpMethod.GET, "/categories/**", "/typologies/**", "/materials/**", "/works/**", "/tasks/**", "/users/**").hasAuthority("ADMIN")
+            .antMatchers(HttpMethod.POST, "/categories/**", "/typologies/**", "/materials/**", "/works/**", "/tasks/**", "/users/**").hasAuthority("ADMIN")
+            .antMatchers(HttpMethod.GET, "/projects/**", "/rooms/**", "/home/**").access("hasAuthority('ADMIN') or hasAuthority('USER')")
+            .antMatchers(HttpMethod.POST, "/projects/**", "/rooms/**", "/home/**").access("hasAuthority('ADMIN') or hasAuthority('USER')") 
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
                 .and()
             .httpBasic();
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
