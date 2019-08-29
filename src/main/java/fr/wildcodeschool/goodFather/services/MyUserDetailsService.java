@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
             User adminDefault = new User(email, encoder.encode(password), role);
             userRepository.save(adminDefault);
         }
-        User user = userRepository.findByUsername(email);
+        User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }
