@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 @Entity
 public class Room {
     
@@ -19,7 +19,12 @@ public class Room {
 
     private double height;
 
-    @OneToMany
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    private Project project;
+
+    @ManyToOne
+    @JoinColumn
     private Category category;
 
     public Room() {
