@@ -2,6 +2,7 @@ package fr.wildcodeschool.goodFather.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,6 +23,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
+            .antMatchers(HttpMethod.GET, "/", "/CSS/**", "/IMG/**").permitAll()
             .antMatchers("/").permitAll()
             .antMatchers("/admin").hasRole("ADMIN")
             .antMatchers("/categories").hasRole("ADMIN")
