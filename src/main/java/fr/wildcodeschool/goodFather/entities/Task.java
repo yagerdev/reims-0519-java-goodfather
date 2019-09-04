@@ -1,11 +1,16 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.ManyToAny;
+
+@Entity
 public class Task {
 
     @Id
@@ -18,16 +23,14 @@ public class Task {
 
     private double percentRange;
 
-    @OneToMany
+    @ManyToMany
     @JoinColumn
     private Typology typology;
 
-    @OneToMany
-    @JoinColumn
+    @OneToMany(mappedBy = "material")
     private Material material;
 
-    @OneToMany
-    @JoinColumn
+    @OneToMany(mappedBy = "work")
     private Work work;
 
     public Task(Long id, double price, double multiplicator, double percentRange, Typology typology, Material material, Work work) {
