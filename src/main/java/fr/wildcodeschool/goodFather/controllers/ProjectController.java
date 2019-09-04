@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,12 +45,13 @@ public class ProjectController {
     @GetMapping("/projects/{projectId}/edit")
     public String showCategories(
             Model model,
-            Long projectId,
+            @PathVariable("projectId") Long projectId,
             @RequestParam(required=false) Long categoryId
         ) {
         if(categoryId == null) {
             List<Category> categoryList = categoryRepository.findAll();
-            model.addAttribute("categories", categoryList);    
+            model.addAttribute("categories", categoryList);
+            model.addAttribute("projectId", projectId);
             return "categories";
         }
         else {
