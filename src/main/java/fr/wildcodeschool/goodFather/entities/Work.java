@@ -31,9 +31,6 @@ public class Work {
         this.name = name;
     }
 
-    @OneToMany(mappedBy = "work")
-    private Set<Task> tasks;
-
     public Long getId() {
         return id;
     }
