@@ -55,6 +55,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
             .formLogin()
             .loginPage("/login")
             .defaultSuccessUrl("/projects/create", true)
+            .failureUrl("/?error=true")
             .permitAll()
                 .and()
             .httpBasic();
