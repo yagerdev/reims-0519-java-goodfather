@@ -23,7 +23,7 @@ public class CategoryController {
         //Todo : check if user is admin
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
-        return "admin-category";
+        return "admin/admin-category";
     }
 
     @PostMapping("/categories")

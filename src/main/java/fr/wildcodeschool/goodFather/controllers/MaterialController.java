@@ -22,7 +22,7 @@ public class MaterialController {
     public String showMaterials(Model model) {
         List<Material> materialList = materialRepository.findAll();
         model.addAttribute("materials", materialList);
-        return "admin-material";
+        return "admin/admin-material";
     }
 
     @PostMapping("/materials")
