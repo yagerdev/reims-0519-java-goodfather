@@ -21,4 +21,9 @@ public class FragmentsController {
         return "head";
     }
 
+    @GetMapping("/header")
+    public String getHeader() {
+        return "header";
+    }
+
 }
