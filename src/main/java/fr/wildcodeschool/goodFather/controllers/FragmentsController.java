@@ -11,4 +11,9 @@ public class FragmentsController {
         return "footer";
     }
 
+    @GetMapping("/script")
+    public String getScript() {
+        return "script";
+    }
+
 }
