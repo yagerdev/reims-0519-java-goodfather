@@ -26,7 +26,7 @@ public class RoomController {
     ProjectRepository projectRepository;
     
     @GetMapping("/rooms/create")
-    public String showCreateRoomForm(){
+    public String showCreateRoom(){
         return"room-create";
     }
 
