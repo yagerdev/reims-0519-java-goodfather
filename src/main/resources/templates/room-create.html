@@ -58,8 +58,8 @@
                 <span class="yellow-gf">CUISINE</span>
             </h2>
             <form th:action="@{/rooms}" method="POST">
-                <input type="number" name="project" th:value=${projectId} hidden>
-                <input type="number" name="category" th:value=${categoryId} hidden>
+                <input type="hidden" name="project" th:value=${projectId}>
+                <input type="hidden" name="category" th:value=${categoryId}>
                 <div class="input-group mb-3">
                     <label for="walla">Mur A</label>
                     <input type="number" placeholder="cm" id="walla" name="walla">
