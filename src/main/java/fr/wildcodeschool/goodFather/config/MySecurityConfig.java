@@ -42,6 +42,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .csrf().disable()
             .authorizeRequests()
             .antMatchers(HttpMethod.GET, "/", "/CSS/**", "/IMG/**").permitAll()
             .antMatchers("/admin").hasAuthority("ADMIN")
@@ -52,6 +53,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
+            .loginPage("/login")
+            .defaultSuccessUrl("/projects/create")
+            .permitAll()
                 .and()
             .httpBasic();
     }
