@@ -26,4 +26,9 @@ public class FragmentsController {
         return "header";
     }
 
+    @GetMapping("/logo")
+    public String getLogo() {
+        return "logo";
+    }
+
 }
