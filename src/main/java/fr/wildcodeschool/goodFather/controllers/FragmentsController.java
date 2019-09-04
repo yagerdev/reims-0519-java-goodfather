@@ -16,4 +16,9 @@ public class FragmentsController {
         return "script";
     }
 
+    @GetMapping("/head")
+    public String getHead() {
+        return "head";
+    }
+
 }
