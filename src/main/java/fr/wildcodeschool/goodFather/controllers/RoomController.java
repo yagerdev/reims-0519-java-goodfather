@@ -1,8 +1,11 @@
 package fr.wildcodeschool.goodFather.controllers;
 
 import fr.wildcodeschool.goodFather.entities.Category;
+import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
+import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
+import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,12 @@ public class RoomController {
     
     @Autowired
     RoomRepository roomRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
     
     @GetMapping("/rooms/create")
     public String showCreateRoomForm(){
@@ -27,9 +36,11 @@ public class RoomController {
         @RequestParam("wallb") Double wallB,
         @RequestParam("height") Double height,
         @RequestParam("project")Long projectId,
-        @RequestParam("category") Category category
+        @RequestParam("category") Long categoryId
         ) {
-            Room room = new Room(wallA, wallB, height, category);
+            Project project = projectRepository.getOne(projectId);
+            Category category = categoryRepository.getOne(categoryId);
+            Room room = new Room(wallA, wallB, height, category, project);
             room = roomRepository.save(room);
             Long id = room.getId();
             return "redirect:/rooms/"+id+"/edit";
