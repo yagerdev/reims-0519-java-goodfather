@@ -57,24 +57,20 @@
                 <br>
                 <span class="yellow-gf">CUISINE</span>
             </h2>
-            <form action="/rooms/create" method="POST">
+            <form th:action="@{/rooms}" method="POST">
+                <input type="number" name="project" th:value=${projectId} hidden>
+                <input type="number" name="category" th:value=${categoryId} hidden>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="label-wall-a" name="walla">Mur A</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="cm" aria-label="Mur A" aria-describedby="label-wall-a">
+                    <label for="walla">Mur A</label>
+                    <input type="number" placeholder="cm" id="walla" name="walla">
                 </div>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="label-wall-b" name="wallb">Mur B</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="cm" aria-label="Mur B" aria-describedby="label-wall-b">
+                    <label for="wallb">Mur A</label>
+                    <input type="number" placeholder="cm" id="wallb" name="wallb">
                 </div>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="label-heigth" name="height">Hauteur</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="cm" aria-label="Mur A" aria-describedby="label-heigth">
+                    <label for="height">Hauteur</label>
+                    <input type="number" placeholder="cm" id="height" name="height">
                 </div>
                 <div class="row justify-content-center">
                     <button type="submit" class="btn btn-info">Créer ma pièce</button>
