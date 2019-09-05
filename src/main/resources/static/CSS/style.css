@@ -77,6 +77,10 @@ h6 {
 	font-size: 0.9rem;
 }
 
+.modal-dialog form {
+    background-color: white;
+}
+
 /* ------------- Footer ------------- */
 
 footer {
