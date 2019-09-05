@@ -22,7 +22,7 @@ public class WorkController {
     public String showCategories(Model model) {
         List<Work> workList = workRepository.findAll();
         model.addAttribute("works", workList);
-        return "admin/admin-work";
+        return "admin/work";
     }
 
     @PostMapping("/works")

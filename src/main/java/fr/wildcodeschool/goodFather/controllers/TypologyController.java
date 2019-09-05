@@ -23,7 +23,7 @@ public class TypologyController {
         //Todo : check if user is admin
         List<Typology> typologyList = typologyRepository.findAll();
         model.addAttribute("typologies", typologyList);
-        return "admin/admin-typology";
+        return "admin/typology";
     }
 
     @PostMapping("/typologies")
