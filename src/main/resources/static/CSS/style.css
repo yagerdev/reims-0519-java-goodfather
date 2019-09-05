@@ -226,3 +226,22 @@ ion-icon:hover {
 .cuisine {
 	background-image: url("../IMG/cuisine.jpg");
 }
+
+/* ------------- ADMIN ------------- */
+
+.admin-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.admin-control a {
+    margin-bottom: 2vh;
+    width: 100%;
+}
+
+.admin-control .btn {
+    width: 80%;
+    padding: 2vh 0;
+}
