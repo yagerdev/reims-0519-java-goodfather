@@ -24,15 +24,15 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(length = 100)
-    private String firstname;
+    private String firstName;
 
     @Column(length = 100)
-    private String lastname;
+    private String lastName;
 
     @Column(length = 100)
     private String email;
 
-    private String phone_number;
+    private String phoneNumber;
 
     private String address;
 
@@ -40,7 +40,7 @@ public class User implements UserDetails {
     private String city;
 
     @Column(length = 5)
-    private String postal_code;
+    private String postalCode;
 
     private String password;
 
@@ -52,29 +52,29 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String firstname, String lastname, String email, String phone_number, String address,
-            String city, String postal_code, String password, String role) {
+    public User(Long id, String firstName, String lastName, String email, String phoneNumber, String address,
+            String city, String postalCode, String password, String role) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.city = city;
-        this.postal_code = postal_code;
+        this.postalCode = postalCode;
         this.password = password;
         this.role = role;
     }
 
-    public User(String firstname, String lastname, String email, String phone_number, String address, String city,
-            String postal_code, String password, String role) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, String email, String phoneNumber, String address, String city,
+            String postalCode, String password, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
         this.address = address;
         this.city = city;
-        this.postal_code = postal_code;
+        this.postalCode = postalCode;
         this.password = password;
         this.role = role;
     }
@@ -93,20 +93,20 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -117,12 +117,12 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {
@@ -141,12 +141,12 @@ public class User implements UserDetails {
         this.city = city;
     }
 
-    public String getPostal_code() {
-        return postal_code;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setPostal_code(String postal_code) {
-        this.postal_code = postal_code;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getPassword() {
