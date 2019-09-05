@@ -78,7 +78,16 @@ h6 {
 }
 
 .modal-dialog form {
-    background-color: white;
+	background-color: white;
+}
+
+input[type="number"] {
+	-webkit-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance:none;
 }
 
 /* ------------- Footer ------------- */
@@ -167,13 +176,13 @@ ion-icon:hover {
 	display: flex;
 	width: 100%;
 	margin: 2vh 0;
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .group-image .image:hover p {
-    background-color: #328080;
-    color: white;
-    transition: 0.5s;
+	background-color: #328080;
+	color: white;
+	transition: 0.5s;
 }
 
 @media only screen and (min-width: 1224px) {
