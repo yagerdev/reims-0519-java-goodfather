@@ -1,18 +1,24 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Material {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "material")
+    private Set<Task> tasks;
 
     public Material() {
     }
@@ -40,6 +46,14 @@ public class Material {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
 }
