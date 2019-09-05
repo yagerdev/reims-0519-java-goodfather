@@ -24,10 +24,10 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(length = 100)
-    private String firstname;
+    private String firstName;
 
     @Column(length = 100)
-    private String lastname;
+    private String lastName;
 
     @Column(length = 100)
     private String email;
@@ -52,11 +52,11 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String firstname, String lastname, String email, String phoneNumber, String address,
+    public User(Long id, String firstName, String lastName, String email, String phoneNumber, String address,
             String city, String postalCode, String password, String role) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -66,10 +66,10 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(String firstname, String lastname, String email, String phoneNumber, String address, String city,
+    public User(String firstName, String lastName, String email, String phoneNumber, String address, String city,
             String postalCode, String password, String role) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -93,20 +93,20 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
