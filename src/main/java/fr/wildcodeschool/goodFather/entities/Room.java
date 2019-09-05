@@ -20,7 +20,7 @@ public class Room {
     private double height;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn
     private Project project;
 
     @ManyToOne
@@ -31,19 +31,21 @@ public class Room {
 
     }
 
-    public Room(double wallA, double wallB, double height, Category category) {
+    public Room(double wallA, double wallB, double height, Category category, Project project) {
         this.setWallA(wallA);
         this.setWallB(wallB);
         this.setHeight(height);
-        this.setCategory(category);
+		this.setCategory(category);
+		this.setProject(project);
     }
 
-    public Room(Long id, double wallA, double wallB, double height, Category category) {
+    public Room(Long id, double wallA, double wallB, double height, Category category, Project project) {
         this.setId(id);
         this.setWallA(wallA);
         this.setWallB(wallB);
         this.setHeight(height);
-        this.setCategory(category);
+		this.setCategory(category);
+		this.setProject(project);
     }
 
 	public Long getId() {
@@ -84,6 +86,14 @@ public class Room {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 }

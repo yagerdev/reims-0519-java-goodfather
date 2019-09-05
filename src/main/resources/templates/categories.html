@@ -6,14 +6,15 @@
         <main class="container">
             <h2>Selectionner<span class="yellow-gf">votre pièce</span></h2>
             <div class="group-image">
-                <div 
-                    th:each="category : ${categories}" 
+                <a 
+                    th:each="category : ${categories}"
+                    th:href="@{'/projects/' + ${projectId} + '/edit?categoryId=' + ${category.id}}"
                     th:classappend="|${category.name.toLowerCase()
                         .replaceAll(&quot;[^a-z0-9 ]&quot;, &quot;&quot;)
                         .replaceAll(&quot; &quot;,&quot;-&quot;)} image|"
                 >
                     <p th:text="${category.name}">Nom de la catégorie</p>
-                </div>
+                </a>
             </div>
 
         </main>

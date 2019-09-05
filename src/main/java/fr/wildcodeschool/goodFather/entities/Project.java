@@ -36,7 +36,7 @@ public class Project {
     private Date creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn
     private User user;
 
     @OneToMany(mappedBy = "project")
@@ -44,20 +44,22 @@ public class Project {
 
     public Project() { }
 
-    public Project(Long id, String name, String address, String city, String postalCode, Date createDate) {
+    public Project(Long id, String name, String address, String city, String postalCode, Date createDate, User user) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
         this.creationDate = createDate;
+        this.user = user;
     }
 
-    public Project(String name, String address, String city, String postalCode) {
+    public Project(String name, String address, String city, String postalCode, User user) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.user = user;
     }
 
     public Long getId() {
@@ -106,6 +108,14 @@ public class Project {
 
     public void setCreateDate(Date createDate) {
         this.creationDate = createDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
     
 }

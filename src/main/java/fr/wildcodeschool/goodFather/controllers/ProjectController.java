@@ -2,15 +2,19 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,7 +34,9 @@ public class ProjectController {
         @RequestParam String city,
         @RequestParam String postalCode
     ) {
-        Project project = new Project(name, address, city, postalCode);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User)authentication.getPrincipal();
+        Project project = new Project(name, address, city, postalCode,currentUser);
         project = projectRepository.save(project);
         Long id = project.getId();
         return "redirect:/projects/"+id+"/edit";
@@ -44,12 +50,13 @@ public class ProjectController {
     @GetMapping("/projects/{projectId}/edit")
     public String showCategories(
             Model model,
-            Long projectId,
+            @PathVariable("projectId") Long projectId,
             @RequestParam(required=false) Long categoryId
         ) {
         if(categoryId == null) {
             List<Category> categoryList = categoryRepository.findAll();
-            model.addAttribute("categories", categoryList);    
+            model.addAttribute("categories", categoryList);
+            model.addAttribute("projectId", projectId);
             return "categories";
         }
         else {
