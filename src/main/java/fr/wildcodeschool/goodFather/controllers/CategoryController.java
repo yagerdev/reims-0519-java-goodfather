@@ -20,7 +20,6 @@ public class CategoryController {
 
     @GetMapping("/categories")
     public String showCategories(Model model) {
-        //Todo : check if user is admin
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
         return "admin/category";
@@ -28,7 +27,6 @@ public class CategoryController {
 
     @PostMapping("/categories")
     public String createCategory(@RequestParam String name) {
-        //Todo : check if user is admin
         Category category = new Category(name);
         categoryRepository.save(category);
         return "redirect:/categories";
