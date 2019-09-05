@@ -27,7 +27,13 @@
                 <ul class="list-group" th:each="category : ${categories}">
                     <li class="list-group-item" th:text="${category.name}">Item</li>
                     <div class="icon-actions">
-                        <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
+                        <form th:action="@{/categories}">
+                        <label for="id"></label>
+                        <input type="text" hidden name="id" th:value="${category.id}"/>
+                            <button type="submit">
+                                <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
+                            </button>
+                        </form>
                     </div>
                 </ul>
             </section>
