@@ -25,8 +25,8 @@ public class UserController {
 
     @PostMapping("/users")
     public String createUser(
-        @RequestParam("firstname") String firstname,
-        @RequestParam("lastname") String lastname,
+        @RequestParam("firstName") String firstName,
+        @RequestParam("lastName") String lastName,
         @RequestParam("email") String email,
         @RequestParam("phoneNumber")String phoneNumber,
         @RequestParam("address") String address,
@@ -35,7 +35,7 @@ public class UserController {
         @RequestParam("password") String password,
         @RequestParam("role") String role
         ) { 
-            User user = new User(firstname,lastname,email,phoneNumber, address,city,postalCode,password,role);
+            User user = new User(firstName,lastName,email,phoneNumber, address,city,postalCode,password,role);
             userRepository.save(user);     
         return "redirect:/users";
     }
