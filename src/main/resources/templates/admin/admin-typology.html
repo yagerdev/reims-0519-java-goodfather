@@ -3,26 +3,18 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
-        <main class="container home-container">
-            <h2>
-                Gestion des
-                <br>
-                <span class="yellow-gf">typologies de travaux</span>
-            </h2>
-
-            <section class="section-create-categories">
-                <h3>Créer une typologie</h3>
+        <main class="container">
+            <h2>Gestion des<span class="yellow-gf">typologies de travaux</span></h2>
+            <section>
                 <form th:action="@{/typologies}" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputTypology">Typologie</label>
+                            <label class="input-group-text" for="name">Nom</label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="..."
-                            aria-label="name" 
-                            aria-describedby="inputTypology"
+                            placeholder="Entrez une donnée ..."
                             name="name"
                         >
                     </div>
@@ -32,7 +24,7 @@
             <section class="section-list">
                 <h3>Liste des typologies créées :</h3>
                 <ul class="list-group" th:each="typology : ${typologies}">
-                    <li class="list-group-item" th:text="${typology.name}">Nom de la typologie</li>
+                    <li class="list-group-item" th:text="${typology.name}">Item</li>
                 </ul>
             </section>
         </main>

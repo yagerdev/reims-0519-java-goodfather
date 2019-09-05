@@ -3,26 +3,18 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
-        <main class="container home-container">
-            <h2>
-                Gestion des
-                <br>
-                <span class="yellow-gf">catégories</span>
-            </h2>
-
-            <section class="section-create-categories">
-                <h3>Créer une catégorie</h3>
+        <main class="container">
+            <h2>Gestion des<span class="yellow-gf">catégories</span></h2>
+            <section>
                 <form th:action="@{/categories}" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputCategory">Catégorie</label>
+                            <label class="input-group-text" for="name">Nom</label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="..."
-                            aria-label="name" 
-                            aria-describedby="inputCategory"
+                            placeholder="Entrez une donnée ..."
                             name="name"
                         >
                     </div>
@@ -32,7 +24,7 @@
             <section class="section-list">
                 <h3>Liste des catégories créées :</h3>
                 <ul class="list-group" th:each="category : ${categories}">
-                    <li class="list-group-item" th:text="${category.name}">Nom de la catégorie</li>
+                    <li class="list-group-item" th:text="${category.name}">Item</li>
                 </ul>
             </section>
         </main>

@@ -3,26 +3,18 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
-        <main class="container home-container">
-            <h2>
-                Gestion des
-                <br>
-                <span class="yellow-gf">matériaux</span>
-            </h2>
-
-            <section class="section-create-categories">
-                <h3>Créer une matériau</h3>
+        <main class="container">
+            <h2>Gestion des<span class="yellow-gf">matériaux</span></h2>
+            <section>
                 <form th:action="@{/materials}" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputMaterial">Matériaux</label>
+                            <label class="input-group-text" for="name">Nom</label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="..."
-                            aria-label="name" 
-                            aria-describedby="inputMaterial"
+                            placeholder="Entrez une donnée ..."
                             name="name"
                         >
                     </div>
@@ -32,7 +24,7 @@
             <section class="section-list">
                 <h3>Liste des matériaux créés :</h3>
                 <ul class="list-group" th:each="material : ${materials}">
-                    <li class="list-group-item" th:text="${material.name}">Nom du matériau</li>
+                    <li class="list-group-item" th:text="${material.name}">Item</li>
                 </ul>
             </section>
         </main>
