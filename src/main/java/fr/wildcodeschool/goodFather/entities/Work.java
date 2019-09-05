@@ -19,6 +19,9 @@ public class Work {
     @Column
     private String name;
 
+    @OneToMany(mappedBy = "work")
+    private Set<Task> tasks;
+
     public Work() {
     }
 
@@ -45,6 +48,14 @@ public class Work {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
 }
