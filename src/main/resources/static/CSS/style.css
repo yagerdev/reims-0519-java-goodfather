@@ -167,6 +167,13 @@ ion-icon:hover {
 	display: flex;
 	width: 100%;
 	margin: 2vh 0;
+    text-decoration: none;
+}
+
+.group-image .image:hover p {
+    background-color: #328080;
+    color: white;
+    transition: 0.5s;
 }
 
 @media only screen and (min-width: 1224px) {
