@@ -1,14 +1,14 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.ManyToAny;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -25,12 +25,14 @@ public class Task {
 
     @ManyToMany
     @JoinColumn
-    private Typology typology;
+    private Set<Typology> typology;
 
-    @OneToMany(mappedBy = "material")
+    @ManyToOne
+    @JoinColumn
     private Material material;
 
-    @OneToMany(mappedBy = "work")
+    @ManyToOne
+    @JoinColumn
     private Work work;
 
     public Task(Long id, double price, double multiplicator, double percentRange, Typology typology, Material material, Work work) {
@@ -38,7 +40,6 @@ public class Task {
         this.setPrice(price);
         this.setMultiplicator(multiplicator);
         this.setPercentRange(percentRange);
-        this.setTypology(typology);
         this.setMaterial(material);
         this.setWork(work);
     }
@@ -47,7 +48,6 @@ public class Task {
         this.setPrice(price);
         this.setMultiplicator(multiplicator);
         this.setPercentRange(percentRange);
-        this.setTypology(typology);
         this.setMaterial(material);
         this.setWork(work);
     }
@@ -88,14 +88,6 @@ public class Task {
         this.percentRange = percentRange;
     }
 
-    public Typology getTypology() {
-        return typology;
-    }
-
-    public void setTypology(Typology typology) {
-        this.typology = typology;
-    }
-
     public Material getMaterial() {
         return material;
     }
@@ -110,5 +102,9 @@ public class Task {
 
     public void setWork(Work work) {
         this.work = work;
+    }
+
+    public void setTypology(Set<Typology> typology) {
+        this.typology = typology;
     }
 }
