@@ -3,14 +3,8 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
-        <main class="container categories-container">
-
-            <h2>
-                Selectionner
-                <br>
-                <span class="yellow-gf">votre pièce</span>
-            </h2>
-
+        <main class="container">
+            <h2>Selectionner<span class="yellow-gf">votre pièce</span></h2>
             <div class="group-image">
                 <div 
                     th:each="category : ${categories}" 
