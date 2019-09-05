@@ -26,6 +26,9 @@
                 <h3>Liste des catégories créées :</h3>
                 <ul class="list-group" th:each="category : ${categories}">
                     <li class="list-group-item" th:text="${category.name}">Item</li>
+                    <div class="icon-actions">
+                        <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
+                    </div>
                 </ul>
             </section>
         </main>

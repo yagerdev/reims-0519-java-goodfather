@@ -69,12 +69,20 @@ h6 {
 
 .list-group-item {
 	border: 0.5px solid gray;
-	margin: 1vh 0;
+	margin: 0.5vh auto;
+    width: 90%;
 }
 
 .input-group-text,
 .form-control {
 	font-size: 0.9rem;
+}
+
+.list-group {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    justify-content: space-between;
 }
 
 .modal-dialog form {
@@ -123,6 +131,19 @@ ion-icon {
 ion-icon:hover {
 	color: #ffcc00;
 	transition: 0.5s;
+}
+
+.icon-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+}
+
+.icon-delete {
+    color: red;
+    height: 40px;
+    width: 40px;
 }
 
 /* ------------- Header ------------- */
