@@ -171,7 +171,7 @@ public class User implements UserDetails {
         if(getRole().equals("ADMIN")) {
             authorities.add(new SimpleGrantedAuthority("ADMIN"));
         }
-        if(getUsername().equals("USER")) {
+        if(getRole().equals("USER")) {
             authorities.add(new SimpleGrantedAuthority("USER"));
         }
         return authorities;
