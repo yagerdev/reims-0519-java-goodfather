@@ -19,7 +19,7 @@ public class Task {
 
     private double price;
 
-    private double multiplicator;
+    private String unit;
 
     private double percentRange;
 
@@ -35,18 +35,31 @@ public class Task {
     @JoinColumn
     private Work work;
 
-    public Task(Long id, double price, double multiplicator, double percentRange, Typology typology, Material material, Work work) {
+    public Task(Long id, 
+                double price, 
+                String unit, 
+                double percentRange, 
+                Typology typology, 
+                Material material, 
+                Work work
+    ) {
         this.setId(id);
         this.setPrice(price);
-        this.setMultiplicator(multiplicator);
+        this.setUnit(unit);
         this.setPercentRange(percentRange);
         this.setMaterial(material);
         this.setWork(work);
     }
 
-    public Task(double price, double multiplicator, double percentRange, Typology typology, Material material, Work work) {
+    public Task(double price, 
+                String unit, 
+                double percentRange, 
+                Typology typology, 
+                Material material, 
+                Work work
+    ) {
         this.setPrice(price);
-        this.setMultiplicator(multiplicator);
+        this.setUnit(unit);
         this.setPercentRange(percentRange);
         this.setMaterial(material);
         this.setWork(work);
@@ -72,12 +85,12 @@ public class Task {
         this.price = price;
     }
 
-    public double getMultiplicator() {
-        return multiplicator;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setMultiplicator(double multiplicator) {
-        this.multiplicator = multiplicator;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public double getPercentRange() {

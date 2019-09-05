@@ -1,293 +1,228 @@
 /* ------------- Charte graphique ------------- */
 
 .bg-vert-gf {
-    background-color: #328080;
+	background-color: #328080;
 }
 
 .bg-yellow-gf {
-    background-color: #ffcc00;
+	background-color: #ffcc00;
 }
 
 .vert-gf {
-    color: #328080;
+	color: #328080;
 }
 
 .yellow-gf {
-    color: #ffcc00;
+	color: #ffcc00;
 }
 
 /* ------------- Configuration générale ------------- */
 
 body {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height:100vh;
-    color: #333333;
-    line-height: 1.5em;
-    font-family: 'Roboto', sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-height: 100vh;
+	color: #333333;
+	line-height: 1.5em;
+	font-family: "Roboto", sans-serif;
+	text-align: center;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Montserrat", sans-serif;
 }
 
 .gf-logo {
-    width: 50%;
+	max-width: 50%;
 }
 
-@media screen and (min-width: 1000px) {
-    .gf-logo {
-        width: 30%;
-    }
+.container {
+	margin: auto;
+	padding: 2vh 0;
+	width: 90%;
+}
+
+.container h2 {
+	text-transform: uppercase;
+	font-weight: 700;
+	display: flex;
+	flex-direction: column;
+}
+
+.container form {
+	background-color: whitesmoke;
+	padding: 3vh;
+	margin-bottom: 2vh;
+	margin: auto auto 2vh auto;
+}
+
+.section-list h3 {
+	font-size: 1rem;
+}
+
+.list-group-item {
+	border: 0.5px solid gray;
+	margin: 1vh 0;
+}
+
+.input-group-text,
+.form-control {
+	font-size: 0.9rem;
+}
+
+.modal-dialog form {
+	background-color: white;
+}
+
+input[type="number"] {
+	-webkit-appearance:textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance:none;
 }
 
 /* ------------- Footer ------------- */
 
 footer {
-    width: 100%;
-    padding: 5vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #333333;
+	width: 100%;
+	padding: 5vh;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: #333333;
 }
 
 footer .footer-social {
-    width: 40%;
-    display: flex;
-    justify-content: space-between;
+	width: 40%;
+	display: flex;
+	justify-content: space-between;
 }
 
 @media screen and (min-width: 1000px) {
-    footer .footer-social {
-        width: 20%;
-    }
+	footer .footer-social {
+		width: 20%;
+	}
 }
 
 ion-icon {
-    height: 30px;
-    width: 30px;
-    color: white;
-    margin: 0;
+	height: 30px;
+	width: 30px;
+	color: white;
+	margin: 0;
 }
 
 ion-icon:hover {
-    color: #ffcc00;
-    transition: .5s;
+	color: #ffcc00;
+	transition: 0.5s;
 }
 
 /* ------------- Header ------------- */
 
 .navbar {
-    width: 100vw;
+	width: 100vw;
+	text-align: left;
 }
 
 .navbar ul {
-    padding: 5vh 0;
-    width: 90%;
-    margin: auto;
+	padding: 5vh 0;
+	width: 90%;
+	margin: auto;
 }
 
 .navbar ul li {
-    padding: 1vh 2vh;
-    border-bottom: 1px solid rgba(255, 255, 255, .5);
+	padding: 1vh 2vh;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .navbar ul li:hover {
-    background-color: rgba(255, 255, 255, .5);
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
 .navbar h1 {
-    color: white;
-    font-size: 12pt;
-    font-weight: lighter;
-    margin: 0;
+	color: white;
+	font-size: 10pt;
+	font-weight: lighter;
+	margin: 0;
 }
 
 .navbar-dark .navbar-toggler {
-    border-color: rgba(255, 255, 255, .8);
-}
-
-/* ------------- PAGE ACCUEIL ------------- */
-
-.home-container {
-    text-align: center;
-    margin: auto;
-    padding: 4vh 1vh;
-}
-
-.home-container h2 {
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-/* ------------- PAGE PROFIL ------------- */
-
-.profil-container {
-    text-align: center;
-    margin: auto;
-    padding: 4vh 1vh;
-}
-
-.profil-container h2 {
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.profil-container form {
-    background-color: whitesmoke;
-    padding: 3vh;
-    margin-bottom: 2vh;
-}
-
-/* ------------- PAGE TRAVAUX ------------- */
-
-.travaux-container {
-    text-align: center;
-    margin: auto;
-    padding: 4vh 1vh;
-}
-
-.travaux-container table {
-    margin: 2vh 0 4vh 0;
-}
-
-/* ------------- PAGE ROOM ------------- */
-
-.room-container {
-    text-align: center;
-    margin: auto;
-    padding: 4vh 1vh;
-}
-
-.room-container h2 {
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.room-container form {
-    background-color: whitesmoke;
-    padding: 3vh;
-    margin-bottom: 2vh;
-    max-width: 300px;
-    margin: auto;
-}
-
-.room-container .input-group {
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.room-container .input-group-prepend {
-    min-width: 100px;
-}
-
-.room-container .input-group-prepend .input-group-text {
-    min-width: 100px;
-    justify-content: center;
-}
-
-/* ---------------------------------- ADMIN ---------------------------------- */
-
-/* ------------- ADMIN CATEGORIES ------------- */
-
-.section-create-categories {
-    background-color: whitesmoke;
-    padding: 2vh 4vw;
-}
-
-.section-create-categories h3 {
-    margin-bottom: 1rem;
-    font-size: 14pt;
-    color: gray;
-}
-
-.section-create-categories .btn-info {
-    width: 30%;
-}
-
-.section-categories-list {
-    padding-top: 3vh;
-}
-
-.section-categories-list h3 {
-    font-size: 1rem;
+	border-color: rgba(255, 255, 255, 0.8);
 }
 
 /* ------------- PAGE CATEGORIES ------------- */
 
-.categories-container {
-    text-align: center;
-    margin: auto;
-    padding: 4vh 1vh;
+.group-image {
+	width: 80%;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
-.categories-container h2 {
-    text-transform: uppercase;
-    font-weight: 700;
-    padding-bottom: 2vh;
+.group-image .image {
+	background-size: cover;
+	background-position: center;
+	height: 200px;
+	border-radius: 1em;
+	display: flex;
+	width: 100%;
+	margin: 2vh 0;
+	text-decoration: none;
 }
 
-.categories-container .group-image {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.group-image .image:hover p {
+	background-color: #328080;
+	color: white;
+	transition: 0.5s;
 }
 
-.categories-container .image {
-    background-size: cover;
-    background-position: center;
-    height: 200px;
-    border-radius: 1em;
-    display: flex;
-    width: 100%;
-    margin: 1vh 0;
+@media only screen and (min-width: 1224px) {
+	.group-image {
+		flex-direction: row;
+		justify-content: space-around;
+		width: 100%;
+	}
+
+	.group-image .image {
+		width: 200px;
+		margin: auto;
+	}
 }
 
-@media only screen and (min-width : 1224px){
-
-    .categories-container .group-image {
-        flex-direction: row;
-        justify-content: space-around;
-        width: 100%;
-    }
-
-    .categories-container .image {
-        width: 200px;
-        margin: auto;
-    }
+.group-image .image p {
+	width: 90%;
+	margin: auto auto 1.5em auto;
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 0.5em;
+	padding: 0.5em;
+	text-transform: uppercase;
 }
 
-.categories-container .image p {
-    width: 90%;
-    margin: auto auto 1.5em auto;
-    background-color: rgba(255, 255, 255, .9);
-    border-radius: 0.5em;
-    padding: 0.3em;
-    text-transform: uppercase;
+.salle-de-bain {
+	background-image: url("../IMG/sdb.jpg");
 }
 
-.categories-container .salle-de-bain {
-    background-image: url('../IMG/sdb.jpg');
+.couloir {
+	background-image: url("../IMG/couloir.jpg");
 }
 
-.categories-container .couloir {
-    background-image: url('../IMG/couloir.jpg');
+.salon-sjour {
+	background-image: url("../IMG/salonsejour.jpg");
 }
 
-.categories-container .salon-sjour {
-    background-image: url('../IMG/salonsejour.jpg');
+.chambre {
+	background-image: url("../IMG/chambre.jpg");
 }
 
-.categories-container .chambre {
-    background-image: url('../IMG/chambre.jpg');
-}
-
-.categories-container .cuisine {
-    background-image: url('../IMG/cuisine.jpg');
+.cuisine {
+	background-image: url("../IMG/cuisine.jpg");
 }
