@@ -9,6 +9,7 @@ import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,19 @@ public class RoomController {
     ProjectRepository projectRepository;
     
     @GetMapping("/rooms/create")
-    public String showCreateRoom(){
+    public String showCreateRoom(
+        Model model,
+        @RequestParam Long projectId,
+        @RequestParam Long categoryId
+    ){
+        if (projectId == null) {
+            return "redirect:/projects";
+        }
+        else if (categoryId == null) {
+            return "redirect:/projects/" + projectId + "/edit";
+        }
+        model.addAttribute("projectId", projectId);
+        model.addAttribute("categoryId", categoryId);
         return"room-create";
     }
 
