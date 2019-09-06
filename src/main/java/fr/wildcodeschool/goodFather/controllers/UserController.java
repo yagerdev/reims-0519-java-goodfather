@@ -45,4 +45,8 @@ public class UserController {
             return "redirect:/users";
     }
 
+    @GetMapping("/403")
+    public String forbiddenRedirect() {
+        return "redirect:/home";
+    }
 }
