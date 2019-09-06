@@ -25,7 +25,7 @@
             <section class="section-list">
                 <h3>Liste des typologies créées :</h3>
 				<ul class="list-group">
-					<div th:each="material : ${typologies}" class="item-global">
+					<div th:each="typology : ${typologies}" class="item-global">
 						<li class="list-group-item" th:text="${typology.name}">Item</li>
                         <form th:action="@{/typologies/} + ${typology.id}" th:method="delete">
                             <input type="hidden" th:value="${typology.id}" th:name="id" />
