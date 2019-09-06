@@ -58,6 +58,8 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
             .failureUrl("/?error=true")
             .permitAll()
                 .and()
+            .exceptionHandling().accessDeniedPage("/403")
+                .and()
             .httpBasic();
     }
 
