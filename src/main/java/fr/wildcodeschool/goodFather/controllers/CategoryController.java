@@ -34,10 +34,10 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @DeleteMapping("/categories/{id}")
-    public boolean deleteCategory(@PathVariable Long id){
-        categoryRepository.deleteById(id);
-        return true;
-    }
+    // @DeleteMapping("/categories/{id}")
+    // public String deleteCategory(@PathVariable Long id){
+    //     categoryRepository.deleteById(id);
+    //     return "redirect:/categories";
+    // }
     
 }
