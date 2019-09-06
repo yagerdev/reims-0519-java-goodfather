@@ -69,8 +69,8 @@ h6 {
 
 .list-group-item {
 	border: 0.5px solid gray;
-	margin: 0.5vh auto;
-    width: 90%;
+	margin: 0.5vh;
+    width: 100%;
 }
 
 .input-group-text,
@@ -78,24 +78,36 @@ h6 {
 	font-size: 0.9rem;
 }
 
-.list-group {
-    display: flex;
-    flex-direction: row;
-    justify-items: center;
-    justify-content: space-between;
-}
-
-.modal-dialog form {
+.modal-dialog form,
+.item-global form {
 	background-color: white;
 }
 
-input[type="number"] {
-	-webkit-appearance:textfield;
+.item-global {
+	display: flex;
+	justify-items: center;
+	justify-content: space-between;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-    -webkit-appearance:none;
+.item-global form {
+    padding: 0;
+	margin: 1vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.item-global .btn {
+    display: flex;
+}
+
+input[type="number"] {
+	-webkit-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
 }
 
 /* ------------- Footer ------------- */
@@ -125,7 +137,6 @@ ion-icon {
 	height: 30px;
 	width: 30px;
 	color: white;
-	margin: 0;
 }
 
 ion-icon:hover {
@@ -133,17 +144,8 @@ ion-icon:hover {
 	transition: 0.5s;
 }
 
-.icon-actions {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 30%;
-}
-
 .icon-delete {
-    color: red;
-    height: 40px;
-    width: 40px;
+	color: white;
 }
 
 /* ------------- Header ------------- */
@@ -251,18 +253,18 @@ ion-icon:hover {
 /* ------------- ADMIN ------------- */
 
 .admin-control {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .admin-control a {
-    margin-bottom: 2vh;
-    width: 100%;
+	margin-bottom: 2vh;
+	width: 100%;
 }
 
 .admin-control .btn {
-    width: 80%;
-    padding: 2vh 0;
+	width: 80%;
+	padding: 2vh 0;
 }
