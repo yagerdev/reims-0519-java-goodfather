@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.wildcodeschool.goodFather.entities.Material;
 import fr.wildcodeschool.goodFather.entities.Task;
-import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
@@ -64,19 +63,5 @@ public class TaskController {
                 return "redirect:/tasks";
 
             }
-
-
-/* 
-            @RequestParam("walla") Double wallA,
-            @RequestParam("wallb") Double wallB,
-            @RequestParam("height") Double height,
-            @RequestParam("project")Long projectId,
-            @RequestParam("category") Long categoryId
-            ) {
-                Project project = projectRepository.getOne(projectId);
-                Category category = categoryRepository.getOne(categoryId);
-                Room room = new Room(wallA, wallB, height, category, project);
-                room = roomRepository.save(room);
-                Long id = room.getId(); */
     }
 }
