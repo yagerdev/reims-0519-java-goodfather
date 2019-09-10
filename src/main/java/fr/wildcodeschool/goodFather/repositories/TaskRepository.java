@@ -10,8 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    List<Task> selectWorkNameAndMaterialNameFromTasks(Long taskid){
-    select CONCAT(work.name, " ", material.name) from work join task on task.work_id=work.id join material on task.material_id=material.id;
-    }
+    abstract List<Task> findByTasks (Long taskid);
+    /* select CONCAT(work.name, " ", material.name) from work join task on task.work_id=work.id join material on task.material_id=material.id; */
 
 }
