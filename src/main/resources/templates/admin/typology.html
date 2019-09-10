@@ -24,45 +24,40 @@
 			</section>
 			<section class="section-list">
 				<h3>Liste des typologies créées :</h3>
-				<div class="list-group">
-					<div th:each="typology : ${typologies}" class="item-global">
-						<form
-							th:action="@{/typologies/} + ${typology.id}"
-							th:method="PUT"
-                            th:object="${typology}"
-							class="update-form"
+				<div th:each="typology : ${typologies}" class="item-global">
+					<form
+						th:action="@{/typologies/} + ${typology.id}"
+						th:method="PUT"
+						th:object="${typology}"
+						class="update-form"
+					>
+						<input
+							type="text"
+							th:value="*{name}"
+							th:id="${typology.id}"
+							name="name"
+							disabled
+						/>
+						<button
+							type="button"
+							class="btn btn-info"
+							th:id="${typology.id + 'item'}"
+							th:onclick="'javascript:update(\'' + ${typology.id} + '\');'"
 						>
-							<input
-                                type="text"
-								th:value="*{name}"
-								th:id="${typology.id}"
-                                name="name"
-                                disabled
-							/>
-							<button
-								type="button"
-								class="btn btn-info"
-                                id="update-button"
-								th:onclick="'javascript:update(\'' + ${typology.id} + '\');'"
-							>
-								<ion-icon name="create"></ion-icon>
-							</button>
-						</form>
+							<ion-icon name="create"></ion-icon>
+						</button>
+					</form>
 
-						<form
-							th:action="@{/typologies/} + ${typology.id}"
-							th:method="DELETE"
-						>
-							<input type="hidden" th:value="${typology.id}" th:name="id" />
-							<button type="submit" class="btn btn-info">
-								<ion-icon
-									ios="ios-close"
-									md="md-close"
-									class="icon-delete"
-								></ion-icon>
-							</button>
-						</form>
-					</div>
+					<form th:action="@{/typologies/} + ${typology.id}" th:method="DELETE">
+						<input type="hidden" th:value="${typology.id}" th:name="id" />
+						<button type="submit" class="btn btn-info">
+							<ion-icon
+								ios="ios-close"
+								md="md-close"
+								class="icon-delete"
+							></ion-icon>
+						</button>
+					</form>
 				</div>
 			</section>
 		</main>
