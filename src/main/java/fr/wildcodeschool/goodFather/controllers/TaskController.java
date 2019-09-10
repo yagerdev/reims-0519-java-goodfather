@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.wildcodeschool.goodFather.entities.Material;
 import fr.wildcodeschool.goodFather.entities.Task;
+import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
@@ -50,8 +51,8 @@ public class TaskController {
         @RequestParam(required = false) Long materialId,
         @RequestParam(required = false) Double price,
         @RequestParam(required = false) String unit, 
-        @RequestParam(required = false) Double percentRange
-        ) {
+        @RequestParam(required = false) Double percentRange) {
+            
             if(workId == null || materialId == null || price == null) {
                 return "redirect:/tasks";
             }
@@ -61,7 +62,6 @@ public class TaskController {
                 Task task = new Task(price, unit, percentRange, material, work);
                 task = taskRepository.save(task);
                 return "redirect:/tasks";
-
             }
     }
 }
