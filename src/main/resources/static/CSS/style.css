@@ -62,10 +62,6 @@ h6 {
 	margin: auto auto 2vh auto;
 }
 
-.section-list h3 {
-	font-size: 1rem;
-}
-
 .modal-dialog form,
 .item-global form {
 	background-color: white;
