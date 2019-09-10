@@ -36,7 +36,7 @@ public class TypologyController {
     }
 
     @PutMapping("/typologies/{id}")
-    public String updateTypology(@PathVariable Long id, @RequestParam Typology typology) {
+    public String updateTypology(@PathVariable Long id, Typology typology) {
         Typology typologyToUpdate = typologyRepository.findById(id).get();
         typologyToUpdate.setName(typology.getName());
         typologyRepository.save(typologyToUpdate);
