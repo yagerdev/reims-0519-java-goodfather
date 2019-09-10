@@ -24,9 +24,18 @@
             </section>
             <section class="section-list">
                 <h3>Liste des typologies créées :</h3>
-                <ul class="list-group" th:each="typology : ${typologies}">
-                    <li class="list-group-item" th:text="${typology.name}">Item</li>
-                </ul>
+				<ul class="list-group">
+					<div th:each="typology : ${typologies}" class="item-global">
+						<li class="list-group-item" th:text="${typology.name}">Item</li>
+                        <form th:action="@{/typologies/} + ${typology.id}" th:method="delete">
+                            <input type="hidden" th:value="${typology.id}" th:name="id" />
+                            <label for="id"></label>
+                            <button type="submit" class="btn btn-info">
+                                <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
+                            </button>
+                        </form>
+					</div>
+				</ul>
             </section>
         </main>
 		<div th:replace="fragments/footer.html :: footer"></div>
