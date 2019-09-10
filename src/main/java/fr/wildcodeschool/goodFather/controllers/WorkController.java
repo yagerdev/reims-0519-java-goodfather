@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,6 +31,12 @@ public class WorkController {
     public String createWork(@RequestParam String name) {
         Work work = new Work(name);
         workRepository.save(work);
+        return "redirect:/works";
+    }
+
+    @DeleteMapping("/works/{id}")
+    public String deleteWork(@PathVariable Long id){
+        workRepository.deleteById(id);
         return "redirect:/works";
     }
 }

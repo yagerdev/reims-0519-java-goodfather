@@ -8,7 +8,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,7 +22,6 @@ public class CategoryController {
 
     @GetMapping("/categories")
     public String showCategories(Model model) {
-        //Todo : check if user is admin
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
         return "admin/category";
@@ -28,9 +29,15 @@ public class CategoryController {
 
     @PostMapping("/categories")
     public String createCategory(@RequestParam String name) {
-        //Todo : check if user is admin
         Category category = new Category(name);
         categoryRepository.save(category);
         return "redirect:/categories";
     }
+
+    @DeleteMapping("/categories/{id}")
+    public String deleteCategory(@PathVariable Long id){
+        categoryRepository.deleteById(id);
+        return "redirect:/categories";
+    }
+    
 }
