@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -23,14 +24,14 @@ public class UserController {
     UserRepository userRepository;
     
     @GetMapping("/users")
-    public String showAllUser(Model model){
+    public String show(Model model){
         List<User> userList = userRepository.findAll();
         model.addAttribute("users", userList);
-        return"admin/user";
+        return "admin/user";
     }
 
     @PostMapping("/users")
-    public String createUser(
+    public String create(
         @RequestParam("firstName") String firstName,
         @RequestParam("lastName") String lastName,
         @RequestParam("email") String email,
@@ -47,8 +48,25 @@ public class UserController {
             return "redirect:/users";
     }
 
+    @PutMapping("/users/{id}")
+    public String update(@PathVariable Long id, User user) {
+        User userToUpdate = userRepository.findById(id).get();
+        userToUpdate.setFirstname(user.getFirstName());
+        userToUpdate.setLastname(user.getLastName());
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setPhoneNumber(user.getPhoneNumber());
+        userToUpdate.setPhoneNumber(user.getPhoneNumber());
+        userToUpdate.setAddress(user.getAddress());
+        userToUpdate.setCity(user.getCity());
+        userToUpdate.setPostalCode(user.getPostalCode());
+        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setRole(user.getRole());
+        userRepository.save(userToUpdate);
+        return "redirect:/users";
+    }
+
     @DeleteMapping("/users/{id}")
-    public String deleteUser(@PathVariable Long id){
+    public String delete(@PathVariable Long id){
         userRepository.deleteById(id);
         return "redirect:/users";
     }
