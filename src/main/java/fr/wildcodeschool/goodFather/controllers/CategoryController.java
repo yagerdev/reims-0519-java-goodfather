@@ -5,8 +5,10 @@ import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,22 +41,32 @@ public class CategoryController {
     public String readCategory(Model model, @PathVariable Long id) {
         Category category = categoryRepository.findById(id).get();
         List<Typology> typologies = typologyRepository.findAll();
+        Map<Typology, Boolean> checked = new HashMap<Typology, Boolean>();
+        for (Typology typology : typologies) {
+            if (category.getTypologies().contains(typology)) {
+                checked.put(typology, true);
+            } else {
+                checked.put(typology, false);
+            }
+        }
         model.addAttribute("entityName", category.getName());
         model.addAttribute("entityType", "categories");
         model.addAttribute("entityId", id);
         model.addAttribute("listType", "typologies");
-        model.addAttribute("myList", typologies);
+        model.addAttribute("myMap", checked);
         return "admin/config";
     }
 
     @PutMapping("/categories/{id}")
-    public String editCategory(@PathVariable(name = "id") Long categoryId, @RequestParam(name = "typologies") List<Long> typologyIds) {
-        Set<Typology> typologies = new HashSet<Typology>();
-        for (Long typologyId : typologyIds) {
-            Typology typology = typologyRepository.findById(typologyId).get();
-            typologies.add(typology);
-        }
+    public String editCategory(@PathVariable(name = "id") Long categoryId,
+            @RequestParam(required = false, name = "typologies") List<Long> typologyIds) {
         Category category = categoryRepository.findById(categoryId).get();
+        Set<Typology> typologies = new HashSet<Typology>();
+        if (typologyIds != null) {
+            for (Long typologyId : typologyIds) {
+                typologies.add( typologyRepository.findById( typologyId ).get() );
+            }
+        }
         category.setTypologies(typologies);
         categoryRepository.save(category);
         return "redirect:/categories";
@@ -68,9 +80,9 @@ public class CategoryController {
     }
 
     @DeleteMapping("/categories/{id}")
-    public String deleteCategory(@PathVariable Long id){
+    public String deleteCategory(@PathVariable Long id) {
         categoryRepository.deleteById(id);
         return "redirect:/categories";
     }
-    
+
 }
