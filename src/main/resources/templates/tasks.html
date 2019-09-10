@@ -15,9 +15,9 @@
                 </thead>
                 <tbody class="thead-light">
                     <tr>
-                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.height}">item</td>
                         <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallA}">item</td>
-                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallB}">item</td>
+                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallA}">item</td>
+                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.height}">item</td>
                     </tr>
                 </tbody>
             </table>
