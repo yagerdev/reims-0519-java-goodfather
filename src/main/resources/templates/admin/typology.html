@@ -23,7 +23,6 @@
 				</form>
 			</section>
 			<section class="section-list">
-				<h3>Liste des typologies créées :</h3>
 				<div th:each="typology : ${typologies}" class="item-global">
 					<form
 						th:action="@{/typologies/} + ${typology.id}"
