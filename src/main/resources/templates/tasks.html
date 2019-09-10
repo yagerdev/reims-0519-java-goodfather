@@ -15,9 +15,9 @@
                 </thead>
                 <tbody class="thead-light">
                     <tr>
-                        <td>46 cm2</td>
-                        <td>50 cm2</td>
-                        <td>20 cm2</td>
+                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallA + ' cm'}">item</td>
+                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallA + ' cm'}">item</td>
+                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.height + ' cm'}">item</td>
                     </tr>
                 </tbody>
             </table>
@@ -25,16 +25,11 @@
             <form method="" action="">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Catégorie</label>
+                        <label class="input-group-text" for="inputGroupSelect01">Typologie</label>
                     </div>
                     <select class="custom-select" id="inputGroupSelect01">
                         <option selected>Sélectionnez...</option>
-                        <option value="1">Mur</option>
-                        <option value="2">Electricité</option>
-                        <option value="3">Plafond</option>
-                        <option value="4">Sol</option>
-                        <option value="5">Ameublement</option>
-                        <option value="6">Plafond</option>
+                        <option th:each="typologie : ${typologies}" th:text="${typologie.name}">item</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
@@ -43,10 +38,7 @@
                     </div>
                     <select class="custom-select" id="inputGroupSelect02">
                         <option selected>Sélectionnez...</option>
-                        <option value="1">Détruire</option>
-                        <option value="2">Pose</option>
-                        <option value="3">Peindre</option>
-                        <option value="4">Revetir</option>
+                        <option th:each="work : ${works}" th:text="${work.name}">item</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
@@ -55,9 +47,7 @@
                     </div>
                     <select class="custom-select" id="inputGroupSelect03">
                         <option selected>Sélectionnez...</option>
-                        <option value="1">Platre</option>
-                        <option value="2">Rail</option>
-                        <option value="3">Laine de verre</option>
+                        <option th:each="material : ${materials}" th:text="${material.name}">item</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-info">Ajouter</button>
