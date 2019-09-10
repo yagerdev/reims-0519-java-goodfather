@@ -11,14 +11,21 @@
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                     </div>
-
+                    <select name="workId" id="">
+                        <option value="" disabled selected>Sélectionner un travail</option>
+                        <option th:each="work : ${works}" th:text="${work.name}"
+                            th:value="${work.id}"></option>
+                    </select>
                     <select name="materialId" id="">
                         <option value="" disabled selected>Sélectionner un matériel</option>
                         <option th:each="material : ${materials}" th:text="${material.name}"
                             th:value="${material.id}"></option>
                     </select>
-                        <input type="checkbox" th:each="work : ${works}" name="workId" th:text="${work.name}"
-                        th:value="${work.id}"></option>
+                    <input type="text" placeholder="Prix" th:name="price"></input>
+                    <input type="radio" th:name="unit" value="en m²">en m²</input>
+                    <input type="radio" th:name="unit" value="l'unité">par unité</input>
+                    <input type="range" th:name="percentRange" min="0"  max="100" step="0.01" value="0" oninput="result.value=percentRange.value">
+                    <output name="result">0</output>%/100%</input>
                 </div>
                 <button type="submit" class="btn btn-info">Créer</button>
             </form>
@@ -33,5 +40,5 @@
     <div th:replace="fragments/footer.html :: footer"></div>
     <div th:replace="fragments/script.html :: script"></div>
 </body>
-
+<input type=>
 </html>

@@ -41,19 +41,30 @@ public class TaskController {
         model.addAttribute("tasks", tasks);
         model.addAttribute("works", works);
         model.addAttribute("materials", materials);
+
         return "admin/task";
     }
 
     @PostMapping("/tasks")
     public String createTask(Model model,
-        @RequestParam Long workId,
-        @RequestParam Long materialId
+        @RequestParam(required = false) Long workId,
+        @RequestParam(required = false) Long materialId,
+        @RequestParam(required = false) Double price,
+        @RequestParam(required = false) String unit, 
+        @RequestParam(required = false) Double percentRange
         ) {
-            Material material = materialRepository.getOne(materialId);
-            Work work = workRepository.getOne(workId);
-            Task task = new Task(material, work);
-            task = taskRepository.save(task);
-            return "redirect:/tasks";
+            if(workId == null || materialId == null || price == null) {
+                return "redirect:/tasks";
+            }
+            else {
+                Material material = materialRepository.getOne(materialId);
+                Work work = workRepository.getOne(workId);
+                Task task = new Task(price, unit, percentRange, material, work);
+                task = taskRepository.save(task);
+                return "redirect:/tasks";
+
+            }
+
 
 /* 
             @RequestParam("walla") Double wallA,
