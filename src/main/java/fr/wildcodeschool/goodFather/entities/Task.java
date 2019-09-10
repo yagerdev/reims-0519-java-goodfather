@@ -51,16 +51,10 @@ public class Task {
         this.setWork(work);
     }
 
-    public Task(double price, 
-                String unit, 
-                double percentRange, 
-                Typology typology, 
+    public Task(
                 Material material, 
                 Work work
     ) {
-        this.setPrice(price);
-        this.setUnit(unit);
-        this.setPercentRange(percentRange);
         this.setMaterial(material);
         this.setWork(work);
     }

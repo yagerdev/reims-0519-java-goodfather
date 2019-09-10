@@ -35,25 +35,37 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String showCreateTask(Model model) {
-        List<Task> taskList = taskRepository.findAll();
-        model.addAttribute("tasks", taskList);
-        return "admin-task";
+        List<Task> tasks = taskRepository.findAll();
+        List<Work> works = workRepository.findAll();
+        List<Material> materials = materialRepository.findAll();
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("works", works);
+        model.addAttribute("materials", materials);
+        return "admin/task";
     }
 
     @PostMapping("/tasks")
-    public String createTask(
-        @RequestParam("typology") Long typologyId,
-        @RequestParam("work") Long workId,
-        @RequestParam("material") Long materialId,
-        @RequestParam("price") double price,
-        @RequestParam("percent_range") double percentRange,
-        @RequestParam("unit") String unit
+    public String createTask(Model model,
+        @RequestParam Long workId,
+        @RequestParam Long materialId
         ) {
-            Typology typology = typologyRepository.getOne(typologyId);
             Material material = materialRepository.getOne(materialId);
             Work work = workRepository.getOne(workId);
-            Task task = new Task(price, unit, percentRange, typology, material, work);
-            taskRepository.save(task);
+            Task task = new Task(material, work);
+            task = taskRepository.save(task);
             return "redirect:/tasks";
+
+/* 
+            @RequestParam("walla") Double wallA,
+            @RequestParam("wallb") Double wallB,
+            @RequestParam("height") Double height,
+            @RequestParam("project")Long projectId,
+            @RequestParam("category") Long categoryId
+            ) {
+                Project project = projectRepository.getOne(projectId);
+                Category category = categoryRepository.getOne(categoryId);
+                Room room = new Room(wallA, wallB, height, category, project);
+                room = roomRepository.save(room);
+                Long id = room.getId(); */
     }
 }
