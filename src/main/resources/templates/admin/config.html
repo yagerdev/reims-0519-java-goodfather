@@ -9,9 +9,8 @@
 				<form th:action="@{'/' + ${entityType} + '/' + ${entityId}}" th:method="PUT">
 					<span th:text="${'Sélection des ' + listType}"></span>
 					<div th:each="item : ${myList}">
-						<input type="checkbox" th:field="*{myList}" th:value="${item.id}"/>
-						<label th:for="${myList}" 
-						th:text="${item.name}">item</label>
+						<input type="checkbox" th:name="${listType}" th:id="${item.id}" th:value="${item.id}"/>
+						<label th:for="${item.id}" th:text="${item.name}">item</label>
                       </div>
 					<button type="submit" class="btn btn-info">Filtrer</button>
 				</form>
