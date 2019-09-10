@@ -19,16 +19,10 @@
 		<script>
 			function update(target) {
 				let targetToUpdate = document.getElementById(target);
-
 				if (targetToUpdate.disabled) {
 					targetToUpdate.disabled = false;
-					document.addEventListener("keypress", recoverValue);
-					function recoverValue(e) {
-						targetToUpdate.textContent += `${e.code}`;
-					}
 				} else {
-					targetToUpdate.disabled = true;
-					document.getElementById("update-button").type = "submit";
+					document.getElementById(target + "item").type = "submit";
 				}
 			}
 		</script>
