@@ -30,6 +30,13 @@ public class UserController {
         return "admin/user";
     }
 
+    @GetMapping("/users/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        User userToUpdate = userRepository.findById(id).get();
+        model.addAttribute("user", userToUpdate);
+        return "admin/user-edit";
+    }
+
     @PostMapping("/users")
     public String create(
         @RequestParam("firstName") String firstName,
@@ -54,7 +61,6 @@ public class UserController {
         userToUpdate.setFirstname(user.getFirstName());
         userToUpdate.setLastname(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
