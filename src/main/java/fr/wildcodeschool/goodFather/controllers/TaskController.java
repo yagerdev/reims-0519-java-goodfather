@@ -35,25 +35,33 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String showCreateTask(Model model) {
-        List<Task> taskList = taskRepository.findAll();
-        model.addAttribute("tasks", taskList);
-        return "admin-task";
+        List<Task> tasks = taskRepository.findAll();
+        List<Work> works = workRepository.findAll();
+        List<Material> materials = materialRepository.findAll();
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("works", works);
+        model.addAttribute("materials", materials);
+
+        return "admin/task";
     }
 
     @PostMapping("/tasks")
-    public String createTask(
-        @RequestParam("typology") Long typologyId,
-        @RequestParam("work") Long workId,
-        @RequestParam("material") Long materialId,
-        @RequestParam("price") double price,
-        @RequestParam("percent_range") double percentRange,
-        @RequestParam("unit") String unit
-        ) {
-            Typology typology = typologyRepository.getOne(typologyId);
-            Material material = materialRepository.getOne(materialId);
-            Work work = workRepository.getOne(workId);
-            Task task = new Task(price, unit, percentRange, typology, material, work);
-            taskRepository.save(task);
-            return "redirect:/tasks";
+    public String createTask(Model model,
+        @RequestParam(required = false) Long workId,
+        @RequestParam(required = false) Long materialId,
+        @RequestParam(required = false) Double price,
+        @RequestParam(required = false) String unit, 
+        @RequestParam(required = false) Double percentRange) {
+            
+            if(workId == null || materialId == null || price == null) {
+                return "redirect:/tasks";
+            }
+            else {
+                Material material = materialRepository.getOne(materialId);
+                Work work = workRepository.getOne(workId);
+                Task task = new Task(price, unit, percentRange, material, work);
+                task = taskRepository.save(task);
+                return "redirect:/tasks";
+            }
     }
 }
