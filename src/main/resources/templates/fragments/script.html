@@ -16,5 +16,21 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"
 		></script>
+		<script>
+			function update(target) {
+				let targetToUpdate = document.getElementById(target);
+
+				if (targetToUpdate.disabled) {
+					targetToUpdate.disabled = false;
+					document.addEventListener("keypress", recoverValue);
+					function recoverValue(e) {
+						targetToUpdate.textContent += `${e.code}`;
+					}
+				} else {
+					targetToUpdate.disabled = true;
+					document.getElementById("update-button").type = "submit";
+				}
+			}
+		</script>
 	</body>
 </html>
