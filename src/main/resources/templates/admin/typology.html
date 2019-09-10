@@ -28,14 +28,16 @@
 					<div th:each="typology : ${typologies}" class="item-global">
 						<form
 							th:action="@{/typologies/} + ${typology.id}"
-                            th:object="${typology}"
 							th:method="PUT"
+                            th:object="${typology}"
 							class="update-form"
 						>
 							<input
-								th:value="${typology.name}"
-								disabled
+                                type="text"
+								th:value="*{name}"
 								th:id="${typology.id}"
+                                name="name"
+                                disabled
 							/>
 							<button
 								type="button"
