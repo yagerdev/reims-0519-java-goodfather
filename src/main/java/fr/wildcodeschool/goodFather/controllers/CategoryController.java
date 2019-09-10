@@ -1,7 +1,9 @@
 package fr.wildcodeschool.goodFather.controllers;
 
 import fr.wildcodeschool.goodFather.entities.Category;
+import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
+import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 
 import java.util.List;
 
@@ -20,11 +22,26 @@ public class CategoryController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    TypologyRepository typologyRepository;
+
     @GetMapping("/categories")
     public String showCategories(Model model) {
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
         return "admin/category";
+    }
+
+    @GetMapping("/categories/{id}/edit")
+    public String readCategory(Model model, @PathVariable Long id) {
+        Category category = categoryRepository.findById(id).get();
+        List<Typology> typologies = typologyRepository.findAll();
+        model.addAttribute("entityName", category.getName());
+        model.addAttribute("entityType", "categories");
+        model.addAttribute("entityId", id);
+        model.addAttribute("listType", "typologies");
+        model.addAttribute("myList", typologies);
+        return "admin/config";
     }
 
     @PostMapping("/categories")
