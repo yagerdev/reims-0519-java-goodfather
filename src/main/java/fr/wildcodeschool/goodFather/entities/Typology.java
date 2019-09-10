@@ -1,5 +1,6 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 @Entity
@@ -20,7 +22,12 @@ public class Typology {
     private String name;
 
     @ManyToMany
-    private Set<Task> task;
+    @JoinColumn
+    private Set<Task> tasks = new HashSet<>();
+
+    @ManyToMany
+    @JoinColumn
+    private Set<Category> categories = new HashSet<>();
 
     public Typology() {
     }
@@ -48,5 +55,21 @@ public class Typology {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }

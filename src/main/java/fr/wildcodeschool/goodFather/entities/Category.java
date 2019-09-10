@@ -1,5 +1,6 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,7 +23,11 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private Set<Room> rooms;
+    private Set<Room> rooms = new HashSet<>();
+
+    @ManyToMany
+    @JoinColumn
+    private Set<Typology> typologies = new HashSet<>();
 
     public Category(){
 
@@ -57,5 +64,13 @@ public class Category {
 
     public void setRooms(Set<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    public Set<Typology> getTypologies() {
+        return typologies;
+    }
+
+    public void setTypologies(Set<Typology> typologies) {
+        this.typologies = typologies;
     }
 }
