@@ -86,7 +86,6 @@ input:disabled {
 
 .item-global {
 	display: flex;
-    justify-content: space-between;
     align-items: center;
 	margin-bottom: 1vh;
 }
@@ -98,11 +97,13 @@ input:disabled {
 
 .item-global .btn {
 	display: flex;
+    margin-left: 1vh;
+    width: 50px;
 }
 
 .update-form {
 	display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -110,7 +111,7 @@ input:disabled {
 	text-align: center;
 	border: 1px solid lightgray;
 	border-radius: 5px 5px 0 0;
-    width: 80%;
+    width: 100%;
 }
 
 /* ------------- Footer ------------- */
