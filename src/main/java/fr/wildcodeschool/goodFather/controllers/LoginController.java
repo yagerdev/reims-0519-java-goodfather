@@ -21,7 +21,7 @@ public class LoginController {
     }
 
     @GetMapping("/home")
-    public String redirectByRole() {
+    public String forwardByRole() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User)authentication.getPrincipal();
         if (currentUser.getRole().equals("ADMIN")) {
