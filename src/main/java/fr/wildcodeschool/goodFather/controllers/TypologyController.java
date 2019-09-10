@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -34,8 +35,16 @@ public class TypologyController {
         return "redirect:/typologies";
     }
 
+    @PutMapping("/typologies/{id}")
+    public String updateTypology(@PathVariable Long id, @RequestParam Typology typology) {
+        Typology typologyToUpdate = typologyRepository.findById(id).get();
+        typologyToUpdate.setName(typology.getName());
+        typologyRepository.save(typologyToUpdate);
+        return "redirect:/typologies";
+    }
+
     @DeleteMapping("/typologies/{id}")
-    public String deleteTypology(@PathVariable Long id){
+    public String deleteTypology(@PathVariable Long id) {
         typologyRepository.deleteById(id);
         return "redirect:/typologies";
     }
