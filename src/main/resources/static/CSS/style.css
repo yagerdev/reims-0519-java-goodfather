@@ -103,11 +103,18 @@ input:disabled {
     width: 100%;
 }
 
-.update-form input {
+.update-form input, .user-list {
 	text-align: center;
 	border: 1px solid lightgray;
 	border-radius: 5px 5px 0 0;
     width: 100%;
+}
+
+.user-list {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* ------------- Footer ------------- */
