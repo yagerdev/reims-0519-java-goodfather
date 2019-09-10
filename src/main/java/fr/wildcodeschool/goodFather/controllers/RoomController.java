@@ -87,11 +87,12 @@ public class RoomController {
         List<Typology> typologyList = typologyRepository.findAll();
         List<Work> workList = workRepository.findAll();
         List<Material> materialList = materialRepository.findAll();
+        Room currentRoom = roomRepository.getOne(id);
+        model.addAttribute("idCurrentRoom", currentRoom);
         model.addAttribute("materials", materialList);
         model.addAttribute("typologies", typologyList);
         model.addAttribute("works", workList);
         return "tasks";
     }
-
    
 }
