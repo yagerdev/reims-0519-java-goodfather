@@ -25,10 +25,10 @@ public class LoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User)authentication.getPrincipal();
         if (currentUser.getRole().equals("ADMIN")) {
-            return "redirect:/admin";
+            return "forward:/admin";
         }
         else {
-            return "redirect:/projects/create";
+            return "forward:/projects/create";
         }
     }
 
