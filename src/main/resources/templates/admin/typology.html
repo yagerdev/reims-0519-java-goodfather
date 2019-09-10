@@ -3,42 +3,68 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
-        <main class="container">
-            <h2>Gestion des<span class="yellow-gf">typologies de travaux</span></h2>
-            <section>
-                <form th:action="@{/typologies}" method="POST">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="name">Nom</label>
-                        </div>
-                        <input 
-                            type="text"
-                            class="form-control"
-                            placeholder="Entrez une donnée ..."
-                            name="name"
-                            required
-                        >
-                    </div>
-                    <button type="submit" class="btn btn-info">Créer</button>
-                </form>
-            </section>
-            <section class="section-list">
-                <h3>Liste des typologies créées :</h3>
-				<ul class="list-group">
-					<div th:each="typology : ${typologies}" class="item-global">
-						<li class="list-group-item" th:text="${typology.name}">Item</li>
-                        <form th:action="@{/typologies/} + ${typology.id}" th:method="delete">
-                            <input type="hidden" th:value="${typology.id}" th:name="id" />
-                            <label for="id"></label>
-                            <button type="submit" class="btn btn-info">
-                                <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
-                            </button>
-                        </form>
+		<main class="container">
+			<h2>Gestion des<span class="yellow-gf">typologies de travaux</span></h2>
+			<section>
+				<form th:action="@{/typologies}" method="POST">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="name">Nom</label>
+						</div>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Entrez une donnée ..."
+							name="name"
+							required
+						/>
 					</div>
-				</ul>
-            </section>
-        </main>
+					<button type="submit" class="btn btn-info">Créer</button>
+				</form>
+			</section>
+			<section class="section-list">
+				<h3>Liste des typologies créées :</h3>
+				<div class="list-group">
+					<div th:each="typology : ${typologies}" class="item-global">
+						<form
+							th:action="@{/typologies/} + ${typology.id}"
+                            th:object="${typology}"
+							th:method="PUT"
+							class="update-form"
+						>
+							<input
+								th:value="${typology.name}"
+								disabled
+								th:id="${typology.id}"
+							/>
+							<button
+								type="button"
+								class="btn btn-info"
+                                id="update-button"
+								th:onclick="'javascript:update(\'' + ${typology.id} + '\');'"
+							>
+								<ion-icon name="create"></ion-icon>
+							</button>
+						</form>
+
+						<form
+							th:action="@{/typologies/} + ${typology.id}"
+							th:method="DELETE"
+						>
+							<input type="hidden" th:value="${typology.id}" th:name="id" />
+							<button type="submit" class="btn btn-info">
+								<ion-icon
+									ios="ios-close"
+									md="md-close"
+									class="icon-delete"
+								></ion-icon>
+							</button>
+						</form>
+					</div>
+				</div>
+			</section>
+		</main>
 		<div th:replace="fragments/footer.html :: footer"></div>
 		<div th:replace="fragments/script.html :: script"></div>
-    </body>
+	</body>
 </html>
