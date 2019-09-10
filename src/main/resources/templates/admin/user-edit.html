@@ -4,18 +4,28 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
-			<h2>Gestion des<span class="yellow-gf">utilisateurs</span></h2>
+			<h2>
+				Modification de
+                <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
+                    catégories
+                </span>
+			</h2>
 			<section>
-				<form th:action="@{/users}" method="POST">
+				<form
+					th:action="@{/users/} + ${user.id}"
+					th:method="PUT"
+					th:object="${user}"
+				>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="firstName">Prénom</label>
 						</div>
 						<input
 							type="text"
+							th:value="*{firstName}"
 							class="form-control"
 							name="firstName"
-							required
+                            onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -24,66 +34,82 @@
 						</div>
 						<input
 							type="text"
+							th:value="*{lastName}"
 							class="form-control"
 							name="lastName"
-							required
+                            onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="email">Mail</label>
 						</div>
-						<input type="email" class="form-control" name="email" required />
+						<input
+							type="email"
+							class="form-control"
+							name="email"
+							th:value="*{email}"
+                            onfocus="this.value=''"
+						/>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="phoneNumber"
-								>Téléphone</label
-							>
+							<label class="input-group-text" for="phoneNumber">Téléphone</label>
 						</div>
 						<input
 							type="tel"
+							th:value="*{phoneNumber}"
 							class="form-control"
 							name="phoneNumber"
-							required
+                            onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="address">Adresse</label>
 						</div>
-						<input type="text" class="form-control" name="address" required />
+						<input
+							type="text"
+							class="form-control"
+							name="address"
+							th:value="*{address}"
+                            onfocus="this.value=''"
+						/>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<label class="input-group-text" for="city">City</label>
 						</div>
-						<input type="text" class="form-control" name="city" required />
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="postalCode"
-								>Code postal</label
-							>
-						</div>
 						<input
 							type="text"
+							th:value="*{city}"
 							class="form-control"
-							name="postalCode"
-							required
+							name="city"
+                            onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="password"
-								>Mot de passe</label
-							>
+							<label class="input-group-text" for="postalCode">Code postal</label>
 						</div>
 						<input
 							type="text"
+							th:value="*{postalCode}"
+							class="form-control"
+							name="postalCode"
+                            onfocus="this.value=''"
+						/>
+					</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="password">Mot de passe</label>
+						</div>
+						<input
+							type="text"
+							th:value="*{password}"
 							class="form-control"
 							name="password"
-							required
+                            onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -91,39 +117,13 @@
 							<label class="input-group-text" for="role">Rôle</label>
 						</div>
 						<select class="custom-select" name="role" required>
-							<option selected disabled>Choisir...</option>
+							<option selected disabled th:text="*{role}">Choisir...</option>
 							<option value="ADMIN">ADMIN</option>
 							<option value="USER">USER</option>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-info">Créer</button>
+					<button type="submit" class="btn btn-info">Modifier</button>
 				</form>
-			</section>
-			<section class="section-list">
-				<div th:each="user : ${users}" class="item-global">
-
-                    
-					<div type="text" th:text="${user.firstName} + ' ' + ${user.lastName}" th:id="${user.id}" class="user-list">
-						User
-					</div>
-
-					<a th:href="@{'/users/' + ${user.id}}">
-						<button type="button" class="btn btn-info">
-							<ion-icon name="create"></ion-icon>
-						</button>
-					</a>
-
-					<form th:action="@{/users/} + ${user.id}" th:method="DELETE">
-						<input type="hidden" th:value="${user.id}" th:name="id" />
-						<button type="submit" class="btn btn-info">
-							<ion-icon
-								ios="ios-close"
-								md="md-close"
-								class="icon-delete"
-							></ion-icon>
-						</button>
-					</form>
-				</div>
 			</section>
 		</main>
 		<div th:replace="fragments/footer.html :: footer"></div>
