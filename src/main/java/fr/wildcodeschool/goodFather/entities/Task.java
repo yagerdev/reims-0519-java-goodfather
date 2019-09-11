@@ -124,4 +124,8 @@ public class Task {
     public void setTypologies(Set<Typology> typologies) {
         this.typologies = typologies;
     }
+
+    public String constructName() {
+        return this.work.getName() + " " + this.material.getName();
+    }
 }
