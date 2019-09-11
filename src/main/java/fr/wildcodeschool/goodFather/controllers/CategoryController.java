@@ -58,17 +58,22 @@ public class CategoryController {
     }
 
     @PutMapping("/categories/{id}")
-    public String edit(@PathVariable(name = "id") Long categoryId,
-            @RequestParam(required = false, name = "typologies") List<Long> typologyIds) {
-        Category category = categoryRepository.findById(categoryId).get();
-        Set<Typology> typologies = new HashSet<Typology>();
-        if (typologyIds != null) {
+    public String edit(
+        @PathVariable(name = "id") Long categoryId,
+        @RequestParam(required = false, name = "typologies") List<Long> typologyIds, 
+        Category category
+    ) {
+        Category categoryToUpdate = categoryRepository.findById(categoryId).get();
+        if (typologyIds == null) {
+            categoryToUpdate.setName(category.getName());
+        } else {
+            Set<Typology> typologies = new HashSet<Typology>();
             for (Long typologyId : typologyIds) {
-                typologies.add( typologyRepository.findById( typologyId ).get() );
+                typologies.add(typologyRepository.findById(typologyId).get());
             }
+            categoryToUpdate.setTypologies(typologies);
         }
-        category.setTypologies(typologies);
-        categoryRepository.save(category);
+        categoryRepository.save(categoryToUpdate);
         return "redirect:/categories";
     }
 
@@ -79,16 +84,8 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    @PutMapping("/categories/{id}")
-    public String update(@PathVariable Long id, Category category) {
-        Category categoryToUpdate = categoryRepository.findById(id).get();
-        categoryToUpdate.setName(category.getName());
-        categoryRepository.save(categoryToUpdate);
-        return "redirect:/categories";
-    }
-
     @DeleteMapping("/categories/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         categoryRepository.deleteById(id);
         return "redirect:/categories";
     }
