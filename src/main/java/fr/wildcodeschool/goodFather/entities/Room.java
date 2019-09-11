@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 @Entity
 public class Room {
@@ -20,11 +19,9 @@ public class Room {
     private double height;
 
     @ManyToOne
-    @JoinColumn
     private Project project;
 
     @ManyToOne
-    @JoinColumn
     private Category category;
 
     public Room() {
