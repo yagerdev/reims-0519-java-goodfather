@@ -58,14 +58,13 @@ public class UserController {
     @PutMapping("/users/{id}")
     public String update(@PathVariable Long id, User user) {
         User userToUpdate = userRepository.findById(id).get();
-        userToUpdate.setFirstname(user.getFirstName());
-        userToUpdate.setLastname(user.getLastName());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
-        userToUpdate.setPassword(user.getPassword());
         userToUpdate.setRole(user.getRole());
         userRepository.save(userToUpdate);
         return "redirect:/users";
