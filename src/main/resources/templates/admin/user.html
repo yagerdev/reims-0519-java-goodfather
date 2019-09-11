@@ -101,18 +101,14 @@
 			</section>
 			<section class="section-list">
 				<div th:each="user : ${users}" class="item-global">
-
-                    
 					<div type="text" th:text="${user.firstName} + ' ' + ${user.lastName}" th:id="${user.id}" class="user-list">
 						User
 					</div>
-
 					<a th:href="@{'/users/' + ${user.id}}">
 						<button type="button" class="btn btn-info">
 							<ion-icon name="create"></ion-icon>
 						</button>
 					</a>
-
 					<form th:action="@{/users/} + ${user.id}" th:method="DELETE">
 						<input type="hidden" th:value="${user.id}" th:name="id" />
 						<button type="submit" class="btn btn-info">

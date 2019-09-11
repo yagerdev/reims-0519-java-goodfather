@@ -24,6 +24,7 @@
 			</section>
 			<section class="section-list">
 				<div th:each="category : ${categories}" class="item-global">
+
 					<form
 						th:action="@{/categories/} + ${category.id}"
 						th:method="PUT"
@@ -59,6 +60,12 @@
 							></ion-icon>
 						</button>
 					</form>
+
+                    <a th:href="@{'/categories/' + ${category.id} + '/edit'}">
+                        <button type="button" class="btn btn-info">
+                            <ion-icon name="build"></ion-icon>
+                        </button>
+					</a>
 				</div>
 			</section>
 		</main>
