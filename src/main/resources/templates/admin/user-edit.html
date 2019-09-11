@@ -6,9 +6,12 @@
 		<main class="container">
 			<h2>
 				Modification de
-                <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
-                    catégories
-                </span>
+				<span
+					class="yellow-gf"
+					th:text="${user.firstName} + ' ' + ${user.lastName}"
+				>
+					catégories
+				</span>
 			</h2>
 			<section>
 				<form
@@ -22,10 +25,10 @@
 						</div>
 						<input
 							type="text"
-							th:value="*{firstName}"
 							class="form-control"
-							name="firstName"
-                            onfocus="this.value=''"
+							th:name="firstName"
+                            th:value="*{firstName}"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -34,10 +37,10 @@
 						</div>
 						<input
 							type="text"
-							th:value="*{lastName}"
 							class="form-control"
-							name="lastName"
-                            onfocus="this.value=''"
+							th:name="lastName"
+                            th:value="*{lastName}"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -49,7 +52,7 @@
 							class="form-control"
 							name="email"
 							th:value="*{email}"
-                            onfocus="this.value=''"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -58,10 +61,10 @@
 						</div>
 						<input
 							type="tel"
-							th:value="*{phoneNumber}"
 							class="form-control"
 							name="phoneNumber"
-                            onfocus="this.value=''"
+                            th:value="*{phoneNumber}"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -73,7 +76,7 @@
 							class="form-control"
 							name="address"
 							th:value="*{address}"
-                            onfocus="this.value=''"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -82,10 +85,10 @@
 						</div>
 						<input
 							type="text"
-							th:value="*{city}"
 							class="form-control"
 							name="city"
-                            onfocus="this.value=''"
+                            th:value="*{city}"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -94,22 +97,10 @@
 						</div>
 						<input
 							type="text"
-							th:value="*{postalCode}"
 							class="form-control"
 							name="postalCode"
-                            onfocus="this.value=''"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="password">Mot de passe</label>
-						</div>
-						<input
-							type="text"
-							th:value="*{password}"
-							class="form-control"
-							name="password"
-                            onfocus="this.value=''"
+                            th:value="${user.postalCode}"
+							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
