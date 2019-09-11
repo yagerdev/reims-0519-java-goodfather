@@ -57,7 +57,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="phoneNumber">Téléphone</label>
+							<label class="input-group-text" for="phoneNumber"
+								>Téléphone</label
+							>
 						</div>
 						<input
 							type="tel"
@@ -93,7 +95,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="postalCode">Code postal</label>
+							<label class="input-group-text" for="postalCode"
+								>Code postal</label
+							>
 						</div>
 						<input
 							type="text"
@@ -112,11 +116,18 @@
 								id="admin"
 								name="role"
 								value="ADMIN"
+                                th:checked="${user.role == 'ADMIN'}"
 							/>
 							<label for="role">Administrateur</label>
 						</div>
 						<div class="item-check">
-							<input type="radio" id="user" name="role" value="USER" />
+							<input
+								type="radio"
+								id="user"
+								name="role"
+								value="USER"
+								th:checked="${user.role == 'USER'}"
+							/>
 							<label for="role">Utilisateur</label>
 						</div>
 					</section>
