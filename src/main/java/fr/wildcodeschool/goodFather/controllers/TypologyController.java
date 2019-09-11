@@ -6,8 +6,10 @@ import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -52,6 +55,26 @@ public class TypologyController {
         model.addAttribute("listType", "tasks");
         model.addAttribute("myMap", checked);
         return "admin/config";
+    }
+
+    @PutMapping("/typologies/{id}")
+    public String editTypology(
+            @PathVariable(name = "id") Long typologyId,
+            @RequestParam(required = false, name = "tasks") List<Long> taskIds,
+            Typology typology
+    ) {
+        Typology typologyToUpdate = typologyRepository.findById(typologyId).get();
+        if (taskIds == null) {
+            typologyToUpdate.setName(typology.getName());
+        } else {
+            Set<Task> tasks = new HashSet<Task>();
+            for (Long taskId : taskIds) {
+                tasks.add( taskRepository.findById( taskId ).get() );
+            }
+            typologyToUpdate.setTasks(tasks);
+        }
+        typologyRepository.save(typologyToUpdate);
+        return "redirect:/typologies";
     }
 
     @PostMapping("/typologies")
