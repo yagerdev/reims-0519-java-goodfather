@@ -1,5 +1,6 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Task {
 
     @ManyToMany
     @JoinColumn
-    private Set<Typology> typology;
+    private Set<Typology> typologies = new HashSet<>();
 
     @ManyToOne
     @JoinColumn
@@ -51,10 +52,9 @@ public class Task {
         this.setWork(work);
     }
 
-    public Task(double price, 
-                String unit, 
-                double percentRange, 
-                Typology typology, 
+    public Task(double price,
+                String unit,
+                double percentRange,
                 Material material, 
                 Work work
     ) {
@@ -117,7 +117,11 @@ public class Task {
         this.work = work;
     }
 
-    public void setTypology(Set<Typology> typology) {
-        this.typology = typology;
+    public Set<Typology> getTypologies() {
+        return typologies;
+    }
+
+    public void setTypologies(Set<Typology> typologies) {
+        this.typologies = typologies;
     }
 }
