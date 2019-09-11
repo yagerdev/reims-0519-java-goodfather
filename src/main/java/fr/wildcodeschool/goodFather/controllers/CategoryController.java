@@ -38,7 +38,7 @@ public class CategoryController {
     }
 
     @GetMapping("/categories/{id}/edit")
-    public String readCategory(Model model, @PathVariable Long id) {
+    public String read(Model model, @PathVariable Long id) {
         Category category = categoryRepository.findById(id).get();
         List<Typology> typologies = typologyRepository.findAll();
         Map<Typology, Boolean> checked = new HashMap<Typology, Boolean>();
@@ -58,7 +58,7 @@ public class CategoryController {
     }
 
     @PutMapping("/categories/{id}")
-    public String editCategory(@PathVariable(name = "id") Long categoryId,
+    public String edit(@PathVariable(name = "id") Long categoryId,
             @RequestParam(required = false, name = "typologies") List<Long> typologyIds) {
         Category category = categoryRepository.findById(categoryId).get();
         Set<Typology> typologies = new HashSet<Typology>();

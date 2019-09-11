@@ -45,7 +45,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public String createTask(Model model,
+    public String create(Model model,
         @RequestParam(required = false) Long workId,
         @RequestParam(required = false) Long materialId,
         @RequestParam(required = false) Double price,
