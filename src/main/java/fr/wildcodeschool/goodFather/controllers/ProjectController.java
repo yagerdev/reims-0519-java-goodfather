@@ -37,7 +37,7 @@ public class ProjectController {
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User)authentication.getPrincipal();
-        Project project = new Project(name, address, city, postalCode,currentUser);
+        Project project = new Project(name, address, city, postalCode, currentUser);
         project = projectRepository.save(project);
         Long id = project.getId();
         return "redirect:/projects/"+id+"/edit";
