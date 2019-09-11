@@ -27,7 +27,7 @@
 							type="text"
 							class="form-control"
 							th:name="firstName"
-                            th:value="*{firstName}"
+							th:value="*{firstName}"
 							onfocus="this.value=''"
 						/>
 					</div>
@@ -39,7 +39,7 @@
 							type="text"
 							class="form-control"
 							th:name="lastName"
-                            th:value="*{lastName}"
+							th:value="*{lastName}"
 							onfocus="this.value=''"
 						/>
 					</div>
@@ -63,7 +63,7 @@
 							type="tel"
 							class="form-control"
 							name="phoneNumber"
-                            th:value="*{phoneNumber}"
+							th:value="*{phoneNumber}"
 							onfocus="this.value=''"
 						/>
 					</div>
@@ -87,7 +87,7 @@
 							type="text"
 							class="form-control"
 							name="city"
-                            th:value="*{city}"
+							th:value="*{city}"
 							onfocus="this.value=''"
 						/>
 					</div>
@@ -99,20 +99,28 @@
 							type="text"
 							class="form-control"
 							name="postalCode"
-                            th:value="${user.postalCode}"
+							th:value="${user.postalCode}"
 							onfocus="this.value=''"
 						/>
 					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="role">Rôle</label>
+
+					<section class="check-role">
+						<p>Sélectionner le rôle de l'utilisateur :</p>
+						<div class="item-check">
+							<input
+								type="radio"
+								id="admin"
+								name="role"
+								value="ADMIN"
+							/>
+							<label for="role">Administrateur</label>
 						</div>
-						<select class="custom-select" name="role" required>
-							<option selected disabled th:text="*{role}">Choisir...</option>
-							<option value="ADMIN">ADMIN</option>
-							<option value="USER">USER</option>
-						</select>
-					</div>
+						<div class="item-check">
+							<input type="radio" id="user" name="role" value="USER" />
+							<label for="role">Utilisateur</label>
+						</div>
+					</section>
+
 					<button type="submit" class="btn btn-info">Modifier</button>
 				</form>
 			</section>
