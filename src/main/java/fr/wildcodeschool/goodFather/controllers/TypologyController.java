@@ -84,14 +84,6 @@ public class TypologyController {
         return "redirect:/typologies";
     }
 
-    @PutMapping("/typologies/{id}")
-    public String update(@PathVariable Long id, Typology typology) {
-        Typology typologyToUpdate = typologyRepository.findById(id).get();
-        typologyToUpdate.setName(typology.getName());
-        typologyRepository.save(typologyToUpdate);
-        return "redirect:/typologies";
-    }
-
     @DeleteMapping("/typologies/{id}")
     public String delete(@PathVariable Long id) {
         typologyRepository.deleteById(id);
