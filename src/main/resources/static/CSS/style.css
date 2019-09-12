@@ -157,6 +157,46 @@ input:disabled {
 	}
 }
 
+.read-project {
+    min-width: 120px;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form-control {
+    height: auto;
+}
+
+.accordion > .card .card-header {
+    margin: 0;
+}
+
+.accordion > .card {
+    border: none;
+}
+
+.card-header {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: white;
+}
+
+.card-body {
+    background-color: whitesmoke;
+    border: 1px solid #ced4da;
+    border-top: none;
+}
+
+.btn-room {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
 /* ------------- Footer ------------- */
 
 footer {
