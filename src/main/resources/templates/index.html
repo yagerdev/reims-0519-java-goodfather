@@ -18,8 +18,8 @@
 					pour sécuriser votre prochaine acquisition !
 				</p>
 			</section>
-
-			<button  th:if="${not isLogged}"
+<div sec:authorize="!isAuthenticated()">
+			<button 
 				type="button"
 				class="btn btn-outline-warning"
 				data-toggle="modal"
@@ -27,7 +27,6 @@
 			>
 				Se connecter
 			</button>
-
 			<section
 				class="modal fade"
 				id="loginModal"
