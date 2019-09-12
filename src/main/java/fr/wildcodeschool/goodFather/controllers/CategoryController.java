@@ -79,7 +79,7 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public String createCategory(@ModelAttribute Category category) {
+    public String create(@ModelAttribute Category category) {
         categoryRepository.save(category);
         return "redirect:/categories";
     }

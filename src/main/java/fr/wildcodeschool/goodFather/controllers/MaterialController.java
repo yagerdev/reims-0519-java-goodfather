@@ -29,7 +29,7 @@ public class MaterialController {
     }
 
     @PostMapping("/materials")
-    public String createMaterial(@ModelAttribute Material material) {
+    public String create(@ModelAttribute Material material) {
         materialRepository.save(material);
         return "redirect:/materials";
     }
