@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.wildcodeschool.goodFather.entities.Material;
 import fr.wildcodeschool.goodFather.entities.Task;
-import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
-import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
 
 @Controller
@@ -23,9 +21,6 @@ public class TaskController {
     
     @Autowired
     TaskRepository taskRepository;
-
-    @Autowired
-    TypologyRepository typologyRepository;
 
     @Autowired
     MaterialRepository materialRepository;
@@ -46,7 +41,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public String createTask(Model model,
+    public String create(Model model,
         @RequestParam(required = false) Long workId,
         @RequestParam(required = false) Long materialId,
         @RequestParam(required = false) Double price,

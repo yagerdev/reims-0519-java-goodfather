@@ -16,5 +16,23 @@
 			integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 			crossorigin="anonymous"
 		></script>
+		<script>
+			function update(target) {
+				let targetToUpdate = document.getElementById(target);
+				let buttons = document.getElementsByClassName("btn-info");
+				if (targetToUpdate.disabled) {
+					targetToUpdate.value = "";
+					targetToUpdate.disabled = false;
+					document
+						.getElementById(target + "item")
+						.setAttribute("class", "btn-warning btn");
+					for (let i = 0; i < buttons.length; i++) {
+						buttons[i].disabled = true;
+					}
+				} else {
+					document.getElementById(target + "item").type = "submit";
+				}
+			}
+		</script>
 	</body>
 </html>

@@ -4,7 +4,6 @@ import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Material;
 import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Room;
-import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
@@ -67,7 +66,7 @@ public class RoomController {
     }
 
     @PostMapping("/rooms")
-    public String createRoom(
+    public String create(
         @RequestParam("walla") Double wallA,
         @RequestParam("wallb") Double wallB,
         @RequestParam("height") Double height,
@@ -83,7 +82,7 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/{id}/edit")
-    public String editRoom(@PathVariable("id") Long id, Model model){
+    public String edit(@PathVariable("id") Long id, Model model){
         List<Typology> typologyList = typologyRepository.findAll();
         List<Work> workList = workRepository.findAll();
         List<Material> materialList = materialRepository.findAll();

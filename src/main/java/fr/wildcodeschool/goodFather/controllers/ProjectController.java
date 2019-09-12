@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +29,7 @@ public class ProjectController {
     CategoryRepository categoryRepository;
     
     @PostMapping("/projects")
-    public String createProject(
+    public String create(
         @RequestParam String name,
         @RequestParam String address,
         @RequestParam String city,
@@ -36,7 +37,7 @@ public class ProjectController {
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User)authentication.getPrincipal();
-        Project project = new Project(name, address, city, postalCode,currentUser);
+        Project project = new Project(name, address, city, postalCode, currentUser);
         project = projectRepository.save(project);
         Long id = project.getId();
         return "redirect:/projects/"+id+"/edit";
@@ -55,7 +56,7 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{projectId}/edit")
-    public String showCategories(
+    public String show(
             Model model,
             @PathVariable("projectId") Long projectId,
             @RequestParam(required=false) Long categoryId
@@ -69,5 +70,11 @@ public class ProjectController {
         else {
             return "redirect:/rooms/create?projectId="+projectId+"&categoryId="+categoryId;
         }
+    }
+
+    @DeleteMapping("/projects/{id}")
+    public String delete(@PathVariable Long id){
+        projectRepository.deleteById(id);
+        return "redirect:/projects";
     }
 }

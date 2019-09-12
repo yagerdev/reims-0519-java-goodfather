@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -26,7 +25,6 @@ public class Category {
     private Set<Room> rooms = new HashSet<>();
 
     @ManyToMany
-    @JoinColumn
     private Set<Typology> typologies = new HashSet<>();
 
     public Category(){
