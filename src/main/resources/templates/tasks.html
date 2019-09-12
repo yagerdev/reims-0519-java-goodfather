@@ -23,7 +23,7 @@
             </table>
 
             <form th:method="POST" th:action="@{/tasks/add}">
-                <input type="hidden" name="roomId" th:value="${room.id}">
+                <input type="hidden" name="room" th:value="${room.id}">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Typologie</label>
