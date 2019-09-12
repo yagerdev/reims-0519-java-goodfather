@@ -6,6 +6,7 @@ import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,8 @@ public class ProjectController {
     ) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User)authentication.getPrincipal();
-        Project project = new Project(name, address, city, postalCode, currentUser);
+        Date dateCreateProject = new Date();
+        Project project = new Project(name, address, city, postalCode, dateCreateProject, currentUser);
         project = projectRepository.save(project);
         Long id = project.getId();
         return "redirect:/projects/"+id+"/edit";
