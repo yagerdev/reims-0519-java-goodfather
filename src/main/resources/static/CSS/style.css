@@ -109,6 +109,7 @@ input:disabled {
 	border: 1px solid lightgray;
 	border-radius: 5px 5px 0 0;
 	width: 100%;
+    background-color: white;
 }
 
 .user-list {
