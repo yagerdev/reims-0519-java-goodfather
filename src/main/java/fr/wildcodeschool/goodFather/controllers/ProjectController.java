@@ -57,8 +57,7 @@ public class ProjectController {
     public String read(@PathVariable Long id, Model model) {
         Project project = projectRepository.findById(id).get();
         model.addAttribute("project", project);
-        List<Room> roomList = roomRepository.findAll();
-        model.addAttribute("rooms", roomList);
+        model.addAttribute("rooms", project.getRooms());
         return "project-recap";
     }
 
