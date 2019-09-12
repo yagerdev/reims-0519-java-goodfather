@@ -51,7 +51,7 @@
 								type="button"
 								data-toggle="collapse"
 								data-target="#roomsList"
-                                aria-expanded="false"
+								aria-expanded="false"
 								aria-controls="collapseOne"
 							>
 								Gestion des pièces
@@ -66,16 +66,18 @@
 						data-parent="#roomControl"
 					>
 						<div class="card-body">
-							Anim pariatur cliche reprehenderit, enim eiusmod high life
-							accusamus terry richardson ad squid. 3 wolf moon officia aute,
-							non cupidatat skateboard dolor brunch. Food truck quinoa
+							<a th:href="@{'/projects/' + ${project.id} + '/edit'}">
+								<button class="btn btn-info">Ajouter une pièce</button>
+							</a>
+							<section class="section-list">
+								<div th:each="room : ${rooms}" class="item-global">
+									<p th:text="${room.height}">ro</p>
+								</div>
+							</section>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- <a th:href="@{'/projects/' + ${project.id} + '/edit'}">
-				<button class="btn btn-info">Ajouter une pièce</button>
-			</a> -->
 		</main>
 		<div th:replace="fragments/footer.html :: footer"></div>
 		<div th:replace="fragments/script.html :: script"></div>
