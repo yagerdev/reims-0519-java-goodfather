@@ -61,17 +61,41 @@
 
 					<div
 						id="roomsList"
-						class="collapse"
+						class="collapse show"
 						aria-labelledby="headingOne"
 						data-parent="#roomControl"
 					>
 						<div class="card-body">
 							<a th:href="@{'/projects/' + ${project.id} + '/edit'}">
-								<button class="btn btn-info">Ajouter une pièce</button>
+								<button class="btn btn-info mb-4">Ajouter une pièce</button>
 							</a>
 							<section class="section-list">
 								<div th:each="room : ${rooms}" class="item-global">
-									<p th:text="${room.height}">ro</p>
+									<div class="user-list" th:text="${room.name}">
+										item
+									</div>
+									<form
+										th:action="@{/rooms/} + ${room.id}"
+										th:method="DELETE"
+									>
+										<input
+											type="hidden"
+											th:value="${room.id}"
+											th:name="id"
+										/>
+										<button type="submit" class="btn btn-info">
+											<ion-icon
+												ios="ios-close"
+												md="md-close"
+												class="icon-delete"
+											></ion-icon>
+										</button>
+									</form>
+									<a th:href="@{'/projects/' + ${project.id} + '/read'}">
+										<button type="button" class="btn btn-info">
+											<ion-icon name="eye"></ion-icon>
+										</button>
+									</a>
 								</div>
 							</section>
 						</div>
