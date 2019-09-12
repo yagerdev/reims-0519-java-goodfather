@@ -15,15 +15,15 @@
                 </thead>
                 <tbody class="thead-light">
                     <tr>
-                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallA + ' cm'}">item</td>
-                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.wallA + ' cm'}">item</td>
-                        <td th:each="room : ${idCurrentRoom}" name="" th:text="${room.height + ' cm'}">item</td>
+                        <td th:text="${room.wallA + ' cm'}">item</td>
+                        <td th:text="${room.wallA + ' cm'}">item</td>
+                        <td th:text="${room.height + ' cm'}">item</td>
                     </tr>
                 </tbody>
             </table>
 
             <form th:method="POST" th:action="@{/tasks/add}">
-                <input type="hidden" name="roomId" th:value="${idCurrentRoom.id}">
+                <input type="hidden" name="roomId" th:value="${room.id}">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Typologie</label>
