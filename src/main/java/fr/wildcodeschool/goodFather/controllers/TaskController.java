@@ -69,10 +69,10 @@ public class TaskController {
     @PostMapping("/tasks/add")
     public String add(
         @ModelAttribute Room room,
-        @RequestParam Long workId,
-        @RequestParam Long materialId
+        @ModelAttribute Work work,
+        @ModelAttribute Material material
     ) {
-        Task task = taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId);
+        Task task = taskRepository.findTaskByWorkIdAndMaterialId(work.getId(), material.getId());
         room.addTask(task);
         room = roomRepository.save(room);
         return "redirect:/rooms/" + room.getId() + "/edit";
