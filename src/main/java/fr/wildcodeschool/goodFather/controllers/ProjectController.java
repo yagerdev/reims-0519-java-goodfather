@@ -47,6 +47,14 @@ public class ProjectController {
     public String showCreateProjectForm() {
         return "project-create";
     }
+
+    @GetMapping("projects/{id}/read")
+    public String read(@PathVariable Long id, Model model) {
+        Project project = projectRepository.findById(id).get();
+        model.addAttribute("project", project);
+        return "project-recap";
+    }
+
     @GetMapping("/projects")
     public String showAllProjectsByUser(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
