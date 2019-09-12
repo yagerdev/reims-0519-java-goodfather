@@ -55,19 +55,20 @@
 								aria-controls="collapseOne"
 							>
 								Gestion des pièces
+                                <ion-icon name="arrow-dropdown" class="vert-gf"></ion-icon>
 							</button>
 						</h2>
 					</div>
 
 					<div
 						id="roomsList"
-						class="collapse show"
+						class="collapse"
 						aria-labelledby="headingOne"
 						data-parent="#roomControl"
 					>
 						<div class="card-body">
 							<a th:href="@{'/projects/' + ${project.id} + '/edit'}">
-								<button class="btn btn-info mb-4">Ajouter une pièce</button>
+								<button class="btn btn-info mb-4">Ajouter une nouvelle pièce</button>
 							</a>
 							<section class="section-list">
 								<div th:each="room : ${rooms}" class="item-global">
@@ -91,9 +92,9 @@
 											></ion-icon>
 										</button>
 									</form>
-									<a th:href="@{'/projects/' + ${project.id} + '/read'}">
+									<a th:href="@{'/rooms/' + ${room.id} + '/edit'}">
 										<button type="button" class="btn btn-info">
-											<ion-icon name="eye"></ion-icon>
+											<ion-icon name="build"></ion-icon>
 										</button>
 									</a>
 								</div>
