@@ -4,7 +4,7 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
-			<h2>Gestion des<span class="yellow-gf">catégories</span></h2>
+			<h2>Gestion des<span class="yellow-gf">utilisateurs</span></h2>
 			<section>
 				<form th:action="@{/users}" method="POST">
 					<div class="input-group mb-3">
@@ -37,7 +37,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="phoneNumber">Téléphone</label>
+							<label class="input-group-text" for="phoneNumber"
+								>Téléphone</label
+							>
 						</div>
 						<input
 							type="tel"
@@ -60,7 +62,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="postalCode">Code postal</label>
+							<label class="input-group-text" for="postalCode"
+								>Code postal</label
+							>
 						</div>
 						<input
 							type="text"
@@ -71,9 +75,16 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="password">Mot de passe</label>
+							<label class="input-group-text" for="password"
+								>Mot de passe</label
+							>
 						</div>
-						<input type="text" class="form-control" name="password" required />
+						<input
+							type="text"
+							class="form-control"
+							name="password"
+							required
+						/>
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -89,20 +100,27 @@
 				</form>
 			</section>
 			<section class="section-list">
-				<h3>Liste des utilisateurs créés :</h3>
-				<ul class="list-group">
-					<div th:each="user : ${users}" class="item-global">
-						<li class="list-group-item" th:text="${user.name}">Item</li>
-                        <form th:action="@{/users/} + ${user.id}" th:method="delete">
-                            <input type="hidden" th:value="${user.id}" th:name="id" />
-                            <label for="id"></label>
-                            <button type="submit" class="btn btn-info">
-                                <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
-                            </button>
-                        </form>
+				<div th:each="user : ${users}" class="item-global">
+					<div type="text" th:text="${user.firstName} + ' ' + ${user.lastName}" th:id="${user.id}" class="user-list">
+						User
 					</div>
-				</ul>
-            </section>
+					<a th:href="@{'/users/' + ${user.id}}">
+						<button type="button" class="btn btn-info">
+							<ion-icon name="create"></ion-icon>
+						</button>
+					</a>
+					<form th:action="@{/users/} + ${user.id}" th:method="DELETE">
+						<input type="hidden" th:value="${user.id}" th:name="id" />
+						<button type="submit" class="btn btn-info">
+							<ion-icon
+								ios="ios-close"
+								md="md-close"
+								class="icon-delete"
+							></ion-icon>
+						</button>
+					</form>
+				</div>
+			</section>
 		</main>
 		<div th:replace="fragments/footer.html :: footer"></div>
 		<div th:replace="fragments/script.html :: script"></div>

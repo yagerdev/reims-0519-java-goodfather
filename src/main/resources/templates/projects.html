@@ -3,18 +3,30 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
-        <main class="container">
-            <h2>Gestion des<span class="yellow-gf">projets</span></h2>
-            <section class="section-list">
-                <h3>Liste des projets créés :</h3>
-				<ul class="list-group">
-					<div th:each="project : ${projects}" class="item-global">
-						<li class="list-group-item" th:text="${project.name}">Item</li>
-					</div>
-				</ul>
-            </section>
-        </main>
+		<main class="container">
+			<h2>Liste des<span class="yellow-gf">projects</span></h2>
+			<section class="section-list">
+				<div th:each="project : ${projects}" class="item-global">
+                    <div class="user-list" th:text="${project.name}">item</div>
+					<form th:action="@{/projects/} + ${project.id}" th:method="DELETE">
+						<input type="hidden" th:value="${project.id}" th:name="id" />
+						<button type="submit" class="btn btn-info">
+							<ion-icon
+								ios="ios-close"
+								md="md-close"
+								class="icon-delete"
+							></ion-icon>
+						</button>
+					</form>
+                    <a th:href="@{'/projects/' + ${project.id} + '/read'}">
+						<button type="button" class="btn btn-info">
+							<ion-icon name="eye"></ion-icon>
+						</button>
+					</a>
+				</div>
+			</section>
+		</main>
 		<div th:replace="fragments/footer.html :: footer"></div>
 		<div th:replace="fragments/script.html :: script"></div>
-    </body>
+	</body>
 </html>

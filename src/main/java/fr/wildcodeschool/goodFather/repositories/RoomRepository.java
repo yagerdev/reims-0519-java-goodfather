@@ -7,5 +7,4 @@ import fr.wildcodeschool.goodFather.entities.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
-
 }

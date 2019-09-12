@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -25,15 +24,12 @@ public class Task {
     private double percentRange;
 
     @ManyToMany
-    @JoinColumn
     private Set<Typology> typologies = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn
     private Material material;
 
     @ManyToOne
-    @JoinColumn
     private Work work;
 
     public Task(Long id, 
@@ -123,5 +119,9 @@ public class Task {
 
     public void setTypologies(Set<Typology> typologies) {
         this.typologies = typologies;
+    }
+
+    public String constructName() {
+        return this.work.getName() + " " + this.material.getName();
     }
 }

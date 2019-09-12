@@ -22,21 +22,45 @@
                     <button type="submit" class="btn btn-info">Créer</button>
                 </form>
             </section>
-            <section class="section-list">
-                <h3>Liste des actions créées :</h3>
-				<ul class="list-group">
-					<div th:each="work : ${works}" class="item-global">
-						<li class="list-group-item" th:text="${work.name}">Item</li>
-                        <form th:action="@{/works/} + ${work.id}" th:method="delete">
-                            <input type="hidden" th:value="${work.id}" th:name="id" />
-                            <label for="id"></label>
-                            <button type="submit" class="btn btn-info">
-                                <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
-                            </button>
-                        </form>
-					</div>
-				</ul>
-            </section>
+			<section class="section-list">
+				<div th:each="work : ${works}" class="item-global">
+					<form
+						th:action="@{/works/} + ${work.id}"
+						th:method="PUT"
+						th:object="${work}"
+						class="update-form"
+					>
+						<input
+							type="text"
+							th:value="*{name}"
+							th:id="${work.id}"
+                            placeholder="Merci de saisier une nouvelle donnée ..."
+                            onfocus="this.placeholder=''"
+							name="name"
+							disabled
+						/>
+						<button
+							type="button"
+							class="btn btn-info"
+							th:id="${work.id + 'item'}"
+							th:onclick="'javascript:update(\'' + ${work.id} + '\');'"
+						>
+							<ion-icon name="create"></ion-icon>
+						</button>
+					</form>
+
+					<form th:action="@{/works/} + ${work.id}" th:method="DELETE">
+						<input type="hidden" th:value="${work.id}" th:name="id" />
+						<button type="submit" class="btn btn-info">
+							<ion-icon
+								ios="ios-close"
+								md="md-close"
+								class="icon-delete"
+							></ion-icon>
+						</button>
+					</form>
+				</div>
+			</section>
         </main>
 		<div th:replace="fragments/footer.html :: footer"></div>
 		<div th:replace="fragments/script.html :: script"></div>

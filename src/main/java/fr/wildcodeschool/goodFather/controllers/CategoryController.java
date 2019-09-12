@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,14 +32,14 @@ public class CategoryController {
     TypologyRepository typologyRepository;
 
     @GetMapping("/categories")
-    public String showCategories(Model model) {
+    public String show(Model model) {
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
         return "admin/category";
     }
 
     @GetMapping("/categories/{id}/edit")
-    public String readCategory(Model model, @PathVariable Long id) {
+    public String read(Model model, @PathVariable Long id) {
         Category category = categoryRepository.findById(id).get();
         List<Typology> typologies = typologyRepository.findAll();
         Map<Typology, Boolean> checked = new HashMap<Typology, Boolean>();
@@ -58,29 +59,33 @@ public class CategoryController {
     }
 
     @PutMapping("/categories/{id}")
-    public String editCategory(@PathVariable(name = "id") Long categoryId,
-            @RequestParam(required = false, name = "typologies") List<Long> typologyIds) {
-        Category category = categoryRepository.findById(categoryId).get();
-        Set<Typology> typologies = new HashSet<Typology>();
-        if (typologyIds != null) {
+    public String edit(
+        @PathVariable(name = "id") Long categoryId,
+        @RequestParam(required = false, name = "typologies") List<Long> typologyIds, 
+        Category category
+    ) {
+        Category categoryToUpdate = categoryRepository.findById(categoryId).get();
+        if (typologyIds == null) {
+            categoryToUpdate.setName(category.getName());
+        } else {
+            Set<Typology> typologies = new HashSet<Typology>();
             for (Long typologyId : typologyIds) {
-                typologies.add( typologyRepository.findById( typologyId ).get() );
+                typologies.add(typologyRepository.findById(typologyId).get());
             }
+            categoryToUpdate.setTypologies(typologies);
         }
-        category.setTypologies(typologies);
-        categoryRepository.save(category);
+        categoryRepository.save(categoryToUpdate);
         return "redirect:/categories";
     }
 
     @PostMapping("/categories")
-    public String createCategory(@RequestParam String name) {
-        Category category = new Category(name);
+    public String create(@ModelAttribute Category category) {
         categoryRepository.save(category);
         return "redirect:/categories";
     }
 
     @DeleteMapping("/categories/{id}")
-    public String deleteCategory(@PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
         categoryRepository.deleteById(id);
         return "redirect:/categories";
     }

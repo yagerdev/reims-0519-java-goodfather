@@ -9,8 +9,19 @@
 				<form th:action="@{'/' + ${entityType} + '/' + ${entityId}}" th:method="PUT">
 					<span th:text="${'Sélection des ' + listType}"></span>
 					<div th:each="mySet : ${myMap}">
-						<input type="checkbox" th:name="${listType}" th:id="${mySet.key.id}" th:value="${mySet.key.id}" th:checked="${mySet.value}"/>
-						<label th:for="${mySet.key.id}" th:text="${mySet.key.name}">item</label>
+						<input 
+							type="checkbox" 
+							th:name="${listType}" 
+							th:id="${mySet.key.id}" 
+							th:value="${mySet.key.id}" 
+							th:checked="${mySet.value}"
+						/>
+						<label 
+							th:for="${mySet.key.id}"
+							th:text="${entityType == 'categories' ? mySet.key.name : mySet.key.constructName()}"
+						>
+							item
+						</label>
                       </div>
 					<button type="submit" class="btn btn-info">Filtrer</button>
 				</form>
