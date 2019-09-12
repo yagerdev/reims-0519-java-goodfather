@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.wildcodeschool.goodFather.entities.Material;
+import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
+import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
 
@@ -27,6 +29,9 @@ public class TaskController {
 
     @Autowired
     WorkRepository workRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
     @GetMapping("/tasks")
     public String showCreateTask(Model model) {
@@ -58,5 +63,18 @@ public class TaskController {
                 task = taskRepository.save(task);
                 return "redirect:/tasks";
             }
+    }
+
+    @PostMapping("/tasks/add")
+    public String add(
+        @RequestParam Long roomId,
+        @RequestParam Long workId,
+        @RequestParam Long materialId
+    ) {
+        Task task = taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId);
+        Room room = roomRepository.findById(roomId).get();
+        room.addTask(task);
+        room = roomRepository.save(room);
+        return "redirect:/rooms/" + roomId + "/edit";
     }
 }
