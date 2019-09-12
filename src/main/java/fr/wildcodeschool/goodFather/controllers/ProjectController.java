@@ -2,9 +2,11 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class ProjectController {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
     
     @PostMapping("/projects")
     public String create(
@@ -52,6 +57,8 @@ public class ProjectController {
     public String read(@PathVariable Long id, Model model) {
         Project project = projectRepository.findById(id).get();
         model.addAttribute("project", project);
+        List<Room> roomList = roomRepository.findAll();
+        model.addAttribute("rooms", roomList);
         return "project-recap";
     }
 
