@@ -32,6 +32,9 @@ public class Task {
     @ManyToOne
     private Work work;
 
+    @ManyToMany
+    private Set<Room> rooms = new HashSet<>();
+
     public Task(Long id, 
                 double price, 
                 String unit, 
@@ -123,5 +126,13 @@ public class Task {
 
     public String constructName() {
         return this.work.getName() + " " + this.material.getName();
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 }
