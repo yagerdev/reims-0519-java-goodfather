@@ -14,7 +14,6 @@ import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
-import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
 
 @Controller
@@ -22,9 +21,6 @@ public class TaskController {
     
     @Autowired
     TaskRepository taskRepository;
-
-    @Autowired
-    TypologyRepository typologyRepository;
 
     @Autowired
     MaterialRepository materialRepository;

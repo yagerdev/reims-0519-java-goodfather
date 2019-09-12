@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MaterialController {
@@ -29,8 +29,7 @@ public class MaterialController {
     }
 
     @PostMapping("/materials")
-    public String create(@RequestParam String name) {
-        Material material = new Material(name);
+    public String createMaterial(@ModelAttribute Material material) {
         materialRepository.save(material);
         return "redirect:/materials";
     }
