@@ -31,7 +31,7 @@ public class TypologyController {
     TaskRepository taskRepository;
 
     @GetMapping("/typologies")
-    public String showTypologies(Model model) {
+    public String show(Model model) {
         List<Typology> typologyList = typologyRepository.findAll();
         model.addAttribute("typologies", typologyList);
         return "admin/typology";
@@ -78,14 +78,22 @@ public class TypologyController {
     }
 
     @PostMapping("/typologies")
-    public String createTypology(@RequestParam String name) {
+    public String create(@RequestParam String name) {
         Typology typology = new Typology(name);
         typologyRepository.save(typology);
         return "redirect:/typologies";
     }
 
+    @PutMapping("/typologies/{id}")
+    public String update(@PathVariable Long id, Typology typology) {
+        Typology typologyToUpdate = typologyRepository.findById(id).get();
+        typologyToUpdate.setName(typology.getName());
+        typologyRepository.save(typologyToUpdate);
+        return "redirect:/typologies";
+    }
+
     @DeleteMapping("/typologies/{id}")
-    public String deleteTypology(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         typologyRepository.deleteById(id);
         return "redirect:/typologies";
     }

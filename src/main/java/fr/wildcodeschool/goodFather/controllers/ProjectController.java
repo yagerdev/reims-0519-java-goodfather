@@ -28,7 +28,7 @@ public class ProjectController {
     CategoryRepository categoryRepository;
     
     @PostMapping("/projects")
-    public String createProject(
+    public String create(
         @RequestParam String name,
         @RequestParam String address,
         @RequestParam String city,
@@ -55,7 +55,7 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{projectId}/edit")
-    public String showCategories(
+    public String show(
             Model model,
             @PathVariable("projectId") Long projectId,
             @RequestParam(required=false) Long categoryId
