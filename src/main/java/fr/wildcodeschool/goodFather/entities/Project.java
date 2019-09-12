@@ -52,11 +52,12 @@ public class Project {
         this.user = user;
     }
 
-    public Project(String name, String address, String city, String postalCode, User user) {
+    public Project(String name, String address, String city, String postalCode, Date createDate, User user) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.setCreateDate(createDate);
         this.user = user;
     }
 

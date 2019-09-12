@@ -4,7 +4,7 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
-			<h2>Bienvenue<span class="yellow-gf">Matthieu</span></h2>
+			<h2>Bienvenue<span class="yellow-gf" th:each="currentUser : ${nameCurrentUser}" th:text="${currentUser.firstName}"></span></h2>
 			<section class="admin-control">
 				<p>
 					Ici, vous avez accès aux différentes pages permettant la création, la

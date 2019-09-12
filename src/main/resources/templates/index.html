@@ -18,8 +18,8 @@
 					pour sécuriser votre prochaine acquisition !
 				</p>
 			</section>
-
-			<button
+			<div sec:authorize="!isAuthenticated()">
+					<button 
 				type="button"
 				class="btn btn-outline-warning"
 				data-toggle="modal"
@@ -27,7 +27,7 @@
 			>
 				Se connecter
 			</button>
-
+			</div>
 			<section
 				class="modal fade"
 				id="loginModal"
