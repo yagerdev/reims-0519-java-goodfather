@@ -4,37 +4,37 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
-			<h2>
+			<h2 class="mb-3">
 				Récapitulatif
 				<span class="yellow-gf" th:text="${project.name}">nom projet</span>
 			</h2>
-			<section class="recap-info-project">
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
+			<section class="recap-info-project mb-3">
+				<div class="input-group mb-1">
+					<div class="input-group-prepend read-project">
 						<span class="input-group-text flex-centered">Nom</span>
 					</div>
 					<div class="form-control" th:text="${project.name}">
 						nom
 					</div>
 				</div>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
+				<div class="input-group mb-1">
+					<div class="input-group-prepend read-project">
 						<span class="input-group-text flex-centered">Adresse</span>
 					</div>
 					<div class="form-control" th:text="${project.address}">
 						adresse
 					</div>
 				</div>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
+				<div class="input-group mb-1">
+					<div class="input-group-prepend read-project">
 						<span class="input-group-text flex-centered">Ville</span>
 					</div>
 					<div class="form-control" th:text="${project.city}">
 						ville
 					</div>
 				</div>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
+				<div class="input-group mb-1">
+					<div class="input-group-prepend read-project">
 						<span class="input-group-text flex-centered">Code postal</span>
 					</div>
 					<div class="form-control" th:text="${project.postalCode}">
@@ -42,9 +42,40 @@
 					</div>
 				</div>
 			</section>
-			<a th:href="@{'/projects/' + ${project.id} + '/edit'}">
+			<div class="accordion" id="roomControl">
+				<div class="card">
+					<div class="card-header" id="headingOne">
+						<h2 class="mb-0">
+							<button
+								class="btn btn-outline-info btn-room"
+								type="button"
+								data-toggle="collapse"
+								data-target="#roomsList"
+                                aria-expanded="false"
+								aria-controls="collapseOne"
+							>
+								Gestion des pièces
+							</button>
+						</h2>
+					</div>
+
+					<div
+						id="roomsList"
+						class="collapse"
+						aria-labelledby="headingOne"
+						data-parent="#roomControl"
+					>
+						<div class="card-body">
+							Anim pariatur cliche reprehenderit, enim eiusmod high life
+							accusamus terry richardson ad squid. 3 wolf moon officia aute,
+							non cupidatat skateboard dolor brunch. Food truck quinoa
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- <a th:href="@{'/projects/' + ${project.id} + '/edit'}">
 				<button class="btn btn-info">Ajouter une pièce</button>
-			</a>
+			</a> -->
 		</main>
 		<div th:replace="fragments/footer.html :: footer"></div>
 		<div th:replace="fragments/script.html :: script"></div>
