@@ -53,9 +53,9 @@
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
             <section class="section-list">
-                <h3>Liste des actions créées :</h3>
+                <h3>Liste des taches ajoutées :</h3>
                 <ul class="list-group" th:each="task : ${tasks}">
-                    <li class="list-group-item" th:text="${task.id}">Item</li>
+                    <li class="list-group-item" th:text="${task.constructName()}">Item</li>
                 </ul>
             </section>
         </main>
