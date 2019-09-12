@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -67,14 +68,13 @@ public class TaskController {
 
     @PostMapping("/tasks/add")
     public String add(
-        @RequestParam Long roomId,
+        @ModelAttribute Room room,
         @RequestParam Long workId,
         @RequestParam Long materialId
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId);
-        Room room = roomRepository.findById(roomId).get();
         room.addTask(task);
         room = roomRepository.save(room);
-        return "redirect:/rooms/" + roomId + "/edit";
+        return "redirect:/rooms/" + room.getId() + "/edit";
     }
 }
