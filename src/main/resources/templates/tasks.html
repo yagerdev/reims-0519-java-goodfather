@@ -22,7 +22,8 @@
                 </tbody>
             </table>
 
-            <form method="" action="">
+            <form th:method="POST" th:action="@{/tasks/add}">
+                <input type="hidden" name="room" th:value="${room.id}">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Typologie</label>
@@ -36,24 +37,24 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect02">Travaux</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect02">
+                    <select class="custom-select" id="inputGroupSelect02" name="workId">
                         <option selected>Sélectionnez...</option>
-                        <option th:each="work : ${works}" th:text="${work.name}">item</option>
+                        <option th:each="work : ${works}" th:text="${work.name}" th:value="${work.id}">item</option>
                     </select>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect03">Matériaux</label>
                     </div>
-                    <select class="custom-select" id="inputGroupSelect03">
+                    <select class="custom-select" id="inputGroupSelect03" name="materialId" >
                         <option selected>Sélectionnez...</option>
-                        <option th:each="material : ${materials}" th:text="${material.name}">item</option>
+                        <option th:each="material : ${materials}" th:text="${material.name}" th:value="${material.id}">item</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
             <section class="section-list">
-                <h3>Liste des taches ajoutées :</h3>
+                <h3>Liste des actions créées :</h3>
                 <ul class="list-group" th:each="task : ${tasks}">
                     <li class="list-group-item" th:text="${task.constructName()}">Item</li>
                 </ul>
