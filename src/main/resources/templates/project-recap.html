@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="FR">
+	<div th:replace="fragments/head.html :: head"></div>
+	<body>
+		<div th:replace="fragments/header.html :: header"></div>
+		<main class="container">
+			<h2>
+				Récapitulatif
+				<span class="yellow-gf" th:text="${project.name}">nom projet</span>
+			</h2>
+			<section class="recap-info-project">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text flex-centered">Nom</span>
+					</div>
+					<div class="form-control" th:text="${project.name}">
+						nom
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text flex-centered">Adresse</span>
+					</div>
+					<div class="form-control" th:text="${project.address}">
+						adresse
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text flex-centered">Ville</span>
+					</div>
+					<div class="form-control" th:text="${project.city}">
+						ville
+					</div>
+				</div>
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text flex-centered">Code postal</span>
+					</div>
+					<div class="form-control" th:text="${project.postalCode}">
+						code postal
+					</div>
+				</div>
+			</section>
+			<a th:href="@{'/projects/' + ${project.id} + '/edit'}">
+				<button class="btn btn-info">Ajouter une pièce</button>
+			</a>
+		</main>
+		<div th:replace="fragments/footer.html :: footer"></div>
+		<div th:replace="fragments/script.html :: script"></div>
+	</body>
+</html>
