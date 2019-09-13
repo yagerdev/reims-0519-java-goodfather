@@ -54,7 +54,7 @@ public class ProjectController {
         return "project-create";
     }
 
-    @GetMapping("projects/{id}/read")
+    @GetMapping("projects/{id}")
     public String read(@PathVariable Long id, Model model) {
         Project project = projectRepository.findById(id).get();
         model.addAttribute("project", project);
