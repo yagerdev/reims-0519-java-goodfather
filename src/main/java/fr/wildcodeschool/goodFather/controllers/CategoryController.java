@@ -65,12 +65,14 @@ public class CategoryController {
         Category category
     ) {
         Category categoryToUpdate = categoryRepository.findById(categoryId).get();
-        if (typologyIds == null) {
+        if (category.getName() != null) {
             categoryToUpdate.setName(category.getName());
         } else {
             Set<Typology> typologies = new HashSet<Typology>();
-            for (Long typologyId : typologyIds) {
-                typologies.add(typologyRepository.findById(typologyId).get());
+            if (typologyIds != null) {
+                for (Long typologyId : typologyIds) {
+                    typologies.add(typologyRepository.findById(typologyId).get());
+                }
             }
             categoryToUpdate.setTypologies(typologies);
         }
