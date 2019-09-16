@@ -15,7 +15,7 @@
 			</h2>
 			<section>
 				<form
-					th:action="@{/users/} + ${user.id}"
+					th:action="@{/profil/} + ${user.id}"
 					th:method="PUT"
 					th:object="${user}"
 				>
@@ -114,11 +114,11 @@
 							>
 						</div>
 						<input
-							type="text"
+							type="password"
 							class="form-control"
 							name="password"
-						    value="Votre nouveau mot de passe ici"
-							onfocus="this.value=''"
+						    placeholder="Votre nouveau mot de passe ici"
+							th:value='${user.getPassword()}'
 						/>
 					</div>
 
