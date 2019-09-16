@@ -91,7 +91,7 @@ public class RoomController {
         model.addAttribute("materials", materialList);
         model.addAttribute("typologies", typologyList);
         model.addAttribute("works", workList);
-        model.addAttribute("tasks", currentRoom.getTasks());
+        model.addAttribute("quantities", currentRoom.getQuantities());
         return "tasks";
     }
    
