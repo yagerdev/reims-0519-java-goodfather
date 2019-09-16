@@ -65,12 +65,14 @@ public class TypologyController {
             Typology typology
     ) {
         Typology typologyToUpdate = typologyRepository.findById(typologyId).get();
-        if (taskIds == null) {
+        if (typology.getName() != null) {
             typologyToUpdate.setName(typology.getName());
         } else {
             Set<Task> tasks = new HashSet<Task>();
-            for (Long taskId : taskIds) {
-                tasks.add( taskRepository.findById( taskId ).get() );
+            if (taskIds != null) {
+                for (Long taskId : taskIds) {
+                    tasks.add( taskRepository.findById( taskId ).get() );
+                }
             }
             typologyToUpdate.setTasks(tasks);
         }
