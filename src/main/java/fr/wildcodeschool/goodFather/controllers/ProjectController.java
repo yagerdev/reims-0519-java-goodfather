@@ -5,6 +5,7 @@ import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.UserRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 
 import java.util.Date;
@@ -12,7 +13,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProjectController {
 
     @Autowired
+    UserRepository userRepository;
+    
+    @Autowired
     ProjectRepository projectRepository;
 
     @Autowired
@@ -35,8 +38,7 @@ public class ProjectController {
     RoomRepository roomRepository;
     
     @PostMapping("/projects")
-    public String create(@ModelAttribute Project project) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String create(@ModelAttribute Project project, Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();
         project.setUser(currentUser);
         project.setCreationDate(new Date());
@@ -45,7 +47,9 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/create")
-    public String showCreateProjectForm() {
+    public String showCreateProjectForm(Model model, Authentication authentication) {
+        User currentUser = (User)authentication.getPrincipal();
+        model.addAttribute("user", currentUser);
         return "project-create";
     }
 
@@ -58,8 +62,7 @@ public class ProjectController {
     }
 
     @GetMapping("/projects")
-    public String showAllProjectsByUser(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String showAllProjectsByUser(Model model, Authentication authentication){
         List<Project> projectsList = projectRepository.findAllByUser(authentication.getPrincipal());
         model.addAttribute("projects", projectsList);
         return "projects";
