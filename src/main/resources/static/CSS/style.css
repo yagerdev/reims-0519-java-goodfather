@@ -1,33 +1,36 @@
 /* ------------- Charte graphique ------------- */
 
-.bg-vert-gf, .btn-info, .btn-outline-info:hover {
-	background-color: #328080;
+.bg-vert-gf,
+.btn-info,
+.btn-outline-info:hover {
+    background-color: #328080;
 }
 
 .bg-yellow-gf {
-	background-color: #ffcc00;
+    background-color: #ffcc00;
 }
 
-.vert-gf, .btn-outline-info {
-	color: #328080;
+.vert-gf,
+.btn-outline-info {
+    color: #328080;
 }
 
 .yellow-gf {
-	color: #ffcc00;
+    color: #ffcc00;
 }
 
 /* ------------- Configuration générale ------------- */
 
 body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	min-height: 100vh;
-	color: #333333;
-	line-height: 1.5em;
-	font-family: "Roboto", sans-serif;
-	text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #333333;
+    line-height: 1.5em;
+    font-family: "Roboto", sans-serif;
+    text-align: center;
 }
 
 h1,
@@ -36,126 +39,130 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: "Montserrat", sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
 .gf-logo {
-	max-width: 50%;
+    max-width: 50%;
 }
 
 .container {
-	margin: auto;
-	padding: 2vh 0;
-	width: 90%;
+    margin: auto;
+    padding: 2vh 0;
+    width: 90%;
 }
 
 .container h2 {
-	text-transform: uppercase;
-	font-weight: 700;
-	display: flex;
-	flex-direction: column;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
 }
 
 .container form {
-	background-color: whitesmoke;
-	padding: 3vh;
-	margin: auto auto 2vh auto;
+    background-color: whitesmoke;
+    padding: 3vh;
+    margin: auto auto 2vh auto;
 }
 
 .modal-dialog form,
 .item-global form {
-	background-color: white;
+    background-color: white;
 }
 
 input[type="number"] {
-	-webkit-appearance: textfield;
+    -webkit-appearance: textfield;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-	-webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
 input:disabled {
-	color: #333333;
+    color: #333333;
 }
 
 .item-global {
-	display: flex;
-	align-items: center;
-	margin-bottom: 1vh;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vh;
 }
 
 .item-global form {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .item-global .btn {
-	display: flex;
-	margin-left: 1vh;
-	width: 50px;
+    display: flex;
+    margin-left: 1vh;
+    width: 50px;
 }
 
 .update-form {
-	display: flex;
-	justify-content: space-between;
-	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .update-form input,
 .user-list {
-	text-align: center;
-	border: 1px solid lightgray;
-	border-radius: 5px 5px 0 0;
-	width: 100%;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
     background-color: white;
 }
 
 .user-list {
-	height: 50px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-attribute {
+    width: calc(100% / 3);
 }
 
 .check-role {
-	background-color: white;
-	border: 1px solid lightgray;
-	border-radius: 5px 5px 0 0;
-	margin-bottom: 3vh;
-	padding-bottom: 2.5vh;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 3vh;
+    padding-bottom: 2.5vh;
 }
 
 .check-role p {
-	background-color: #e9ecef;
-	color: #495057;
-	font-size: 0.9rem;
-	border-bottom: 1px solid #ced4da;
-	padding: 2vh;
+    background-color: #e9ecef;
+    color: #495057;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ced4da;
+    padding: 2vh;
 }
 
 .check-role .item-check {
-	display: flex;
-	width: 100%;
-	height: 50px;
+    display: flex;
+    width: 100%;
+    height: 50px;
 }
 
 .check-role label {
-	margin: auto auto auto 2vh;
-	width: 50%;
+    margin: auto auto auto 2vh;
+    width: 50%;
 }
 
 .check-role input[type="radio"] {
-	height: 30px;
-	width: 30px;
-	margin: auto 0 auto auto;
+    height: 30px;
+    width: 30px;
+    margin: auto 0 auto auto;
 }
 
 @media screen and (min-width: 700px) {
-	.check-role label {
-		width: 15%;
-	}
+    .check-role label {
+        width: 15%;
+    }
 }
 
 .read-project {
@@ -218,158 +225,158 @@ input:disabled {
 /* ------------- Footer ------------- */
 
 footer {
-	width: 100%;
-	padding: 5vh;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	background-color: #333333;
+    width: 100%;
+    padding: 5vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #333333;
 }
 
 footer .footer-social {
-	width: 40%;
-	display: flex;
-	justify-content: space-between;
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
 }
 
 @media screen and (min-width: 1000px) {
-	footer .footer-social {
-		width: 20%;
-	}
+    footer .footer-social {
+        width: 20%;
+    }
 }
 
 ion-icon {
-	height: 30px;
-	width: 30px;
-	color: white;
+    height: 30px;
+    width: 30px;
+    color: white;
 }
 
 ion-icon:hover {
-	color: #ffcc00;
-	transition: 0.5s;
+    color: #ffcc00;
+    transition: 0.5s;
 }
 
 .icon-delete {
-	color: white;
+    color: white;
 }
 
 /* ------------- Header ------------- */
 
 .navbar {
-	width: 100vw;
-	text-align: left;
+    width: 100vw;
+    text-align: left;
 }
 
 .navbar ul {
-	padding: 5vh 0;
-	width: 90%;
-	margin: auto;
+    padding: 5vh 0;
+    width: 90%;
+    margin: auto;
 }
 
 .navbar ul li {
-	padding: 1vh 2vh;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 1vh 2vh;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .navbar ul li:hover {
-	background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .navbar h1 {
-	color: white;
-	font-size: 10pt;
-	font-weight: lighter;
-	margin: 0;
+    color: white;
+    font-size: 10pt;
+    font-weight: lighter;
+    margin: 0;
 }
 
 .navbar-dark .navbar-toggler {
-	border-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 /* ------------- PAGE CATEGORIES ------------- */
 
 .group-image {
-	width: 80%;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .group-image .image {
-	background-size: cover;
-	background-position: center;
-	height: 200px;
-	border-radius: 1em;
-	display: flex;
-	width: 100%;
-	margin: 2vh 0;
-	text-decoration: none;
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    border-radius: 1em;
+    display: flex;
+    width: 100%;
+    margin: 2vh 0;
+    text-decoration: none;
 }
 
 .group-image .image:hover p {
-	background-color: #328080;
-	color: white;
-	transition: 0.5s;
+    background-color: #328080;
+    color: white;
+    transition: 0.5s;
 }
 
 @media only screen and (min-width: 1224px) {
-	.group-image {
-		flex-direction: row;
-		justify-content: space-around;
-		width: 100%;
-	}
+    .group-image {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
 
-	.group-image .image {
-		width: 200px;
-		margin: auto;
-	}
+    .group-image .image {
+        width: 200px;
+        margin: auto;
+    }
 }
 
 .group-image .image p {
-	width: 90%;
-	margin: auto auto 1.5em auto;
-	background-color: rgba(255, 255, 255, 0.9);
-	border-radius: 0.5em;
-	padding: 0.5em;
-	text-transform: uppercase;
+    width: 90%;
+    margin: auto auto 1.5em auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0.5em;
+    padding: 0.5em;
+    text-transform: uppercase;
 }
 
 .salle-de-bain {
-	background-image: url("../IMG/sdb.jpg");
+    background-image: url("../IMG/sdb.jpg");
 }
 
 .couloir {
-	background-image: url("../IMG/couloir.jpg");
+    background-image: url("../IMG/couloir.jpg");
 }
 
 .salon-sjour {
-	background-image: url("../IMG/salonsejour.jpg");
+    background-image: url("../IMG/salonsejour.jpg");
 }
 
 .chambre {
-	background-image: url("../IMG/chambre.jpg");
+    background-image: url("../IMG/chambre.jpg");
 }
 
 .cuisine {
-	background-image: url("../IMG/cuisine.jpg");
+    background-image: url("../IMG/cuisine.jpg");
 }
 
 /* ------------- ADMIN ------------- */
 
 .admin-control {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .admin-control a {
-	margin-bottom: 2vh;
-	width: 100%;
+    margin-bottom: 2vh;
+    width: 100%;
 }
 
 .admin-control .btn {
-	width: 80%;
-	padding: 2vh 0;
+    width: 80%;
+    padding: 2vh 0;
 }
