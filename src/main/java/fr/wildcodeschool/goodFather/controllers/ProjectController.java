@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,9 +37,9 @@ public class ProjectController {
         @RequestParam String name,
         @RequestParam String address,
         @RequestParam String city,
-        @RequestParam String postalCode
+        @RequestParam String postalCode,
+        Authentication authentication
     ) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User currentUser = (User)authentication.getPrincipal();
         Date dateCreateProject = new Date();
         Project project = new Project(name, address, city, postalCode, dateCreateProject, currentUser);
@@ -50,15 +49,13 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/create")
-    public String showCreateProjectForm(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String showCreateProjectForm(Model model, Authentication authentication) {
         User currentUser = (User)authentication.getPrincipal();
         model.addAttribute("user", currentUser);
         return "project-create";
     }
     @GetMapping("/projects")
-    public String showAllProjectsByUser(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String showAllProjectsByUser(Model model, Authentication authentication){
         List<Project> projectsList = projectRepository.findAllByUser(authentication.getPrincipal());
         model.addAttribute("projects", projectsList);
         return "projects";
