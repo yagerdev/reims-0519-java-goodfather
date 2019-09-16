@@ -67,9 +67,7 @@
 						data-parent="#roomControl"
 					>
 						<div class="card-body">
-							<a th:href="@{'/projects/' + ${project.id} + '/edit'}">
-								<button class="btn btn-info mb-4">Ajouter une nouvelle pièce</button>
-							</a>
+							<a th:href="@{'/projects/' + ${project.id} + '/edit'}" class="btn btn-info mb-4">Ajouter une nouvelle pièce</a>
 							<section class="section-list">
 								<div th:each="room : ${rooms}" class="item-global">
 									<div class="user-list" th:text="${room.name}">
