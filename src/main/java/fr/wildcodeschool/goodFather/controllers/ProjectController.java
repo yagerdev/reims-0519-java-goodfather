@@ -16,41 +16,37 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProjectController {
-    
+
     @Autowired
     ProjectRepository projectRepository;
 
     @Autowired
     CategoryRepository categoryRepository;
-    
+
     @PostMapping("/projects")
-    public String create(
-        @RequestParam String name,
-        @RequestParam String address,
-        @RequestParam String city,
-        @RequestParam String postalCode
-    ) {
+    public String create(@ModelAttribute Project project) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User)authentication.getPrincipal();
-        Date dateCreateProject = new Date();
-        Project project = new Project(name, address, city, postalCode, dateCreateProject, currentUser);
+        User currentUser = (User) authentication.getPrincipal();
+        project.setUser(currentUser);
+        project.setCreationDate(new Date());
         project = projectRepository.save(project);
-        Long id = project.getId();
-        return "redirect:/projects/"+id+"/edit";
+        return "redirect:/projects/" + project.getId() + "/edit";
     }
 
     @GetMapping("/projects/create")
     public String showCreateProjectForm() {
         return "project-create";
     }
+
     @GetMapping("/projects")
-    public String showAllProjectsByUser(Model model){
+    public String showAllProjectsByUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<Project> projectsList = projectRepository.findAllByUser(authentication.getPrincipal());
         model.addAttribute("projects", projectsList);
@@ -58,24 +54,20 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{projectId}/edit")
-    public String show(
-            Model model,
-            @PathVariable("projectId") Long projectId,
-            @RequestParam(required=false) Long categoryId
-        ) {
-        if(categoryId == null) {
+    public String show(Model model, @PathVariable("projectId") Long projectId,
+            @RequestParam(required = false) Long categoryId) {
+        if (categoryId == null) {
             List<Category> categoryList = categoryRepository.findAll();
             model.addAttribute("categories", categoryList);
             model.addAttribute("projectId", projectId);
             return "categories";
-        }
-        else {
-            return "redirect:/rooms/create?projectId="+projectId+"&categoryId="+categoryId;
+        } else {
+            return "redirect:/rooms/create?projectId=" + projectId + "&categoryId=" + categoryId;
         }
     }
 
     @DeleteMapping("/projects/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         projectRepository.deleteById(id);
         return "redirect:/projects";
     }
