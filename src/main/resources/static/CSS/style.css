@@ -222,6 +222,17 @@ input:disabled {
     border-color: #328080;
 }
 
+/* ------------- ERROR ------------- */
+
+.error {
+	color: white;
+}
+
+.error-title {
+	font-size: 70pt;
+	transform: rotate(5deg);
+}
+
 /* ------------- Footer ------------- */
 
 footer {

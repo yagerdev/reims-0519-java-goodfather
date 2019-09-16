@@ -24,10 +24,9 @@ public class LoginController {
         User currentUser = (User)authentication.getPrincipal();
         if (currentUser.getRole().equals("ADMIN")) {
             return "forward:/admin";
-        }
-        else {
+        } else {
             return "forward:/projects/create";
-        }
+        } 
     }
 
 }
