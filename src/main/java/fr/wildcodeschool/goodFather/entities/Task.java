@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Task {
@@ -32,8 +33,8 @@ public class Task {
     @ManyToOne
     private Work work;
 
-    @ManyToMany
-    private Set<Room> rooms = new HashSet<>();
+    @OneToMany(mappedBy = "task")
+    private Set<Quantity> quantities;
 
     public Task(Long id, 
                 double price, 
@@ -128,11 +129,11 @@ public class Task {
         return this.work.getName() + " " + this.material.getName();
     }
 
-    public Set<Room> getRooms() {
-        return rooms;
+    public Set<Quantity> getQuantities() {
+        return quantities;
     }
 
-    public void setRooms(Set<Room> rooms) {
-        this.rooms = rooms;
+    public void setQuantities(Set<Quantity> quantities) {
+        this.quantities = quantities;
     }
 }
