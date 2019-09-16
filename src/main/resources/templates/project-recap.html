@@ -1,106 +1,144 @@
 <!DOCTYPE html>
 <html lang="FR">
-	<div th:replace="fragments/head.html :: head"></div>
-	<body>
-		<div th:replace="fragments/header.html :: header"></div>
-		<main class="container">
-			<h2 class="mb-3">
-				Récapitulatif
-				<span class="yellow-gf" th:text="${project.name}">nom projet</span>
-			</h2>
-			<section class="recap-info-project mb-3">
-				<div class="input-group mb-1">
-					<div class="input-group-prepend read-project">
-						<span class="input-group-text flex-centered">Nom</span>
-					</div>
-					<div class="form-control" th:text="${project.name}">
-						nom
-					</div>
-				</div>
-				<div class="input-group mb-1">
-					<div class="input-group-prepend read-project">
-						<span class="input-group-text flex-centered">Adresse</span>
-					</div>
-					<div class="form-control" th:text="${project.address}">
-						adresse
-					</div>
-				</div>
-				<div class="input-group mb-1">
-					<div class="input-group-prepend read-project">
-						<span class="input-group-text flex-centered">Ville</span>
-					</div>
-					<div class="form-control" th:text="${project.city}">
-						ville
-					</div>
-				</div>
-				<div class="input-group mb-1">
-					<div class="input-group-prepend read-project">
-						<span class="input-group-text flex-centered">Code postal</span>
-					</div>
-					<div class="form-control" th:text="${project.postalCode}">
-						code postal
-					</div>
-				</div>
-			</section>
-			<div class="accordion" id="roomControl">
-				<div class="card">
-					<div class="card-header" id="headingOne">
-						<h2 class="mb-0">
-							<button
-								class="btn btn-outline-info btn-room"
-								type="button"
-								data-toggle="collapse"
-								data-target="#roomsList"
-								aria-expanded="false"
-								aria-controls="collapseOne"
-							>
-								Gestion des pièces
-                                <ion-icon name="arrow-dropdown" class="vert-gf"></ion-icon>
-							</button>
-						</h2>
-					</div>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <main class="container">
+            <h2 class="mb-3">
+                Récapitulatif
+                <span class="yellow-gf" th:text="${project.name}"
+                    >nom projet</span
+                >
+            </h2>
+            <section class="recap-info-project mb-3">
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend read-project">
+                        <span class="input-group-text flex-centered">Nom</span>
+                    </div>
+                    <div class="form-control" th:text="${project.name}">
+                        nom
+                    </div>
+                </div>
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend read-project">
+                        <span class="input-group-text flex-centered"
+                            >Adresse</span
+                        >
+                    </div>
+                    <div class="form-control" th:text="${project.address}">
+                        adresse
+                    </div>
+                </div>
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend read-project">
+                        <span class="input-group-text flex-centered"
+                            >Ville</span
+                        >
+                    </div>
+                    <div class="form-control" th:text="${project.city}">
+                        ville
+                    </div>
+                </div>
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend read-project">
+                        <span class="input-group-text flex-centered"
+                            >Code postal</span
+                        >
+                    </div>
+                    <div class="form-control" th:text="${project.postalCode}">
+                        code postal
+                    </div>
+                </div>
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend read-project">
+                        <span class="input-group-text flex-centered">Date</span>
+                    </div>
+                    <div
+                        class="form-control"
+                        th:text="${#dates.format(project.creationDate, 'dd - MM - yyyy')}"
+                    >
+                        Date
+                    </div>
+                </div>
+            </section>
+            <div class="accordion" id="roomControl">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button
+                                class="btn btn-outline-info btn-room"
+                                type="button"
+                                data-toggle="collapse"
+                                data-target="#roomsList"
+                                aria-expanded="false"
+                                aria-controls="collapseOne"
+                            >
+                                Gestion des pièces
+                                <ion-icon
+                                    name="arrow-dropdown"
+                                    class="vert-gf"
+                                ></ion-icon>
+                            </button>
+                        </h2>
+                    </div>
 
-					<div
-						id="roomsList"
-						class="collapse"
-						aria-labelledby="headingOne"
-						data-parent="#roomControl"
-					>
-						<div class="card-body">
-							<a th:href="@{'/projects/' + ${project.id} + '/edit'}" class="btn btn-info mb-4">Ajouter une nouvelle pièce</a>
-							<section class="section-list">
-								<div th:each="room : ${rooms}" class="item-global">
-									<div class="user-list" th:text="${room.name}">
-										item
-									</div>
-									<form
-										th:action="@{/rooms/} + ${room.id}"
-										th:method="DELETE"
-									>
-										<input
-											type="hidden"
-											th:value="${room.id}"
-											th:name="id"
-										/>
-										<button type="submit" class="btn btn-info">
-											<ion-icon
-												ios="ios-close"
-												md="md-close"
-												class="icon-delete"
-											></ion-icon>
-										</button>
-									</form>
-									<a th:href="@{'/rooms/' + ${room.id} + '/edit'}" class="btn btn-info">
-										<ion-icon name="build"></ion-icon>
-									</a>
-								</div>
-							</section>
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+                    <div
+                        id="roomsList"
+                        class="collapse"
+                        aria-labelledby="headingOne"
+                        data-parent="#roomControl"
+                    >
+                        <div class="card-body">
+                            <a
+                                th:href="@{'/projects/' + ${project.id} + '/edit'}"
+                                class="btn btn-info mb-4"
+                                >Ajouter une nouvelle pièce</a
+                            >
+                            <section class="section-list">
+                                <div
+                                    th:each="room : ${rooms}"
+                                    class="item-global"
+                                >
+                                    <div
+                                        class="user-list"
+                                        th:text="${room.name}"
+                                    >
+                                        item
+                                    </div>
+                                    <form
+                                        th:action="@{/rooms/} + ${room.id}"
+                                        th:method="DELETE"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            th:value="${room.id}"
+                                            th:name="id"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="btn btn-info"
+                                        >
+                                            <ion-icon
+                                                ios="ios-close"
+                                                md="md-close"
+                                                class="icon-delete"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                                    <a
+                                        th:href="@{'/rooms/' + ${room.id} + '/edit'}"
+                                        class="btn btn-info"
+                                    >
+                                        <ion-icon name="build"></ion-icon>
+                                    </a>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>

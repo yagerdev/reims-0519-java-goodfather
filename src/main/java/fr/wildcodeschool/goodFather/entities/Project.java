@@ -42,22 +42,21 @@ public class Project {
 
     public Project() { }
 
-    public Project(Long id, String name, String address, String city, String postalCode, Date createDate, User user) {
+    public Project(Long id, String name, String address, String city, String postalCode, Date creationDate, User user) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
-        this.creationDate = createDate;
+        this.creationDate = creationDate;
         this.user = user;
     }
 
-    public Project(String name, String address, String city, String postalCode, Date createDate, User user) {
+    public Project(String name, String address, String city, String postalCode, User user) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
-        this.setCreateDate(createDate);
         this.user = user;
     }
 
@@ -99,14 +98,6 @@ public class Project {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
-    }
-
-    public Date getCreateDate() {
-        return creationDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.creationDate = createDate;
     }
 
     public User getUser() {

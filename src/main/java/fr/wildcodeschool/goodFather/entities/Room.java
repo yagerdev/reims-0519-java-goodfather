@@ -1,9 +1,13 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -22,7 +26,10 @@ public class Room {
     private Project project;
 
     @ManyToOne
-    private Category category;
+	private Category category;
+	
+	@ManyToMany
+    private Set<Task> tasks = new HashSet<>();
 
     public Room() {
     }
@@ -100,4 +107,15 @@ public class Room {
         this.name = name;
     }
 
+	public Set<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(Set<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public boolean addTask(Task task) {
+		return this.tasks.add(task);
+	}
 }
