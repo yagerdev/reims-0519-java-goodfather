@@ -22,17 +22,17 @@
                     </tr>
                     <tr>
                         <td
-                            th:text="${(room.wallA/100)*(room.height/100) + ' m²'}"
+                            th:text="${T(Math).round((room.wallA/100)*(room.height/100)*100.00)/100.00 + ' m²'}"
                         >
                             item
                         </td>
                         <td
-                            th:text="${(room.wallB/100)*(room.height/100) + ' m²'}"
+                            th:text="${T(Math).round((room.wallB/100)*(room.height/100)*100.00)/100.00 + ' m²'}"
                         >
                             item
                         </td>
                         <td
-                            th:text="${(room.wallB/100)*(room.wallA/100) + ' m²'}"
+                            th:text="${T(Math).round((room.wallB/100)*(room.wallA/100)*100.00)/100.00 + ' m²'}"
                         >
                             item
                         </td>
