@@ -14,7 +14,7 @@ import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 
 @Controller
-public class ProfilController {
+public class ProfileController {
 
     @Autowired
     UserRepository userRepository;
@@ -22,15 +22,15 @@ public class ProfilController {
     @Autowired
     ProjectRepository projectRepository;
     
-    @GetMapping("/profil")
-    public String loadProfil( Model model) {
+    @GetMapping("/profile")
+    public String loadProfile( Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User users = (User)authentication.getPrincipal();
         model.addAttribute("user", users);
-        return "profil";
+        return "profile";
     }
 
-    @PutMapping("/profil/{id}")
+    @PutMapping("/profile/{id}")
     public String update(@PathVariable Long id, User user) {
         User userToUpdate = userRepository.findById(id).get();
         userToUpdate.setFirstName(user.getFirstName());
@@ -41,7 +41,7 @@ public class ProfilController {
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
         userRepository.save(userToUpdate);
-        return "redirect:/profil";
+        return "redirect:/profile";
     }
 
 }
