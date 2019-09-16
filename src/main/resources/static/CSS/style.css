@@ -1,6 +1,6 @@
 /* ------------- Charte graphique ------------- */
 
-.bg-vert-gf {
+.bg-vert-gf, .btn-info, .btn-outline-info:hover {
 	background-color: #328080;
 }
 
@@ -8,7 +8,7 @@
 	background-color: #ffcc00;
 }
 
-.vert-gf {
+.vert-gf, .btn-outline-info {
 	color: #328080;
 }
 
@@ -109,6 +109,7 @@ input:disabled {
 	border: 1px solid lightgray;
 	border-radius: 5px 5px 0 0;
 	width: 100%;
+    background-color: white;
 }
 
 .user-list {
@@ -155,6 +156,63 @@ input:disabled {
 	.check-role label {
 		width: 15%;
 	}
+}
+
+.read-project {
+    min-width: 120px;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.form-control {
+    height: auto;
+}
+
+.accordion > .card .card-header {
+    margin: 0;
+}
+
+.accordion > .card {
+    border: none;
+}
+
+.card-header {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: white;
+}
+
+.card-body {
+    background-color: whitesmoke;
+    border: 1px solid #ced4da;
+    border-top: none;
+}
+
+.btn-room {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-room ion-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.btn-info {
+    border: none;
+}
+
+.btn-outline-info {
+    border-color: #328080;
 }
 
 /* ------------- Footer ------------- */

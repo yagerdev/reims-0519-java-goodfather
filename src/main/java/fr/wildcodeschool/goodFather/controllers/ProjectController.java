@@ -5,6 +5,7 @@ import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,9 @@ public class ProjectController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    RoomRepository roomRepository;
+    
     @PostMapping("/projects")
     public String create(@ModelAttribute Project project) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,6 +47,14 @@ public class ProjectController {
     @GetMapping("/projects/create")
     public String showCreateProjectForm() {
         return "project-create";
+    }
+
+    @GetMapping("projects/{id}")
+    public String read(@PathVariable Long id, Model model) {
+        Project project = projectRepository.findById(id).get();
+        model.addAttribute("project", project);
+        model.addAttribute("rooms", project.getRooms());
+        return "project-recap";
     }
 
     @GetMapping("/projects")
