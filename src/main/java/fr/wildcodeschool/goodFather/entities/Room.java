@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class Room {
     
@@ -20,7 +21,9 @@ public class Room {
 
     private double wallB;
 
-    private double height;
+	private double height;
+	
+	private double totalCost;
 
     @ManyToOne
     private Project project;
@@ -28,8 +31,8 @@ public class Room {
     @ManyToOne
 	private Category category;
 	
-	@ManyToMany
-    private Set<Task> tasks = new HashSet<>();
+	@OneToMany(mappedBy = "room")
+    private Set<Quantity> quantities;
 
     public Room() {
 
@@ -38,16 +41,18 @@ public class Room {
     public Room(double wallA, double wallB, double height, Category category, Project project) {
         this.setWallA(wallA);
         this.setWallB(wallB);
-        this.setHeight(height);
+		this.setHeight(height);
+		this.setTotalCost(0);
 		this.setCategory(category);
 		this.setProject(project);
     }
 
-    public Room(Long id, double wallA, double wallB, double height, Category category, Project project) {
+    public Room(Long id, double wallA, double wallB, double height, double totalCost, Category category, Project project) {
         this.setId(id);
         this.setWallA(wallA);
         this.setWallB(wallB);
-        this.setHeight(height);
+		this.setHeight(height);
+		this.setTotalCost(totalCost);
 		this.setCategory(category);
 		this.setProject(project);
     }
@@ -100,15 +105,27 @@ public class Room {
 		this.project = project;
 	}
 
-	public Set<Task> getTasks() {
-		return tasks;
+	public boolean addTaskQuantity(Quantity quantity) {
+		return this.quantities.add(quantity);
 	}
 
-	public void setTasks(Set<Task> tasks) {
-		this.tasks = tasks;
+	public double getTotalCost() {
+		return totalCost;
 	}
 
-	public boolean addTask(Task task) {
-		return this.tasks.add(task);
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public void addCost(double taskCost) {
+		this.totalCost += taskCost;
+	}
+
+	public Set<Quantity> getQuantities() {
+		return quantities;
+	}
+
+	public void setQuantities(Set<Quantity> quantities) {
+		this.quantities = quantities;
 	}
 }
