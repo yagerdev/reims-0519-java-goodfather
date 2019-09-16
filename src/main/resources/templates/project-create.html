@@ -4,7 +4,7 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
         <main class="container">
-            <h2>Bienvenue<span class="yellow-gf">Nom utilisateur</span></h2>
+            <h2>Bienvenue<span class="yellow-gf" th:text="${user.firstName}">Nom utilisateur</span></h2>
             <section>
                 <form th:action="@{/projects}" method="POST">
                     <div class="input-group mb-3">
