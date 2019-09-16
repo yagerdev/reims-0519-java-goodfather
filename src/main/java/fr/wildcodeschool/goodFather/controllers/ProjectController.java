@@ -5,6 +5,7 @@ import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.UserRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProjectController {
+
+    @Autowired
+    UserRepository userRepository;
     
     @Autowired
     ProjectRepository projectRepository;
@@ -46,7 +50,10 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/create")
-    public String showCreateProjectForm() {
+    public String showCreateProjectForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User currentUser = (User)authentication.getPrincipal();
+        model.addAttribute("user", currentUser);
         return "project-create";
     }
     @GetMapping("/projects")
