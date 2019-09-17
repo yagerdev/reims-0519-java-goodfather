@@ -49,11 +49,15 @@
                             >Typologie</label
                         >
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01">
+                    <select 
+                        class="custom-select" 
+                        id="inputGroupSelect01"
+                        th:name="typology"
+                    >
                         <option selected>Sélectionnez...</option>
                         <option
-                            th:each="typologie : ${typologies}"
-                            th:text="${typologie.name}"
+                            th:each="typology : ${typologies}"
+                            th:text="${typology.name}"
                         >
                             item
                         </option>
