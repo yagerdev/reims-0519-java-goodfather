@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProjectController {
@@ -62,9 +63,14 @@ public class ProjectController {
     }
 
     @GetMapping("/projects")
-    public String showAllProjectsByUser(Model model, Authentication authentication){
+    public String showAllProjectsByUser(
+        Model model,
+        Authentication authentication,
+        @RequestParam(value = "message", required = false) String message
+    ) {
         List<Project> projectsList = projectRepository.findAllByUser(authentication.getPrincipal());
         model.addAttribute("projects", projectsList);
+        model.addAttribute("message", message);
         return "projects";
     }
 
@@ -82,8 +88,9 @@ public class ProjectController {
     }
 
     @DeleteMapping("/projects/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         projectRepository.deleteById(id);
+        redirectAttributes.addAttribute("message", "delete");
         return "redirect:/projects";
     }
 }

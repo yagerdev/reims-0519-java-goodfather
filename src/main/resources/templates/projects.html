@@ -5,6 +5,7 @@
         <div th:replace="fragments/header.html :: header"></div>
         <main class="container">
             <h2>Liste des<span class="yellow-gf">projects</span></h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
             <section class="section-list">
                 <div th:each="project : ${projects}" class="item-global">
                     <div class="user-list">
