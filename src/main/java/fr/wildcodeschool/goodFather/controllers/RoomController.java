@@ -72,9 +72,8 @@ public class RoomController {
         List<Typology> typologyList = typologyRepository.findAll();
         List<Work> workList = workRepository.findAll();
         List<Material> materialList = materialRepository.findAll();
-        Room currentRoom = roomRepository.getOne(id);
-        Project currentProject = projectRepository.getOne(id);
-        model.addAttribute("project", currentProject);
+        Room currentRoom = roomRepository.findById(id).get();
+        model.addAttribute("project", currentRoom.getProject());
         model.addAttribute("room", currentRoom);
         model.addAttribute("materials", materialList);
         model.addAttribute("typologies", typologyList);
