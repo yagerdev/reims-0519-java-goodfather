@@ -34,6 +34,8 @@ public class Project {
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
+    private double totalCost;
+
     @ManyToOne
     private User user;
 
@@ -123,5 +125,16 @@ public class Project {
     public void setRooms(Set<Room> rooms) {
         this.rooms = rooms;
     }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
+    }
     
+    public void addCost(double cost) {
+        this.totalCost += cost;
+    }
 }
