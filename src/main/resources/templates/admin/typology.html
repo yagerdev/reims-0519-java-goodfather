@@ -49,8 +49,7 @@
 							<ion-icon name="create"></ion-icon>
 						</button>
 					</form>
-
-					<form th:action="@{/typologies/} + ${typology.id}" th:method="DELETE">
+					<form th:action="@{/typologies/} + ${typology.id}" th:method="DELETE" class="delete-form">
 						<input type="hidden" th:value="${typology.id}" th:name="id" />
 						<button type="submit" class="btn btn-info">
 							<ion-icon
