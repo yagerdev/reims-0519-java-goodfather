@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fr.wildcodeschool.goodFather.entities.Material;
+import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
+import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
@@ -33,6 +35,9 @@ public class TaskController {
 
     @Autowired
     RoomRepository roomRepository;
+
+    @Autowired
+    QuantityRepository quantityRepository;
 
     @GetMapping("/tasks")
     public String showCreateTask(Model model) {
@@ -73,8 +78,13 @@ public class TaskController {
         @ModelAttribute Material material
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialId(work.getId(), material.getId());
-        room.addTask(task);
-        room = roomRepository.save(room);
+        Quantity quantity = new Quantity(room, task, 10); // temporary quantity value
+        if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
+            quantity = quantityRepository.save(quantity);
+            room.addTaskQuantity(quantity);
+            room.addCost(task.getPrice()*quantity.getQuantity());
+            room = roomRepository.save(room);
+        }
         return "redirect:/rooms/" + room.getId() + "/edit";
     }
 }

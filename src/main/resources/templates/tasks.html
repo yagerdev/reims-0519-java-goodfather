@@ -39,6 +39,7 @@
                     </tr>
                 </tbody>
             </table>
+            <p>Prix total : <span class="yellow-gf" th:text="${room.totalCost}">Prix des travaux de la pièce</span></p>
 
             <form th:method="POST" th:action="@{/tasks/add}">
                 <input type="hidden" name="room" th:value="${room.id}" />
@@ -101,11 +102,11 @@
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
             <section class="section-list">
-                <h3>Liste des actions créées :</h3>
-                <ul class="list-group" th:each="task : ${tasks}">
-                    <li
-                        class="list-group-item"
-                        th:text="${task.constructName()}"
+                <h3>Liste des actions ajoutées :</h3>
+                <ul class="list-group" th:each="quantity : ${quantities}">
+                    <li 
+                        class="list-group-item" 
+                        th:text="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
                     >
                         Item
                     </li>
