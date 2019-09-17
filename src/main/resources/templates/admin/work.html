@@ -4,7 +4,8 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
         <main class="container">
-            <h2>Gestion des<span class="yellow-gf">actions</span></h2>
+			<h2>Gestion des<span class="yellow-gf">actions</span></h2>
+			<div th:replace="fragments/alert.html :: alert"></div>
             <section>
                 <form th:action="@{/works}" method="POST">
                     <div class="input-group mb-3">

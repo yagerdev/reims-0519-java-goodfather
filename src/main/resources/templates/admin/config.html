@@ -5,6 +5,7 @@
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
 			<h2>Configuration de <span class="yellow-gf" th:text="${entityName}"></span></h2>
+			<div th:replace="fragments/alert.html :: alert"></div>
 			<section>
 				<form th:action="@{'/' + ${entityType} + '/' + ${entityId}}" th:method="PUT">
 					<span th:text="${'Sélection des ' + listType}"></span>
