@@ -60,6 +60,16 @@
                         Date
                     </div>
                 </div>
+                <div class="input-group mb-1">
+                    <div class="input-group-prepend read-project">
+                        <span class="input-group-text flex-centered"
+                            >Coût total</span
+                        >
+                    </div>
+                    <div class="form-control" th:text="${project.totalCost + '€'}">
+                        coût total
+                    </div>
+                </div>
             </section>
             <div class="accordion" id="roomControl">
                 <div class="card">
@@ -101,10 +111,12 @@
                                 >
                                     <div
                                         class="user-list"
-                                        th:text="${room.name}"
+                                        th:text="${room.name + ' - ' + room.totalCost + '€'}"
                                     >
                                         item
+
                                     </div>
+
                                     <form
                                         th:action="@{/rooms/} + ${room.id}"
                                         th:method="DELETE"
