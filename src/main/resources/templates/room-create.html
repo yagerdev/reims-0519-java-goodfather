@@ -4,10 +4,10 @@
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
-			<h2>DIMENSIONS<span class="yellow-gf">nom de la pièce</span></h2>
+			<h2>DIMENSIONS<span class="yellow-gf" th:text="${category.name}"></span></h2>
 			<form th:action="@{/rooms}" method="POST">
-				<input type="hidden" name="project" th:value="${projectId}">
-				<input type="hidden" name="category" th:value="${categoryId}">
+				<input type="hidden" name="project" th:value="${project.id}">
+				<input type="hidden" name="category" th:value="${category.id}">
                 <div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<label class="input-group-text" for="name">Nom</label>
@@ -16,6 +16,7 @@
 						type="text"
 						class="form-control"
 						name="name"
+						th:value="${category.name} + ' - '"
                         required
 					/>
 				</div>
