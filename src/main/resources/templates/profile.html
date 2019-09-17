@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="FR">
+<<<<<<< HEAD
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
@@ -107,27 +108,128 @@
 							th:value="${user.postalCode}"
 							onfocus="this.value=''"
 						/>
+=======
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <main class="container">
+            <h2>
+                Profil de
+                <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
+                    catégories
+                </span>
+            </h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form
+                    th:action="@{/profile/} + ${user.id}"
+                    th:method="PUT"
+                    th:object="${user}"
+                >
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="firstName">
+								Prénom
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:name="firstName"
+                            th:value="*{firstName}"
+                            onfocus="this.value=''"
+                        />
                     </div>
                     <div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="password"
-								>Mot de passe</label
-							>
-						</div>
-						<input
-							type="password"
-							class="form-control"
-							name="password"
-						    placeholder="Votre nouveau mot de passe ici"
-							th:value='${user.getPassword()}'
-						/>
-					</div>
-
-					<button type="submit" class="btn btn-info">Modifier</button>
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="lastName">
+								Nom
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:name="lastName"
+                            th:value="*{lastName}"
+                            onfocus="this.value=''"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="email">
+								Mail
+							</label>
+                        </div>
+                        <input
+                            type="email"
+                            class="form-control"
+                            th:name="email"
+                            th:value="*{email}"
+                            onfocus="this.value=''"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="phoneNumber">
+								Téléphone
+							</label>
+                        </div>
+                        <input
+                            type="tel"
+                            class="form-control"
+                            th:name="phoneNumber"
+                            th:value="*{phoneNumber}"
+                            onfocus="this.value=''"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="address">
+								Adresse
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="address"
+                            th:value="*{address}"
+                            onfocus="this.value=''"
+                        />
+>>>>>>> dev
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="city">
+								City
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            th:value="*{city}"
+                            onfocus="this.value=''"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="postalCode">
+								Code postal
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="postalCode"
+                            th:value="${user.postalCode}"
+                            onfocus="this.value=''"
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-info">Modifier</button>
 				</form>
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>

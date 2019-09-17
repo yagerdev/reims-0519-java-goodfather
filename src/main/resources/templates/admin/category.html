@@ -51,26 +51,33 @@
 						</button>
 					</form>
 
-					<form th:action="@{/categories/} + ${category.id}" th:method="DELETE">
-						<input type="hidden" th:value="${category.id}" th:name="id" />
-						<button type="submit" class="btn btn-info">
-							<ion-icon
-								ios="ios-close"
-								md="md-close"
-								class="icon-delete"
-							></ion-icon>
-						</button>
-					</form>
+                    <form
+                        th:action="@{/categories/} + ${category.id}"
+                        th:method="DELETE"
+                    >
+                        <input
+                            type="hidden"
+                            th:value="${category.id}"
+                            th:name="id"
+                        />
+                        <button type="submit" class="btn btn-info">
+                            <ion-icon
+                                ios="ios-close"
+                                md="md-close"
+                                class="icon-delete"
+                            ></ion-icon>
+                        </button>
+                    </form>
 
                     <a th:href="@{'/categories/' + ${category.id} + '/edit'}">
                         <button type="button" class="btn btn-info">
                             <ion-icon name="build"></ion-icon>
                         </button>
-					</a>
-				</div>
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+                    </a>
+                </div>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>
