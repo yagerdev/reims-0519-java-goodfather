@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="FR">
-    <div th:replace="fragments/head.html :: head"></div>
-    <body>
-        <div th:replace="fragments/header.html :: header"></div>
+	<div th:replace="fragments/head.html :: head"></div>
+	<body>
+		<div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2 th:text="'Projet : ' + ${project.name}">Nom du projet</h2>
             <h3 class="yellow-gf" th:text="${room.name}">Nom de la pièce</h3>
