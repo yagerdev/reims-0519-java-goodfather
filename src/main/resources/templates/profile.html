@@ -6,15 +6,11 @@
         <main class="container">
             <h2>
                 Profil de
-                <span
-                    class="yellow-gf"
-                    th:text="${user.firstName} + ' ' + ${user.lastName}"
-                >
+                <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
                     catégories
                 </span>
             </h2>
             <div th:replace="fragments/alert.html :: alert"></div>
-
             <section>
                 <form
                     th:action="@{/profile/} + ${user.id}"
@@ -23,9 +19,9 @@
                 >
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="firstName"
-                                >Prénom</label
-                            >
+                            <label class="input-group-text" for="firstName">
+								Prénom
+							</label>
                         </div>
                         <input
                             type="text"
@@ -37,9 +33,9 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="lastName"
-                                >Nom</label
-                            >
+                            <label class="input-group-text" for="lastName">
+								Nom
+							</label>
                         </div>
                         <input
                             type="text"
@@ -51,37 +47,37 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="email"
-                                >Mail</label
-                            >
+                            <label class="input-group-text" for="email">
+								Mail
+							</label>
                         </div>
                         <input
                             type="email"
                             class="form-control"
-                            name="email"
+                            th:name="email"
                             th:value="*{email}"
                             onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="phoneNumber"
-                                >Téléphone</label
-                            >
+                            <label class="input-group-text" for="phoneNumber">
+								Téléphone
+							</label>
                         </div>
                         <input
                             type="tel"
                             class="form-control"
-                            name="phoneNumber"
+                            th:name="phoneNumber"
                             th:value="*{phoneNumber}"
                             onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="address"
-                                >Adresse</label
-                            >
+                            <label class="input-group-text" for="address">
+								Adresse
+							</label>
                         </div>
                         <input
                             type="text"
@@ -93,9 +89,9 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="city"
-                                >City</label
-                            >
+                            <label class="input-group-text" for="city">
+								City
+							</label>
                         </div>
                         <input
                             type="text"
@@ -107,9 +103,9 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="postalCode"
-                                >Code postal</label
-                            >
+                            <label class="input-group-text" for="postalCode">
+								Code postal
+							</label>
                         </div>
                         <input
                             type="text"
@@ -121,9 +117,8 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="password"
-                                >Mot de passe</label
-                            >
+                            <label class="input-group-text" for="password">
+								Mot de passe</label>
                         </div>
                         <input
 							type="password"
@@ -153,7 +148,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-info">Modifier</button>
-                </form>
+				</form>
             </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>
