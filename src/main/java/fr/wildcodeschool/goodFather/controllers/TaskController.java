@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.wildcodeschool.goodFather.entities.Material;
+import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
+import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
@@ -37,6 +40,12 @@ public class TaskController {
 
     @Autowired
     RoomRepository roomRepository;
+
+    @Autowired
+    QuantityRepository quantityRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
 
     @GetMapping("/tasks")
     public String showCreateTask(Model model, @RequestParam(value = "message", required = false) String message) {
@@ -84,8 +93,16 @@ public class TaskController {
         @ModelAttribute Material material
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialId(work.getId(), material.getId());
-        room.addTask(task);
-        room = roomRepository.save(room);
+        Quantity quantity = new Quantity(room, task, 10); // temporary quantity value
+        if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
+            Project project = room.getProject();
+            quantity = quantityRepository.save(quantity);
+            room.addTaskQuantity(quantity);
+            room.addCost(task.getPrice()*quantity.getQuantity());
+            room = roomRepository.save(room);
+            project.addCost(task.getPrice()*quantity.getQuantity());
+            project = projectRepository.save(project);
+        }
         return "redirect:/rooms/" + room.getId() + "/edit";
     }
 

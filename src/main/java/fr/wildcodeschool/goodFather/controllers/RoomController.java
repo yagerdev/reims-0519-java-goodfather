@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Material;
+import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.Work;
+import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
@@ -39,21 +42,22 @@ public class RoomController {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
     
     @GetMapping("/rooms/create")
-    public String showCreateRoom(
-        Model model,
-        @RequestParam Long projectId,
-        @RequestParam Long categoryId
-    ) {
+    public String showCreateRoom(Model model, @RequestParam Long projectId, @RequestParam Long categoryId) {
         if (projectId == null) {
             return "redirect:/projects";
         }
         else if (categoryId == null) {
             return "redirect:/projects/" + projectId + "/edit";
         }
-        model.addAttribute("projectId", projectId);
-        model.addAttribute("categoryId", categoryId);
+        Category currentCategory = categoryRepository.findById(categoryId).get();
+        Project currentProject = projectRepository.findById(projectId).get();
+        model.addAttribute("category", currentCategory);
+        model.addAttribute("project", currentProject);
         return"room-create";
     }
 
@@ -68,12 +72,13 @@ public class RoomController {
         List<Typology> typologyList = typologyRepository.findAll();
         List<Work> workList = workRepository.findAll();
         List<Material> materialList = materialRepository.findAll();
-        Room currentRoom = roomRepository.getOne(id);
+        Room currentRoom = roomRepository.findById(id).get();
+        model.addAttribute("project", currentRoom.getProject());
         model.addAttribute("room", currentRoom);
         model.addAttribute("materials", materialList);
         model.addAttribute("typologies", typologyList);
         model.addAttribute("works", workList);
-        model.addAttribute("tasks", currentRoom.getTasks());
+        model.addAttribute("quantities", currentRoom.getQuantities());
         return "tasks";
     }
 
