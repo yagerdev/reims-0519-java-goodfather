@@ -79,6 +79,7 @@
                             th:each="work : ${works}"
                             th:text="${work.name}"
                             th:value="${work.id}"
+                            th:attr="filter=${work.name.toLowerCase()}"
                             >item</option
                         >
                     </select>
@@ -99,6 +100,7 @@
                             th:each="material : ${materials}"
                             th:text="${material.name}"
                             th:value="${material.id}"
+                            th:attr="filter=${material.name.toLowerCase()}"
                             >item</option
                         >
                     </select>
