@@ -5,6 +5,9 @@
 		<div th:replace="fragments/header.html :: header"></div>
 		<main class="container">
 			<h2>Gestion des<span class="yellow-gf">catégories</span></h2>
+			<div class="alert alert-success" role="alert" th:if="${success}">
+				Création réussie !
+            </div>
 			<section>
 				<form th:action="@{/categories}" method="POST">
 					<div class="input-group mb-3">
