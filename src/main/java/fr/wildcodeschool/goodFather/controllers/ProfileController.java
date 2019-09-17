@@ -47,7 +47,6 @@ public class ProfileController {
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
-        userToUpdate.setPassword(encoder.encode(user.getPassword()));
         userToUpdate.setPostalCode(user.getPostalCode());
         userRepository.save(userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
