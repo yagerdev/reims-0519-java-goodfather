@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -24,9 +25,10 @@ public class UserController {
     UserRepository userRepository;
     
     @GetMapping("/users")
-    public String show(Model model){
+    public String show(Model model, @RequestParam(value = "message", required = false) String message){
         List<User> userList = userRepository.findAll();
         model.addAttribute("users", userList);
+        model.addAttribute("message", message);
         return "admin/user";
     }
 
@@ -47,16 +49,18 @@ public class UserController {
         @RequestParam("city") String city,
         @RequestParam("postalCode") String postalCode,
         @RequestParam("password") String password,
-        @RequestParam("role") String role
+        @RequestParam("role") String role,
+        RedirectAttributes redirectAttributes
         ) { 
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
             User user = new User(firstName, lastName, email, phoneNumber, address, city, postalCode, encoder.encode(password), role);
             userRepository.save(user);     
+            redirectAttributes.addAttribute("message", "success");
             return "redirect:/users";
     }
 
     @PutMapping("/users/{id}")
-    public String update(@PathVariable Long id, User user) {
+    public String update(@PathVariable Long id, User user, RedirectAttributes redirectAttributes) {
         User userToUpdate = userRepository.findById(id).get();
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
@@ -67,12 +71,14 @@ public class UserController {
         userToUpdate.setPostalCode(user.getPostalCode());
         userToUpdate.setRole(user.getRole());
         userRepository.save(userToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
         return "redirect:/users";
     }
 
     @DeleteMapping("/users/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         userRepository.deleteById(id);
+        redirectAttributes.addAttribute("message", "delete");
         return "redirect:/users";
     }
 
