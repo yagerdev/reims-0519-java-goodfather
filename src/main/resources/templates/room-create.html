@@ -3,6 +3,7 @@
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
 			<h2>DIMENSIONS<span class="yellow-gf" th:text="${category.name}"></span></h2>
 			<form th:action="@{/rooms}" method="POST">

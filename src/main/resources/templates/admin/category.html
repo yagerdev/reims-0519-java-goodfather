@@ -1,54 +1,55 @@
 <!DOCTYPE html>
 <html lang="FR">
-    <div th:replace="fragments/head.html :: head"></div>
-    <body>
-        <div th:replace="fragments/header.html :: header"></div>
-        <main class="container">
-            <h2>Gestion des<span class="yellow-gf">catégories</span></h2>
-            <div th:replace="fragments/alert.html :: alert"></div>
-            <section>
-                <form th:action="@{/categories}" method="POST">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="name">Nom</label>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Entrez une donnée ..."
-                            name="name"
-                            required
-                        />
-                    </div>
-                    <button type="submit" class="btn btn-info">Créer</button>
-                </form>
-            </section>
-            <section class="section-list">
-                <div th:each="category : ${categories}" class="item-global">
-                    <form
-                        th:action="@{/categories/} + ${category.id}"
-                        th:method="PUT"
-                        th:object="${category}"
-                        class="update-form"
-                    >
-                        <input
-                            type="text"
-                            th:value="*{name}"
-                            th:id="${category.id}"
-                            placeholder="Merci de saisier une nouvelle donnée ..."
-                            onfocus="this.placeholder=''"
-                            name="name"
-                            disabled
-                        />
-                        <button
-                            type="button"
-                            class="btn btn-info"
-                            th:id="${category.id + 'item'}"
-                            th:onclick="'javascript:update(\'' + ${category.id} + '\');'"
-                        >
-                            <ion-icon name="create"></ion-icon>
-                        </button>
-                    </form>
+	<div th:replace="fragments/head.html :: head"></div>
+	<body>
+		<div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
+		<main class="container">
+			<h2>Gestion des<span class="yellow-gf">catégories</span></h2>
+			<section>
+				<form th:action="@{/categories}" method="POST">
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="name">Nom</label>
+						</div>
+						<input
+							type="text"
+							class="form-control"
+							placeholder="Entrez une donnée ..."
+							name="name"
+							required
+						/>
+					</div>
+					<button type="submit" class="btn btn-info">Créer</button>
+				</form>
+			</section>
+			<section class="section-list">
+				<div th:each="category : ${categories}" class="item-global">
+
+					<form
+						th:action="@{/categories/} + ${category.id}"
+						th:method="PUT"
+						th:object="${category}"
+						class="update-form"
+					>
+						<input
+							type="text"
+							th:value="*{name}"
+							th:id="${category.id}"
+							placeholder="Merci de saisier une nouvelle donnée ..."
+							onfocus="this.placeholder=''"
+							name="name"
+							disabled
+						/>
+						<button
+							type="button"
+							class="btn btn-info"
+							th:id="${category.id + 'item'}"
+							th:onclick="'javascript:update(\'' + ${category.id} + '\');'"
+						>
+							<ion-icon name="create"></ion-icon>
+						</button>
+					</form>
 
                     <form
                         th:action="@{/categories/} + ${category.id}"
