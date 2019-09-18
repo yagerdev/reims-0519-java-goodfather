@@ -69,6 +69,11 @@ public class TaskController {
         @RequestParam(required = false) Double percentRange,
         RedirectAttributes redirectAttributes
     ) {
+        System.out.println(workId);
+        System.out.println(materialId);
+        System.out.println(price);
+        System.out.println(unit);
+        System.out.println(percentRange);
         if(workId == null || materialId == null || price == null || unit == null) {
             redirectAttributes.addAttribute("message", "invalide");
             return "redirect:/tasks";

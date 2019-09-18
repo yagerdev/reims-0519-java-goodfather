@@ -1,33 +1,16 @@
 <!DOCTYPE html>
 <html lang="FR">
-<<<<<<< HEAD
 	<div th:replace="fragments/head.html :: head"></div>
 	<body>
 		<div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2>Gestion des<span class="yellow-gf">taches</span></h2>
-=======
-    <div th:replace="fragments/head.html :: head"></div>
-
-    <body>
-        <div th:replace="fragments/header.html :: header"></div>
-        <main class="container">
-            <h2>Gestion des<span class="yellow-gf">taches</span></h2>
             <div th:replace="fragments/alert.html :: alert"></div>
->>>>>>> dev
             <section>
                 <form th:action="@{/tasks}" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-<<<<<<< HEAD
-                            <label class="input-group-text" for="workId">Travail</label>
-                        </div>
-                        <select name="workId" id="">
-                            <option value="" disabled selected>Sélectionner un travail</option>
-                            <option th:each="work : ${works}" th:text="${work.name}"
-                                th:value="${work.id}"></option>
-=======
                             <label class="input-group-text" for="WorkId">
                                 Actions
                             </label>
@@ -41,19 +24,10 @@
                             >
                                 Option
                             </option>
->>>>>>> dev
                         </select>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-<<<<<<< HEAD
-                            <label class="input-group-text" for="workId">Matériel</label>
-                        </div>
-                        <select name="materialId" id="">
-                            <option value="" disabled selected>Sélectionner un matériel</option>
-                            <option th:each="material : ${materials}" th:text="${material.name}"
-                                th:value="${material.id}"></option>
-=======
                             <label class="input-group-text" for="materialId">
                                 Matériaux
                             </label>
@@ -61,7 +35,7 @@
                         <select
                             class="custom-select"
                             id="materialId"
-                            name="materialId"
+                            th:name="materialId"
                             required
                         >
                             <option disabled selected>Sélectionner...</option>
@@ -72,40 +46,9 @@
                             >
                                 Option
                             </option>
->>>>>>> dev
                         </select>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-<<<<<<< HEAD
-                            <label class="input-group-text" for="price">Prix</label>
-                        </div>
-                        <input type="text" placeholder="Prix" th:name="price"></input>
-                        <input type="radio" th:name="unit" value="en m²">en m²</input>
-                        <input type="radio" th:name="unit" value="l'unité">par unité</input>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="percentRange">Fourchette de prix</label>
-                        </div>
-                        <input type="range" th:name="percentRange" min="0"  max="100" step="0.01" value="0" oninput="result.value=percentRange.value">
-                        <output name="result">0</output>%/100%</input>
-                    </div>
-=======
-                            <span class="input-group-text" id="price">
-                                Prix
-                            </span>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control"
-                            aria-label="price"
-                            aria-describedby="price"
-                            th:name="price"
-                            required
-                        />
-                    </div>
-
+                    
                     <div class="form-check form-check-inline mb-3">
                         <input
                             class="form-check-input"
@@ -140,7 +83,7 @@
                             class="form-control"
                             aria-label="price"
                             aria-describedby="price"
-                            value="5"
+                            th:value="5"
                             name="result"
                         />
                     </div>
@@ -154,17 +97,10 @@
                         th:name="percentRange"
                         oninput="result.value = percentRange.value"
                     />
->>>>>>> dev
                     <button type="submit" class="btn btn-info">Créer</button>
                 </form>
             </section>
             <section class="section-list">
-<<<<<<< HEAD
-                <h3>Liste des actions créées :</h3>
-                <ul class="list-group" th:each="task : ${tasks}">
-                    <li class="list-group-item" th:text="${task.constructName()}">Item</li>
-                </ul>
-=======
                 <div th:each="task : ${tasks}" class="item-global">
                     <form
                         th:action="@{/tasks/} + ${task.id}"
@@ -209,14 +145,9 @@
                         </button>
                     </form>
                 </div>
->>>>>>> dev
             </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>
         <div th:replace="fragments/script.html :: script"></div>
     </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> dev
