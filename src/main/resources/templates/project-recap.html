@@ -7,47 +7,49 @@
         <main class="container">
             <h2 class="mb-3">
                 Récapitulatif
-                <span class="yellow-gf" th:text="${project.name}"
-                    >nom projet</span
-                >
+                <span class="yellow-gf" th:text="${project.name}">
+                    nom projet
+                </span>
             </h2>
             <section class="recap-info-project mb-3">
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered">Nom</span>
+                        <span class="input-group-text flex-centered">
+                            Nom
+                        </span>
                     </div>
                     <div class="form-control" th:text="${project.name}">
-                        nom
+                        Nom
                     </div>
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered"
-                            >Adresse</span
-                        >
+                        <span class="input-group-text flex-centered">
+                            Adresse
+                        </span>
                     </div>
                     <div class="form-control" th:text="${project.address}">
-                        adresse
+                        Adresse
                     </div>
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered"
-                            >Ville</span
-                        >
+                        <span class="input-group-text flex-centered">
+                            Ville
+                        </span>
                     </div>
                     <div class="form-control" th:text="${project.city}">
-                        ville
+                        Ville
                     </div>
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered"
-                            >Code postal</span
-                        >
+                        <span class="input-group-text flex-centered">
+                            Code postal
+                        </span>
                     </div>
                     <div class="form-control" th:text="${project.postalCode}">
-                        code postal
+                        Code postal
                     </div>
                 </div>
                 <div class="input-group mb-1">
@@ -63,12 +65,12 @@
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered"
-                            >Coût total</span
-                        >
+                        <span class="input-group-text flex-centered">
+                            Coût total
+                            </span>
                     </div>
                     <div class="form-control" th:text="${project.totalCost + '€'}">
-                        coût total
+                        Coût total
                     </div>
                 </div>
             </section>
@@ -103,8 +105,9 @@
                             <a
                                 th:href="@{'/projects/' + ${project.id} + '/edit'}"
                                 class="btn btn-info mb-4"
-                                >Ajouter une nouvelle pièce</a
                             >
+                                Ajouter une nouvelle pièce
+                            </a>
                             <section class="section-list">
                                 <div
                                     th:each="room : ${rooms}"
@@ -115,7 +118,6 @@
                                         th:text="${room.name + ' - ' + room.totalCost + '€'}"
                                     >
                                         item
-
                                     </div>
 
                                     <form

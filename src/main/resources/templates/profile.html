@@ -14,7 +14,7 @@
             <div th:replace="fragments/alert.html :: alert"></div>
             <section>
                 <form
-                    th:action="@{/profile/} + ${user.id}"
+                    th:action="@{/profile/}"
                     th:method="PUT"
                     th:object="${user}"
                 >
@@ -106,7 +106,7 @@
                             type="text"
                             class="form-control"
                             name="postalCode"
-                            th:value="${user.postalCode}"
+                            th:value="*{postalCode}"
                         />
                     </div>
                     <button type="submit" class="btn btn-info">Modifier</button>

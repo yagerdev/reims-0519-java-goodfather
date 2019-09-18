@@ -34,9 +34,13 @@ public class ProfileController {
         return "profile";
     }
 
-    @PutMapping("/profile/{id}")
-    public String update(@PathVariable Long id, User user, RedirectAttributes redirectAttributes) {
-        User userToUpdate = userRepository.findById(id).get();
+    @PutMapping("/profile")
+    public String update(
+        User user,
+        RedirectAttributes redirectAttributes,
+        Authentication authentication
+    ) {
+        User userToUpdate = (User) authentication.getPrincipal();
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
@@ -44,7 +48,8 @@ public class ProfileController {
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
-        userRepository.save(userToUpdate);
+        userToUpdate = userRepository.save(userToUpdate);
+        redirectAttributes.addAttribute("user", userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
         return "redirect:/profile";
     }

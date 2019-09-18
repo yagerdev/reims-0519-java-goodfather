@@ -86,6 +86,7 @@ input:disabled {
 .item-global {
     display: flex;
     margin-bottom: 1vh;
+    align-items: center;
 }
 
 .item-global form {
