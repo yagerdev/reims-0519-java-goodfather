@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Material;
@@ -83,10 +84,11 @@ public class RoomController {
     }
 
     @DeleteMapping("/rooms/{id}")
-    public String delete(@PathVariable Long id, Model model) {
+    public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Room room = roomRepository.findById(id).get();
         Long projectId = room.getProject().getId();
         roomRepository.deleteById(id);
-        return "redirect:/projects/"+projectId+"/read";
+        redirectAttributes.addAttribute("message", "delete");
+        return "redirect:/projects/"+projectId;
     }
 }
