@@ -1,13 +1,11 @@
 package fr.wildcodeschool.goodFather.entities;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -24,8 +22,8 @@ public class Task {
 
     private double percentRange;
 
-    @ManyToMany
-    private Set<Typology> typologies = new HashSet<>();
+    @ManyToOne
+    private Typology typology;
 
     @ManyToOne
     private Material material;
@@ -48,6 +46,22 @@ public class Task {
         this.setPrice(price);
         this.setUnit(unit);
         this.setPercentRange(percentRange);
+        this.setTypology(typology);
+        this.setMaterial(material);
+        this.setWork(work);
+    }
+
+    public Task(double price,
+                String unit,
+                double percentRange,
+                Typology typology,
+                Material material, 
+                Work work
+    ) {
+        this.setPrice(price);
+        this.setUnit(unit);
+        this.setPercentRange(percentRange);
+        this.setTypology(typology);
         this.setMaterial(material);
         this.setWork(work);
     }
@@ -117,12 +131,12 @@ public class Task {
         this.work = work;
     }
 
-    public Set<Typology> getTypologies() {
-        return typologies;
+    public Typology getTypology() {
+        return typology;
     }
 
-    public void setTypologies(Set<Typology> typologies) {
-        this.typologies = typologies;
+    public void setTypology(Typology typology) {
+        this.typology = typology;
     }
 
     public String constructName() {
