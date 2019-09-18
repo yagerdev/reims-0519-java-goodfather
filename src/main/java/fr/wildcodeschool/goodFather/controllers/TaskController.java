@@ -69,14 +69,8 @@ public class TaskController {
         @RequestParam(required = false) Double percentRange,
         RedirectAttributes redirectAttributes
     ) {
-        System.out.println(workId);
-        System.out.println(materialId);
-        System.out.println(price);
-        System.out.println(unit);
-        System.out.println(percentRange);
         if(workId == null || materialId == null || price == null || unit == null) {
             redirectAttributes.addAttribute("message", "invalide");
-            return "redirect:/tasks";
         }
         else {
             if (taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId) == null) {
@@ -85,10 +79,11 @@ public class TaskController {
                 Task task = new Task(price, unit, percentRange, material, work);
                 task = taskRepository.save(task);
                 redirectAttributes.addAttribute("message", "success");
+            } else {
+                redirectAttributes.addAttribute("message", "doublon"); 
             }
-            redirectAttributes.addAttribute("message", "doublon");
-            return "redirect:/tasks";
         }
+        return "redirect:/tasks";   
     }
 
     @PostMapping("/tasks/add")

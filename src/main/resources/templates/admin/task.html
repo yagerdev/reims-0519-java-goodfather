@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="FR">
-	<div th:replace="fragments/head.html :: head"></div>
-	<body>
-		<div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2>Gestion des<span class="yellow-gf">taches</span></h2>
             <div th:replace="fragments/alert.html :: alert"></div>
@@ -15,7 +15,12 @@
                                 Actions
                             </label>
                         </div>
-                        <select class="custom-select" id="workId" th:name="workId" required>
+                        <select
+                            class="custom-select"
+                            id="workId"
+                            th:name="workId"
+                            required
+                        >
                             <option disabled selected>Sélectionner...</option>
                             <option
                                 th:each="work : ${works}"
@@ -48,7 +53,21 @@
                             </option>
                         </select>
                     </div>
-                    
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">
+                                Prix
+                            </span>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="price"
+                            aria-describedby="price"
+                            th:name="price"
+                            required
+                        />
+                    </div>
                     <div class="form-check form-check-inline mb-3">
                         <input
                             class="form-check-input"
@@ -58,7 +77,9 @@
                             value="au m²"
                             required
                         />
-                        <label class="form-check-label" for="perUnit">au m²</label>
+                        <label class="form-check-label" for="perUnit"
+                            >au m²</label
+                        >
                     </div>
                     <div class="form-check form-check-inline">
                         <input
@@ -69,7 +90,9 @@
                             value="à l'unité"
                             required
                         />
-                        <label class="form-check-label" for="perUnit">à l'unité</label>
+                        <label class="form-check-label" for="perUnit"
+                            >à l'unité</label
+                        >
                     </div>
 
                     <div class="input-group mb-3">
@@ -121,7 +144,8 @@
                             type="button"
                             class="btn btn-info"
                             th:id="${task.id + 'item'}"
-                            th:onclick="'javascript:update(\'' + ${task.id} + '\');'"disabled
+                            th:onclick="'javascript:update(\'' + ${task.id} + '\');'"
+                            disabled
                         >
                             <ion-icon name="create"></ion-icon>
                         </button>
