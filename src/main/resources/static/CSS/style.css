@@ -168,6 +168,21 @@ footer {
 	background-color: #333333;
 }
 
+@media screen and (max-width: 400px) {
+    footer {
+        flex-direction: column;
+    }
+    .footer-link {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1vh;
+    }
+    .footer-link button {
+        margin-bottom: 1vh;
+        width: 100%;
+    }
+ }
+
 footer .footer-social {
 	width: 40%;
 	display: flex;
