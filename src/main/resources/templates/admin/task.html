@@ -143,11 +143,20 @@
                         oninput="result.value = percentRange.value"
                     />
                     <button type="submit" class="btn btn-info">Créer</button>
+                    <button
+                        class="btn btn-info"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#recapTask"
+                        aria-expanded="false"
+                    >
+                        Récapitulatif
+                    </button>
                 </form>
             </section>
 
-            <section class="accordion" id="recapTask">
-                <div class="card mb-3" th:each="typology : ${typologies}">
+            <section class="accordion collapse show" id="recapTask">
+                <div class="card" th:each="typology : ${typologies}">
                     <button
                         class="btn btn-info btn-accordeon p-2"
                         type="button"
