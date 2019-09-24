@@ -55,9 +55,11 @@ public class TaskController {
     @GetMapping("/tasks")
     public String showCreateTask(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Task> tasks = taskRepository.findAll();
+        List<Typology> typologies = typologyRepository.findAll();
         List<Work> works = workRepository.findAll();
         List<Material> materials = materialRepository.findAll();
         model.addAttribute("tasks", tasks);
+        model.addAttribute("typologies", typologies);
         model.addAttribute("works", works);
         model.addAttribute("materials", materials);
         model.addAttribute("message", message);
@@ -69,19 +71,21 @@ public class TaskController {
         Model model,
         @RequestParam(required = false) Long workId,
         @RequestParam(required = false) Long materialId,
+        @RequestParam(required = false) Long typologyId,
         @RequestParam(required = false) Double price,
         @RequestParam(required = false) String unit, 
         @RequestParam(required = false) Double percentRange,
         RedirectAttributes redirectAttributes
     ) {
-        if(workId == null || materialId == null || price == null || unit == null) {
+        if(workId == null || materialId == null || typologyId == null || price == null || unit == null) {
             redirectAttributes.addAttribute("message", "invalide");
         }
         else {
-            if (taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId) == null) {
+            if (taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyId(workId, materialId, typologyId) == null) {
                 Material material = materialRepository.getOne(materialId);
                 Work work = workRepository.getOne(workId);
-                Task task = new Task(price, unit, percentRange, material, work);
+                Typology typology = typologyRepository.getOne(typologyId);
+                Task task = new Task(price, unit, percentRange, typology, material, work);
                 task = taskRepository.save(task);
                 redirectAttributes.addAttribute("message", "success");
             } else {
