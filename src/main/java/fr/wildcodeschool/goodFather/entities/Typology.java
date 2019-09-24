@@ -22,10 +22,10 @@ public class Typology {
     @Column(length = 30)
     private String name;
 
-    @OneToMany(mappedBy = "typology")
+    @OneToMany(mappedBy = "typology", cascade = CascadeType.REMOVE)
     private Set<Task> tasks = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
+    @ManyToMany
     private Set<Category> categories = new HashSet<>();
 
     public Typology() {
