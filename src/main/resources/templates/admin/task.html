@@ -1,59 +1,168 @@
 <!DOCTYPE html>
 <html lang="FR">
-<div th:replace="fragments/head.html :: head"></div>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2>Gestion des<span class="yellow-gf">taches</span></h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form th:action="@{/tasks}" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="WorkId">
+                                Actions
+                            </label>
+                        </div>
+                        <select class="custom-select" id="workId" th:name="workId" required>
+                            <option disabled selected>Sélectionner...</option>
+                            <option
+                                th:each="work : ${works}"
+                                th:text="${work.name}"
+                                th:value="${work.id}"
+                            >
+                                Option
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="materialId">
+                                Matériaux
+                            </label>
+                        </div>
+                        <select
+                            class="custom-select"
+                            id="materialId"
+                            name="materialId"
+                            required
+                        >
+                            <option disabled selected>Sélectionner...</option>
+                            <option
+                                th:each="material : ${materials}"
+                                th:text="${material.name}"
+                                th:value="${material.id}"
+                            >
+                                Option
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">
+                                Prix
+                            </span>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="price"
+                            aria-describedby="price"
+                            th:name="price"
+                            required
+                        />
+                    </div>
 
-<body>
-    <div th:replace="fragments/header.html :: header"></div>
-    <main class="container">
-        <h2>Gestion des<span class="yellow-gf">taches</span></h2>
-        <section>
-            <form th:action="@{/tasks}" method="POST">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="workId">Travail</label>
+                    <div class="form-check form-check-inline mb-3">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            th:name="unit"
+                            id="perUnit"
+                            value="au m²"
+                            required
+                        />
+                        <label class="form-check-label" for="perUnit">au m²</label>
                     </div>
-                    <select name="workId" id="">
-                        <option value="" disabled selected>Sélectionner un travail</option>
-                        <option th:each="work : ${works}" th:text="${work.name}"
-                            th:value="${work.id}"></option>
-                    </select>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="workId">Matériel</label>
+                    <div class="form-check form-check-inline">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            th:name="unit"
+                            id="perUnit"
+                            value="à l'unité"
+                            required
+                        />
+                        <label class="form-check-label" for="perUnit">à l'unité</label>
                     </div>
-                    <select name="materialId" id="">
-                        <option value="" disabled selected>Sélectionner un matériel</option>
-                        <option th:each="material : ${materials}" th:text="${material.name}"
-                            th:value="${material.id}"></option>
-                    </select>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="price">Prix</label>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="percentRange">
+                                Fourchette de prix
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            aria-label="price"
+                            aria-describedby="price"
+                            value="5"
+                            name="result"
+                        />
                     </div>
-                    <input type="text" placeholder="Prix" th:name="price"></input>
-                    <input type="radio" th:name="unit" value="en m²">en m²</input>
-                    <input type="radio" th:name="unit" value="l'unité">par unité</input>
+                    <input
+                        type="range"
+                        class="form-control-range mb-4 col-4"
+                        min="0"
+                        max="20"
+                        step="1"
+                        value="5"
+                        th:name="percentRange"
+                        oninput="result.value = percentRange.value"
+                    />
+                    <button type="submit" class="btn btn-info">Créer</button>
+                </form>
+            </section>
+            <section class="section-list">
+                <div th:each="task : ${tasks}" class="item-global">
+                    <form
+                        th:action="@{/tasks/} + ${task.id}"
+                        th:method="PUT"
+                        th:object="${task}"
+                        class="update-form"
+                    >
+                        <input
+                            type="text"
+                            th:value="*{constructName()}"
+                            th:id="${task.id}"
+                            placeholder="Merci de saisier une nouvelle donnée ..."
+                            onfocus="this.placeholder=''"
+                            name="name"
+                            disabled
+                        />
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            th:id="${task.id + 'item'}"
+                            th:onclick="'javascript:update(\'' + ${task.id} + '\');'"disabled
+                        >
+                            <ion-icon name="create"></ion-icon>
+                        </button>
+                    </form>
+
+                    <form
+                        th:action="@{/tasks/} + ${task.id}"
+                        th:method="DELETE"
+                    >
+                        <input
+                            type="hidden"
+                            th:value="${task.id}"
+                            th:name="id"
+                        />
+                        <button type="submit" class="btn btn-info">
+                            <ion-icon
+                                ios="ios-close"
+                                md="md-close"
+                                class="icon-delete"
+                            ></ion-icon>
+                        </button>
+                    </form>
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="percentRange">Fourchette de prix</label>
-                    </div>
-                    <input type="range" th:name="percentRange" min="0"  max="100" step="0.01" value="0" oninput="result.value=percentRange.value">
-                    <output name="result">0</output>%/100%</input>
-                </div>
-                <button type="submit" class="btn btn-info">Créer</button>
-            </form>
-        </section>
-        <section class="section-list">
-            <h3>Liste des actions créées :</h3>
-            <ul class="list-group" th:each="task : ${tasks}">
-                <li class="list-group-item" th:text="${task.constructName()}">Item</li>
-            </ul>
-        </section>
-    </main>
-    <div th:replace="fragments/footer.html :: footer"></div>
-    <div th:replace="fragments/script.html :: script"></div>
-</body>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>

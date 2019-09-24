@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body class="bg-vert-gf">
+        <main class="container error">
+            <h1 class="yellow-gf mb-4 error-title">Oups !</h1>
+            <p>
+                L'action que vous venez de faire n'est pas autorisée ou n'est pas
+                possible, merci de revenir sur la page d'accueil grâce au bouton
+                ci-dessous
+            </p>
+            <a th:href="@{/home}" class="btn btn-outline-light">Revenir</a>
+        </main>
+    </body>
+</html>

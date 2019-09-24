@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="FR">
-	<div th:replace="fragments/head.html :: head"></div>
-	<body>
-		<div th:replace="fragments/header.html :: header"></div>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
 			<h2>Gestion des<span class="yellow-gf">typologies de travaux</span></h2>
+			<div th:replace="fragments/alert.html :: alert"></div>
 			<section>
 				<form th:action="@{/typologies}" method="POST">
 					<div class="input-group mb-3">
@@ -48,8 +50,7 @@
 							<ion-icon name="create"></ion-icon>
 						</button>
 					</form>
-
-					<form th:action="@{/typologies/} + ${typology.id}" th:method="DELETE">
+					<form th:action="@{/typologies/} + ${typology.id}" th:method="DELETE" class="delete-form">
 						<input type="hidden" th:value="${typology.id}" th:name="id" />
 						<button type="submit" class="btn btn-info">
 							<ion-icon

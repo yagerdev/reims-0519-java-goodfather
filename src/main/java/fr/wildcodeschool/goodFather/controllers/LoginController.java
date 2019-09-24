@@ -2,7 +2,6 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,15 +20,13 @@ public class LoginController {
     }
 
     @GetMapping("/home")
-    public String forwardByRole() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public String forwardByRole(Authentication authentication) {
         User currentUser = (User)authentication.getPrincipal();
         if (currentUser.getRole().equals("ADMIN")) {
             return "forward:/admin";
-        }
-        else {
+        } else {
             return "forward:/projects/create";
-        }
+        } 
     }
 
 }

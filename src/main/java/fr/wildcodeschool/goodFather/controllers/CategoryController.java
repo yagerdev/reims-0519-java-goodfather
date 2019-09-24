@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CategoryController {
@@ -32,9 +33,10 @@ public class CategoryController {
     TypologyRepository typologyRepository;
 
     @GetMapping("/categories")
-    public String show(Model model) {
+    public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Category> categoryList = categoryRepository.findAll();
         model.addAttribute("categories", categoryList);
+        model.addAttribute("message",message);
         return "admin/category";
     }
 
@@ -61,16 +63,20 @@ public class CategoryController {
     @PutMapping("/categories/{id}")
     public String edit(
         @PathVariable(name = "id") Long categoryId,
-        @RequestParam(required = false, name = "typologies") List<Long> typologyIds, 
-        Category category
+        @RequestParam(required = false, name = "typologies") List<Long> typologyIds,
+        Category category,
+        RedirectAttributes redirectAttributes
     ) {
         Category categoryToUpdate = categoryRepository.findById(categoryId).get();
-        if (typologyIds == null) {
+        if (category.getName() != null) {
             categoryToUpdate.setName(category.getName());
+            redirectAttributes.addAttribute("message", "edit");
         } else {
             Set<Typology> typologies = new HashSet<Typology>();
-            for (Long typologyId : typologyIds) {
-                typologies.add(typologyRepository.findById(typologyId).get());
+            if (typologyIds != null) {
+                for (Long typologyId : typologyIds) {
+                    typologies.add(typologyRepository.findById(typologyId).get());
+                }
             }
             categoryToUpdate.setTypologies(typologies);
         }
@@ -79,14 +85,16 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public String create(@ModelAttribute Category category) {
+    public String create(@ModelAttribute Category category, RedirectAttributes redirectAttributes) {
         categoryRepository.save(category);
+        redirectAttributes.addAttribute("message", "success");
         return "redirect:/categories";
     }
 
     @DeleteMapping("/categories/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         categoryRepository.deleteById(id);
+        redirectAttributes.addAttribute("message", "delete");
         return "redirect:/categories";
     }
 

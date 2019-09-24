@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="FR">
-	<div th:replace="fragments/head.html :: head"></div>
-	<body>
-		<div th:replace="fragments/header.html :: header"></div>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
 			<h2>Gestion des<span class="yellow-gf">matériaux</span></h2>
+			<div th:replace="fragments/alert.html :: alert"></div>
 			<section>
 				<form th:action="@{/materials}" method="POST">
 					<div class="input-group mb-3">
@@ -35,7 +37,6 @@
 							th:value="*{name}"
 							th:id="${material.id}"
 							placeholder="Merci de saisier une nouvelle donnée ..."
-							onfocus="this.placeholder=''"
 							name="name"
 							disabled
 						/>

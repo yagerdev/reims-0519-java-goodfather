@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class TypologyController {
@@ -32,8 +33,9 @@ public class TypologyController {
     TaskRepository taskRepository;
 
     @GetMapping("/typologies")
-    public String show(Model model) {
+    public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Typology> typologyList = typologyRepository.findAll();
+        model.addAttribute("message", message);
         model.addAttribute("typologies", typologyList);
         return "admin/typology";
     }
@@ -60,17 +62,21 @@ public class TypologyController {
 
     @PutMapping("/typologies/{id}")
     public String editTypology(
-            @PathVariable(name = "id") Long typologyId,
-            @RequestParam(required = false, name = "tasks") List<Long> taskIds,
-            Typology typology
+        @PathVariable(name = "id") Long typologyId,
+        @RequestParam(required = false, name = "tasks") List<Long> taskIds,
+        Typology typology,
+        RedirectAttributes redirectAttributes
     ) {
         Typology typologyToUpdate = typologyRepository.findById(typologyId).get();
-        if (taskIds == null) {
+        if (typology.getName() != null) {
             typologyToUpdate.setName(typology.getName());
+            redirectAttributes.addAttribute("message", "edit");
         } else {
             Set<Task> tasks = new HashSet<Task>();
-            for (Long taskId : taskIds) {
-                tasks.add( taskRepository.findById( taskId ).get() );
+            if (taskIds != null) {
+                for (Long taskId : taskIds) {
+                    tasks.add( taskRepository.findById( taskId ).get() );
+                }
             }
             typologyToUpdate.setTasks(tasks);
         }
@@ -79,14 +85,16 @@ public class TypologyController {
     }
 
     @PostMapping("/typologies")
-    public String create(@ModelAttribute Typology typology) {
+    public String create(@ModelAttribute Typology typology, RedirectAttributes redirectAttributes) {
         typologyRepository.save(typology);
+        redirectAttributes.addAttribute("message", "success");
         return "redirect:/typologies";
     }
 
     @DeleteMapping("/typologies/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         typologyRepository.deleteById(id);
+        redirectAttributes.addAttribute("message", "delete");
         return "redirect:/typologies";
     }
 }
