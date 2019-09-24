@@ -434,6 +434,7 @@ ion-icon:hover {
     width: 100%;
     border-radius: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 4px;
 }
 
 .form-control-range {
@@ -450,4 +451,22 @@ ion-icon:hover {
     background: #328080;
     cursor: pointer;
     border: none;
+}
+
+.btn-section {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding: 2vh;
+}
+
+.btn-section button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-list {
+    display: flex;
+    flex-direction: column;
 }

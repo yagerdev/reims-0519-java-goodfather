@@ -130,7 +130,7 @@
                     </div>
                     <input
                         type="range"
-                        class="form-control-range mb-4 col-6 mt-4"
+                        class="form-control-range mb-4"
                         min="0"
                         max="20"
                         step="1"
@@ -138,20 +138,25 @@
                         th:name="percentRange"
                         oninput="result.value = percentRange.value"
                     />
-                    <button type="submit" class="btn btn-info">Créer</button>
-                    <button
-                        class="btn btn-info"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#recapTask"
-                        aria-expanded="false"
-                    >
-                        Récapitulatif des tâches créées
-                    </button>
+                    <div class="btn-section">
+                        <button type="submit" class="btn btn-info">
+                            Créer
+                        </button>
+                        <button
+                            class="btn btn-info btn-recap"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#recapTask"
+                            aria-expanded="false"
+                        >
+                            Récapitulatif
+                            <ion-icon name="arrow-dropdown"></ion-icon>
+                        </button>
+                    </div>
                 </form>
             </section>
 
-            <section class="accordion collapse" id="recapTask">
+            <section class="accordion collapse show" id="recapTask">
                 <div class="card" th:each="typology : ${typologies}">
                     <button
                         class="btn btn-info btn-accordeon p-2"
@@ -159,7 +164,7 @@
                         data-toggle="collapse"
                         th:attr="data-target='#typo'+${typology.id}"
                         aria-expanded="false"
-                        th:text="${typology.name}"
+                        th:utext="${typology.name.toUpperCase()}"
                     >
                         Nom d'une typologie
                     </button>
@@ -186,6 +191,7 @@
                                             name="name"
                                             disabled
                                         />
+
                                         <a
                                             th:href="@{/tasks/} + ${task.id}"
                                             type="submit"
@@ -193,6 +199,78 @@
                                         >
                                             <ion-icon name="create"></ion-icon>
                                         </a>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-info"
+                                        data-toggle="modal"
+                                        th:attr="data-target='#task'+${task.id}"
+                                    >
+                                        <ion-icon name="eye"></ion-icon>
+                                    </button>
+
+                                    <div
+                                        class="modal fade"
+                                        th:id="'task'+${task.id}"
+                                        tabindex="-1"
+                                        role="dialog"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="modal-dialog modal-dialog-centered"
+                                            role="document"
+                                        >
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">
+                                                        Donnée de la tâche
+                                                    </h5>
+                                                    <button
+                                                        type="button"
+                                                        class="close"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true"
+                                                            >&times;</span
+                                                        >
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table">
+                                                        <thead
+                                                            class="thead-dark"
+                                                        >
+                                                            <tr>
+                                                                <th>Nom</th>
+                                                                <th>Prix</th>
+                                                                <th>Marge</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td
+                                                                    th:text="*{task.constructName()}"
+                                                                >
+                                                                    price
+                                                                </td>
+                                                                <td
+                                                                    th:text="${task.price}"
+                                                                >
+                                                                    price
+                                                                </td>
+                                                                <td
+                                                                    th:text="${task.percentRange}"
+                                                                >
+                                                                    %
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <form
