@@ -70,7 +70,7 @@
                             Coût total
                             </span>
                     </div>
-                    <div class="form-control" th:text="${project.totalCost + '€'}">
+                    <div class="form-control" th:text="${project.lowerTotalCost + ' - ' + project.upperTotalCost + '€'}">
                         Coût total
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                                 >
                                     <div
                                         class="user-list"
-                                        th:text="${room.name + ' - ' + room.totalCost + '€'}"
+                                        th:text="${room.name + ' : ' + room.lowerTotalCost + ' - ' + room.upperTotalCost + '€'}"
                                     >
                                         item
                                     </div>
