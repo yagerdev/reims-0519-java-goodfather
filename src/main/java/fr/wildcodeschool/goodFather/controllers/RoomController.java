@@ -16,11 +16,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
@@ -42,6 +44,9 @@ public class RoomController {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    QuantityRepository quantityRepository;
     
     @GetMapping("/rooms/create")
     public String showCreateRoom(Model model, @RequestParam Long projectId, @RequestParam Long categoryId) {
@@ -84,5 +89,14 @@ public class RoomController {
         roomRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/projects/"+projectId;
+    }
+
+    @DeleteMapping("/rooms/{id}/edit")
+    public String deleteUserTask(@PathVariable Long id, RedirectAttributes redirectAttributes, @RequestParam Task task){
+        Room room = roomRepository.findById(id).get();
+        Long roomId = room.getId();
+        Quantity quantity = quantityRepository.findQuantityByRoomIdAndTaskId(roomId, task.getId());
+        quantityRepository.delete(quantity);
+        return "redirect:/rooms/" + roomId + "/edit"; 
     }
 }
