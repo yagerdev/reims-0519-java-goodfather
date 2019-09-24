@@ -1,6 +1,7 @@
 package fr.wildcodeschool.goodFather.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,13 +66,13 @@ public class RoomController {
 
     @GetMapping("/rooms/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model){
-        List<Typology> typologyList = typologyRepository.findAll();
-        List<Task> tasks = taskRepository.findAll();
         Room currentRoom = roomRepository.findById(id).get();
+        Set<Typology> typologies = currentRoom.getCategory().getTypologies();
+        List<Task> tasks = taskRepository.findAll();
         model.addAttribute("project", currentRoom.getProject());
         model.addAttribute("room", currentRoom);
         model.addAttribute("tasks", tasks);
-        model.addAttribute("typologies", typologyList);
+        model.addAttribute("typologies", typologies);
         model.addAttribute("quantities", currentRoom.getQuantities());
         return "tasks";
     }
