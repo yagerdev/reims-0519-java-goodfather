@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="FR">
-	<div th:replace="fragments/head.html :: head"></div>
-	<body>
-		<div th:replace="fragments/header.html :: header"></div>
-		<main class="container">
-			<h2>Configuration de <span class="yellow-gf" th:text="${entityName}"></span></h2>
-			<div th:replace="fragments/alert.html :: alert"></div>
-			<section>
-				<form th:action="@{'/' + ${entityType} + '/' + ${entityId}}" th:method="PUT">
-					<span th:text="${'Sélection des ' + listType}"></span>
-					<div th:each="mySet : ${myMap}">
-						<input 
-							type="checkbox" 
-							th:name="${listType}" 
-							th:id="${mySet.key.id}" 
-							th:value="${mySet.key.id}" 
-							th:checked="${mySet.value}"
-						/>
-						<label 
-							th:for="${mySet.key.id}"
-							th:text="${entityType == 'categories' ? mySet.key.name : mySet.key.constructName()}"
-						>
-							item
-						</label>
-                      </div>
-					<button type="submit" class="btn btn-info">Filtrer</button>
-				</form>
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2>
+                Configuration de
+                <span class="yellow-gf" th:text="${entityName}"></span>
+            </h2>
+            <section>
+                <p>
+                    Merci de sélectionner les
+                    <span th:text="${listType}"></span> rattachées à
+                    <span th:text="${entityName}"></span>
+                </p>
+                <form
+                    th:action="@{'/' + ${entityType} + '/' + ${entityId}}"
+                    th:method="PUT"
+                >
+                    <div th:each="mySet : ${myMap}">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input
+                                        type="checkbox"
+                                        th:name="${listType}"
+                                        th:id="${mySet.key.id}"
+                                        th:value="${mySet.key.id}"
+                                        th:checked="${mySet.value}"
+                                    />
+                                </div>
+                            </div>
+                            <label
+                                class="form-control"
+                                h:for="${mySet.key.id}"
+                                th:text="${entityType == 'categories' ? mySet.key.name : mySet.key.constructName()}"
+                            >
+                                Item
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info">Filtrer</button>
+                </form>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>

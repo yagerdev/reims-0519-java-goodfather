@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Typology {
@@ -20,7 +21,7 @@ public class Typology {
     @Column(length = 30)
     private String name;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "typology")
     private Set<Task> tasks = new HashSet<>();
 
     @ManyToMany

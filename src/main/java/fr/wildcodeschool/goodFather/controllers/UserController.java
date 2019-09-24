@@ -72,6 +72,7 @@ public class UserController {
         userToUpdate.setRole(user.getRole());
         userRepository.save(userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
+        redirectAttributes.addAttribute("user", userToUpdate);
         return "redirect:/users";
     }
 

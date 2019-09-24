@@ -55,10 +55,11 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}")
-    public String read(@PathVariable Long id, Model model) {
+    public String read(@PathVariable Long id, Model model, @RequestParam(value = "message", required = false) String message) {
         Project project = projectRepository.findById(id).get();
         model.addAttribute("project", project);
         model.addAttribute("rooms", project.getRooms());
+        model.addAttribute("message", message);
         return "project-recap";
     }
 

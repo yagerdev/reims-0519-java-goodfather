@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="FR">
-	<div th:replace="fragments/head.html :: head"></div>
-	<body>
-		<div th:replace="fragments/header.html :: header"></div>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
 			<h2>
 				Modification de
@@ -28,7 +29,6 @@
 							class="form-control"
 							th:name="firstName"
 							th:value="*{firstName}"
-							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -40,7 +40,6 @@
 							class="form-control"
 							th:name="lastName"
 							th:value="*{lastName}"
-							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -52,7 +51,6 @@
 							class="form-control"
 							name="email"
 							th:value="*{email}"
-							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -66,7 +64,6 @@
 							class="form-control"
 							name="phoneNumber"
 							th:value="*{phoneNumber}"
-							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -78,7 +75,6 @@
 							class="form-control"
 							name="address"
 							th:value="*{address}"
-							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -90,7 +86,6 @@
 							class="form-control"
 							name="city"
 							th:value="*{city}"
-							onfocus="this.value=''"
 						/>
 					</div>
 					<div class="input-group mb-3">
@@ -104,7 +99,6 @@
 							class="form-control"
 							name="postalCode"
 							th:value="${user.postalCode}"
-							onfocus="this.value=''"
 						/>
 					</div>
 

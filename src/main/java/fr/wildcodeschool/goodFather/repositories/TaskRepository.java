@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    Task findTaskByWorkIdAndMaterialId(Long workId, Long materialId);
-	Task deleteById(Task taskId);
+ 
+  Task findTaskByWorkIdAndMaterialIdAndTypologyId(Long workId, Long materialId, Long typologyId);
+ 	Task deleteById(Task taskId);
+    
 }

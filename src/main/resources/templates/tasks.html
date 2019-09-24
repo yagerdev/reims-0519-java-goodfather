@@ -43,11 +43,16 @@
                     <label class="input-group-text" for="inputGroupSelect01">Typologie</label
                         >
                     </div>
-                    <select class="custom-select" id="inputGroupSelect01">
-                        <option selected>Sélectionnez...</option>
+                    <select 
+                        class="custom-select" 
+                        id="typology"
+                        th:name="typology"
+                    >
+                        <option selected disabled>Sélectionnez...</option>
                         <option
-                            th:each="typologie : ${typologies}"
-                            th:text="${typologie.name}"
+                            th:each="typology : ${typologies}"
+                            th:text="${typology.name}"
+                            th:value="${typology.id}"
                         >
                             item
                         </option>
@@ -55,40 +60,42 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect02"
+                        <label class="input-group-text" for="work"
                             >Travaux</label
                         >
                     </div>
                     <select
                         class="custom-select"
-                        id="inputGroupSelect02"
+                        id="work"
                         th:name="work"
                     >
-                        <option selected>Sélectionnez...</option>
+                        <option selected disabled>Sélectionnez...</option>
                         <option
-                            th:each="work : ${works}"
-                            th:text="${work.name}"
-                            th:value="${work.id}"
+                            th:each="task : ${tasks}"
+                            th:text="${task.work.name}"
+                            th:value="${task.work.id}"
+                            th:attr="filter=${task.typology.id}"
                             >item</option
                         >
                     </select>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect03"
+                        <label class="input-group-text" for="material"
                             >Matériaux</label
                         >
                     </div>
                     <select
                         class="custom-select"
-                        id="inputGroupSelect03"
+                        id="material"
                         th:name="material"
                     >
-                        <option selected>Sélectionnez...</option>
+                        <option selected disabled>Sélectionnez...</option>
                         <option
-                            th:each="material : ${materials}"
-                            th:text="${material.name}"
-                            th:value="${material.id}"
+                            th:each="task : ${tasks}"
+                            th:text="${task.material.name}"
+                            th:value="${task.material.id}"
+                            th:attr="filter=${task.typology.id + ' ' + task.work.id}"
                             >item</option
                         >
                     </select>
@@ -127,6 +134,8 @@
                 </ul>         
             </section>
         </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script th:src="@{/JS/filter_task.js}"></script>
         <div th:replace="fragments/footer.html :: footer"></div>
         <div th:replace="fragments/script.html :: script"></div>
     </body>
