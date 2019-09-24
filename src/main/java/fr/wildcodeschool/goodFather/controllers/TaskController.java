@@ -18,12 +18,14 @@ import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
+import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
+import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
 
 @Controller
@@ -46,6 +48,9 @@ public class TaskController {
 
     @Autowired
     ProjectRepository projectRepository;
+
+    @Autowired
+    TypologyRepository typologyRepository;
 
     @GetMapping("/tasks")
     public String showCreateTask(Model model, @RequestParam(value = "message", required = false) String message) {
@@ -88,11 +93,12 @@ public class TaskController {
 
     @PostMapping("/tasks/add")
     public String add(
+        @ModelAttribute Typology typology,
         @ModelAttribute Room room,
         @ModelAttribute Work work,
         @ModelAttribute Material material
     ) {
-        Task task = taskRepository.findTaskByWorkIdAndMaterialId(work.getId(), material.getId());
+        Task task = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyId(work.getId(), material.getId(), typology.getId());
         Quantity quantity = new Quantity(room, task, 10); // temporary quantity value
         if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
             Project project = room.getProject();

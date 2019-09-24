@@ -14,17 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.wildcodeschool.goodFather.entities.Category;
-import fr.wildcodeschool.goodFather.entities.Material;
 import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Room;
+import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Typology;
-import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
-import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
+import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
-import fr.wildcodeschool.goodFather.repositories.WorkRepository;
 
 @Controller
 public class RoomController {
@@ -36,10 +34,7 @@ public class RoomController {
     TypologyRepository typologyRepository;
 
     @Autowired
-    WorkRepository workRepository;
-
-    @Autowired
-    MaterialRepository materialRepository;
+    TaskRepository taskRepository;
 
     @Autowired
     ProjectRepository projectRepository;
@@ -71,14 +66,12 @@ public class RoomController {
     @GetMapping("/rooms/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model){
         List<Typology> typologyList = typologyRepository.findAll();
-        List<Work> workList = workRepository.findAll();
-        List<Material> materialList = materialRepository.findAll();
+        List<Task> tasks = taskRepository.findAll();
         Room currentRoom = roomRepository.findById(id).get();
         model.addAttribute("project", currentRoom.getProject());
         model.addAttribute("room", currentRoom);
-        model.addAttribute("materials", materialList);
+        model.addAttribute("tasks", tasks);
         model.addAttribute("typologies", typologyList);
-        model.addAttribute("works", workList);
         model.addAttribute("quantities", currentRoom.getQuantities());
         return "tasks";
     }
