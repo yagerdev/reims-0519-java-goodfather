@@ -96,10 +96,11 @@ public class TaskController {
         @ModelAttribute Typology typology,
         @ModelAttribute Room room,
         @ModelAttribute Work work,
-        @ModelAttribute Material material
+        @ModelAttribute Material material,
+        @ModelAttribute Quantity quantity
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyId(work.getId(), material.getId(), typology.getId());
-        Quantity quantity = new Quantity(room, task, 10); // temporary quantity value
+        quantity.setTask(task);
         if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
             Project project = room.getProject();
             quantity = quantityRepository.save(quantity);
