@@ -14,14 +14,13 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    private String name;
     private double wallA;
     private double wallB;
-
 	private double height;
-	
-	private double totalCost;
-    private String name;
+    private double lowerTotalCost;
+    private double upperTotalCost;
 
     @ManyToOne
     private Project project;
@@ -35,21 +34,40 @@ public class Room {
     public Room() {
     }
 
-    public Room(double wallA, double wallB, double height, Category category, Project project) {
+    public Room(String name,
+                double wallA, 
+                double wallB, 
+                double height, 
+                Category category, 
+                Project project
+    ) {
+        this.setName(name);
         this.setWallA(wallA);
         this.setWallB(wallB);
 		this.setHeight(height);
-		this.setTotalCost(0);
+        this.setLowerTotalCost(0);
+        this.setUpperTotalCost(0);
 		this.setCategory(category);
 		this.setProject(project);
     }
 
-    public Room(Long id, double wallA, double wallB, double height, double totalCost, Category category, Project project) {
+    public Room(Long id, 
+                String name,
+                double wallA, 
+                double wallB, 
+                double height, 
+                double lowerTotalCost, 
+                double upperTotalCost, 
+                Category category, 
+                Project project
+    ) {
         this.setId(id);
+        this.setName(name);
         this.setWallA(wallA);
         this.setWallB(wallB);
 		this.setHeight(height);
-		this.setTotalCost(totalCost);
+        this.setLowerTotalCost(lowerTotalCost);
+        this.setUpperTotalCost(upperTotalCost);
 		this.setCategory(category);
 		this.setProject(project);
     }
@@ -110,27 +128,32 @@ public class Room {
         this.name = name;
     }
 
-	public boolean addTaskQuantity(Quantity quantity) {
-		return this.quantities.add(quantity);
-	}
-
-	public double getTotalCost() {
-		return totalCost;
-	}
-
-	public void setTotalCost(double totalCost) {
-		this.totalCost = totalCost;
-	}
-
-	public void addCost(double taskCost) {
-		this.totalCost += taskCost;
-	}
-
 	public Set<Quantity> getQuantities() {
 		return quantities;
 	}
 
 	public void setQuantities(Set<Quantity> quantities) {
 		this.quantities = quantities;
+	}
+
+    public double getLowerTotalCost() {
+        return lowerTotalCost;
+    }
+
+    public void setLowerTotalCost(double lowerTotalCost) {
+        this.lowerTotalCost = lowerTotalCost;
+    }
+
+    public double getUpperTotalCost() {
+        return upperTotalCost;
+    }
+
+    public void setUpperTotalCost(double upperTotalCost) {
+        this.upperTotalCost = upperTotalCost;
+    }
+
+	public void addCost(double cost, double percentRange) {
+		this.lowerTotalCost += cost * (1 - percentRange/100);
+        this.upperTotalCost += cost * (1 + percentRange/100);
 	}
 }
