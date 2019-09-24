@@ -1,53 +1,46 @@
 <!DOCTYPE html>
 <html lang="FR">
-    <div th:replace="fragments/head.html :: head"></div>
-    <body>
-        <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
-        <main class="container">
-            <h2 th:text="'Projet : ' + ${project.name}">Nom du projet</h2>
-            <h3 class="yellow-gf" th:text="${room.name}">Nom de la pièce</h3>
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th>MUR A</th>
-                        <th>MUR B</th>
-                        <th>Sol / Plafond</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td th:text="${room.wallA + ' cm'}">item</td>
-                        <td th:text="${room.wallB + ' cm'}">item</td>
-                        <td th:text="${room.height + ' cm'}">item</td>
-                    </tr>
-                    <tr>
-                        <td
-                            th:text="${T(Math).round((room.wallA/100)*(room.height/100)*100.00)/100.00 + ' m²'}"
-                        >
-                            item
-                        </td>
-                        <td
-                            th:text="${T(Math).round((room.wallB/100)*(room.height/100)*100.00)/100.00 + ' m²'}"
-                        >
-                            item
-                        </td>
-                        <td
-                            th:text="${T(Math).round((room.wallB/100)*(room.wallA/100)*100.00)/100.00 + ' m²'}"
-                        >
-                            item
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>Prix total : <span class="yellow-gf" th:text="${room.totalCost + '€'}">Prix des travaux de la pièce</span></p>
+<div th:replace="fragments/head.html :: head"></div>
 
-            <form th:method="POST" th:action="@{/tasks/add}" th:name="task">
-                <input type="hidden" name="room" th:value="${room.id}" />
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01"
-                            >Typologie</label
+<body>
+    <div th:replace="fragments/header.html :: header"></div>
+    <main class="container">
+        <h2 th:text="'Projet : ' + ${project.name}">Nom du projet</h2>
+        <h3 class="yellow-gf" th:text="${room.name}">Nom de la pièce</h3>
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th>MUR A</th>
+                    <th>MUR B</th>
+                    <th>Sol / Plafond</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${room.wallA + ' cm'}">item</td>
+                    <td th:text="${room.wallB + ' cm'}">item</td>
+                    <td th:text="${room.height + ' cm'}">item</td>
+                </tr>
+                <tr>
+                    <td th:text="${T(Math).round((room.wallA/100)*(room.height/100)*100.00)/100.00 + ' m²'}">
+                        item
+                    </td>
+                    <td th:text="${T(Math).round((room.wallB/100)*(room.height/100)*100.00)/100.00 + ' m²'}">
+                        item
+                    </td>
+                    <td th:text="${T(Math).round((room.wallB/100)*(room.wallA/100)*100.00)/100.00 + ' m²'}">
+                        item
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Prix total : <span class="yellow-gf" th:text="${room.totalCost + '€'}">Prix des travaux de la pièce</span></p>
+
+        <form th:method="POST" th:action="@{/tasks/add}">
+            <input type="hidden" name="room" th:value="${room.id}" />
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Typologie</label
                         >
                     </div>
                     <select 
@@ -117,8 +110,28 @@
                         th:text="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
                     >
                         Item
-                    </li>
-                </ul>
+                    </li> 
+                    <form
+                                        th:action="@{'/rooms/' + ${room.id} + '/edit'}"
+                                        th:method="DELETE"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            th:value="${quantity.task.id}"
+                                            th:name="task"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="btn btn-info"
+                                        >
+                                            <ion-icon
+                                                ios="ios-close"
+                                                md="md-close"
+                                                class="icon-delete"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                </ul>         
             </section>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
