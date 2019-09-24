@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Typology {
     @OneToMany(mappedBy = "typology")
     private Set<Task> tasks = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private Set<Category> categories = new HashSet<>();
 
     public Typology() {
