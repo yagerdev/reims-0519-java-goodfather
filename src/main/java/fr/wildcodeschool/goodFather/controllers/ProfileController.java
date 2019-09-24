@@ -2,16 +2,12 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
@@ -37,10 +33,13 @@ public class ProfileController {
         return "profile";
     }
 
-    @PutMapping("/profile/{id}")
-    public String update(@PathVariable Long id, User user, RedirectAttributes redirectAttributes) {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        User userToUpdate = userRepository.findById(id).get();
+    @PutMapping("/profile")
+    public String update(
+        User user,
+        RedirectAttributes redirectAttributes,
+        Authentication authentication
+    ) {
+        User userToUpdate = (User) authentication.getPrincipal();
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(user.getEmail());
@@ -48,7 +47,8 @@ public class ProfileController {
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
-        userRepository.save(userToUpdate);
+        userToUpdate = userRepository.save(userToUpdate);
+        redirectAttributes.addAttribute("user", userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
         return "redirect:/profile";
     }

@@ -3,6 +3,7 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2>Gestion des<span class="yellow-gf">catégories</span></h2>
             <div th:replace="fragments/alert.html :: alert"></div>
@@ -36,7 +37,6 @@
                             th:value="*{name}"
                             th:id="${category.id}"
                             placeholder="Merci de saisier une nouvelle donnée ..."
-                            onfocus="this.placeholder=''"
                             name="name"
                             disabled
                         />

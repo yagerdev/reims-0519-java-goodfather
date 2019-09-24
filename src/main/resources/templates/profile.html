@@ -3,6 +3,7 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2>
                 Profil de
@@ -13,7 +14,7 @@
             <div th:replace="fragments/alert.html :: alert"></div>
             <section>
                 <form
-                    th:action="@{/profile/} + ${user.id}"
+                    th:action="@{/profile/}"
                     th:method="PUT"
                     th:object="${user}"
                 >
@@ -28,7 +29,6 @@
                             class="form-control"
                             th:name="firstName"
                             th:value="*{firstName}"
-                            onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
@@ -42,7 +42,6 @@
                             class="form-control"
                             th:name="lastName"
                             th:value="*{lastName}"
-                            onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
@@ -56,7 +55,6 @@
                             class="form-control"
                             th:name="email"
                             th:value="*{email}"
-                            onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
@@ -70,7 +68,6 @@
                             class="form-control"
                             th:name="phoneNumber"
                             th:value="*{phoneNumber}"
-                            onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
@@ -84,7 +81,6 @@
                             class="form-control"
                             name="address"
                             th:value="*{address}"
-                            onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
@@ -98,7 +94,6 @@
                             class="form-control"
                             name="city"
                             th:value="*{city}"
-                            onfocus="this.value=''"
                         />
                     </div>
                     <div class="input-group mb-3">
@@ -111,8 +106,7 @@
                             type="text"
                             class="form-control"
                             name="postalCode"
-                            th:value="${user.postalCode}"
-                            onfocus="this.value=''"
+                            th:value="*{postalCode}"
                         />
                     </div>
                     <button type="submit" class="btn btn-info">Modifier</button>
