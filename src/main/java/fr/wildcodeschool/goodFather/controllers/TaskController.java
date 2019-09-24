@@ -78,15 +78,15 @@ public class TaskController {
             redirectAttributes.addAttribute("message", "invalide");
         }
         else {
-            /* if (taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId) == null) { */
+            if (taskRepository.findTaskByWorkIdAndMaterialId(workId, materialId) == null) {
                 Material material = materialRepository.getOne(materialId);
                 Work work = workRepository.getOne(workId);
                 Task task = new Task(price, unit, percentRange, material, work);
                 task = taskRepository.save(task);
                 redirectAttributes.addAttribute("message", "success");
-/*             } else { */
+            } else {
                 redirectAttributes.addAttribute("message", "doublon");
-/*             } */
+            }
         }
         return "redirect:/tasks";
     }
