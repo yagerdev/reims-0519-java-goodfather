@@ -190,6 +190,8 @@ input:disabled {
 
 .form-control {
     height: auto;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .accordion > .card .card-header {
@@ -428,10 +430,24 @@ ion-icon:hover {
     padding: 2vh 0;
 }
 
-/* ------------- ACCORDEON ------------- */
-
 .btn-accordeon {
     width: 100%;
     border-radius: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-control-range {
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+}
+
+.form-control-range::-webkit-slider-thumb,
+.form-control-range::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #328080;
+    cursor: pointer;
+    border: none;
 }

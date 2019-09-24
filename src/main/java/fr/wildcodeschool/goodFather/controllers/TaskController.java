@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -53,7 +54,7 @@ public class TaskController {
     TypologyRepository typologyRepository;
 
     @GetMapping("/tasks")
-    public String showCreateTask(Model model, @RequestParam(value = "message", required = false) String message) {
+    public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Task> tasks = taskRepository.findAll();
         List<Typology> typologies = typologyRepository.findAll();
         List<Work> works = workRepository.findAll();
@@ -64,6 +65,13 @@ public class TaskController {
         model.addAttribute("materials", materials);
         model.addAttribute("message", message);
         return "admin/task";
+    }
+
+    @GetMapping("/tasks/{id}")
+    public String read(@PathVariable Long id, Model model) {
+        Task task = taskRepository.findById(id).get();
+        model.addAttribute("task", task);
+        return "admin/task-edit";
     }
 
     @PostMapping("/tasks")
@@ -103,7 +111,7 @@ public class TaskController {
         @ModelAttribute Material material
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyId(work.getId(), material.getId(), typology.getId());
-        Quantity quantity = new Quantity(room, task, 10); // temporary quantity value
+        Quantity quantity = new Quantity(room, task, 10);
         if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
             Project project = room.getProject();
             quantity = quantityRepository.save(quantity);
@@ -117,9 +125,20 @@ public class TaskController {
     }
 
     @DeleteMapping("/tasks/{id}")
-    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         taskRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
+        return "redirect:/tasks";
+    }
+
+    @PutMapping("/tasks/{id}")
+    public String update(@PathVariable Long id, Task task, RedirectAttributes redirectAttributes) {
+        Task taskToUpdate = taskRepository.findById(id).get();
+        taskToUpdate.setPercentRange(task.getPercentRange());
+        taskToUpdate.setPrice(task.getPrice());
+        taskToUpdate.setUnit(task.getUnit());
+        taskRepository.save(taskToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
         return "redirect:/tasks";
     }
 }

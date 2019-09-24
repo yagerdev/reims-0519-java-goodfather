@@ -5,14 +5,14 @@
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2>Gestion des<span class="yellow-gf">taches</span></h2>
+            <h2>Gestion des<span class="yellow-gf">tâches</span></h2>
             <div th:replace="fragments/alert.html :: alert"></div>
             <section>
                 <form th:action="@{/tasks}" method="POST">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="typologyId">
-                                Typologie
+                                Typologies
                             </label>
                         </div>
                         <select
@@ -84,8 +84,6 @@
                         <input
                             type="text"
                             class="form-control"
-                            aria-label="price"
-                            aria-describedby="price"
                             th:name="price"
                             required
                         />
@@ -99,9 +97,9 @@
                             value="au m²"
                             required
                         />
-                        <label class="form-check-label" for="perUnit"
-                            >au m²</label
-                        >
+                        <label class="form-check-label" for="perUnit">
+                            au m²
+                        </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input
@@ -112,9 +110,9 @@
                             value="à l'unité"
                             required
                         />
-                        <label class="form-check-label" for="perUnit"
-                            >à l'unité</label
-                        >
+                        <label class="form-check-label" for="perUnit">
+                            à l'unité
+                        </label>
                     </div>
 
                     <div class="input-group mb-3">
@@ -126,15 +124,13 @@
                         <input
                             type="text"
                             class="form-control"
-                            aria-label="price"
-                            aria-describedby="price"
                             value="5"
                             name="result"
                         />
                     </div>
                     <input
                         type="range"
-                        class="form-control-range mb-4 col-4"
+                        class="form-control-range mb-4 col-6 mt-4"
                         min="0"
                         max="20"
                         step="1"
@@ -150,12 +146,12 @@
                         data-target="#recapTask"
                         aria-expanded="false"
                     >
-                        Récapitulatif
+                        Récapitulatif des tâches créées
                     </button>
                 </form>
             </section>
 
-            <section class="accordion collapse show" id="recapTask">
+            <section class="accordion collapse" id="recapTask">
                 <div class="card" th:each="typology : ${typologies}">
                     <button
                         class="btn btn-info btn-accordeon p-2"
@@ -179,9 +175,7 @@
                                     th:each="task : *{typology.getTasks()}"
                                     class="item-global"
                                 >
-                                    <form
-                                        th:action="@{/tasks/} + ${task.id}"
-                                        th:method="PUT"
+                                    <div
                                         th:object="${task}"
                                         class="update-form"
                                     >
@@ -192,13 +186,14 @@
                                             name="name"
                                             disabled
                                         />
-                                        <button
-                                            type="button"
+                                        <a
+                                            th:href="@{/tasks/} + ${task.id}"
+                                            type="submit"
                                             class="btn btn-info"
                                         >
                                             <ion-icon name="create"></ion-icon>
-                                        </button>
-                                    </form>
+                                        </a>
+                                    </div>
 
                                     <form
                                         th:action="@{/tasks/} + ${task.id}"

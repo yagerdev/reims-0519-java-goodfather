@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2>Modification des<span class="yellow-gf">tâches</span></h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form
+                    th:action="@{/tasks/} + ${task.id}"
+                    th:method="PUT"
+                    th:object="${task}"
+                >
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="typologyId">
+                                Typologie
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            th:value="${task.typology.name}"
+                            class="form-control"
+                            th:name="typologyId"
+                            disabled
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="WorkId">
+                                Action
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            th:value="${task.work.name}"
+                            class="form-control"
+                            th:name="workId"
+                            disabled
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="materialId">
+                                Matériau
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            th:value="${task.material.name}"
+                            class="form-control"
+                            th:name="materialId"
+                            disabled
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="price">
+                                Prix
+                            </span>
+                        </div>
+                        <input
+                            type="text"
+                            th:value="${task.price}"
+                            class="form-control"
+                            th:name="price"
+                            required
+                        />
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            th:name="unit"
+                            id="perUnit"
+                            value="au m²"
+                            th:checked="${task.unit.equals('au m²')}"
+                            required
+                        />
+                        <label class="form-check-label" for="perUnit"
+                            >au m²</label
+                        >
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            th:name="unit"
+                            id="perUnit"
+                            value="à l'unité"
+                            th:checked="${task.unit.equals('à l''unité')}"
+                            required
+                        />
+                        <label class="form-check-label" for="perUnit"
+                            >à l'unité</label
+                        >
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="percentRange">
+                                Fourchette de prix
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:value="${task.percentRange}"
+                            name="result"
+                        />
+                    </div>
+                    <input
+                        type="range"
+                        class="form-control-range mb-4 col-6 mt-4"
+                        min="0"
+                        max="20"
+                        step="1"
+                        th:value="${task.percentRange}"
+                        th:name="percentRange"
+                        oninput="result.value = percentRange.value"
+                    />
+                    <button type="submit" class="btn btn-info">Modifier</button>
+                </form>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>
