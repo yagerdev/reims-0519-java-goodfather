@@ -130,15 +130,20 @@ input:disabled {
     }
 }
 
-.user-list {
-    height: 50px;
+.project-attribute {
+    width: calc(80% / 2);
+    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
-.project-attribute {
-    width: calc(100% / 3);
+.user-list {
+    min-height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 0.8em;
 }
 
 .check-role {
@@ -486,4 +491,15 @@ ion-icon:hover {
 .section-list {
     display: flex;
     flex-direction: column;
+}
+
+.action-recap-project {
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+    border-radius: .25rem;
+}
+
+.action-recap-project .btn {
+    width: calc(70vw / 2);
 }
