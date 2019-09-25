@@ -265,46 +265,10 @@ footer {
     background-color: #333333;
 }
 
-@media screen and (max-width: 400px) {
-    footer {
-        flex-direction: column;
-    }
-    .footer-link {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1vh;
-    }
-    .footer-link button {
-        margin-bottom: 1vh;
-        width: 100%;
-    }
-}
-
 footer .footer-social {
     display: flex;
     justify-content: space-around;
     width: 20%;
-}
-
-@media screen and (max-width: 400px) {
-    footer .footer-social {
-        flex-direction: column;
-        height: 80%;
-    }
-
-    footer .footer-link {
-        width: 50%;
-    }
-
-    footer .footer-link {
-        flex-direction: column;
-    }
-
-    footer .footer-link button {
-        margin-left: 0;
-        margin-bottom: 1vh;
-        width: 100%;
-    }
 }
 
 footer .footer-link {
@@ -314,6 +278,26 @@ footer .footer-link {
 
 footer .footer-link button {
     margin-left: 1vh;
+}
+
+@media screen and (max-width: 420px) {
+  
+    .footer-link {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-link a {
+        margin-bottom: 1vh;
+        width: 100%;
+    }
+    footer .footer-social {
+        flex-direction: column;
+        height: 80%;
+    }
+
+    footer .footer-link {
+        width: 50%;
+    }
 }
 
 ion-icon {
