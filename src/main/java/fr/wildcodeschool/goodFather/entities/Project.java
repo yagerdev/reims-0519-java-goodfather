@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.entities;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,31 +35,51 @@ public class Project {
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
-    private double totalCost;
+    private double lowerTotalCost;
+    private double upperTotalCost;
+
 
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private Set<Room> rooms;
 
     public Project() { }
 
-    public Project(Long id, String name, String address, String city, String postalCode, Date creationDate, User user) {
+    public Project(Long id, 
+                    String name, 
+                    String address, 
+                    String city, 
+                    String postalCode, 
+                    Date creationDate, 
+                    double lowerTotalCost, 
+                    double upperTotalCost, 
+                    User user
+    ) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
         this.creationDate = creationDate;
+        this.lowerTotalCost = lowerTotalCost;
+        this.upperTotalCost = upperTotalCost;
         this.user = user;
     }
 
-    public Project(String name, String address, String city, String postalCode, User user) {
+    public Project(String name, 
+                    String address, 
+                    String city, 
+                    String postalCode, 
+                    User user
+    ) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.lowerTotalCost = 0;
+        this.upperTotalCost = 0;
         this.user = user;
     }
 
@@ -126,15 +147,24 @@ public class Project {
         this.rooms = rooms;
     }
 
-    public double getTotalCost() {
-        return totalCost;
+    public double getLowerTotalCost() {
+        return lowerTotalCost;
     }
 
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
+    public void setLowerTotalCost(double lowerTotalCost) {
+        this.lowerTotalCost = lowerTotalCost;
     }
-    
-    public void addCost(double cost) {
-        this.totalCost += cost;
+
+    public double getUpperTotalCost() {
+        return upperTotalCost;
+    }
+
+    public void setUpperTotalCost(double upperTotalCost) {
+        this.upperTotalCost = upperTotalCost;
+    }
+
+    public void addCost(double cost, double percentRange) {
+        this.lowerTotalCost += cost * (1 - percentRange/100);
+        this.upperTotalCost += cost * (1 + percentRange/100);
     }
 }

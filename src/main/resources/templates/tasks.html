@@ -35,7 +35,7 @@
                 </tr>
             </tbody>
         </table>
-        <p>Prix total : <span class="yellow-gf" th:text="${room.totalCost + '€'}">Prix des travaux de la pièce</span></p>
+        <p>Prix total : <span class="yellow-gf" th:text="${room.lowerTotalCost + ' - ' + room.upperTotalCost + '€'}">Prix des travaux de la pièce</span></p>
 
         <form th:method="POST" th:action="@{/tasks/add}">
             <input type="hidden" name="room" th:value="${room.id}" />

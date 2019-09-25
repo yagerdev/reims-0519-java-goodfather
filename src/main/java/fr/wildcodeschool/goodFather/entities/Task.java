@@ -2,6 +2,7 @@ package fr.wildcodeschool.goodFather.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +32,7 @@ public class Task {
     @ManyToOne
     private Work work;
 
-    @OneToMany(mappedBy = "task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE)
     private Set<Quantity> quantities;
 
     public Task(Long id, 
