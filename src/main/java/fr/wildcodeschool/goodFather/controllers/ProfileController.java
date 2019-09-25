@@ -2,6 +2,8 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,4 +55,41 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/password")
+    public String password(Model model,@RequestParam(value = "message", required = false) String message
+    ){
+        model.addAttribute("message", message);
+        return "password";
+    }
+
+    @PutMapping("/password")
+    public String updatePass(
+        @RequestParam("psw") String actualPassword,
+        @RequestParam("newpsw")String repeatPassword,
+        @RequestParam("repeatpsw") String password,
+        RedirectAttributes redirectAttributes,
+        Authentication authentication,
+        User user
+        ) {
+
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        User userToUpdate = (User) authentication.getPrincipal();
+
+    if( encoder.matches(password, userToUpdate.getPassword()) )
+        {
+        redirectAttributes.addAttribute("message", "erreur");
+        return"redirect:/profile";
+        }
+        
+    if (encoder.matches(repeatPassword, encoder.encode(password)))
+        {   
+        userToUpdate.setPassword(encoder.encode(password));
+        userRepository.save(userToUpdate);
+        redirectAttributes.addAttribute("user", userToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
+        return "redirect:/password";
+        }
+    redirectAttributes.addAttribute("message", "erreur");
+    return "redirect:/profile";
+    }
 }
