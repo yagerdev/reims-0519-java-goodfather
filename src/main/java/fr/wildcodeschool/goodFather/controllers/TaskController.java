@@ -104,10 +104,9 @@ public class TaskController {
         if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
             Project project = room.getProject();
             quantity = quantityRepository.save(quantity);
-            room.addTaskQuantity(quantity);
-            room.addCost(task.getPrice()*quantity.getQuantity());
+            room.addCost(task.getPrice()*quantity.getQuantity(), task.getPercentRange());
             room = roomRepository.save(room);
-            project.addCost(task.getPrice()*quantity.getQuantity());
+            project.addCost(task.getPrice()*quantity.getQuantity(), task.getPercentRange());
             project = projectRepository.save(project);
         }
         return "redirect:/rooms/" + room.getId() + "/edit";
