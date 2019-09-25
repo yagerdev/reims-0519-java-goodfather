@@ -186,4 +186,9 @@ public class Project {
         this.lowerTotalCost -= cost * (1 - percentRange/100);
         this.upperTotalCost -= cost * (1 + percentRange/100);
     }
+
+    public void removeRoomCost(Room room) {
+        this.lowerTotalCost -= room.getLowerTotalCost();
+        this.upperTotalCost -= room.getUpperTotalCost();
+    }
 }

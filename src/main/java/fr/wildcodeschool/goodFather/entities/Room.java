@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.entities;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,11 @@ public class Room {
     private String name;
     private double wallA;
     private double wallB;
-	private double height;
+    private double height;
+
+    @Column(length = 300)
+    private String comment;
+    
     private double lowerTotalCost;
     private double upperTotalCost;
 
@@ -39,13 +44,15 @@ public class Room {
                 double wallA, 
                 double wallB, 
                 double height, 
+                String comment,
                 Category category, 
                 Project project
     ) {
         this.setName(name);
         this.setWallA(wallA);
         this.setWallB(wallB);
-		this.setHeight(height);
+        this.setHeight(height);
+        this.setComment(comment == null ? "" : comment);
         this.setLowerTotalCost(0);
         this.setUpperTotalCost(0);
 		this.setCategory(category);
@@ -57,6 +64,7 @@ public class Room {
                 double wallA, 
                 double wallB, 
                 double height, 
+                String comment,
                 double lowerTotalCost, 
                 double upperTotalCost, 
                 Category category, 
@@ -66,7 +74,8 @@ public class Room {
         this.setName(name);
         this.setWallA(wallA);
         this.setWallB(wallB);
-		this.setHeight(height);
+        this.setHeight(height);
+        this.setComment(comment);
         this.setLowerTotalCost(lowerTotalCost);
         this.setUpperTotalCost(upperTotalCost);
 		this.setCategory(category);
@@ -103,6 +112,14 @@ public class Room {
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Category getCategory() {

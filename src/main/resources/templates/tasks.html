@@ -35,6 +35,16 @@
                 </tr>
             </tbody>
         </table>
+        <div class="input-group mb-1">
+            <div class="input-group-prepend read-project">
+                <span class="input-group-text flex-centered">
+                    Commentaire
+                </span>
+            </div>
+            <div class="form-control" th:text="${room.comment}">
+                Commentaire
+            </div>
+        </div>
         <p>Prix total : <span class="yellow-gf" th:text="${room.lowerTotalCost + ' - ' + room.upperTotalCost + '€'}">Prix des travaux de la pièce</span></p>
 
         <form th:method="POST" th:action="@{/tasks/add}">
@@ -124,7 +134,7 @@
                         Item
                     </li> 
                     <form
-                                        th:action="@{'/rooms/' + ${room.id} + '/edit'}"
+                                        th:action="@{'/quantity'}"
                                         th:method="DELETE"
                                     >
                                         <input
