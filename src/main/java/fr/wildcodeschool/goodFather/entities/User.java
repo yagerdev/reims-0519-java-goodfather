@@ -80,10 +80,12 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(String email, String password, String role) {
+    public User(String email, String password, String role, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.role = role;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     @Override
