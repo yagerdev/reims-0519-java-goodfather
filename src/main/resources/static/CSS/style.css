@@ -191,7 +191,6 @@ input:disabled {
 .form-control {
     height: auto;
     text-align: center;
-    text-transform: uppercase;
 }
 
 .accordion > .card .card-header {
