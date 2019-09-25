@@ -58,7 +58,7 @@ public class ProjectController {
 
     @GetMapping("projects/{id}")
     public String read(
-        @PathVariable Long id, 
+        @PathVariable Long id,
         Model model,
         @RequestParam(value = "message", required = false) String message
     ) {
