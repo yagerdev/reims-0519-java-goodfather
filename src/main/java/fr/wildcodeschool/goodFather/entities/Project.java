@@ -38,7 +38,6 @@ public class Project {
     private double lowerTotalCost;
     private double upperTotalCost;
 
-
     @ManyToOne
     private User user;
 
