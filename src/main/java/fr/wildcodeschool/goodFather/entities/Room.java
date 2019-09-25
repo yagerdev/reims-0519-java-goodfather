@@ -171,12 +171,16 @@ public class Room {
     }
 
 	public void addCost(double cost, double percentRange) {
-		this.lowerTotalCost += cost * (1 - percentRange/100);
-        this.upperTotalCost += cost * (1 + percentRange/100);
+		double lowerCost = cost * (1 - percentRange/100);
+        double upperCost = cost * (1 + percentRange/100);
+        this.lowerTotalCost += ( (double)Math.round(lowerCost * 100) ) / 100;
+        this.upperTotalCost += ( (double)Math.round(upperCost * 100) ) / 100;
     }
     
     public void reduceCost(double cost, double percentRange) {
-        this.lowerTotalCost -= cost * (1 - percentRange/100);
-        this.upperTotalCost -= cost * (1 + percentRange/100);
+        double lowerCost = cost * (1 - percentRange/100);
+        double upperCost = cost * (1 + percentRange/100);
+        this.lowerTotalCost -= ( (double)Math.round(lowerCost * 100) ) / 100;
+        this.upperTotalCost -= ( (double)Math.round(upperCost * 100) ) / 100;
     }
 }

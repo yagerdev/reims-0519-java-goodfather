@@ -82,7 +82,7 @@
                     </div>
                     <div
                         class="form-control"
-                        th:text="${T(Math).round(project.lowerTotalCost + project.upperTotalCost) + ' €'}"
+                        th:text="${T(Math).round((project.lowerTotalCost + project.upperTotalCost)/2) + ' €'}"
                     >
                         Coût total
                     </div>
