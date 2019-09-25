@@ -56,7 +56,7 @@ public class ProfileController {
     }
 
     @GetMapping("/password")
-    public String pass(Model model,@RequestParam(value = "message", required = false) String message
+    public String password(Model model,@RequestParam(value = "message", required = false) String message
     ){
         model.addAttribute("message", message);
         return "password";
