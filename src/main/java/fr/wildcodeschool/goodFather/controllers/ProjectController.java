@@ -2,6 +2,7 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
@@ -10,6 +11,7 @@ import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -55,11 +57,18 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}")
-    public String read(@PathVariable Long id, Model model, @RequestParam(value = "message", required = false) String message) {
+    public String read(
+        @PathVariable Long id, 
+        Model model,
+        @RequestParam(value = "message", required = false) String message
+    ) {
         Project project = projectRepository.findById(id).get();
+        List<Category> categoryList = categoryRepository.findAll();
+        Set<Room> rooms = project.getRooms();
         model.addAttribute("project", project);
-        model.addAttribute("rooms", project.getRooms());
+        model.addAttribute("rooms", rooms);
         model.addAttribute("message", message);
+        model.addAttribute("categories", categoryList);
         return "project-recap";
     }
 
@@ -76,8 +85,11 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{projectId}/edit")
-    public String show(Model model, @PathVariable("projectId") Long projectId,
-            @RequestParam(required = false) Long categoryId) {
+    public String show(
+        Model model, 
+        @PathVariable("projectId") Long projectId,
+        @RequestParam(required = false) Long categoryId
+    ) {
         if (categoryId == null) {
             List<Category> categoryList = categoryRepository.findAll();
             model.addAttribute("categories", categoryList);

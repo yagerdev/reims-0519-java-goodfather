@@ -3,7 +3,7 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2 class="mb-3">
                 Récapitulatif
@@ -59,7 +59,7 @@
                     </div>
                     <div
                         class="form-control"
-                        th:text="${#dates.format(project.creationDate, 'dd - MM - yyyy')}"
+                        th:text="${#dates.format(project.creationDate, 'dd/MM/yyyy')}"
                     >
                         Date
                     </div>
@@ -68,62 +68,67 @@
                     <div class="input-group-prepend read-project">
                         <span class="input-group-text flex-centered">
                             Coût total
-                            </span>
+                        </span>
                     </div>
-                    <div class="form-control" th:text="${project.totalCost + '€'}">
+                    <div
+                        class="form-control"
+                        th:text="${project.totalCost + '€'}"
+                    >
                         Coût total
                     </div>
                 </div>
             </section>
-            <div class="accordion" id="roomControl">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button
-                                class="btn btn-outline-info btn-room"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#roomsList"
-                                aria-expanded="false"
-                                aria-controls="collapseOne"
-                            >
-                                Gestion des pièces
-                                <ion-icon
-                                    name="arrow-dropdown"
-                                    class="vert-gf"
-                                ></ion-icon>
-                            </button>
-                        </h2>
-                    </div>
+
+            <section class="accordion" id="recapProject">
+                <div class="card" th:each="category : ${categories}">
+                    <button
+                        class="btn btn-info btn-accordeon p-2"
+                        type="button"
+                        data-toggle="collapse"
+                        th:attr="data-target='#cat'+${category.id}"
+                        aria-expanded="false"
+                        th:text="${category.name.toUpperCase()}"
+                    >
+                        Nom d'une categorie
+                    </button>
 
                     <div
-                        id="roomsList"
+                        th:id="'cat'+${category.id}"
                         class="collapse"
-                        aria-labelledby="headingOne"
-                        data-parent="#roomControl"
+                        data-parent="#recapProject"
                     >
                         <div class="card-body">
-                            <a
-                                th:href="@{'/projects/' + ${project.id} + '/edit'}"
-                                class="btn btn-info mb-4"
-                            >
-                                Ajouter une nouvelle pièce
-                            </a>
                             <section class="section-list">
                                 <div
-                                    th:each="room : ${rooms}"
+                                    th:each="room : *{category.getRooms()}"
                                     class="item-global"
                                 >
                                     <div
-                                        class="user-list"
-                                        th:text="${room.name + ' - ' + room.totalCost + '€'}"
+                                        th:object="${room}"
+                                        class="update-form"
+                                        th:if="${room.getProject().getId()} == ${project.id}"
                                     >
-                                        item
+                                        <input
+                                            type="text"
+                                            th:value="${room.name}"
+                                            th:id="${room.id}"
+                                            name="name"
+                                            disabled
+                                        />
+
+                                        <a
+                                            th:href="@{/rooms/} + ${room.id}"
+                                            type="submit"
+                                            class="btn btn-info"
+                                        >
+                                            <ion-icon name="create"></ion-icon>
+                                        </a>
                                     </div>
 
                                     <form
                                         th:action="@{/rooms/} + ${room.id}"
                                         th:method="DELETE"
+                                        th:if="${room.getProject().getId()} == ${project.id}"
                                     >
                                         <input
                                             type="hidden"
@@ -141,18 +146,12 @@
                                             ></ion-icon>
                                         </button>
                                     </form>
-                                    <a
-                                        th:href="@{'/rooms/' + ${room.id} + '/edit'}"
-                                        class="btn btn-info"
-                                    >
-                                        <ion-icon name="build"></ion-icon>
-                                    </a>
                                 </div>
                             </section>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>
         <div th:replace="fragments/script.html :: script"></div>
