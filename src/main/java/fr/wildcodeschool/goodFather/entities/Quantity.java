@@ -1,5 +1,6 @@
 package fr.wildcodeschool.goodFather.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Quantity {
     @ManyToOne
     private Room room;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Task task;
     
     public Quantity() {

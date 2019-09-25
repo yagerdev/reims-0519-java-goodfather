@@ -2,6 +2,7 @@ package fr.wildcodeschool.goodFather.entities;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Room {
     @ManyToOne
 	private Category category;
 	
-	@OneToMany(mappedBy = "room")
+	@OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
     private Set<Quantity> quantities;
 
     public Room() {
