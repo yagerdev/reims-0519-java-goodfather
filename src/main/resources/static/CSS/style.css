@@ -278,7 +278,7 @@ footer {
         margin-bottom: 1vh;
         width: 100%;
     }
- }
+}
 
 footer .footer-social {
     display: flex;
@@ -493,13 +493,28 @@ ion-icon:hover {
     flex-direction: column;
 }
 
-.action-recap-project {
-    background-color: whitesmoke;
+.action-recap-project-container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
+    height: 10vh;
 }
 
-.action-recap-project .btn {
-    width: calc(70vw / 2);
+.action-recap-project-container .d-flex {
+    width: calc(80vw / 4);
+    height: 100%;
+    margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .action-recap-project-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .action-recap-project-container .d-flex {
+        width: 100%;
+        margin-bottom: 0.8vh;
+    }
 }
