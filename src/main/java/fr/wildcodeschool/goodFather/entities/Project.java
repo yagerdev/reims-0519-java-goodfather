@@ -32,12 +32,14 @@ public class Project {
     @Column(length = 5)
     private String postalCode;
 
+    @Column(length = 300)
+    private String comment;
+
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
     private double lowerTotalCost;
     private double upperTotalCost;
-
 
     @ManyToOne
     private User user;
@@ -52,6 +54,7 @@ public class Project {
                     String address, 
                     String city, 
                     String postalCode, 
+                    String comment,
                     Date creationDate, 
                     double lowerTotalCost, 
                     double upperTotalCost, 
@@ -62,6 +65,7 @@ public class Project {
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.comment = comment;
         this.creationDate = creationDate;
         this.lowerTotalCost = lowerTotalCost;
         this.upperTotalCost = upperTotalCost;
@@ -72,12 +76,14 @@ public class Project {
                     String address, 
                     String city, 
                     String postalCode, 
+                    String comment,
                     User user
     ) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.comment = (comment == null) ? "": comment;
         this.lowerTotalCost = 0;
         this.upperTotalCost = 0;
         this.user = user;
@@ -121,6 +127,14 @@ public class Project {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public User getUser() {
