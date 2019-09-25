@@ -44,7 +44,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
         http
             .csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.GET, "/CSS/**", "/IMG/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/").anonymous()
+            .antMatchers(HttpMethod.GET, "/").permitAll()
             .antMatchers("/admin").hasAuthority("ADMIN")
             .antMatchers(HttpMethod.GET, "/categories/**", "/typologies/**", "/materials/**", "/works/**", "/tasks/**", "/users/**")
                 .hasAuthority("ADMIN")
