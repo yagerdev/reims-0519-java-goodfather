@@ -65,9 +65,12 @@ h6 {
     margin: auto auto 2vh auto;
 }
 
-.modal-dialog form,
-.item-global form {
+.modal-dialog form {
     background-color: white;
+}
+
+.item-global form {
+    background-color: transparent;
 }
 
 input[type="number"] {
@@ -191,7 +194,6 @@ input:disabled {
 .form-control {
     height: auto;
     text-align: center;
-    text-transform: uppercase;
 }
 
 .accordion > .card .card-header {

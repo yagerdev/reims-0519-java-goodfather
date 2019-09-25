@@ -13,7 +13,7 @@
                         <span th:text="${project.name}" class="project-attribute">Nom</span>
 						<span th:text="${project.city}" class="project-attribute">Ville</span>
 						<span 
-							th:text="${#dates.format(project.creationDate, 'dd - MM - yyyy')}"
+							th:text="${#dates.format(project.creationDate, 'dd/MM/yyyy')}"
 							class="project-attribute"
 						>	Date
 						</span>
