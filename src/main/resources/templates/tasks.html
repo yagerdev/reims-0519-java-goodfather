@@ -115,7 +115,7 @@
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
             <section class="section-list">
-                <h3>Liste des actions ajoutées :</h3>
+                <h3>Liste des travaux ajoutées :</h3>
                 <ul class="list-group" th:each="quantity : ${quantities}">
                     <li 
                         class="list-group-item" 
@@ -129,8 +129,8 @@
                                     >
                                         <input
                                             type="hidden"
-                                            th:value="${quantity.task.id}"
-                                            th:name="task"
+                                            th:value="${quantity.id}"
+                                            th:name="quantity"
                                         />
                                         <button
                                             type="submit"
