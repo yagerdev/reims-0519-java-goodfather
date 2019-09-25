@@ -55,14 +55,14 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/pass")
+    @GetMapping("/password")
     public String pass(Model model,@RequestParam(value = "message", required = false) String message
     ){
         model.addAttribute("message", message);
-        return "pass";
+        return "password";
     }
 
-    @PutMapping("/pass")
+    @PutMapping("/password")
     public String updatePass(
         @RequestParam("psw") String actualPassword,
         @RequestParam("newpsw")String repeatPassword,
@@ -87,7 +87,7 @@ public class ProfileController {
         userRepository.save(userToUpdate);
         redirectAttributes.addAttribute("user", userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
-        return "redirect:/pass";
+        return "redirect:/password";
         }
     redirectAttributes.addAttribute("message", "erreur");
     return "redirect:/profile";
