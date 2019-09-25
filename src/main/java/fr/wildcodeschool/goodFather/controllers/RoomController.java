@@ -92,11 +92,15 @@ public class RoomController {
     }
 
     @DeleteMapping("/rooms/{id}/edit")
-    public String deleteUserTask(@PathVariable Long id, RedirectAttributes redirectAttributes, @RequestParam Task task){
-        Room room = roomRepository.findById(id).get();
-        Long roomId = room.getId();
-        Quantity quantity = quantityRepository.findQuantityByRoomIdAndTaskId(roomId, task.getId());
+    public String deleteUserTask(@PathVariable Long id, RedirectAttributes redirectAttributes, @RequestParam Quantity quantity){
+        Task task = quantity.getTask();
+        Room room = quantity.getRoom();
+        Project project = room.getProject();
+        room.reduceCost(task.getPrice() * quantity.getQuantity(), task.getPercentRange());
+        project.reduceCost(task.getPrice() * quantity.getQuantity(), task.getPercentRange());
+        room = roomRepository.save(room);
+        project = projectRepository.save(project);
         quantityRepository.delete(quantity);
-        return "redirect:/rooms/" + roomId + "/edit"; 
+        return "redirect:/rooms/" + id + "/edit"; 
     }
 }
