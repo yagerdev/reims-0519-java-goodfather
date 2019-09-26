@@ -6,6 +6,7 @@
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
+<<<<<<< HEAD
             <section class="jumbotron">
                 <h2 th:text="'Projet : ' + ${project.name}" class="yellow-gf">
                     Nom du projet
@@ -26,6 +27,23 @@
                 ></textarea>
             </div>
             <table class="table table-striped table-dark rounded-bottom">
+=======
+            <h2 th:text="'Projet : ' + ${project.name}">Nom du projet</h2>
+            <h3 class="yellow-gf mb-3" th:text="${room.name}">
+                Nom de la pièce
+            </h3>
+            <div class="input-group mb-1">
+                <div class="input-group-prepend read-project">
+                    <span class="input-group-text flex-centered">
+                        Commentaire
+                    </span>
+                </div>
+                <div class="form-control" th:text="${room.comment}">
+                    Commentaire
+                </div>
+            </div>
+            <table class="table table-striped table-dark">
+>>>>>>> 70a62ee4d65095e665365ac6248e04f87b32bcdd
                 <thead>
                     <tr>
                         <th>MUR A</th>
@@ -97,11 +115,19 @@
                 >
             </section>
 
+<<<<<<< HEAD
             <form th:method="POST" th:action="@{/tasks/add}">
                 <input type="hidden" name="room" th:value="${room.id}" />
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01"
+=======
+            <form th:method="POST" th:action="@{/task/add}">
+                <input type="hidden" name="room" th:value="${room.id}" />
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="inputGroupSelect01"
+>>>>>>> 70a62ee4d65095e665365ac6248e04f87b32bcdd
                             >Typologie</label
                         >
                     </div>
@@ -121,8 +147,8 @@
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="work"
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="work"
                             >Travaux</label
                         >
                     </div>
@@ -138,8 +164,8 @@
                     </select>
                 </div>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="material"
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="material"
                             >Matériaux</label
                         >
                     </div>
@@ -159,9 +185,15 @@
                     </select>
                 </div>
                 <div class="input-group mb-3">
+<<<<<<< HEAD
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="quantity"
                             >Quantité / Surface</label
+=======
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="quantity"
+                            >Quantité</label
+>>>>>>> 70a62ee4d65095e665365ac6248e04f87b32bcdd
                         >
                     </div>
                     <input
@@ -173,6 +205,7 @@
                 </div>
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
+<<<<<<< HEAD
             <section class="section-list">
                 <h3>Liste des travaux ajoutées :</h3>
                 <ul class="list-group" th:each="quantity : ${quantities}">
@@ -197,6 +230,34 @@
                         </button>
                     </form>
                 </ul>
+=======
+
+            <section class="section-list list-task-room">
+                <h3 class="mb-4">Liste des travaux ajoutées :</h3>
+                <form
+                    th:action="@{'/quantity'}"
+                    th:method="DELETE"
+                    class="list-group"
+                    th:each="quantity : ${quantities}"
+                >
+                    <input
+                        class="list-group-item"
+                        th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price} + '€'"
+                    />
+                    <input
+                        type="hidden"
+                        th:value="${quantity.id}"
+                        th:name="quantity"
+                    />
+                    <button type="submit" class="btn btn-info">
+                        <ion-icon
+                            ios="ios-close"
+                            md="md-close"
+                            class="icon-delete"
+                        ></ion-icon>
+                    </button>
+                </form>
+>>>>>>> 70a62ee4d65095e665365ac6248e04f87b32bcdd
             </section>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
