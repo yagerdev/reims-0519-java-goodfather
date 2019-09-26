@@ -502,3 +502,17 @@ ion-icon:hover {
         margin-bottom: 0.8vh;
     }
 }
+
+.list-task-room {
+    width: 100%;
+}
+
+.list-task-room form {
+    width: 100%;
+    background-color: transparent;
+    padding: 0;
+}
+
+.list-task-room .list-group-item {
+    text-align: center;
+}
