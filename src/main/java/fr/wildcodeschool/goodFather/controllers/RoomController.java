@@ -73,12 +73,10 @@ public class RoomController {
         Room currentRoom = roomRepository.findById(id).get();
         Set<Typology> typologies = currentRoom.getCategory().getTypologies();
         List<Task> tasks = taskRepository.findAll();
-        List<Typology> typologies2 = typologyRepository.findAll();
         model.addAttribute("project", currentRoom.getProject());
         model.addAttribute("room", currentRoom);
         model.addAttribute("tasks", tasks);
         model.addAttribute("typologies", typologies);
-        model.addAttribute("typologies2", typologies2);
         model.addAttribute("quantities", currentRoom.getQuantities());
         return "tasks";
     }

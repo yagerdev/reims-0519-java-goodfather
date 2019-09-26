@@ -101,17 +101,9 @@
                     </button>
                     <div th:id="'typo'+${typology.id}" class="collapse" data-parent="#recapTask">
                         <div class="card-body">
-                            <section class="section-list">
-                                <div th:each="task : *{typology.getTasks()}" class="item-global">
-                                    <div th:object="${quantity}" class="update-form">
-                                        <input type="text" th:value="${task.constructName()}" th:id="${task.id}"
-                                            name="name" disabled />
-                                        <button type="submit" class="btn btn-info">
-                                            <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
-                                        </button>
-                                    </div>
-                                </div>
-                            </section>
+                            <div th:each="quantity : ${room.quantities}">
+                                <input th:if="${quantity.task.typology ==  typology.id}" th:text="${typology.name}">
+                            </div>
                         </div>
                     </div>
                 </div>
