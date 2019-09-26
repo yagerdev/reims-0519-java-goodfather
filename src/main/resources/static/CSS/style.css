@@ -1,4 +1,4 @@
-/* ------------- Charte graphique ------------- */
+/* ------------- CHARTE GRAPHIQUE ------------- */
 
 .bg-vert-gf,
 .btn-info,
@@ -19,7 +19,7 @@
     color: #ffcc00;
 }
 
-/* ------------- Configuration générale ------------- */
+/* ------------- CONFIGURATION GÉNÉRALE ------------- */
 
 body {
     display: flex;
@@ -31,10 +31,6 @@ body {
     line-height: 1.5em;
     font-family: "Roboto", sans-serif;
     text-align: center;
-}
-
-.jumbotron {
-    background-color: whitesmoke;
 }
 
 h1,
@@ -50,16 +46,25 @@ h6 {
     max-width: 50%;
 }
 
+.jumbotron {
+    background-color: whitesmoke;
+}
+
+.read-project {
+    min-width: 130px;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .container {
     margin: auto;
     padding: 2vh 0;
     width: 80%;
-}
-
-@media screen and (max-width: 992px) {
-    .container {
-        width: 100%;
-    }
 }
 
 .container h2 {
@@ -75,12 +80,14 @@ h6 {
     margin: auto auto 2vh auto;
 }
 
-.modal-dialog form {
-    background-color: white;
+@media screen and (max-width: 992px) {
+    .container {
+        width: 100%;
+    }
 }
 
-.item-global form {
-    background-color: transparent;
+.modal-dialog form {
+    background-color: white;
 }
 
 input[type="number"] {
@@ -103,6 +110,7 @@ input:disabled {
 }
 
 .item-global form {
+    background-color: transparent;
     margin: 0;
     padding: 0;
 }
@@ -195,17 +203,6 @@ input:disabled {
     }
 }
 
-.read-project {
-    min-width: 130px;
-}
-
-.flex-centered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
 .form-control {
     height: auto;
     text-align: center;
@@ -264,7 +261,7 @@ input:disabled {
     transform: rotate(5deg);
 }
 
-/* ------------- Footer ------------- */
+/* ------------- FOOTER ------------- */
 
 footer {
     width: 100%;
