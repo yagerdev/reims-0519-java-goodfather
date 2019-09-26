@@ -5,7 +5,7 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
-			<h2>
+			<h2 class="jumbotron mb-3">
 				Modification de
 				<span
 					class="yellow-gf"
@@ -19,6 +19,7 @@
 					th:action="@{/users/} + ${user.id}"
 					th:method="PUT"
 					th:object="${user}"
+					class="rounded"
 				>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">

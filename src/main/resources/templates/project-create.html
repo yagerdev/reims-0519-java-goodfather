@@ -5,9 +5,9 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2>Bienvenue<span class="yellow-gf" th:text="${user.firstName}">Nom utilisateur</span></h2>
+            <h2 class="jumbotron mb-3">Bienvenue<span class="yellow-gf" th:text="${user.firstName}">Nom utilisateur</span></h2>
             <section>
-                <form th:action="@{/projects}" method="POST">
+                <form th:action="@{/projects}" method="POST" class="rounded">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="name">Nom</label>
@@ -67,9 +67,8 @@
                     </div>
 
                     <button type="submit" class="btn btn-info">Créer un projet</button>
+                    <a href="/projects" type="button" class="btn btn-outline-info">Vos projets</a>
                 </form>
-
-                <a href="/projects" type="button" class="btn btn-outline-warning">Vos projets</a>
             </section>
         </main>
 		<div th:replace="fragments/footer.html :: footer"></div>

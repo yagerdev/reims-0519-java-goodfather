@@ -6,7 +6,7 @@
     <div th:replace="fragments/header.html :: header"></div>
     <div th:replace="fragments/nav.html :: nav"></div>
     <main class="container">
-        <h2>
+        <h2 class="jumbotron mb-3">
             Profil de
             <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
                     catégories
@@ -14,7 +14,7 @@
         </h2>
         <div th:replace="fragments/alert.html :: alert"></div>
         <section>
-            <form th:action="@{/profile/}" th:method="PUT" th:object="${user}">
+            <form th:action="@{/profile/}" th:method="PUT" th:object="${user}" class="rounded">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="firstName">
@@ -72,8 +72,8 @@
                     <input type="text" class="form-control" name="postalCode" th:value="*{postalCode}" />
                 </div>
                 <button type="submit" class="btn btn-info">Modifier vos informations</button>
+                <a th:href="@{/password}" class="btn btn-outline-info">Modifier votre mot de passe</a>
             </form>
-            <a href="/password"><button type="submit" class="btn btn-info">Modifier votre mot de passe</button></a>
         </section>
     </main>
     <div th:replace="fragments/footer.html :: footer"></div>

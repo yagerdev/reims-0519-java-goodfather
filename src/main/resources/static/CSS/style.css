@@ -33,6 +33,10 @@ body {
     text-align: center;
 }
 
+.jumbotron {
+    background-color: whitesmoke;
+}
+
 h1,
 h2,
 h3,
@@ -276,12 +280,11 @@ footer .footer-link {
     align-items: center;
 }
 
-footer .footer-link button {
+footer .footer-link a {
     margin-left: 1vh;
 }
 
 @media screen and (max-width: 420px) {
-  
     .footer-link {
         display: flex;
         flex-direction: column;
@@ -351,41 +354,26 @@ ion-icon:hover {
 /* ------------- PAGE CATEGORIES ------------- */
 
 .group-image {
-    width: 80%;
-    margin: auto;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .group-image .image {
     background-size: cover;
     background-position: center;
-    height: 200px;
-    border-radius: 1em;
+    height: 300px;
     display: flex;
-    width: 100%;
-    margin: 2vh 0;
     text-decoration: none;
+    width: 100%;
+    width: 200px;
 }
 
 .group-image .image:hover p {
     background-color: #328080;
     color: white;
     transition: 0.5s;
-}
-
-@media only screen and (min-width: 1224px) {
-    .group-image {
-        flex-direction: row;
-        justify-content: space-around;
-        width: 100%;
-    }
-
-    .group-image .image {
-        width: 200px;
-        margin: auto;
-    }
 }
 
 .group-image .image p {
@@ -395,6 +383,18 @@ ion-icon:hover {
     border-radius: 0.5em;
     padding: 0.5em;
     text-transform: uppercase;
+}
+
+@media screen and (max-width: 1200px) {
+    .group-image {
+        flex-direction: column;
+    }
+
+    .group-image .image {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 3vh;
+    }
 }
 
 .salle-de-bain {
@@ -432,7 +432,7 @@ ion-icon:hover {
 }
 
 .admin-control .btn {
-    width: 80%;
+    width: 100%;
     padding: 2vh 0;
 }
 
@@ -486,7 +486,7 @@ ion-icon:hover {
 }
 
 .action-recap-project-container .d-flex {
-    width: calc(80vw / 4);
+    width: calc(75vw / 4);
     height: 100%;
     margin: 0;
 }
@@ -501,4 +501,9 @@ ion-icon:hover {
         width: 100%;
         margin-bottom: 0.8vh;
     }
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: transparent;
 }

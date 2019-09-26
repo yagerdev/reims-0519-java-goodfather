@@ -3,23 +3,32 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2>Selectionner<span class="yellow-gf">votre pièce</span></h2>
-            <div class="group-image">
-                <a 
+            <h2 class="jumbotron mb-3">
+                Selectionner<span class="yellow-gf">votre pièce</span>
+            </h2>
+            <a
+                th:href="@{'/projects/' + ${projectId}}"
+                class="btn btn-info col-6"
+            >
+                Votre projet
+            </a>
+            <div class="group-image p-3">
+                <a
                     th:each="category : ${categories}"
                     th:href="@{'/projects/' + ${projectId} + '/edit?categoryId=' + ${category.id}}"
-                    th:classappend="|${category.name.toLowerCase()
-                        .replaceAll(&quot;[^a-z0-9 ]&quot;, &quot;&quot;)
-                        .replaceAll(&quot; &quot;,&quot;-&quot;)} image|"
+                    th:classappend='|${category.name.toLowerCase()
+                        .replaceAll("[^a-z0-9 ]", "")
+                        .replaceAll(" ","-")} image rounded|'
                 >
-                    <p th:text="${category.name}" class="vert-gf">Nom de la catégorie</p>
+                    <p th:text="${category.name}" class="vert-gf">
+                        Nom de la catégorie
+                    </p>
                 </a>
             </div>
-
         </main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
     </body>
 </html>
