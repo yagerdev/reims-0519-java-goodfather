@@ -110,8 +110,9 @@
                         class="custom-select"
                         id="typology"
                         th:name="typology"
+                        autofocus
                     >
-                        <option selected disabled>Sélectionnez...</option>
+                        <option selected disabled >Sélectionnez...</option>
                         <option
                             th:each="typology : ${typologies}"
                             th:text="${typology.name}"
