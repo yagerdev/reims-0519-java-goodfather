@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
-import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Typology;
@@ -87,22 +86,11 @@ public class RoomController {
     @DeleteMapping("/rooms/{id}")
     public String delete(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Room room = roomRepository.findById(id).get();
-        Long projectId = room.getProject().getId();
+        Project project = room.getProject();
+        project.removeRoomCost(room);
+        project = projectRepository.save(project);
         roomRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
-        return "redirect:/projects/"+projectId;
-    }
-
-    @DeleteMapping("/rooms/{id}/edit")
-    public String deleteUserTask(@PathVariable Long id, RedirectAttributes redirectAttributes, @RequestParam Quantity quantity){
-        Task task = quantity.getTask();
-        Room room = quantity.getRoom();
-        Project project = room.getProject();
-        room.reduceCost(task.getPrice() * quantity.getQuantity(), task.getPercentRange());
-        project.reduceCost(task.getPrice() * quantity.getQuantity(), task.getPercentRange());
-        room = roomRepository.save(room);
-        project = projectRepository.save(project);
-        quantityRepository.delete(quantity);
-        return "redirect:/rooms/" + id + "/edit"; 
+        return "redirect:/projects/"+project.getId();
     }
 }

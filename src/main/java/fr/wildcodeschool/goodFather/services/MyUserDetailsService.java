@@ -27,11 +27,17 @@ public class MyUserDetailsService implements UserDetailsService {
     @Value("${user.role}")
     private String role;
 
+    @Value("${user.firstname}")
+    private String firstName;
+
+    @Value("${user.lastname}")
+    private String lastName;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         if(userRepository.count() == 0) {
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-            User adminDefault = new User(email, encoder.encode(password), role);
+            User adminDefault = new User(email, encoder.encode(password), role, firstName, lastName);
             userRepository.save(adminDefault);
         }
         User user = userRepository.findByEmail(email);

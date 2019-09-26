@@ -130,15 +130,20 @@ input:disabled {
     }
 }
 
-.user-list {
-    height: 50px;
+.project-attribute {
+    width: calc(80% / 2);
+    height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
-.project-attribute {
-    width: calc(100% / 3);
+.user-list {
+    min-height: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 0.8em;
 }
 
 .check-role {
@@ -260,46 +265,10 @@ footer {
     background-color: #333333;
 }
 
-@media screen and (max-width: 400px) {
-    footer {
-        flex-direction: column;
-    }
-    .footer-link {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 1vh;
-    }
-    .footer-link button {
-        margin-bottom: 1vh;
-        width: 100%;
-    }
- }
-
 footer .footer-social {
     display: flex;
     justify-content: space-around;
     width: 20%;
-}
-
-@media screen and (max-width: 400px) {
-    footer .footer-social {
-        flex-direction: column;
-        height: 80%;
-    }
-
-    footer .footer-link {
-        width: 50%;
-    }
-
-    footer .footer-link {
-        flex-direction: column;
-    }
-
-    footer .footer-link button {
-        margin-left: 0;
-        margin-bottom: 1vh;
-        width: 100%;
-    }
 }
 
 footer .footer-link {
@@ -309,6 +278,26 @@ footer .footer-link {
 
 footer .footer-link button {
     margin-left: 1vh;
+}
+
+@media screen and (max-width: 420px) {
+  
+    .footer-link {
+        display: flex;
+        flex-direction: column;
+    }
+    .footer-link a {
+        margin-bottom: 1vh;
+        width: 100%;
+    }
+    footer .footer-social {
+        flex-direction: column;
+        height: 80%;
+    }
+
+    footer .footer-link {
+        width: 50%;
+    }
 }
 
 ion-icon {
@@ -486,4 +475,30 @@ ion-icon:hover {
 .section-list {
     display: flex;
     flex-direction: column;
+}
+
+.action-recap-project-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.25rem;
+    height: 10vh;
+}
+
+.action-recap-project-container .d-flex {
+    width: calc(80vw / 4);
+    height: 100%;
+    margin: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .action-recap-project-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .action-recap-project-container .d-flex {
+        width: 100%;
+        margin-bottom: 0.8vh;
+    }
 }

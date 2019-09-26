@@ -32,12 +32,14 @@ public class Project {
     @Column(length = 5)
     private String postalCode;
 
+    @Column(length = 300)
+    private String comment;
+
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
     private double lowerTotalCost;
     private double upperTotalCost;
-
 
     @ManyToOne
     private User user;
@@ -52,6 +54,7 @@ public class Project {
                     String address, 
                     String city, 
                     String postalCode, 
+                    String comment,
                     Date creationDate, 
                     double lowerTotalCost, 
                     double upperTotalCost, 
@@ -62,6 +65,7 @@ public class Project {
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.comment = comment;
         this.creationDate = creationDate;
         this.lowerTotalCost = lowerTotalCost;
         this.upperTotalCost = upperTotalCost;
@@ -72,12 +76,14 @@ public class Project {
                     String address, 
                     String city, 
                     String postalCode, 
+                    String comment,
                     User user
     ) {
         this.name = name;
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
+        this.comment = (comment == null) ? "": comment;
         this.lowerTotalCost = 0;
         this.upperTotalCost = 0;
         this.user = user;
@@ -123,6 +129,14 @@ public class Project {
         this.postalCode = postalCode;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public User getUser() {
         return user;
     }
@@ -164,12 +178,21 @@ public class Project {
     }
 
     public void addCost(double cost, double percentRange) {
-        this.lowerTotalCost += cost * (1 - percentRange/100);
-        this.upperTotalCost += cost * (1 + percentRange/100);
+        double lowerCost = cost * (1 - percentRange/100);
+        double upperCost = cost * (1 + percentRange/100);
+        this.lowerTotalCost += ( (double)Math.round(lowerCost * 100) ) / 100;
+        this.upperTotalCost += ( (double)Math.round(upperCost * 100) ) / 100;
     }
 
     public void reduceCost(double cost, double percentRange) {
-        this.lowerTotalCost -= cost * (1 - percentRange/100);
-        this.upperTotalCost -= cost * (1 + percentRange/100);
+        double lowerCost = cost * (1 - percentRange/100);
+        double upperCost = cost * (1 + percentRange/100);
+        this.lowerTotalCost -= ( (double)Math.round(lowerCost * 100) ) / 100;
+        this.upperTotalCost -= ( (double)Math.round(upperCost * 100) ) / 100;
+    }
+
+    public void removeRoomCost(Room room) {
+        this.lowerTotalCost -= room.getLowerTotalCost();
+        this.upperTotalCost -= room.getUpperTotalCost();
     }
 }

@@ -35,13 +35,14 @@ public class Task {
     @OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE)
     private Set<Quantity> quantities;
 
-    public Task(Long id, 
-                double price, 
-                String unit, 
-                double percentRange, 
-                Typology typology, 
-                Material material, 
-                Work work
+    public Task(
+        Long id, 
+        double price, 
+        String unit, 
+        double percentRange, 
+        Typology typology, 
+        Material material, 
+        Work work
     ) {
         this.setId(id);
         this.setPrice(price);
@@ -52,12 +53,13 @@ public class Task {
         this.setWork(work);
     }
 
-    public Task(double price,
-                String unit,
-                double percentRange,
-                Typology typology,
-                Material material, 
-                Work work
+    public Task(
+        double price,
+        String unit,
+        double percentRange,
+        Typology typology,
+        Material material, 
+        Work work
     ) {
         this.setPrice(price);
         this.setUnit(unit);
@@ -67,11 +69,12 @@ public class Task {
         this.setWork(work);
     }
 
-    public Task(double price,
-                String unit,
-                double percentRange,
-                Material material, 
-                Work work
+    public Task(
+        double price,
+        String unit,
+        double percentRange,
+        Material material, 
+        Work work
     ) {
         this.setPrice(price);
         this.setUnit(unit);
