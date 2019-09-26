@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.xml.PluggableSchemaResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -106,4 +108,22 @@ public class ProjectController {
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/projects";
     }
+
+    @GetMapping("projects/{id}/modify")
+    public String modify(@PathVariable Long id, Long projectId, Model model){
+
+        Project project = projectRepository.findById(id).get();
+        System.out.println(project);
+        model.addAttribute("project", project);
+        return "project-edit";
+    }
+
+    @PutMapping("projects/{id}/modify")
+    public String update(RedirectAttributes redirectAttributes, @ModelAttribute Project project, Long projectId, Model model){
+        model.addAttribute("project", project);
+        project.setCreationDate(project.getCreationDate());
+        project = projectRepository.save(project);
+        return"project-edit";
+    }
 }
+// to do faire des request param spécifique
