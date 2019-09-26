@@ -171,17 +171,15 @@
                                         >
                                             <ion-icon name="create"></ion-icon>
                                         </a>
+                                            <button
+                                            type="button"
+                                            class="btn btn-info"
+                                            data-toggle="modal"
+                                            th:attr="data-target='#room'+${room.id}"
+                                        >
+                                            <ion-icon name="eye"></ion-icon>
+                                        </button>
                                     </div>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-info"
-                                        data-toggle="modal"
-                                        th:attr="data-target='#room'+${room.id}"
-                                    >
-                                        <ion-icon name="eye"></ion-icon>
-                                    </button>
-
                                     <div
                                         class="modal fade"
                                         th:id="'room'+${room.id}"
