@@ -53,7 +53,13 @@ h6 {
 .container {
     margin: auto;
     padding: 2vh 0;
-    width: 90%;
+    width: 60%;
+}
+
+@media screen and (max-width: 992px) {
+    .container {
+        width: 100%;
+    }
 }
 
 .container h2 {
