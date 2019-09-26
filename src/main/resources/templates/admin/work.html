@@ -5,18 +5,22 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-			<h2 class="jumbotron mb-3">Gestion des<span class="yellow-gf">travaux</span></h2>
+			<h2 class="jumbotron mb-3">
+				Gestion des
+				<span class="yellow-gf">travaux</span>
+			</h2>
 			<div th:replace="fragments/alert.html :: alert"></div>
             <section>
                 <form th:action="@{/works}" method="POST" class="rounded">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="name">Nom</label>
+                            <label class="input-group-text" for="name">
+								Nom
+							</label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="Entrez une donnée ..."
                             name="name"
                             required
                         >
@@ -36,7 +40,6 @@
 							type="text"
 							th:value="*{name}"
 							th:id="${work.id}"
-                            placeholder="Merci de saisier une nouvelle donnée ..."
 							name="name"
 							disabled
 						/>

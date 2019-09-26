@@ -5,36 +5,45 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2 class="jumbotron mb-3">Bienvenue<span class="yellow-gf" th:text="${user.firstName}">Nom utilisateur</span></h2>
+            <h2 class="jumbotron mb-3">
+                Bienvenue
+                <span class="yellow-gf" th:text="${user.firstName}">
+                    Nom utilisateur
+                </span>
+            </h2>
             <section>
                 <form th:action="@{/projects}" method="POST" class="rounded">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="name">Nom</label>
+                            <label class="input-group-text flex-centered" for="name">
+                                Nom
+                            </label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="Entrez un nom de projet ..."
                             name="name"
                             required
                         >
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="address">Adresse</label>
+                            <label class="input-group-text flex-centered" for="address">
+                                Adresse
+                            </label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="Entrez une adresse ..."
                             name="address"
                             required
                         >
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="postalCode">Code postal</label>
+                            <label class="input-group-text flex-centered" for="postalCode">
+                                Code postal
+                            </label>
                         </div>
                         <input 
                             type="text"
@@ -45,27 +54,28 @@
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="city">Ville</label>
+                            <label class="input-group-text flex-centered" for="city">
+                                Ville
+                            </label>
                         </div>
                         <input 
                             type="text"
                             class="form-control"
-                            placeholder="Entrez une ville ..."
                             name="city"
                             required
                         >
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="comment">Commentaire</label>
+                            <label class="input-group-text flex-centered" for="comment">
+                                Commentaire
+                            </label>
                         </div>
                         <textarea 
                             class="form-control"
-                            placeholder="Entrez un commentaire ..."
                             name="comment"
                         ></textarea>
                     </div>
-
                     <button type="submit" class="btn btn-info">Créer un projet</button>
                     <a href="/projects" type="button" class="btn btn-outline-info">Vos projets</a>
                 </form>

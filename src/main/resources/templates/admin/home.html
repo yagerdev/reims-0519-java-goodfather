@@ -6,11 +6,13 @@
         <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
             <h2 class="jumbotron mb-3">
-                Bienvenue<span
+                Bienvenue
+                <span
                     class="yellow-gf"
                     th:text="${user.firstName} + ' ' + ${user.lastName}"
-                    >Nom utilisateur</span
                 >
+                    Nom utilisateur
+                </span>
             </h2>
             <section class="admin-control">
                 <p>
@@ -24,12 +26,8 @@
                 <a href="/tasks" class="btn btn-outline-info">Tâches</a>
                 <a href="/works" class="btn btn-outline-info">Travaux</a>
                 <a href="/materials" class="btn btn-outline-info">Matériaux</a>
-                <a href="/typologies" class="btn btn-outline-info"
-                    >Typologies</a
-                >
-                <a href="/categories" class="btn btn-outline-info"
-                    >Catégories</a
-                >
+                <a href="/typologies" class="btn btn-outline-info">Typologies</a>
+                <a href="/categories" class="btn btn-outline-info">Catégories</a>
             </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>

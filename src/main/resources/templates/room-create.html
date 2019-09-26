@@ -5,13 +5,18 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
-			<h2 class="jumbotron mb-3">DIMENSIONS<span class="yellow-gf" th:text="${category.name}"></span></h2>
+			<h2 class="jumbotron mb-3">
+				Dimensions
+				<span class="yellow-gf" th:text="${category.name}"></span>
+			</h2>
 			<form th:action="@{/rooms}" method="POST" class="rounded">
 				<input type="hidden" name="project" th:value="${project.id}">
 				<input type="hidden" name="category" th:value="${category.id}">
                 <div class="input-group mb-3">
 					<div class="input-group-prepend read-project">
-						<label class="input-group-text flex-centered" for="name">Nom</label>
+						<label class="input-group-text flex-centered" for="name">
+							Nom
+						</label>
 					</div>
 					<input
 						type="text"
@@ -23,47 +28,51 @@
 				</div>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend read-project">
-						<label class="input-group-text flex-centered" for="walla">Mur A</label>
+						<label class="input-group-text flex-centered" for="walla">
+							MUR A
+						</label>
 					</div>
 					<input
 						type="number"
 						class="form-control"
-						placeholder="... en cm"
 						name="wallA"
                         required
 					/>
 				</div>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend read-project">
-						<label class="input-group-text flex-centered" for="wallb">Mur B</label>
+						<label class="input-group-text flex-centered" for="wallb">
+							MUR B
+						</label>
 					</div>
 					<input
 						type="number"
 						class="form-control"
-						placeholder="... en cm"
 						name="wallB"
                         required
 					/>
 				</div>
                 <div class="input-group mb-3">
 					<div class="input-group-prepend read-project">
-						<label class="input-group-text flex-centered" for="height">Hauteur</label>
+						<label class="input-group-text flex-centered" for="height">
+							Hauteur
+						</label>
 					</div>
 					<input
 						type="number"
 						class="form-control"
-						placeholder="... en cm"
 						name="height"
                         required
 					/>
 				</div>
 				<div class="input-group mb-3">
 					<div class="input-group-prepend read-project">
-						<label class="input-group-text flex-centered" for="comment">Commentaire</label>
+						<label class="input-group-text flex-centered" for="comment">
+							Commentaire
+						</label>
 					</div>
 					<textarea 
 						class="form-control"
-						placeholder="Entrez un commentaire ..."
 						name="comment"
 					></textarea>
 				</div>

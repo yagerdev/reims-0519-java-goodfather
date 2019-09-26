@@ -12,8 +12,9 @@
             <section>
                 <p>
                     Merci de sélectionner les
-                    <span th:text="${listType}"></span> rattachées à
-                    <span th:text="${entityName}"></span>
+                        <span th:text="${listType}"></span>
+                    rattachées à
+                        <span th:text="${entityName}"></span>
                 </p>
                 <form
                     th:action="@{'/' + ${entityType} + '/' + ${entityId}}"

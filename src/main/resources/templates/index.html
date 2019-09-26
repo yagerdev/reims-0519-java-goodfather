@@ -5,7 +5,10 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
-			<h2 class="jumbotron mb-3">Investir avec<span class="yellow-gf">GoodFather</span></h2>
+			<h2 class="jumbotron mb-3">
+				Investir avec
+				<span class="yellow-gf">GoodFather</span>
+			</h2>
 			<section>
 				<p>
 					Nous sommes heureux de vous accueillir sur notre site ! Notre passion
@@ -20,21 +23,20 @@
 				</p>
 			</section>
 			<div sec:authorize="!isAuthenticated()">
-					<button 
-				type="button"
-				class="btn btn-outline-warning"
-				data-toggle="modal"
-				data-target="#loginModal"
-			>
-				Se connecter
-			</button>
+				<button 
+					type="button"
+					class="btn btn-outline-warning"
+					data-toggle="modal"
+					data-target="#loginModal"
+				>
+					Se connecter
+				</button>
 			</div>
 			<section
 				class="modal fade"
 				id="loginModal"
 				tabindex="-1"
 				role="dialog"
-				aria-labelledby="exampleModalLabel"
 				aria-hidden="true"
 			>
 				<div class="modal-dialog" role="document">
@@ -57,27 +59,27 @@
 							class="form-group modal-body"
 						>
 							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="user_mail">Mail :</span>
+								<div class="input-group-prepend read-project">
+									<span class="input-group-text flex-centered" id="user_mail">
+										Mail :
+									</span>
 								</div>
 								<input
 									type="text"
 									class="form-control"
-									aria-label="user_mail"
-									aria-describedby="user_mail"
 									name="username"
                                     required
 								/>
 							</div>
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
-									<span class="input-group-text" id="user_mdp">Mot de passe :</span>
+									<span class="input-group-text" id="user_mdp">
+										Mot de passe :
+									</span>
 								</div>
 								<input
 									type="password"
 									class="form-control"
-									aria-label="user_mdp"
-									aria-describedby="user_mdp"
 									name="password"
                                     required
 								/>
