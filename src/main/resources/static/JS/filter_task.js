@@ -1,5 +1,6 @@
 $("#typology").on("change", function() {
-    let typology = $(this).val(); 
+    let typology = $(this).val();
+    $("#work").prop('disabled', false);
     $("#work").find("option").hide();
     $("#work").val('Sélectionnez...');
     $("#material").find("option").hide();
@@ -25,6 +26,7 @@ $("#typology").on("change", function() {
 $("#work").on("change", function() {
     let typology = $("#typology").val();
     let work = $(this).val().toLowerCase();
+    $("#material").prop('disabled', false);
     $("#material").find("option").hide();
     $("#material").val('Sélectionnez...');
     if (work) {
