@@ -52,7 +52,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
                 .hasAuthority("ADMIN")
             .antMatchers(HttpMethod.GET, "/projects/**", "/rooms/**", "/home/**")
                 .access("hasAuthority('ADMIN') or hasAuthority('USER')")
-            .antMatchers(HttpMethod.POST, "/projects/**", "/rooms/**", "/home/**", "/quantity/**")
+            .antMatchers(HttpMethod.POST, "/projects/**", "/rooms/**", "/home/**", "/quantity/**", "/task/add")
                 .access("hasAuthority('ADMIN') or hasAuthority('USER')") 
             .anyRequest().authenticated()
             .and()
