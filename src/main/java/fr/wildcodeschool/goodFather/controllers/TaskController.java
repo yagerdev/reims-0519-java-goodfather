@@ -103,16 +103,16 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    @PostMapping("/tasks/add")
+    @PostMapping("/task/add")
     public String add(
         @ModelAttribute Typology typology,
         @ModelAttribute Room room,
         @ModelAttribute Work work,
         @ModelAttribute Material material,
-        @ModelAttribute Quantity quantity
+        @RequestParam double quantityValue
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyId(work.getId(), material.getId(), typology.getId());
-        quantity.setTask(task);
+        Quantity quantity = new Quantity(room, task, quantityValue);
         if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
             Project project = room.getProject();
             quantity = quantityRepository.save(quantity);
