@@ -29,30 +29,6 @@
 					<button type="submit" class="btn btn-info">Créer</button>
 				</form>
 			</section>
-			<section class="section-list">
-				<div th:each="material : ${materials}" class="item-global">
-					<form
-						th:action="@{/materials/} + ${material.id}"
-						th:method="PUT"
-						th:object="${material}"
-						class="update-form"
-					>
-						<input
-							type="text"
-							th:value="*{name}"
-							th:id="${material.id}"
-							name="name"
-							disabled
-						/>
-						<button
-							type="button"
-							class="btn btn-info"
-							th:id="${material.id + 'item'}"
-							th:onclick="'javascript:update(\'' + ${material.id} + '\');'"
-						>
-							<ion-icon name="create"></ion-icon>
-						</button>
-					</form>
 
             <section class="search col-8 m-auto">
                 <div class="input-group mb-3">
