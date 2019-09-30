@@ -1,4 +1,4 @@
-/* ------------- Charte graphique ------------- */
+/* ------------- CHARTE GRAPHIQUE ------------- */
 
 .bg-vert-gf,
 .btn-info,
@@ -19,7 +19,7 @@
     color: #ffcc00;
 }
 
-/* ------------- Configuration générale ------------- */
+/* ------------- CONFIGURATION GÉNÉRALE ------------- */
 
 body {
     display: flex;
@@ -46,10 +46,25 @@ h6 {
     max-width: 50%;
 }
 
+.jumbotron {
+    background-color: whitesmoke;
+}
+
+.read-project {
+    min-width: 130px;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
 .container {
     margin: auto;
     padding: 2vh 0;
-    width: 90%;
+    width: 80%;
 }
 
 .container h2 {
@@ -65,12 +80,14 @@ h6 {
     margin: auto auto 2vh auto;
 }
 
-.modal-dialog form {
-    background-color: white;
+@media screen and (max-width: 992px) {
+    .container {
+        width: 90%;
+    }
 }
 
-.item-global form {
-    background-color: transparent;
+.modal-dialog form {
+    background-color: white;
 }
 
 input[type="number"] {
@@ -93,6 +110,7 @@ input:disabled {
 }
 
 .item-global form {
+    background-color: transparent;
     margin: 0;
     padding: 0;
 }
@@ -185,17 +203,6 @@ input:disabled {
     }
 }
 
-.read-project {
-    min-width: 120px;
-}
-
-.flex-centered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
 .form-control {
     height: auto;
     text-align: center;
@@ -254,7 +261,7 @@ input:disabled {
     transform: rotate(5deg);
 }
 
-/* ------------- Footer ------------- */
+/* ------------- FOOTER ------------- */
 
 footer {
     width: 100%;
@@ -276,12 +283,11 @@ footer .footer-link {
     align-items: center;
 }
 
-footer .footer-link button {
+footer .footer-link a {
     margin-left: 1vh;
 }
 
 @media screen and (max-width: 420px) {
-  
     .footer-link {
         display: flex;
         flex-direction: column;
@@ -351,41 +357,26 @@ ion-icon:hover {
 /* ------------- PAGE CATEGORIES ------------- */
 
 .group-image {
-    width: 80%;
-    margin: auto;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .group-image .image {
     background-size: cover;
     background-position: center;
-    height: 200px;
-    border-radius: 1em;
+    height: 300px;
     display: flex;
-    width: 100%;
-    margin: 2vh 0;
     text-decoration: none;
+    width: 100%;
+    width: 200px;
 }
 
 .group-image .image:hover p {
     background-color: #328080;
     color: white;
     transition: 0.5s;
-}
-
-@media only screen and (min-width: 1224px) {
-    .group-image {
-        flex-direction: row;
-        justify-content: space-around;
-        width: 100%;
-    }
-
-    .group-image .image {
-        width: 200px;
-        margin: auto;
-    }
 }
 
 .group-image .image p {
@@ -395,6 +386,18 @@ ion-icon:hover {
     border-radius: 0.5em;
     padding: 0.5em;
     text-transform: uppercase;
+}
+
+@media screen and (max-width: 1200px) {
+    .group-image {
+        flex-direction: column;
+    }
+
+    .group-image .image {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 3vh;
+    }
 }
 
 .salle-de-bain {
@@ -432,7 +435,7 @@ ion-icon:hover {
 }
 
 .admin-control .btn {
-    width: 80%;
+    width: 100%;
     padding: 2vh 0;
 }
 
@@ -486,7 +489,7 @@ ion-icon:hover {
 }
 
 .action-recap-project-container .d-flex {
-    width: calc(80vw / 4);
+    width: calc(75vw / 4);
     height: 100%;
     margin: 0;
 }
@@ -501,4 +504,9 @@ ion-icon:hover {
         width: 100%;
         margin-bottom: 0.8vh;
     }
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    background-color: transparent;
 }

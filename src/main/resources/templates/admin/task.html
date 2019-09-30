@@ -5,10 +5,10 @@
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2>Gestion des<span class="yellow-gf">tâches</span></h2>
+            <h2 class="jumbotron mb-3">Gestion des<span class="yellow-gf">tâches</span></h2>
             <div th:replace="fragments/alert.html :: alert"></div>
             <section>
-                <form th:action="@{/tasks}" method="POST">
+                <form th:action="@{/tasks}" method="POST" class="rounded">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="typologyId">
@@ -20,6 +20,7 @@
                             id="typologyId"
                             th:name="typologyId"
                             required
+                            autofocus
                         >
                             <option disabled selected>Sélectionnez ...</option>
                             <option
@@ -222,9 +223,9 @@
                                                         data-dismiss="modal"
                                                         aria-label="Close"
                                                     >
-                                                        <span aria-hidden="true"
-                                                            >&times;</span
-                                                        >
+                                                        <span aria-hidden="true">
+                                                            &times;
+                                                        </span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
