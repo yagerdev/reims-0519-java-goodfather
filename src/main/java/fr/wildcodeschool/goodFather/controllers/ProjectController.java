@@ -16,6 +16,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,8 +63,15 @@ public class ProjectController {
     public String read(
         @PathVariable Long id,
         Model model,
-        @RequestParam(value = "message", required = false) String message
+        @RequestParam(value = "message", required = false) String message,
+        Authentication authentication
     ) {
+        Project projectToUpdate = projectRepository.findById(id).get();
+        User currentUser = (User)authentication.getPrincipal();
+        Long UserId = currentUser.getId();
+        Long projectUserId = projectToUpdate.getUser().getId();
+        if(UserId == projectUserId)
+        {
         Project project = projectRepository.findById(id).get();
         List<Category> categoryList = categoryRepository.findAll();
         Set<Room> rooms = project.getRooms();
@@ -72,6 +80,8 @@ public class ProjectController {
         model.addAttribute("message", message);
         model.addAttribute("categories", categoryList);
         return "project-recap";
+        }
+        return"error";
     }
 
     @GetMapping("/projects")
@@ -90,16 +100,25 @@ public class ProjectController {
     public String show(
         Model model, 
         @PathVariable("projectId") Long projectId,
-        @RequestParam(required = false) Long categoryId
+        @RequestParam(required = false) Long categoryId,
+        Authentication authentication
     ) {
-        if (categoryId == null) {
-            List<Category> categoryList = categoryRepository.findAll();
-            model.addAttribute("categories", categoryList);
-            model.addAttribute("projectId", projectId);
-            return "categories";
-        } else {
-            return "redirect:/rooms/create?projectId=" + projectId + "&categoryId=" + categoryId;
+        Project projectToUpdate = projectRepository.findById(projectId).get();
+        User currentUser = (User)authentication.getPrincipal();
+        Long UserId = currentUser.getId();
+        Long projectUserId = projectToUpdate.getUser().getId();
+        if(UserId == projectUserId)
+        {
+            if (categoryId == null) {
+                List<Category> categoryList = categoryRepository.findAll();
+                model.addAttribute("categories", categoryList);
+                model.addAttribute("projectId", projectId);
+                return "categories";
+            } else {
+                return "redirect:/rooms/create?projectId=" + projectId + "&categoryId=" + categoryId;
+            }
         }
+        return"error";   
     }
 
     @DeleteMapping("/projects/{id}")
@@ -110,12 +129,20 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}/modify")
-    public String modify(@PathVariable Long id, Long projectId, Model model){
+    public String modify(@PathVariable Long id, Long projectId, Model model,Authentication authentication){
 
+        Project projectToUpdate = projectRepository.findById(id).get();
+        User currentUser = (User)authentication.getPrincipal();
+        Long UserId = currentUser.getId();
+        Long projectUserId = projectToUpdate.getUser().getId();
         Project project = projectRepository.findById(id).get();
-        System.out.println(project);
+        if(UserId == projectUserId)
+        {
         model.addAttribute("project", project);
         return "project-edit";
+        }
+        else
+        return"error";
     }
 
     @PutMapping("projects/{id}/modify")
@@ -126,10 +153,15 @@ public class ProjectController {
     @RequestParam String city, 
     @RequestParam String postalCode, 
     @RequestParam String comment, 
-    Model model
+    Model model,
+    Authentication authentication
     ){
-        System.out.println(id);
         Project projectToUpdate = projectRepository.findById(id).get();
+        User currentUser = (User)authentication.getPrincipal();
+        Long UserId = currentUser.getId();
+        Long projectUserId = projectToUpdate.getUser().getId();
+        if(UserId == projectUserId)
+        {
         projectToUpdate.setName(name);
         projectToUpdate.setAddress(address);
         projectToUpdate.setCity(city);
@@ -138,6 +170,8 @@ public class ProjectController {
         projectToUpdate = projectRepository.save(projectToUpdate);
         model.addAttribute("project", projectToUpdate);
         return"project-edit";
+        }
+        else
+        return"error";
     }
 }
-// to do faire des request param spécifique
