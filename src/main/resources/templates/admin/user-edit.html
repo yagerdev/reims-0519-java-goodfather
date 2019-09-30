@@ -5,7 +5,7 @@
         <div th:replace="fragments/header.html :: header"></div>
 		<div th:replace="fragments/nav.html :: nav"></div>
 		<main class="container">
-			<h2>
+			<h2 class="jumbotron mb-3">
 				Modification de
 				<span
 					class="yellow-gf"
@@ -19,6 +19,7 @@
 					th:action="@{/users/} + ${user.id}"
 					th:method="PUT"
 					th:object="${user}"
+					class="rounded"
 				>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
@@ -33,7 +34,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="lastName">Nom</label>
+							<label class="input-group-text" for="lastName">
+								Nom
+							</label>
 						</div>
 						<input
 							type="text"
@@ -44,7 +47,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="email">Mail</label>
+							<label class="input-group-text" for="email">
+								Mail
+							</label>
 						</div>
 						<input
 							type="email"
@@ -55,9 +60,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="phoneNumber"
-								>Téléphone</label
-							>
+							<label class="input-group-text" for="phoneNumber">
+								Téléphone
+							</label>
 						</div>
 						<input
 							type="tel"
@@ -68,7 +73,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="address">Adresse</label>
+							<label class="input-group-text" for="address">
+								Adresse
+							</label>
 						</div>
 						<input
 							type="text"
@@ -79,7 +86,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="city">City</label>
+							<label class="input-group-text" for="city">
+								City
+							</label>
 						</div>
 						<input
 							type="text"
@@ -90,9 +99,9 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="postalCode"
-								>Code postal</label
-							>
+							<label class="input-group-text" for="postalCode">
+								Code postal
+							</label>
 						</div>
 						<input
 							type="text"
@@ -125,7 +134,6 @@
 							<label for="role">Utilisateur</label>
 						</div>
 					</section>
-
 					<button type="submit" class="btn btn-info">Modifier</button>
 				</form>
 			</section>
