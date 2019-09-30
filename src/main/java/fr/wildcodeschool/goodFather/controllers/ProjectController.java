@@ -119,10 +119,24 @@ public class ProjectController {
     }
 
     @PutMapping("projects/{id}/modify")
-    public String update(RedirectAttributes redirectAttributes, @ModelAttribute Project project, Long projectId, Model model){
-        model.addAttribute("project", project);
-        project.setCreationDate(project.getCreationDate());
-        project = projectRepository.save(project);
+    public String update(RedirectAttributes redirectAttributes,
+    @PathVariable Long id,
+    @RequestParam String name, 
+    @RequestParam String address, 
+    @RequestParam String city, 
+    @RequestParam String postalCode, 
+    @RequestParam String comment, 
+    Model model
+    ){
+        System.out.println(id);
+        Project projectToUpdate = projectRepository.findById(id).get();
+        projectToUpdate.setName(name);
+        projectToUpdate.setAddress(address);
+        projectToUpdate.setCity(city);
+        projectToUpdate.setComment(comment);
+        projectToUpdate.setPostalCode(postalCode);
+        projectToUpdate = projectRepository.save(projectToUpdate);
+        model.addAttribute("project", projectToUpdate);
         return"project-edit";
     }
 }
