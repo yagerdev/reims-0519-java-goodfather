@@ -16,7 +16,6 @@ import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -68,21 +67,20 @@ public class ProjectController {
     ) {
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User)authentication.getPrincipal();
-        Long UserId = currentUser.getId();
+        Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(UserId == projectUserId)
-        {
-        Project project = projectRepository.findById(id).get();
-        List<Category> categoryList = categoryRepository.findAll();
-        Collections.sort(categoryList);
-        TreeSet<Room> rooms = new TreeSet<Room>(project.getRooms());
-        model.addAttribute("project", project);
-        model.addAttribute("rooms", rooms);
-        model.addAttribute("message", message);
-        model.addAttribute("categories", categoryList);
-        return "project-recap";
+        if (userId.equals(projectUserId)) {
+            Project project = projectRepository.findById(id).get();
+            List<Category> categoryList = categoryRepository.findAll();
+            Collections.sort(categoryList);
+            TreeSet<Room> rooms = new TreeSet<Room>(project.getRooms());
+            model.addAttribute("project", project);
+            model.addAttribute("rooms", rooms);
+            model.addAttribute("message", message);
+            model.addAttribute("categories", categoryList);
+            return "project-recap";
         }
-        return"error";
+        return "error";
     }
 
     @GetMapping("/projects")
@@ -107,10 +105,9 @@ public class ProjectController {
     ) {
         Project projectToUpdate = projectRepository.findById(projectId).get();
         User currentUser = (User)authentication.getPrincipal();
-        Long UserId = currentUser.getId();
+        Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(UserId == projectUserId)
-        {
+        if(userId.equals(projectUserId)) {
             if (categoryId == null) {
                 List<Category> categoryList = categoryRepository.findAll();
                 Collections.sort(categoryList);
@@ -132,49 +129,51 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}/update")
-    public String update(@PathVariable Long id, Long projectId, Model model,Authentication authentication){
-
+    public String update(
+        @PathVariable Long id,
+        Long projectId,
+        Model model,
+        Authentication authentication
+    ){
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User)authentication.getPrincipal();
-        Long UserId = currentUser.getId();
+        Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
         Project project = projectRepository.findById(id).get();
-        if(UserId == projectUserId)
-        {
-        model.addAttribute("project", project);
-        return "project-edit";
+        if (userId.equals(projectUserId)) {
+            model.addAttribute("project", project);
+            return "project-edit";
         }
-        else
         return"error";
     }
 
     @PutMapping("projects/{id}/update")
     public String update(RedirectAttributes redirectAttributes,
-    @PathVariable Long id,
-    @RequestParam String name, 
-    @RequestParam String address, 
-    @RequestParam String city, 
-    @RequestParam String postalCode, 
-    @RequestParam String comment, 
-    Model model,
-    Authentication authentication
+        @PathVariable Long id,
+        @RequestParam String name, 
+        @RequestParam String address, 
+        @RequestParam String city, 
+        @RequestParam String postalCode, 
+        @RequestParam String comment, 
+        Model model,
+        Authentication authentication
     ){
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User)authentication.getPrincipal();
-        Long UserId = currentUser.getId();
+        Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(UserId == projectUserId)
-        {
-        projectToUpdate.setName(name);
-        projectToUpdate.setAddress(address);
-        projectToUpdate.setCity(city);
-        projectToUpdate.setComment(comment);
-        projectToUpdate.setPostalCode(postalCode);
-        projectToUpdate = projectRepository.save(projectToUpdate);
-        model.addAttribute("project", projectToUpdate);
-        return"project-edit";
+        if(userId.equals(projectUserId)) {
+            projectToUpdate.setName(name);
+            projectToUpdate.setAddress(address);
+            projectToUpdate.setCity(city);
+            projectToUpdate.setComment(comment);
+            projectToUpdate.setPostalCode(postalCode);
+            projectToUpdate = projectRepository.save(projectToUpdate);
+            model.addAttribute("project", projectToUpdate);
+            return"project-edit";
         }
-        else
-        return"error";
+        else {
+            return"error";
+        }
     }
 }

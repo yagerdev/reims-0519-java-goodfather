@@ -201,4 +201,13 @@ public class Project implements Comparable<Project> {
     public int compareTo(Project project) {
         return project.getCreationDate().compareTo(this.creationDate);
     }
+
+    public boolean containAtLeastOneOf(Category category) {
+        for (Room room : rooms) {
+            if (room.getCategory() == category) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
