@@ -108,7 +108,7 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
-    @PostMapping("/tasks/add")
+    @PostMapping("/task/add")
     public String add(
         @ModelAttribute Typology typology,
         @ModelAttribute Room room,
