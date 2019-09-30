@@ -139,6 +139,7 @@
                         th:attr="data-target='#cat'+${category.id}"
                         aria-expanded="false"
                         th:text="${category.name.toUpperCase()}"
+                        th:if="${project.containAtLeastOneOf(category)}"
                     >
                         Nom d'une categorie
                     </button>
