@@ -34,7 +34,7 @@
             <section class="search col-8 m-auto">
                 <div class="input-group mb-3">
                     <input
-                        type="text"
+                        type="search"
                         id="searchBar"
 						class="form-control rounded mr-1"
                         placeholder="Recherchez ..."
@@ -46,8 +46,7 @@
                 </div>
             </section>
 
-            <section class="section-list" id="list">
-                <div th:each="material : ${materials}" class="item-global">
+            <section th:each="material : ${materials}" class="item-global">
                     <form
                         th:action="@{/materials/} + ${material.id}"
                         th:method="PUT"
@@ -90,7 +89,6 @@
                             ></ion-icon>
                         </button>
                     </form>
-                </div>
             </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>

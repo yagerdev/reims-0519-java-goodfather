@@ -46,15 +46,16 @@
             }
 
             function search() {
-                let searchValue = document
-                    .getElementById("searchBar")
-                    .value.toLowerCase();
+                let input = document.getElementById("searchBar");
+                let filter = input.value.toUpperCase();
                 let items = document.getElementsByClassName("search-item");
+                let form = document.getElementsByClassName("item-global");
                 for (i = 0; i < items.length; i++) {
-                    if (items[i].toUpperCase().indexOf(searchValue) > -1) {
-                        items[i].style.display = "";
+                    value = items[i].value;
+                    if (value.toUpperCase().indexOf(filter) > -1) {
+                        form[i].style.display = "";
                     } else {
-                        items[i].style.display = "none";
+                        form[i].style.display = "none";
                     }
                 }
             }
