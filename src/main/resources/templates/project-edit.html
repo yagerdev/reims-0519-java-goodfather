@@ -14,7 +14,7 @@
         </h2>
         <div th:replace="fragments/alert.html :: alert"></div>
         <section>
-            <form th:action="@{/projects/} + ${project.id} + '/modify'" th:method="PUT" th:object="${project}">
+            <form th:action="@{/projects/} + ${project.id} + '/update'" th:method="PUT" th:object="${project}">
                 <div>
                     <input type="number" th:name="projectId" th:value="project.id" hidden/>
                 </div>
