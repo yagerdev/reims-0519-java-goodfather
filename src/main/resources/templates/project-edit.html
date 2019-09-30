@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="FR">
+<div th:replace="fragments/head.html :: head"></div>
+
+<body>
+    <div th:replace="fragments/header.html :: header"></div>
+    <div th:replace="fragments/nav.html :: nav"></div>
+    <main class="container">
+        <h2>
+            EDIT PROJECT
+            <span class="yellow-gf" th:text="${project.id}">
+                    catégories
+                </span>
+        </h2>
+        <div th:replace="fragments/alert.html :: alert"></div>
+        <section>
+            <form th:action="@{/projects/} + ${project.id} + '/update'" th:method="PUT" th:object="${project}">
+                <div>
+                    <input type="number" th:name="projectId" th:value="project.id" hidden/>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="name">
+								Nom du projet
+							</label>
+                    </div>
+                    <input type="text" class="form-control" th:name="name" th:value="*{name}" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="address">
+								Adresse du projet
+							</label>
+                    </div>
+                    <input type="text" class="form-control" th:name="address" th:value="*{address}" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="postal_code">
+								Code postal
+							</label>
+                    </div>
+                    <input type="tel" class="form-control" th:name="postalCode" th:value="*{postalCode}" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="city">
+								Ville
+							</label>
+                    </div>
+                    <input type="text" class="form-control" th:name="city" th:value="*{city}" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="comment">
+							Commentaire
+							</label>
+                    </div>
+                    <input type="text" class="form-control" name="comment" th:value="*{comment}" />
+                </div>
+                <div class="input-group mb-3" hidden>
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="creationDate">
+								Date
+							</label>
+                    </div>
+                    <input type="date" class="form-control" th:name="creationDate" th:value="*{creationDate}" />
+                </div>
+                <button type="submit" class="btn btn-info">Modifier vos informations</button>
+            </form>
+        </section>
+    </main>
+    <div th:replace="fragments/footer.html :: footer"></div>
+    <div th:replace="fragments/script.html :: script"></div>
+</body>
+
+</html>

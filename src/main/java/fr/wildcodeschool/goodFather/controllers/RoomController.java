@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.controllers;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.Typology;
+import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
@@ -69,7 +71,15 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/{id}/edit")
-    public String edit(@PathVariable("id") Long id, Model model){
+    public String edit(@PathVariable("id") Long id, Model model,
+    Authentication authentication
+    ){
+        Project projectToUpdate = projectRepository.findById(id).get();
+        User currentUser = (User)authentication.getPrincipal();
+        Long UserId = currentUser.getId();
+        Long projectUserId = projectToUpdate.getUser().getId();
+        if(UserId == projectUserId)
+        {
         Room currentRoom = roomRepository.findById(id).get();
         Set<Typology> typologies = currentRoom.getCategory().getTypologies();
         List<Task> tasks = taskRepository.findAll();
@@ -85,6 +95,8 @@ public class RoomController {
         model.addAttribute("surfaceB", surfaceB);
         model.addAttribute("ground", ground);
         return "tasks";
+        }
+        return"error";
     }
 
     @DeleteMapping("/rooms/{id}")
