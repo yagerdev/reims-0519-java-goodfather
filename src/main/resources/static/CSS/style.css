@@ -19,6 +19,10 @@
     color: #ffcc00;
 }
 
+.btn-warning {
+    color: white;
+}
+
 /* ------------- Configuration générale ------------- */
 
 body {
@@ -281,7 +285,7 @@ footer .footer-link button {
 }
 
 @media screen and (max-width: 420px) {
-  
+
     .footer-link {
         display: flex;
         flex-direction: column;
@@ -502,3 +506,5 @@ ion-icon:hover {
         margin-bottom: 0.8vh;
     }
 }
+
+/* ------------- SEARCH ------------- */

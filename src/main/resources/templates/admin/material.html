@@ -3,67 +3,90 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
-		<main class="container">
-			<h2>Gestion des<span class="yellow-gf">matériaux</span></h2>
-			<div th:replace="fragments/alert.html :: alert"></div>
-			<section>
-				<form th:action="@{/materials}" method="POST">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="name">Nom</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							placeholder="Entrez une donnée ..."
-							name="name"
-							required
-						/>
-					</div>
-					<button type="submit" class="btn btn-info">Créer</button>
-				</form>
-			</section>
-			<section class="section-list">
-				<div th:each="material : ${materials}" class="item-global">
-					<form
-						th:action="@{/materials/} + ${material.id}"
-						th:method="PUT"
-						th:object="${material}"
-						class="update-form"
-					>
-						<input
-							type="text"
-							th:value="*{name}"
-							th:id="${material.id}"
-							placeholder="Merci de saisier une nouvelle donnée ..."
-							name="name"
-							disabled
-						/>
-						<button
-							type="button"
-							class="btn btn-info"
-							th:id="${material.id + 'item'}"
-							th:onclick="'javascript:update(\'' + ${material.id} + '\');'"
-						>
-							<ion-icon name="create"></ion-icon>
-						</button>
-					</form>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2>Gestion des<span class="yellow-gf">matériaux</span></h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form th:action="@{/materials}" method="POST">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="name"
+                                >Nom</label
+                            >
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Entrez une donnée ..."
+                            name="name"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-info">Créer</button>
+                </form>
+            </section>
 
-					<form th:action="@{/materials/} + ${material.id}" th:method="DELETE">
-						<input type="hidden" th:value="${material.id}" th:name="id" />
-						<button type="submit" class="btn btn-info">
-							<ion-icon
-								ios="ios-close"
-								md="md-close"
-								class="icon-delete"
-							></ion-icon>
-						</button>
-					</form>
-				</div>
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+            <section class="search col-8 m-auto">
+                <div class="input-group mb-3">
+                    <input
+                        type="text"
+						class="form-control rounded mr-1"
+						placeholder="Recherchez un matériau ..."
+                    />
+                    <button class="btn btn-warning d-flex justify-content-center align-items-center">
+                        <ion-icon name="search"></ion-icon>
+                    </button>
+                </div>
+            </section>
+
+            <section class="section-list">
+                <div th:each="material : ${materials}" class="item-global">
+                    <form
+                        th:action="@{/materials/} + ${material.id}"
+                        th:method="PUT"
+                        th:object="${material}"
+                        class="update-form"
+                    >
+                        <input
+                            type="text"
+                            th:value="*{name}"
+                            th:id="${material.id}"
+                            placeholder="Merci de saisier une nouvelle donnée ..."
+                            name="name"
+                            disabled
+                        />
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            th:id="${material.id + 'item'}"
+                            th:onclick="'javascript:update(\'' + ${material.id} + '\');'"
+                        >
+                            <ion-icon name="create"></ion-icon>
+                        </button>
+                    </form>
+
+                    <form
+                        th:action="@{/materials/} + ${material.id}"
+                        th:method="DELETE"
+                    >
+                        <input
+                            type="hidden"
+                            th:value="${material.id}"
+                            th:name="id"
+                        />
+                        <button type="submit" class="btn btn-info">
+                            <ion-icon
+                                ios="ios-close"
+                                md="md-close"
+                                class="icon-delete"
+                            ></ion-icon>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>
