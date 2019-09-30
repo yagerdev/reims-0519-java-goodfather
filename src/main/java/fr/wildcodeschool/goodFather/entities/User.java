@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,7 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User implements UserDetails {
+public class User implements UserDetails, Comparable<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +49,7 @@ public class User implements UserDetails {
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Set<Project> projects;
+    private Set<Project> projects = new TreeSet<Project>();
 
     public User() {
     }
@@ -206,5 +207,10 @@ public class User implements UserDetails {
 
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
+    }
+
+    @Override
+    public int compareTo(User user) {
+        return (this.lastName + " " + this.firstName).compareTo(user.getLastName() + " " + user.getFirstName());
     }
 }

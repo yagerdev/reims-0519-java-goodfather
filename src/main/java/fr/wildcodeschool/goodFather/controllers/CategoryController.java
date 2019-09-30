@@ -5,11 +5,12 @@ import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ public class CategoryController {
     @GetMapping("/categories")
     public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Category> categoryList = categoryRepository.findAll();
+        Collections.sort(categoryList);
         model.addAttribute("categories", categoryList);
         model.addAttribute("message",message);
         return "admin/category";
@@ -44,7 +46,7 @@ public class CategoryController {
     public String read(Model model, @PathVariable Long id) {
         Category category = categoryRepository.findById(id).get();
         List<Typology> typologies = typologyRepository.findAll();
-        Map<Typology, Boolean> checked = new HashMap<Typology, Boolean>();
+        Map<Typology, Boolean> checked = new TreeMap<Typology, Boolean>();
         for (Typology typology : typologies) {
             if (category.getTypologies().contains(typology)) {
                 checked.put(typology, true);
@@ -52,10 +54,8 @@ public class CategoryController {
                 checked.put(typology, false);
             }
         }
-        model.addAttribute("entityName", category.getName());
-        model.addAttribute("entityType", "categories");
-        model.addAttribute("entityId", id);
-        model.addAttribute("listType", "typologies");
+        model.addAttribute("categoryName", category.getName());
+        model.addAttribute("categoryId", id);
         model.addAttribute("myMap", checked);
         return "admin/config";
     }

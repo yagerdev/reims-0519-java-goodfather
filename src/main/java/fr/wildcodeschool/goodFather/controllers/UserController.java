@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.controllers;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class UserController {
     @GetMapping("/users")
     public String show(Model model, @RequestParam(value = "message", required = false) String message){
         List<User> userList = userRepository.findAll();
+        Collections.sort(userList);
         model.addAttribute("users", userList);
         model.addAttribute("message", message);
         return "admin/user";

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Quantity {
+public class Quantity implements Comparable<Quantity>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,5 +67,10 @@ public class Quantity {
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    @Override
+    public int compareTo(Quantity quantity) {
+        return this.task.compareTo(quantity.getTask());
     }
  }

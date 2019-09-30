@@ -2,6 +2,7 @@ package fr.wildcodeschool.goodFather.entities;
 
 import java.util.Date;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Project {
+public class Project implements Comparable<Project> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +46,7 @@ public class Project {
     private User user;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
-    private Set<Room> rooms;
+    private Set<Room> rooms = new TreeSet<Room>();
 
     public Project() { }
 
@@ -194,5 +195,10 @@ public class Project {
     public void removeRoomCost(Room room) {
         this.lowerTotalCost -= room.getLowerTotalCost();
         this.upperTotalCost -= room.getUpperTotalCost();
+    }
+
+    @Override
+    public int compareTo(Project project) {
+        return project.getCreationDate().compareTo(this.creationDate);
     }
 }
