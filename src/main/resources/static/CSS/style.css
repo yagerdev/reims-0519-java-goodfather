@@ -535,3 +535,61 @@ ion-icon:hover {
 .form-control[readonly] {
     background-color: transparent;
 }
+
+/* ------------- HELP ------------- */
+
+.help p {
+    margin: 0;
+    letter-spacing: 1px;
+    margin: auto;
+    text-align: justify;
+}
+
+.help a {
+    background-color: #ffcc00;
+    font-weight: bold;
+    padding: 4px;
+    color: white;
+    transition: 0.5s;
+}
+
+.help a:hover {
+    background-color: #328080;
+    text-decoration: none;
+}
+
+.help .card-body {
+    background-color: whitesmoke;
+    border: none;
+}
+
+.logo-help-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.logo-help-container p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2vh;
+    width: calc(80vw / 6);
+}
+
+.help-logo ion-icon {
+    color: #328080;
+    width: 30px;
+    height: 30px;
+}
+
+@media screen and (max-width: 800px) {
+    .logo-help-container {
+        flex-wrap: wrap;
+    }
+
+    .logo-help-container p {
+        width: calc(80vw / 2);
+    }
+}
