@@ -183,4 +183,13 @@ public class Room {
         this.lowerTotalCost -= ( (double)Math.round(lowerCost * 100) ) / 100;
         this.upperTotalCost -= ( (double)Math.round(upperCost * 100) ) / 100;
     }
+
+    public boolean containAtLeastOneOf(Typology typology) {
+        for (Quantity quantity : quantities) {
+            if (quantity.getTask().getTypology() == typology) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
