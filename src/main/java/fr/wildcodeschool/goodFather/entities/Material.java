@@ -1,6 +1,7 @@
 package fr.wildcodeschool.goodFather.entities;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Material {
+public class Material implements Comparable<Material> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +20,7 @@ public class Material {
     private String name;
 
     @OneToMany(mappedBy = "material", cascade = CascadeType.REMOVE)
-    private Set<Task> tasks;
+    private Set<Task> tasks = new TreeSet<Task>();
 
     public Material() {
     }
@@ -55,6 +56,11 @@ public class Material {
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    @Override
+    public int compareTo(Material material) {
+        return this.name.compareTo(material.getName());
     }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 
 import fr.wildcodeschool.goodFather.services.MyUserDetailsService;
 
@@ -78,5 +79,10 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
         authProvider.setUserDetailsService(myUserDetailsService);
         authProvider.setPasswordEncoder(encoder);
         return authProvider;
-	}
+    }
+    
+    @Bean
+    public SpringSecurityDialect springSecurityDialect() {
+        return new SpringSecurityDialect();
+    }
 }

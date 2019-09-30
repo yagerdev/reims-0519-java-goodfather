@@ -144,21 +144,11 @@
                         <button type="submit" class="btn btn-info">
                             Créer
                         </button>
-                        <button
-                            class="btn btn-info btn-recap"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#recapTask"
-                            aria-expanded="false"
-                        >
-                            Récapitulatif
-                            <ion-icon name="arrow-dropdown"></ion-icon>
-                        </button>
                     </div>
                 </form>
             </section>
 
-            <section class="accordion collapse" id="recapTask">
+            <section class="accordion" id="recapTask">
                 <div class="card" th:each="typology : ${typologies}">
                     <button
                         class="btn btn-info btn-accordeon p-2"

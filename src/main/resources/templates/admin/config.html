@@ -7,17 +7,15 @@
         <main class="container">
             <h2 class="jumbotron mb-3">
                 Configuration de
-                <span class="yellow-gf" th:text="${entityName}"></span>
+                <span class="yellow-gf" th:text="${categoryName}"></span>
             </h2>
             <section>
                 <p>
-                    Merci de sélectionner les
-                        <span th:text="${listType}"></span>
-                    rattachées à
-                        <span th:text="${entityName}"></span>
+                    Merci de sélectionner les typologies rattachées à
+                    <span th:text="${categoryName}"></span>
                 </p>
                 <form
-                    th:action="@{'/' + ${entityType} + '/' + ${entityId}}"
+                    th:action="@{'/categories/' + ${categoryId}}"
                     th:method="PUT"
                 >
                     <div th:each="mySet : ${myMap}">
@@ -26,7 +24,7 @@
                                 <div class="input-group-text flex-centered">
                                     <input
                                         type="checkbox"
-                                        th:name="${listType}"
+                                        name="typologies"
                                         th:id="${mySet.key.id}"
                                         th:value="${mySet.key.id}"
                                         th:checked="${mySet.value}"
@@ -37,7 +35,7 @@
                             <label
                                 class="form-control"
                                 h:for="${mySet.key.id}"
-                                th:text="${entityType == 'categories' ? mySet.key.name : mySet.key.constructName()}"
+                                th:text="${mySet.key.name}"
                             >
                                 Item
                             </label>

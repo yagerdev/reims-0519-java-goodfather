@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.controllers;
 import fr.wildcodeschool.goodFather.entities.Material;
 import fr.wildcodeschool.goodFather.repositories.MaterialRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class MaterialController {
     @GetMapping("/materials")
     public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Material> materialList = materialRepository.findAll();
+        Collections.sort(materialList);
         model.addAttribute("materials", materialList);
         model.addAttribute("message", message);
         return "admin/material";

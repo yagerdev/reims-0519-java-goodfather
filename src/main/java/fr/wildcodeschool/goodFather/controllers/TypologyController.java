@@ -5,10 +5,9 @@ import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,29 +34,10 @@ public class TypologyController {
     @GetMapping("/typologies")
     public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Typology> typologyList = typologyRepository.findAll();
+        Collections.sort(typologyList);
         model.addAttribute("message", message);
         model.addAttribute("typologies", typologyList);
         return "admin/typology";
-    }
-
-    @GetMapping("/typologies/{id}/edit")
-    public String readTypology(Model model, @PathVariable Long id) {
-        Typology typology = typologyRepository.findById(id).get();
-        List<Task> tasks = taskRepository.findAll();
-        Map<Task, Boolean> checked = new HashMap<Task, Boolean>();
-        for (Task task : tasks) {
-            if (typology.getTasks().contains(task)) {
-                checked.put(task, true);
-            } else {
-                checked.put(task, false);
-            }
-        }
-        model.addAttribute("entityName", typology.getName());
-        model.addAttribute("entityType", "typologies");
-        model.addAttribute("entityId", id);
-        model.addAttribute("listType", "tasks");
-        model.addAttribute("myMap", checked);
-        return "admin/config";
     }
 
     @PutMapping("/typologies/{id}")
