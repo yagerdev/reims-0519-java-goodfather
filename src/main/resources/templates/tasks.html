@@ -15,8 +15,8 @@
                 </h3>
             </section>
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Commentaires</span>
+                <div class="input-group-prepend read-project">
+                    <span class="input-group-text flex-centered">Commentaires</span>
                 </div>
                 <textarea
                     class="form-control"
@@ -101,8 +101,8 @@
             <form th:method="POST" th:action="@{/tasks/add}">
                 <input type="hidden" name="room" th:value="${room.id}" />
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="typology">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="typology">
                             Typologie
                         </label>
                     </div>
@@ -173,6 +173,7 @@
                         class="form-control"
                         name="quantity"
                         required
+                        placeholder="Entrez la quantité spécifique à votre tâche"
                     />
                 </div>
                 <button type="submit" class="btn btn-info">Ajouter</button>

@@ -13,8 +13,8 @@
             <section>
                 <form th:action="@{/works}" method="POST" class="rounded">
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="name">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="name">
 								Nom
 							</label>
                         </div>
@@ -24,6 +24,7 @@
                             name="name"
 							required
 							autofocus
+							placeholder="Entrez un travail ..."
                         >
                     </div>
                     <button type="submit" class="btn btn-info">Créer</button>

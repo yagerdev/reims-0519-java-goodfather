@@ -22,14 +22,15 @@
                 >
                     <div th:each="mySet : ${myMap}">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
+                            <div class="input-group-prepend read-project">
+                                <div class="input-group-text flex-centered">
                                     <input
                                         type="checkbox"
                                         th:name="${listType}"
                                         th:id="${mySet.key.id}"
                                         th:value="${mySet.key.id}"
                                         th:checked="${mySet.value}"
+                                        class="checkbox-config"
                                     />
                                 </div>
                             </div>

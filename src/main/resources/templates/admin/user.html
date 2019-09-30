@@ -13,8 +13,8 @@
             <section>
                 <form th:action="@{/users}" method="POST" class="rounded">
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="firstName">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="firstName">
 								Prénom
 							</label>
                         </div>
@@ -24,11 +24,12 @@
                             name="firstName"
                             required
                             autofocus
+                            placeholder="Entrez le prénom de l'utilisateur ..."
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="lastName">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="lastName">
 								Nom
 							</label>
                         </div>
@@ -37,11 +38,12 @@
                             class="form-control"
                             name="lastName"
                             required
+                            placeholder="Entrez le nom de l'utilisateur ..."
                         />
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="role">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="role">
                                 Rôle
                             </label>
 						</div>
@@ -52,8 +54,8 @@
 						</select>
 					</div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="email">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="email">
 								Mail
 							</label>
                         </div>
@@ -62,11 +64,12 @@
                             class="form-control"
                             name="email"
                             required
+                            placeholder="Entrez le mail de l'utilisateur ..."
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="password">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="password">
 								Mot de passe
 							</label>
                         </div>
@@ -76,11 +79,12 @@
                             name="password"
                             required
                             id="password"
+                            placeholder="Entrez le mot de passe de l'utilisateur ..."
                         />
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
+						<div class="input-group-prepend read-project">
+							<div class="input-group-text flex-centered">
 								<input
 									type="checkbox"
 									id="show-password"
@@ -96,8 +100,8 @@
 						/>
 					</div>
 					<div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="phoneNumber">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="phoneNumber">
 								Téléphone
 							</label>
                         </div>
@@ -105,11 +109,12 @@
                             type="tel"
                             class="form-control"
                             name="phoneNumber"
+                            placeholder="Entrez le numéro de téléphone de l'utilisateur ..."
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="address">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="address">
 								Adresse
 							</label>
                         </div>
@@ -117,11 +122,12 @@
                             type="text"
                             class="form-control"
                             name="address"
+                            placeholder="Entrez l'adresse de l'utilisateur ..."
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="city">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="city">
 								City
 							</label>
                         </div>
@@ -129,11 +135,12 @@
                             type="text"
                             class="form-control"
                             name="city"
+                            placeholder="Entrez la ville de l'utilisateur ..."
                         />
                     </div>
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="postalCode">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="postalCode">
 								Code postal
 							</label>
                         </div>
@@ -141,6 +148,7 @@
                             type="text"
                             class="form-control"
                             name="postalCode"
+                            placeholder="Entrez le code postal de l'utilisateur ..."
                         />
                     </div>
                     <button type="submit" class="btn btn-info">Créer</button>

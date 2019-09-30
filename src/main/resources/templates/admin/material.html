@@ -13,8 +13,8 @@
 			<section>
 				<form th:action="@{/materials}" method="POST" class="rounded">
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="name">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="name">
 								Nom
 							</label>
 						</div>
@@ -23,7 +23,8 @@
 							class="form-control"
 							name="name"
 							required
-							autofocus
+                            autofocus
+                            placeholder="Entrez un matériau ..."
 						/>
 					</div>
 					<button type="submit" class="btn btn-info">Créer</button>
@@ -35,7 +36,7 @@
                     <input
                         type="text"
 						class="form-control rounded mr-1"
-						placeholder="Recherchez un matériau ..."
+						placeholder="Recherchez ..."
                     />
                     <button class="btn btn-warning d-flex justify-content-center align-items-center">
                         <ion-icon name="search"></ion-icon>
