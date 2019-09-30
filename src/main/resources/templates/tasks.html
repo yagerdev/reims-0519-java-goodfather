@@ -89,7 +89,6 @@
                     Finir projet
                 </a>
             </section>
-
             <form th:method="POST" th:action="@{/task/add}">
                 <input type="hidden" name="room" th:value="${room.id}" />
                 <div class="input-group mb-3">
@@ -186,34 +185,32 @@
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
             <section class="section-list">
-                <ul class="list-group" th:each="quantity : ${quantities}">
-                    <li
-                        class="list-group-item"
-                        th:text="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
-                    >
-                        Item
-                    </li> 
-                    <form
-                        th:action="@{'/quantity'}"
-                        th:method="DELETE"
-                    >
-                        <input
-                            type="hidden"
-                            th:value="${quantity.id}"
-                            th:name="quantity"
-                        />
-                        <button
-                            type="submit"
-                            class="btn btn-info"
-                        >
-                            <ion-icon
-                                ios="ios-close"
-                                md="md-close"
-                                class="icon-delete"
-                            ></ion-icon>
+                <h3>Liste des taches ajoutées :</h3>
+                <section class="accordion" id="recapTask">
+                    <div class="card" th:each="typology : ${typologies}">
+                        <button class="btn btn-info btn-accordeon p-2" type="button" data-toggle="collapse"
+                            th:attr="data-target='#typo'+${typology.id}" aria-expanded="false"
+                            th:text="${typology.name.toUpperCase()}">
+                            Nom d'une typologie
                         </button>
-                    </form>
-                </ul>         
+                        <div th:id="'typo'+${typology.id}" class="collapse" data-parent="#recapTask">
+                            <div class="card-body">
+                                <div class="item-global" th:each="quantity : ${room.quantities}">
+                                    <input class="update-form text-center" th:if="${quantity.task.typology.id ==  typology.id}"
+                                        th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
+                                        disabled
+                                    />
+                                    <form th:if="${quantity.task.typology.id ==  typology.id}" th:action="@{'/quantity'}" th:method="DELETE">
+                                        <input type="hidden" th:value="${quantity.id}" th:name="quantity" />
+                                        <button type="submit" class="btn btn-info">
+                                            <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </section>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
