@@ -13,7 +13,7 @@ public class Quantity implements Comparable<Quantity>{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int quantity;
+    private double quantity;
 
     @ManyToOne
     private Room room;
@@ -24,13 +24,13 @@ public class Quantity implements Comparable<Quantity>{
     public Quantity() {
     }
 
-    public Quantity(Room room, Task task, int quantity) {
+    public Quantity(Room room, Task task, double quantity) {
         this.room = room;
         this.task = task;
         this.quantity = quantity;
     }
 
-    public Quantity(Long id, Room room, Task task, int quantity) {
+    public Quantity(Long id, Room room, Task task, double quantity) {
         this.id = id;
         this.room = room;
         this.task = task;
@@ -45,11 +45,11 @@ public class Quantity implements Comparable<Quantity>{
         this.id = id;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 

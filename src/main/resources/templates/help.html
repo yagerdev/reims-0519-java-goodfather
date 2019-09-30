@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron">
+                Besoin
+                <span class="yellow-gf">d'aides ?</span>
+            </h2>
+
+            <section class="help-logo">
+                <h3 class="font-weight-bold mb-4">Lexique des icones</h3>
+                <div class="logo-help-container">
+                    <p class="rounded border">
+                        Modifier<ion-icon class="mt-2" name="create"></ion-icon>
+                    </p>
+                    <p class="rounded border">
+                        Consulter<ion-icon class="mt-2" name="eye"></ion-icon>
+                    </p>
+                    <p class="rounded border">
+                        Supprimer<ion-icon class="mt-2" name="close"></ion-icon>
+                    </p>
+                    <p class="rounded border">
+                        Accueil<ion-icon class="mt-2" name="home"></ion-icon>
+                    </p>
+                    <p class="rounded border">
+                        Profil<ion-icon class="mt-2" name="person"></ion-icon>
+                    </p>
+                    <p class="rounded border">
+                        Configurer<ion-icon class="mt-2" name="build"></ion-icon>
+                    </p>
+                </div>
+            </section>
+
+            <section class="help border-top pt-4 mb-4">
+                <h3 class="font-weight-bold mb-4">Questions fréquentes</h3>
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button
+                                    class="btn btn-info btn-accordeon"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseOne"
+                                    aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                >
+                                    Comment créer un projet ?
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div
+                            id="collapseOne"
+                            class="collapse"
+                            aria-labelledby="headingOne"
+                            data-parent="#accordionExample"
+                        >
+                            <div class="card-body">
+                                <p>
+                                    Vous souhaitez créer votre premier projet ?
+                                    Aucun problème, rendez-vous
+                                    <a href="/home">sur cette page</a> , où il
+                                    vous suffira de renseigner le nom de projet
+                                    et sa localisation. Une section commentaire
+                                    est également présente afin de noter les
+                                    différentes particuliarités de votre projet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button
+                                    class="btn btn-info btn-accordeon collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseTwo"
+                                    aria-expanded="false"
+                                    aria-controls="collapseTwo"
+                                >
+                                    Consulter ou modifier mes informations
+                                    personnelles ?
+                                </button>
+                            </h2>
+                        </div>
+                        <div
+                            id="collapseTwo"
+                            class="collapse"
+                            aria-labelledby="headingTwo"
+                            data-parent="#accordionExample"
+                        >
+                            <div class="card-body">
+                                <p>
+                                    GoodFather à créé votre compte afin que vous
+                                    puissiez accéder à l'application, cependant,
+                                    vous pouvez modifier votre mot de passe
+                                    et/ou vos informations personnelles en vous
+                                    dirigeant
+                                    <a href="/profile">sur cette page</a> et il
+                                    vous suffit de modifier les informations
+                                    déjà pré-remplie et cliquer sur "modifier
+                                    mes informations".
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button
+                                    class="btn btn-info btn-accordeon collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseThree"
+                                    aria-expanded="false"
+                                    aria-controls="collapseThree"
+                                >
+                                    Comment voir mes projets ?
+                                </button>
+                            </h2>
+                        </div>
+                        <div
+                            id="collapseThree"
+                            class="collapse"
+                            aria-labelledby="headingThree"
+                            data-parent="#accordionExample"
+                        >
+                            <div class="card-body">
+                                <p>
+                                    Vous avez créé un projet et vous souhaitez
+                                    le consulter et/ou modifier des éléments,
+                                    rien de plus simple, rendez-vous sur
+                                    <a href="/projects">sur cette page</a> où
+                                    tous vos projets seront listés avec leur
+                                    date de création.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="questions border-top pt-4">
+                <h3 class="font-weight-bold mb-4">
+                    Une question sans réponse ? Contactez-nous !
+                </h3>
+                <a
+                    href="https://www.goodfather.fr/contact/"
+                    class="btn btn-info"
+                    >Contacter</a
+                >
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>
