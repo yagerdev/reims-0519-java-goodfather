@@ -69,7 +69,7 @@ public class ProjectController {
         User currentUser = (User)authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if (userId == projectUserId) {
+        if (userId.equals(projectUserId)) {
             Project project = projectRepository.findById(id).get();
             List<Category> categoryList = categoryRepository.findAll();
             Collections.sort(categoryList);
@@ -80,7 +80,7 @@ public class ProjectController {
             model.addAttribute("categories", categoryList);
             return "project-recap";
         }
-        return"error";
+        return "error";
     }
 
     @GetMapping("/projects")
@@ -107,7 +107,7 @@ public class ProjectController {
         User currentUser = (User)authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(userId == projectUserId) {
+        if(userId.equals(projectUserId)) {
             if (categoryId == null) {
                 List<Category> categoryList = categoryRepository.findAll();
                 Collections.sort(categoryList);
@@ -129,38 +129,40 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}/update")
-    public String update(@PathVariable Long id, Long projectId, Model model,Authentication authentication){
-
-        Project projectToUpdate = projectRepository.findById(id).get();
-        User currentUser = (User)authentication.getPrincipal();
-        Long userId = currentUser.getId();
-        Long projectUserId = projectToUpdate.getUser().getId();
-        Project project = projectRepository.findById(id).get();
-        if(userId == projectUserId)
-        {
-        model.addAttribute("project", project);
-        return "project-edit";
-        }
-        else
-        return"error";
-    }
-
-    @PutMapping("projects/{id}/update")
-    public String update(RedirectAttributes redirectAttributes,
-    @PathVariable Long id,
-    @RequestParam String name, 
-    @RequestParam String address, 
-    @RequestParam String city, 
-    @RequestParam String postalCode, 
-    @RequestParam String comment, 
-    Model model,
-    Authentication authentication
+    public String update(
+        @PathVariable Long id,
+        Long projectId,
+        Model model,
+        Authentication authentication
     ){
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User)authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(userId == projectUserId) {
+        Project project = projectRepository.findById(id).get();
+        if (userId.equals(projectUserId)) {
+            model.addAttribute("project", project);
+            return "project-edit";
+        }
+        return"error";
+    }
+
+    @PutMapping("projects/{id}/update")
+    public String update(RedirectAttributes redirectAttributes,
+        @PathVariable Long id,
+        @RequestParam String name, 
+        @RequestParam String address, 
+        @RequestParam String city, 
+        @RequestParam String postalCode, 
+        @RequestParam String comment, 
+        Model model,
+        Authentication authentication
+    ){
+        Project projectToUpdate = projectRepository.findById(id).get();
+        User currentUser = (User)authentication.getPrincipal();
+        Long userId = currentUser.getId();
+        Long projectUserId = projectToUpdate.getUser().getId();
+        if(userId.equals(projectUserId)) {
             projectToUpdate.setName(name);
             projectToUpdate.setAddress(address);
             projectToUpdate.setCity(city);
