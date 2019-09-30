@@ -128,8 +128,8 @@ public class ProjectController {
         return "redirect:/projects";
     }
 
-    @GetMapping("projects/{id}/modify")
-    public String modify(@PathVariable Long id, Long projectId, Model model,Authentication authentication){
+    @GetMapping("projects/{id}/update")
+    public String update(@PathVariable Long id, Long projectId, Model model,Authentication authentication){
 
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User)authentication.getPrincipal();
@@ -145,7 +145,7 @@ public class ProjectController {
         return"error";
     }
 
-    @PutMapping("projects/{id}/modify")
+    @PutMapping("projects/{id}/update")
     public String update(RedirectAttributes redirectAttributes,
     @PathVariable Long id,
     @RequestParam String name, 
