@@ -3,26 +3,34 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
-		<main class="container">
-			<h2>Bienvenue<span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">Nom utilisateur</span></h2>
-			<section class="admin-control">
-				<p>
-					Ici, vous avez accès aux différentes pages permettant la création, la
-					modification, la suppression et la lecture des différents éléments
-					nécessaires au bon fonctionnement de l'application.
-				</p>
-				<a href="/projects/create" class="btn btn-info">Créer un projet</a>
-				<a href="/users" class="btn btn-info">Ajouter un utilisateur</a>
-				<a href="/tasks" class="btn btn-outline-info">Tâches</a>	
-				<a href="/works" class="btn btn-outline-info">Travaux</a>		
-				<a href="/materials" class="btn btn-outline-info">Matériaux</a>
-				<a href="/typologies" class="btn btn-outline-info">Typologies</a>
-				<a href="/categories" class="btn btn-outline-info">Catégories</a>
-
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+                Bienvenue
+                <span
+                    class="yellow-gf"
+                    th:text="${user.firstName} + ' ' + ${user.lastName}"
+                >
+                    Nom utilisateur
+                </span>
+            </h2>
+            <section class="admin-control">
+                <p>
+                    Ici, vous avez accès aux différentes pages permettant la
+                    création, la modification, la suppression et la lecture des
+                    différents éléments nécessaires au bon fonctionnement de
+                    l'application.
+                </p>
+                <a href="/projects/create" class="btn btn-info">Projets</a>
+                <a href="/users" class="btn btn-info">Utilisateurs</a>
+                <a href="/tasks" class="btn btn-outline-info">Tâches</a>
+                <a href="/works" class="btn btn-outline-info">Travaux</a>
+                <a href="/materials" class="btn btn-outline-info">Matériaux</a>
+                <a href="/typologies" class="btn btn-outline-info">Typologies</a>
+                <a href="/categories" class="btn btn-outline-info">Catégories</a>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>
