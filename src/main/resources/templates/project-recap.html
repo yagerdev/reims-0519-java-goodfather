@@ -5,7 +5,7 @@
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2 class="mb-3">
+            <h2 class="mb-3 jumbotron">
                 Récapitulatif
                 <span class="yellow-gf" th:text="${project.name}">
                     nom projet
@@ -65,7 +65,9 @@
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered">Date</span>
+                        <span class="input-group-text flex-centered">
+                            Date
+                        </span>
                     </div>
                     <div
                         class="form-control"
@@ -123,8 +125,9 @@
                 <a
                     href="#"
                     class="btn btn-outline-info d-flex justify-content-center align-items-center"
-                    >Modifier projet</a
                 >
+                    Modifier projet
+                </a>
             </section>
 
             <section class="accordion" id="recapProject">
@@ -171,17 +174,15 @@
                                         >
                                             <ion-icon name="create"></ion-icon>
                                         </a>
+                                            <button
+                                            type="button"
+                                            class="btn btn-info"
+                                            data-toggle="modal"
+                                            th:attr="data-target='#room'+${room.id}"
+                                        >
+                                            <ion-icon name="eye"></ion-icon>
+                                        </button>
                                     </div>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-info"
-                                        data-toggle="modal"
-                                        th:attr="data-target='#room'+${room.id}"
-                                    >
-                                        <ion-icon name="eye"></ion-icon>
-                                    </button>
-
                                     <div
                                         class="modal fade"
                                         th:id="'room'+${room.id}"

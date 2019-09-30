@@ -3,114 +3,47 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
-		<main class="container">
-			<h2>Gestion des<span class="yellow-gf">utilisateurs</span></h2>
-			<div th:replace="fragments/alert.html :: alert"></div>
-			<section>
-				<form th:action="@{/users}" method="POST">
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="firstName">Prénom</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							name="firstName"
-							required
-						/>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+				Gestion des
+				<span class="yellow-gf">utilisateurs</span>
+            </h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form th:action="@{/users}" method="POST" class="rounded">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="firstName">
+								Prénom
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="firstName"
+                            required
+                            autofocus
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="lastName">
+								Nom
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="lastName"
+                            required
+                        />
 					</div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
-							<label class="input-group-text" for="lastName">Nom</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							name="lastName"
-							required
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="email">Mail</label>
-						</div>
-						<input type="email" class="form-control" name="email" required />
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="phoneNumber"
-								>Téléphone</label
-							>
-						</div>
-						<input
-							type="tel"
-							class="form-control"
-							name="phoneNumber"
-							required
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="address">Adresse</label>
-						</div>
-						<input type="text" class="form-control" name="address" required />
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="city">City</label>
-						</div>
-						<input type="text" class="form-control" name="city" required />
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="postalCode"
-								>Code postal</label
-							>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							name="postalCode"
-							required
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="password"
-								>Mot de passe</label
-							>
-						</div>
-						<input
-							type="password"
-							class="form-control"
-							name="password"
-							required
-							id="password"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<input
-									type="checkbox"
-									aria-label="Checkbox for following text input"
-									id="show-password"
-                                    onchange="showAndHidePassword()"
-								/>
-							</div>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							aria-label="Text input with checkbox"
-							value="Afficher le mot de passe"
-							disabled
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="role">Rôle</label>
+							<label class="input-group-text" for="role">
+                                Rôle
+                            </label>
 						</div>
 						<select class="custom-select" name="role" required>
 							<option selected disabled>Choisir...</option>
@@ -118,38 +51,136 @@
 							<option value="USER">USER</option>
 						</select>
 					</div>
-					<button type="submit" class="btn btn-info">Créer</button>
-				</form>
-			</section>
-			<section class="section-list">
-				<div th:each="user : ${users}" class="item-global">
-					<div
-						type="text"
-						th:text="${user.firstName} + ' ' + ${user.lastName}"
-						th:id="${user.id}"
-						class="user-list"
-					>
-						User
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="email">
+								Mail
+							</label>
+                        </div>
+                        <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            required
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="password">
+								Mot de passe
+							</label>
+                        </div>
+                        <input
+                            type="password"
+                            class="form-control"
+                            name="password"
+                            required
+                            id="password"
+                        />
 					</div>
-					<a th:href="@{'/users/' + ${user.id}}">
-						<button type="button" class="btn btn-info">
-							<ion-icon name="create"></ion-icon>
-						</button>
-					</a>
-					<form th:action="@{/users/} + ${user.id}" th:method="DELETE">
-						<input type="hidden" th:value="${user.id}" th:name="id" />
-						<button type="submit" class="btn btn-info">
-							<ion-icon
-								ios="ios-close"
-								md="md-close"
-								class="icon-delete"
-							></ion-icon>
-						</button>
-					</form>
-				</div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input
+									type="checkbox"
+									id="show-password"
+									onchange="showAndHidePassword()"
+								/>
+							</div>
+						</div>
+						<input
+							type="text"
+							class="form-control"
+							value="Afficher le mot de passe"
+							disabled
+						/>
+					</div>
+					<div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="phoneNumber">
+								Téléphone
+							</label>
+                        </div>
+                        <input
+                            type="tel"
+                            class="form-control"
+                            name="phoneNumber"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="address">
+								Adresse
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="address"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="city">
+								City
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="city"
+                        />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="postalCode">
+								Code postal
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="postalCode"
+                        />
+                    </div>
+                    <button type="submit" class="btn btn-info">Créer</button>
+                </form>
 			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+			
+            <section class="section-list">
+                <div th:each="user : ${users}" class="item-global">
+                    <div
+                        type="text"
+                        th:text="${user.firstName} + ' ' + ${user.lastName}"
+                        th:id="${user.id}"
+                        class="user-list"
+                    >
+                        User
+                    </div>
+                    <a th:href="@{'/users/' + ${user.id}}" type="button" class="btn btn-info">
+						<ion-icon name="create"></ion-icon>
+                    </a>
+                    <form
+                        th:action="@{/users/} + ${user.id}"
+                        th:method="DELETE"
+                    >
+                        <input
+                            type="hidden"
+                            th:value="${user.id}"
+                            th:name="id"
+                        />
+                        <button type="submit" class="btn btn-info">
+                            <ion-icon
+                                ios="ios-close"
+                                md="md-close"
+                                class="icon-delete"
+                            ></ion-icon>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>

@@ -5,7 +5,10 @@
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
         <main class="container">
-            <h2>Modification des<span class="yellow-gf">tâches</span></h2>
+            <h2 class="jumbotron mb-3">
+                Modification des
+                <span class="yellow-gf">tâches</span>
+            </h2>
             <div th:replace="fragments/alert.html :: alert"></div>
             <section>
                 <form
@@ -79,9 +82,9 @@
                             th:checked="${task.unit.equals('au m²')}"
                             required
                         />
-                        <label class="form-check-label" for="perUnit"
-                            >au m²</label
-                        >
+                        <label class="form-check-label" for="perUnit">
+                            au m²
+                        </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input
@@ -93,9 +96,9 @@
                             th:checked="${task.unit.equals('à l''unité')}"
                             required
                         />
-                        <label class="form-check-label" for="perUnit"
-                            >à l'unité</label
-                        >
+                        <label class="form-check-label" for="perUnit">
+                            à l'unité
+                        </label>
                     </div>
 
                     <div class="input-group mb-3">
