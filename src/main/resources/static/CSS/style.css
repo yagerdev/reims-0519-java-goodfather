@@ -480,6 +480,8 @@ ion-icon:hover {
     flex-direction: column;
 }
 
+/* ------------- RECAP ROOM ------------- */
+
 .action-recap-project-container {
     display: flex;
     align-items: center;
@@ -503,6 +505,29 @@ ion-icon:hover {
     .action-recap-project-container .d-flex {
         width: 100%;
         margin-bottom: 0.8vh;
+    }
+}
+
+.quantity-selector-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.25rem;
+    height: auto;
+}
+
+.quantity-selector-container .d-flex {
+    width: calc(75vw / 5);
+    height: auto;
+    margin-bottom: 0.8vh;
+}
+
+@media screen and (min-width: 800px) {
+    .quantity-selector-container {
+        height: 10vh;
+    }
+    .quantity-selector-container .d-flex {
+        height: 100%;
     }
 }
 

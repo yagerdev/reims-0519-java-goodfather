@@ -40,19 +40,13 @@
                         <td th:text="${room.height + ' cm'}">item</td>
                     </tr>
                     <tr>
-                        <td
-                            th:text="${T(Math).round((room.wallA/100)*(room.height/100)*100.00)/100.00 + ' m²'}"
-                        >
+                        <td th:text="${surfaceA + ' m²'}">
                             item
                         </td>
-                        <td
-                            th:text="${T(Math).round((room.wallB/100)*(room.height/100)*100.00)/100.00 + ' m²'}"
-                        >
+                        <td th:text="${surfaceB + ' m²'}">
                             item
                         </td>
-                        <td
-                            th:text="${T(Math).round((room.wallB/100)*(room.wallA/100)*100.00)/100.00 + ' m²'}"
-                        >
+                        <td th:text="${ground + ' m²'}">
                             item
                         </td>
                     </tr>
@@ -98,7 +92,7 @@
                 </a>
             </section>
 
-            <form th:method="POST" th:action="@{/tasks/add}">
+            <form th:method="POST" th:action="@{/task/add}">
                 <input type="hidden" name="room" th:value="${room.id}" />
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -162,16 +156,23 @@
                         </option>
                     </select>
                 </div>
+                <div class="quantity-selector-container">
+                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceA.toString()}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">A</button>
+                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceB}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">B</button>
+                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceA + surfaceB}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">A+B</button>
+                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceA*2 + surfaceB*2}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">4</button>
+                    <button type="button" onclick="quantity_select(this);" th:value="${ground}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">Sol</button>
+                </div>
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="quantity">
-                            Quantité
-                        </label>
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="quantity">Quantité / Surface</label>
                     </div>
                     <input
+                        id="quantity"
                         type="number"
                         class="form-control"
-                        name="quantity"
+                        name="quantityValue"
+                        step="0.01"
                         required
                     />
                 </div>
@@ -184,14 +185,20 @@
                         th:text="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
                     >
                         Item
-                    </li>
-                    <form th:action="@{'/quantity'}" th:method="DELETE">
+                    </li> 
+                    <form
+                        th:action="@{'/quantity'}"
+                        th:method="DELETE"
+                    >
                         <input
                             type="hidden"
                             th:value="${quantity.id}"
                             th:name="quantity"
                         />
-                        <button type="submit" class="btn btn-info">
+                        <button
+                            type="submit"
+                            class="btn btn-info"
+                        >
                             <ion-icon
                                 ios="ios-close"
                                 md="md-close"
@@ -199,11 +206,12 @@
                             ></ion-icon>
                         </button>
                     </form>
-                </ul>
+                </ul>         
             </section>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script th:src="@{/JS/filter_task.js}"></script>
+        <script th:src="@{/JS/quantity_selector.js}"></script>
         <div th:replace="fragments/footer.html :: footer"></div>
         <div th:replace="fragments/script.html :: script"></div>
     </body>

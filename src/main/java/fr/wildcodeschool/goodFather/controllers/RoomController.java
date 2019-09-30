@@ -78,6 +78,12 @@ public class RoomController {
         model.addAttribute("tasks", tasks);
         model.addAttribute("typologies", typologies);
         model.addAttribute("quantities", currentRoom.getQuantities());
+        double surfaceA = Math.round((currentRoom.getWallA()/100) * (currentRoom.getHeight()/100) * 100.00) / 100.00;
+        double surfaceB = Math.round((currentRoom.getWallB()/100) * (currentRoom.getHeight()/100) * 100.00) / 100.00;
+        double ground = Math.round((currentRoom.getWallA()/100) * (currentRoom.getWallB()/100) * 100.00) / 100.00;
+        model.addAttribute("surfaceA", surfaceA);
+        model.addAttribute("surfaceB", surfaceB);
+        model.addAttribute("ground", ground);
         return "tasks";
     }
 
