@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="FR">
     <div th:replace="fragments/head.html :: head"></div>
-
     <body>
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
@@ -52,7 +51,6 @@
                     </tr>
                 </tbody>
             </table>
-
             <section class="action-recap-project-container mb-3">
                 <div
                     class="alert alert-info d-flex justify-content-between align-items-center"
@@ -104,6 +102,7 @@
                         class="custom-select"
                         id="typology"
                         th:name="typology"
+                        required
                         autofocus
                     >
                         <option selected disabled >Sélectionnez...</option>
@@ -122,7 +121,13 @@
                             Travaux
                         </label>
                     </div>
-                    <select class="custom-select" id="work" th:name="work">
+                    <select
+                        class="custom-select"
+                        id="work"
+                        th:name="work"
+                        disabled
+                        required
+                    >
                         <option selected disabled>Sélectionnez...</option>
                         <option
                             th:each="task : ${tasks}"
@@ -144,6 +149,8 @@
                         class="custom-select"
                         id="material"
                         th:name="material"
+                        disabled
+                        required
                     >
                         <option selected disabled>Sélectionnez...</option>
                         <option
