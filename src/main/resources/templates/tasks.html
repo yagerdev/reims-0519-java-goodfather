@@ -174,22 +174,45 @@
                 <h3>Liste des taches ajoutées :</h3>
                 <section class="accordion" id="recapTask">
                     <div class="card" th:each="typology : ${typologies}">
-                        <button class="btn btn-info btn-accordeon p-2" type="button" data-toggle="collapse"
-                            th:attr="data-target='#typo'+${typology.id}" aria-expanded="false"
-                            th:text="${typology.name.toUpperCase()}">
+                        <button
+                            class="btn btn-info btn-accordeon p-2"
+                            type="button"
+                            data-toggle="collapse"
+                            th:attr="data-target='#typo'+${typology.id}"
+                            aria-expanded="false"
+                            th:text="${typology.name.toUpperCase()}"
+                        >
                             Nom d'une typologie
                         </button>
-                        <div th:id="'typo'+${typology.id}" class="collapse" data-parent="#recapTask">
+                        <div
+                            th:id="'typo'+${typology.id}"
+                            class="collapse"
+                            data-parent="#recapTask"
+                        >
                             <div class="card-body">
                                 <div class="item-global" th:each="quantity : ${room.quantities}">
-                                    <input class="update-form text-center" th:if="${quantity.task.typology.id ==  typology.id}"
+                                    <input
+                                        class="update-form text-center"
+                                        th:if="${quantity.task.typology.id ==  typology.id}"
                                         th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
                                         disabled
                                     />
-                                    <form th:if="${quantity.task.typology.id ==  typology.id}" th:action="@{'/quantity'}" th:method="DELETE">
-                                        <input type="hidden" th:value="${quantity.id}" th:name="quantity" />
+                                    <form 
+                                        th:if="${quantity.task.typology.id ==  typology.id}"
+                                        th:action="@{'/quantity'}"
+                                        th:method="DELETE"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            th:value="${quantity.id}"
+                                            th:name="quantity"
+                                        />
                                         <button type="submit" class="btn btn-info">
-                                            <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
+                                            <ion-icon
+                                                ios="ios-close"
+                                                md="md-close"
+                                                class="icon-delete"
+                                            ></ion-icon>
                                         </button>
                                     </form>
                                 </div>
