@@ -1,5 +1,6 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,10 @@ public class TaskController {
         List<Typology> typologies = typologyRepository.findAll();
         List<Work> works = workRepository.findAll();
         List<Material> materials = materialRepository.findAll();
+        Collections.sort(tasks);
+        Collections.sort(typologies);
+        Collections.sort(works);
+        Collections.sort(materials);
         model.addAttribute("tasks", tasks);
         model.addAttribute("typologies", typologies);
         model.addAttribute("works", works);
@@ -109,10 +114,10 @@ public class TaskController {
         @ModelAttribute Room room,
         @ModelAttribute Work work,
         @ModelAttribute Material material,
-        @ModelAttribute Quantity quantity
+        @RequestParam double quantityValue
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyId(work.getId(), material.getId(), typology.getId());
-        quantity.setTask(task);
+        Quantity quantity = new Quantity(room, task, quantityValue);
         if (quantityRepository.findQuantityByRoomIdAndTaskId(room.getId(), task.getId()) == null) {
             Project project = room.getProject();
             quantity = quantityRepository.save(quantity);

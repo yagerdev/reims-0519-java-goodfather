@@ -1,7 +1,7 @@
 package fr.wildcodeschool.goodFather.entities;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Typology {
+public class Typology implements Comparable<Typology> {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class Typology {
     private String name;
 
     @OneToMany(mappedBy = "typology", cascade = CascadeType.REMOVE)
-    private Set<Task> tasks = new HashSet<>();
+    private Set<Task> tasks = new TreeSet<Task>();
 
     @ManyToMany
-    private Set<Category> categories = new HashSet<>();
+    private Set<Category> categories = new TreeSet<>();
 
     public Typology() {
     }
@@ -70,5 +70,10 @@ public class Typology {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
+    }
+
+    @Override
+    public int compareTo(Typology typology) {
+        return this.name.compareTo(typology.getName());
     }
 }

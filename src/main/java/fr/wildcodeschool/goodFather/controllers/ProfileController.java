@@ -70,26 +70,24 @@ public class ProfileController {
         RedirectAttributes redirectAttributes,
         Authentication authentication,
         User user
-        ) {
+    ) {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         User userToUpdate = (User) authentication.getPrincipal();
 
-    if( encoder.matches(password, userToUpdate.getPassword()) )
-        {
-        redirectAttributes.addAttribute("message", "erreur");
-        return"redirect:/profile";
+        if( encoder.matches(password, userToUpdate.getPassword()) ) {
+            redirectAttributes.addAttribute("message", "erreur");
+            return"redirect:/profile";
         }
         
-    if (encoder.matches(repeatPassword, encoder.encode(password)))
-        {   
-        userToUpdate.setPassword(encoder.encode(password));
-        userRepository.save(userToUpdate);
-        redirectAttributes.addAttribute("user", userToUpdate);
-        redirectAttributes.addAttribute("message", "edit");
-        return "redirect:/password";
+        if (encoder.matches(repeatPassword, encoder.encode(password))) {   
+            userToUpdate.setPassword(encoder.encode(password));
+            userRepository.save(userToUpdate);
+            redirectAttributes.addAttribute("user", userToUpdate);
+            redirectAttributes.addAttribute("message", "edit");
+            return "redirect:/password";
         }
-    redirectAttributes.addAttribute("message", "erreur");
-    return "redirect:/profile";
+        redirectAttributes.addAttribute("message", "erreur");
+        return "redirect:/profile";
     }
 }
