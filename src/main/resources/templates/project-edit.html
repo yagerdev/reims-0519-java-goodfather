@@ -15,6 +15,9 @@
         <div th:replace="fragments/alert.html :: alert"></div>
         <section>
             <form th:action="@{/projects/} + ${project.id} + '/modify'" th:method="PUT" th:object="${project}">
+                <div>
+                    <input type="number" th:name="projectId" th:value="project.id" hidden/>
+                </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="name">
