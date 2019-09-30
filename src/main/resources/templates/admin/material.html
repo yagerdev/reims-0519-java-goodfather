@@ -35,8 +35,10 @@
                 <div class="input-group mb-3">
                     <input
                         type="text"
+                        id="searchBar"
 						class="form-control rounded mr-1"
-						placeholder="Recherchez ..."
+                        placeholder="Recherchez ..."
+                        onkeyup="search()"
                     />
                     <button class="btn btn-warning d-flex justify-content-center align-items-center">
                         <ion-icon name="search"></ion-icon>
@@ -44,7 +46,7 @@
                 </div>
             </section>
 
-            <section class="section-list">
+            <section class="section-list" id="list">
                 <div th:each="material : ${materials}" class="item-global">
                     <form
                         th:action="@{/materials/} + ${material.id}"
@@ -54,6 +56,7 @@
                     >
                         <input
                             type="text"
+                            class="search-item"
                             th:value="*{name}"
                             th:id="${material.id}"
                             placeholder="Merci de saisier une nouvelle donnée ..."
