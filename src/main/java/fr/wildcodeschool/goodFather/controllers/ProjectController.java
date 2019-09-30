@@ -9,9 +9,10 @@ import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -64,7 +65,8 @@ public class ProjectController {
     ) {
         Project project = projectRepository.findById(id).get();
         List<Category> categoryList = categoryRepository.findAll();
-        Set<Room> rooms = project.getRooms();
+        Collections.sort(categoryList);
+        TreeSet<Room> rooms = new TreeSet<Room>(project.getRooms());
         model.addAttribute("project", project);
         model.addAttribute("rooms", rooms);
         model.addAttribute("message", message);
@@ -79,6 +81,7 @@ public class ProjectController {
         @RequestParam(value = "message", required = false) String message
     ) {
         List<Project> projectsList = projectRepository.findAllByUser(authentication.getPrincipal());
+        Collections.sort(projectsList);
         model.addAttribute("projects", projectsList);
         model.addAttribute("message", message);
         return "projects";
@@ -92,6 +95,7 @@ public class ProjectController {
     ) {
         if (categoryId == null) {
             List<Category> categoryList = categoryRepository.findAll();
+            Collections.sort(categoryList);
             model.addAttribute("categories", categoryList);
             model.addAttribute("projectId", projectId);
             return "categories";

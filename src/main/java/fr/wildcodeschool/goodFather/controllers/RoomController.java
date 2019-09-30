@@ -1,7 +1,8 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,8 +72,9 @@ public class RoomController {
     @GetMapping("/rooms/{id}/edit")
     public String edit(@PathVariable("id") Long id, Model model){
         Room currentRoom = roomRepository.findById(id).get();
-        Set<Typology> typologies = currentRoom.getCategory().getTypologies();
+        TreeSet<Typology> typologies = new TreeSet<Typology>(currentRoom.getCategory().getTypologies());
         List<Task> tasks = taskRepository.findAll();
+        Collections.sort(tasks);
         model.addAttribute("project", currentRoom.getProject());
         model.addAttribute("room", currentRoom);
         model.addAttribute("tasks", tasks);

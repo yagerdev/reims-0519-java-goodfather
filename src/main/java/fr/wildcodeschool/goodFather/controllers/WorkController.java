@@ -3,6 +3,7 @@ package fr.wildcodeschool.goodFather.controllers;
 import fr.wildcodeschool.goodFather.entities.Work;
 import fr.wildcodeschool.goodFather.repositories.WorkRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class WorkController {
     @GetMapping("/works")
     public String show(Model model, @RequestParam(value = "message", required = false) String message) {
         List<Work> workList = workRepository.findAll();
+        Collections.sort(workList);
         model.addAttribute("works", workList);
         model.addAttribute("message", message);
         return "admin/work";
