@@ -31,11 +31,12 @@
                         <a class="nav-link" href="/help">Aide</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.goodfather.fr"
-                            >GoodFather</a
-                        >
+                        <a class="nav-link" href="https://www.goodfather.fr">GoodFather</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="https://www.goodfather.fr/contact/">Contacter</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="!isAnonymous()">
                         <a class="nav-link" href="/logout">Se déconnecter</a>
                     </li>
                 </ul>
