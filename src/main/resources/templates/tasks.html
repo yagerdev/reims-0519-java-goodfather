@@ -1,126 +1,126 @@
 <!DOCTYPE html>
 <html lang="FR">
 <div th:replace="fragments/head.html :: head"></div>
-
-<body>
-    <div th:replace="fragments/header.html :: header"></div>
-    <div th:replace="fragments/nav.html :: nav"></div>
-    <main class="container">
-        <h2 th:text="'Projet : ' + ${project.name}">Nom du projet</h2>
-        <h3 class="yellow-gf" th:text="${room.name}">Nom de la pièce</h3>
-        <table class="table table-striped table-dark">
-            <thead>
-                <tr>
-                    <th>MUR A</th>
-                    <th>MUR B</th>
-                    <th>Sol / Plafond</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td th:text="${room.wallA + ' cm'}">item</td>
-                    <td th:text="${room.wallB + ' cm'}">item</td>
-                    <td th:text="${room.height + ' cm'}">item</td>
-                </tr>
-                <tr>
-                    <td th:text="${T(Math).round((room.wallA/100)*(room.height/100)*100.00)/100.00 + ' m²'}">
-                        item
-                    </td>
-                    <td th:text="${T(Math).round((room.wallB/100)*(room.height/100)*100.00)/100.00 + ' m²'}">
-                        item
-                    </td>
-                    <td th:text="${T(Math).round((room.wallB/100)*(room.wallA/100)*100.00)/100.00 + ' m²'}">
-                        item
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="input-group mb-1">
-            <div class="input-group-prepend read-project">
-                <span class="input-group-text flex-centered">
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 th:text="'Projet : ' + ${project.name}">Nom du projet</h2>
+            <h3 class="yellow-gf" th:text="${room.name}">Nom de la pièce</h3>
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>MUR A</th>
+                        <th>MUR B</th>
+                        <th>Sol / Plafond</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${room.wallA + ' cm'}">item</td>
+                        <td th:text="${room.wallB + ' cm'}">item</td>
+                        <td th:text="${room.height + ' cm'}">item</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${T(Math).round((room.wallA/100)*(room.height/100)*100.00)/100.00 + ' m²'}">
+                            item
+                        </td>
+                        <td th:text="${T(Math).round((room.wallB/100)*(room.height/100)*100.00)/100.00 + ' m²'}">
+                            item
+                        </td>
+                        <td th:text="${T(Math).round((room.wallB/100)*(room.wallA/100)*100.00)/100.00 + ' m²'}">
+                            item
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="input-group mb-1">
+                <div class="input-group-prepend read-project">
+                    <span class="input-group-text flex-centered">
+                        Commentaire
+                    </span>
+                </div>
+                <div class="form-control" th:text="${room.comment}">
                     Commentaire
-                </span>
+                </div>
             </div>
-            <div class="form-control" th:text="${room.comment}">
-                Commentaire
-            </div>
-        </div>
-        <p>Prix total : <span class="yellow-gf"
-                th:text="${room.lowerTotalCost + ' - ' + room.upperTotalCost + '€'}">Prix des travaux de la pièce</span>
-        </p>
+            <p>Prix total : <span class="yellow-gf"
+                    th:text="${room.lowerTotalCost + ' - ' + room.upperTotalCost + '€'}">Prix des travaux de la pièce</span>
+            </p>
 
-        <form th:method="POST" th:action="@{/tasks/add}">
-            <input type="hidden" name="room" th:value="${room.id}" />
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Typologie</label>
+            <form th:method="POST" th:action="@{/tasks/add}">
+                <input type="hidden" name="room" th:value="${room.id}" />
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Typologie</label>
+                    </div>
+                    <select class="custom-select" id="typology" th:name="typology">
+                        <option selected disabled>Sélectionnez...</option>
+                        <option th:each="typology : ${typologies}" th:text="${typology.name}" th:value="${typology.id}">
+                            item
+                        </option>
+                    </select>
                 </div>
-                <select class="custom-select" id="typology" th:name="typology">
-                    <option selected disabled>Sélectionnez...</option>
-                    <option th:each="typology : ${typologies}" th:text="${typology.name}" th:value="${typology.id}">
-                        item
-                    </option>
-                </select>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="work">Travaux</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="work">Travaux</label>
+                    </div>
+                    <select class="custom-select" id="work" th:name="work">
+                        <option selected disabled>Sélectionnez...</option>
+                        <option th:each="task : ${tasks}" th:text="${task.work.name}" th:value="${task.work.id}"
+                            th:attr="filter=${task.typology.id}">item</option>
+                    </select>
                 </div>
-                <select class="custom-select" id="work" th:name="work">
-                    <option selected disabled>Sélectionnez...</option>
-                    <option th:each="task : ${tasks}" th:text="${task.work.name}" th:value="${task.work.id}"
-                        th:attr="filter=${task.typology.id}">item</option>
-                </select>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="material">Matériaux</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="material">Matériaux</label>
+                    </div>
+                    <select class="custom-select" id="material" th:name="material">
+                        <option selected disabled>Sélectionnez...</option>
+                        <option th:each="task : ${tasks}" th:text="${task.material.name}" th:value="${task.material.id}"
+                            th:attr="filter=${task.typology.id + ' ' + task.work.id}">item</option>
+                    </select>
                 </div>
-                <select class="custom-select" id="material" th:name="material">
-                    <option selected disabled>Sélectionnez...</option>
-                    <option th:each="task : ${tasks}" th:text="${task.material.name}" th:value="${task.material.id}"
-                        th:attr="filter=${task.typology.id + ' ' + task.work.id}">item</option>
-                </select>
-            </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="quantity">Quantité / Surface</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="quantity">Quantité / Surface</label>
+                    </div>
+                    <input type="number" class="form-control" name="quantity" required />
                 </div>
-                <input type="number" class="form-control" name="quantity" required />
-            </div>
-            <button type="submit" class="btn btn-info">Ajouter</button>
-        </form>
-        <section class="section-list">
-            <h3>Liste des taches ajoutées :</h3>
-            <section class="accordion" id="recapTask">
-                <div class="card" th:each="typology : ${typologies}">
-                    <button class="btn btn-info btn-accordeon p-2" type="button" data-toggle="collapse"
-                        th:attr="data-target='#typo'+${typology.id}" aria-expanded="false"
-                        th:text="${typology.name.toUpperCase()}">
-                        Nom d'une typologie
-                    </button>
-                    <div th:id="'typo'+${typology.id}" class="collapse" data-parent="#recapTask">
-                        <div class="card-body">
-                            <div class="item-global" th:each="quantity : ${room.quantities}">
-                                <input class="update-form text-center" th:if="${quantity.task.typology.id ==  typology.id}"
-                                    th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
-                                    disabled />
+                <button type="submit" class="btn btn-info">Ajouter</button>
+            </form>
+            <section class="section-list">
+                <h3>Liste des taches ajoutées :</h3>
+                <section class="accordion" id="recapTask">
+                    <div class="card" th:each="typology : ${typologies}">
+                        <button class="btn btn-info btn-accordeon p-2" type="button" data-toggle="collapse"
+                            th:attr="data-target='#typo'+${typology.id}" aria-expanded="false"
+                            th:text="${typology.name.toUpperCase()}">
+                            Nom d'une typologie
+                        </button>
+                        <div th:id="'typo'+${typology.id}" class="collapse" data-parent="#recapTask">
+                            <div class="card-body">
+                                <div class="item-global" th:each="quantity : ${room.quantities}">
+                                    <input class="update-form text-center" th:if="${quantity.task.typology.id ==  typology.id}"
+                                        th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
+                                        disabled
+                                    />
                                     <form th:if="${quantity.task.typology.id ==  typology.id}" th:action="@{'/quantity'}" th:method="DELETE">
                                         <input type="hidden" th:value="${quantity.id}" th:name="quantity" />
                                         <button type="submit" class="btn btn-info">
                                             <ion-icon ios="ios-close" md="md-close" class="icon-delete"></ion-icon>
                                         </button>
                                     </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </section>
-    </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script th:src="@{/JS/filter_task.js}"></script>
-    <div th:replace="fragments/footer.html :: footer"></div>
-    <div th:replace="fragments/script.html :: script"></div>
-</body>
-
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script th:src="@{/JS/filter_task.js}"></script>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>
