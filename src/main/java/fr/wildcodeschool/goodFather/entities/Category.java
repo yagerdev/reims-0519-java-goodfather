@@ -1,7 +1,7 @@
 package fr.wildcodeschool.goodFather.entities;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Category {
+public class Category implements Comparable<Category>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private Set<Room> rooms = new HashSet<>();
+    private Set<Room> rooms = new TreeSet<Room>();
 
     @ManyToMany
-    private Set<Typology> typologies = new HashSet<>();
+    private Set<Typology> typologies = new TreeSet<Typology>();
 
     public Category(){
 
@@ -60,7 +60,7 @@ public class Category {
         return rooms;
     }
 
-    public void setRooms(Set<Room> rooms) {
+    public void setRooms(TreeSet<Room> rooms) {
         this.rooms = rooms;
     }
 
@@ -70,5 +70,10 @@ public class Category {
 
     public void setTypologies(Set<Typology> typologies) {
         this.typologies = typologies;
+    }
+
+    @Override
+    public int compareTo(Category category) {
+        return this.name.compareTo(category.getName());
     }
 }
