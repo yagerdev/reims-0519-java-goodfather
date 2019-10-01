@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="FR">
     <body>
-        <nav class="navbar bg-vert-gf navbar-dark sticky-top" id="navbar">
+        <nav
+            class="navbar navbar-expand-lg navbar-dark bg-vert-gf sticky-top"
+            id="navbar"
+        >
             <button
                 class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
-                data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
             >
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <h1 class="font-weight-bold">J’estime mes travaux</h1>
+
             <div class="group-icon-navbar">
                 <a href="/home">
                     <ion-icon name="home"></ion-icon>
@@ -22,8 +27,9 @@
                     <ion-icon name="person"></ion-icon>
                 </a>
             </div>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/home">Accueil</a>
                     </li>
@@ -36,7 +42,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.goodfather.fr/contact/">Contacter</a>
+                        <a
+                            class="nav-link"
+                            href="https://www.goodfather.fr/contact/"
+                            >Contacter</a
+                        >
                     </li>
                     <li class="nav-item" sec:authorize="!isAnonymous()">
                         <a class="nav-link" href="/logout">Se déconnecter</a>
