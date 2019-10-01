@@ -170,7 +170,7 @@ public class ProjectController {
             projectToUpdate.setPostalCode(postalCode);
             projectToUpdate = projectRepository.save(projectToUpdate);
             model.addAttribute("project", projectToUpdate);
-            return"project-edit";
+            return"redirect:/projects/"+id;
         }
         else {
             return"error";
