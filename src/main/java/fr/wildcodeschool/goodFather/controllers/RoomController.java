@@ -82,7 +82,7 @@ public class RoomController {
         Long projectUserId = projectToUpdate.getUser().getId();
         if (userId.equals(projectUserId)) {
             TreeSet<Typology> typologies = new TreeSet<Typology>(currentRoom.getCategory().getTypologies());
-            List<Task> tasks = taskRepository.findAll();
+            List<Task> tasks = taskRepository.findTasksByUserId(projectToUpdate.getSourceId());
             Collections.sort(tasks);
             model.addAttribute("project", currentRoom.getProject());
             model.addAttribute("room", currentRoom);
