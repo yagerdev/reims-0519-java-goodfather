@@ -5,6 +5,7 @@
 .btn-outline-info:hover {
     background-color: #328080;
     border-color: #328080;
+    color: white;
 }
 
 .bg-yellow-gf,
@@ -18,6 +19,10 @@
 .page-link {
     color: #328080;
     border-color: #328080;
+}
+
+.btn-outline-info {
+    color: #328080;
 }
 
 .yellow-gf,
@@ -106,7 +111,7 @@ input:disabled {
 }
 
 .read-project {
-    min-width: 120px;
+    min-width: 110px;
 }
 
 .form-control::placeholder {
@@ -298,7 +303,7 @@ input:disabled {
     flex-direction: column;
 }
 
-.action-recap-project-container {
+.action-recap-project-container, .quantity-selector-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -307,23 +312,14 @@ input:disabled {
 }
 
 .action-recap-project-container .d-flex {
-    width: calc(75vw / 4);
+    width: calc(80vw / 4);
     height: 100%;
     margin: 0;
 }
 
-.quantity-selector-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 0.25rem;
-    height: auto;
-}
-
-.quantity-selector-container .d-flex {
-    width: calc(75vw / 5);
-    height: auto;
-    margin-bottom: 0.8vh;
+.quantity-selector-container .dimensions {
+    width: calc(75vw / 4);
+    height: 100%;
 }
 
 .form-control:disabled,

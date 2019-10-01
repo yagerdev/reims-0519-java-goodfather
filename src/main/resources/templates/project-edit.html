@@ -7,10 +7,10 @@
     <div th:replace="fragments/nav.html :: nav"></div>
     <main class="container">
         <h2>
-            EDIT PROJECT
-            <span class="yellow-gf" th:text="${project.id}">
-                    catégories
-                </span>
+            Édition
+            <span class="yellow-gf" th:text="${project.name}">
+                nom
+            </span>
         </h2>
         <div th:replace="fragments/alert.html :: alert"></div>
         <section>
@@ -67,6 +67,7 @@
                     <input type="date" class="form-control" th:name="creationDate" th:value="*{creationDate}" />
                 </div>
                 <button type="submit" class="btn btn-info">Modifier vos informations</button>
+                <a type="button" class="btn btn-outline-info" th:href="@{'/projects/' + ${project.id}}">Retourner au projet</a>
             </form>
         </section>
     </main>
