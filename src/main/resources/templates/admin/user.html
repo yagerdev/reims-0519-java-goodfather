@@ -83,8 +83,8 @@
                         />
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<div class="input-group-text flex-centered">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
 								<input
 									type="checkbox"
 									id="show-password"
@@ -98,60 +98,77 @@
 							value="Afficher le mot de passe"
 							disabled
 						/>
-					</div>
-					<div class="input-group mb-3">
-                        <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="phoneNumber">
-								Téléphone
-							</label>
-                        </div>
-                        <input
-                            type="tel"
-                            class="form-control"
-                            name="phoneNumber"
-                            placeholder="Entrez le numéro de téléphone de l'utilisateur ..."
-                        />
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="address">
-								Adresse
-							</label>
-                        </div>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="address"
-                            placeholder="Entrez l'adresse de l'utilisateur ..."
-                        />
+
+                    <div class="user-button d-flex justify-content-around align-items-center col-12">
+                        <button type="submit" class="btn btn-info">Créer</button>
+                
+                        <button
+                            class="btn btn-info"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#additionnalInformation"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                        >
+                            Informations complémentaires
+                        </button>
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="city">
-								City
-							</label>
+
+                    <section class="collapse" id="additionnalInformation">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="phoneNumber">
+                                    Téléphone
+                                </label>
+                            </div>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                name="phoneNumber"
+                                placeholder="Entrez le numéro de téléphone de l'utilisateur ..."
+                            />
                         </div>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="city"
-                            placeholder="Entrez la ville de l'utilisateur ..."
-                        />
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend read-project">
-                            <label class="input-group-text flex-centered" for="postalCode">
-								Code postal
-							</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="address">
+                                    Adresse
+                                </label>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="address"
+                                placeholder="Entrez l'adresse de l'utilisateur ..."
+                            />
                         </div>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="postalCode"
-                            placeholder="Entrez le code postal de l'utilisateur ..."
-                        />
-                    </div>
-                    <button type="submit" class="btn btn-info">Créer</button>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="city">
+                                    City
+                                </label>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="city"
+                                placeholder="Entrez la ville de l'utilisateur ..."
+                            />
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="postalCode">
+                                    Code postal
+                                </label>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="postalCode"
+                                placeholder="Entrez le code postal de l'utilisateur ..."
+                            />
+                        </div>
+                    </section>
                 </form>
             </section>
             <div th:replace="fragments/search.html :: search"></div>

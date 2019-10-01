@@ -614,6 +614,15 @@ ion-icon:hover {
     .logo-help-container p {
         width: calc(80vw / 2);
     }
+
+    .user-button {
+        flex-direction: column;
+    }
+
+    .user-button button {
+        margin-bottom: 1vh;
+        width: 100%;
+    }
 }
 
 .list {
@@ -626,3 +635,4 @@ ion-icon:hover {
 .page-link {
     color: #328080;
 }
+
