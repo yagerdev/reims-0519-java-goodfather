@@ -32,7 +32,7 @@ public class TypologyController {
     TaskRepository taskRepository;
 
     @GetMapping("/typologies")
-    public String show(Model model, @RequestParam(value = "message", required = false) String message) {
+    public String show(Model model, @RequestParam(required = false) String message) {
         List<Typology> typologyList = typologyRepository.findAll();
         Collections.sort(typologyList);
         model.addAttribute("message", message);

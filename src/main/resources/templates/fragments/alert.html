@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="FR">
     <body>
-        <div th:fragment="alert" th:switch="${message}">
+        <div th:fragment="alert" th:switch="${message}" th:id="message">
             <div th:case="'success'" class="alert alert-success">
                 <strong>Création</strong> effectuée.
                 <button

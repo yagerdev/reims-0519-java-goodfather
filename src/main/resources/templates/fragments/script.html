@@ -44,6 +44,12 @@
 					inputPassword.type = "password";
 				}
 			}
+
+			window.setTimeout(hide,3000);
+			function hide() {
+				let alert = document.getElementById("message");
+				alert.style.display = "none";
+			}
 		</script>
 	</body>
 </html>
