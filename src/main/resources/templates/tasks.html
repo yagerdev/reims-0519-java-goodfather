@@ -162,12 +162,39 @@
                         </option>
                     </select>
                 </div>
-                <div class="quantity-selector-container">
-                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceA.toString()}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">A</button>
-                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceB}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">B</button>
-                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceA + surfaceB}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">A+B</button>
-                    <button type="button" onclick="quantity_select(this);" th:value="${surfaceA*2 + surfaceB*2}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">4</button>
-                    <button type="button" onclick="quantity_select(this);" th:value="${ground}" class="btn btn-outline-info d-flex justify-content-center align-items-center col-2">Sol</button>
+                <div class="quantity-selector-container d-flex align-items-center justify-content-between pb-3">
+                    <button 
+                        type="button" 
+                        onclick="quantity_select(this);" 
+                        th:value="${surfaceA.toString()}" 
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        MUR A
+                    </button>
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${surfaceB}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        MUR B
+                    </button>
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${surfaceA*2 + surfaceB*2}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        TOTAL
+                    </button>
+                    <button 
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${ground}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        Sol / Plafond
+                    </button>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -186,11 +213,10 @@
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
             <section class="section-list">
-                <h3>Liste des taches ajoutées :</h3>
                 <section class="accordion" id="recapTask">
                     <div class="card" th:each="typology : ${typologies}">
                         <button
-                            class="btn btn-info btn-accordeon p-2"
+                            class="btn btn-info btn-accordeon rounded p-2"
                             type="button"
                             data-toggle="collapse"
                             th:attr="data-target='#typo'+${typology.id}"
