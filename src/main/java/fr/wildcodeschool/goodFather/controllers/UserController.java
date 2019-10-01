@@ -1,6 +1,8 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.User;
+import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 
 import java.util.Collections;
@@ -24,6 +26,9 @@ public class UserController {
     
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
     
     @GetMapping("/users")
     public String show(Model model, @RequestParam(value = "message", required = false) String message){
@@ -55,8 +60,33 @@ public class UserController {
         RedirectAttributes redirectAttributes
         ) { 
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-            User user = new User(firstName, lastName, email, phoneNumber, address, city, postalCode, encoder.encode(password), role);
-            userRepository.save(user);     
+            User user = new User(
+                firstName, 
+                lastName, 
+                email, 
+                phoneNumber, 
+                address, 
+                city, 
+                postalCode, 
+                encoder.encode(password), 
+                role
+            );
+            user = userRepository.save(user);
+            if (user.getRole().equals("PARTNER")) {
+                Task copyTask;
+                for (Task task : taskRepository.findTasksByUserId(null)) {
+                    copyTask = new Task(
+                        task.getPrice(), 
+                        task.getUnit(), 
+                        task.getPercentRange(), 
+                        task.getTypology(), 
+                        task.getMaterial(), 
+                        task.getWork(), 
+                        user.getId()
+                    );
+                    copyTask = taskRepository.save(copyTask);
+                }
+            }
             redirectAttributes.addAttribute("message", "success");
             return "redirect:/users";
     }
@@ -71,6 +101,25 @@ public class UserController {
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
+        if (userToUpdate.getRole().equals("PARTNER") && !user.getRole().equals("PARTNER")) {
+            for (Task task : taskRepository.findTasksByUserId(id)) {
+                taskRepository.delete(task);
+            }
+        } else if (!userToUpdate.getRole().equals("PARTNER") && user.getRole().equals("PARTNER")) {
+            Task copyTask;
+                for (Task task : taskRepository.findTasksByUserId(null)) {
+                    copyTask = new Task(
+                        task.getPrice(), 
+                        task.getUnit(), 
+                        task.getPercentRange(), 
+                        task.getTypology(), 
+                        task.getMaterial(), 
+                        task.getWork(), 
+                        userToUpdate.getId()
+                    );
+                    copyTask = taskRepository.save(copyTask);
+                }
+        }
         userToUpdate.setRole(user.getRole());
         userRepository.save(userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
@@ -80,9 +129,11 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        for (Task task : taskRepository.findTasksByUserId(id)) {
+            taskRepository.delete(task);
+        }
         userRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/users";
     }
-
 }
