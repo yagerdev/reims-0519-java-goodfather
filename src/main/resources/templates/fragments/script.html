@@ -54,7 +54,9 @@
                     value = items[i].value;
                     if (value.toUpperCase().indexOf(filter) > -1) {
                         form[i].style.display = "";
+                        form[i].style.opacity = "1";
                     } else {
+                        form[i].style.opacity = "0";
                         form[i].style.display = "none";
                     }
                 }
