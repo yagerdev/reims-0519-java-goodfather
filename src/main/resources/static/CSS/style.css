@@ -623,5 +623,12 @@ ion-icon:hover {
 }
 
 .list {
-    min-height: 400px;
+    min-height:300px;
+    max-height: 310px;
+    overflow: scroll;
+    background-color: whitesmoke;
+}
+
+.page-link {
+    color: #328080;
 }
