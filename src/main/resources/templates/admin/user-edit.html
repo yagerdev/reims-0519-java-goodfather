@@ -22,19 +22,20 @@
 					class="rounded"
 				>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="firstName">Prénom</label>
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="firstName">Prénom</label>
 						</div>
 						<input
 							type="text"
 							class="form-control"
 							th:name="firstName"
 							th:value="*{firstName}"
+							placeholder="Modifiez le prénom de l'utilisateur"
 						/>
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="lastName">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="lastName">
 								Nom
 							</label>
 						</div>
@@ -43,11 +44,12 @@
 							class="form-control"
 							th:name="lastName"
 							th:value="*{lastName}"
+							placeholder="Modifiez le nom de l'utilisateur"
 						/>
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="email">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="email">
 								Mail
 							</label>
 						</div>
@@ -56,11 +58,12 @@
 							class="form-control"
 							name="email"
 							th:value="*{email}"
+							placeholder="Modifiez l'email de l'utilisateur"
 						/>
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="phoneNumber">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="phoneNumber">
 								Téléphone
 							</label>
 						</div>
@@ -69,11 +72,12 @@
 							class="form-control"
 							name="phoneNumber"
 							th:value="*{phoneNumber}"
+							placeholder="Modifiez le numéro de téléphone de l'utilisateur"
 						/>
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="address">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="address">
 								Adresse
 							</label>
 						</div>
@@ -82,11 +86,12 @@
 							class="form-control"
 							name="address"
 							th:value="*{address}"
+							placeholder="Modifiez l'adresse de l'utilisateur"
 						/>
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="city">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="city">
 								City
 							</label>
 						</div>
@@ -95,11 +100,12 @@
 							class="form-control"
 							name="city"
 							th:value="*{city}"
+							placeholder="Modifiez la ville de l'utilisateur"
 						/>
 					</div>
 					<div class="input-group mb-3">
-						<div class="input-group-prepend">
-							<label class="input-group-text" for="postalCode">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="postalCode">
 								Code postal
 							</label>
 						</div>
@@ -108,6 +114,7 @@
 							class="form-control"
 							name="postalCode"
 							th:value="${user.postalCode}"
+							placeholder="Modifiez le code postal de l'utilisateur"
 						/>
 					</div>
 
