@@ -34,23 +34,9 @@
                 </form>
             </section>
 
-            <section class="search col-10 m-auto">
-                <div class="input-group mb-3">
-                    <input
-                        type="search"
-                        id="searchBar"
-                        class="form-control rounded mr-1"
-                        placeholder="Recherchez ..."
-                        onkeyup="search()"
-                    />
-                    <button
-                        class="btn btn-warning d-flex justify-content-center align-items-center"
-                    >
-                        <ion-icon name="search"></ion-icon>
-                    </button>
-                </div>
-            </section>
-            <div class="list rounded p-4">
+            <div th:replace="fragments/search.html :: search"></div>
+
+            <div class="list rounded border p-4">
                 <section th:each="material : ${materials}" class="item-global">
                     <form
                         th:action="@{/materials/} + ${material.id}"

@@ -52,6 +52,7 @@ h6 {
 
 .jumbotron {
     background-color: whitesmoke;
+    padding: 3vh;
 }
 
 .read-project {
@@ -536,15 +537,8 @@ ion-icon:hover {
 
 .form-control:disabled,
 .form-control[readonly] {
-    background: repeating-linear-gradient(
-        60deg,
-        white,
-        white 35px,
-        transparent 35px,
-        transparent 70px
-    );
-    font-weight: bold;
     color: #495057;
+    opacity: 0.9;
 }
 
 .checkbox-config {
@@ -623,7 +617,7 @@ ion-icon:hover {
 }
 
 .list {
-    min-height:300px;
+    min-height: 300px;
     max-height: 310px;
     overflow: scroll;
     background-color: whitesmoke;

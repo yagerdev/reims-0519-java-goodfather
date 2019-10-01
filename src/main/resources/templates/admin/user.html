@@ -153,18 +153,16 @@
                     </div>
                     <button type="submit" class="btn btn-info">Créer</button>
                 </form>
-			</section>
-			
-            <section class="section-list">
-                <div th:each="user : ${users}" class="item-global">
-                    <div
+            </section>
+            <div th:replace="fragments/search.html :: search"></div>
+            <section class="list rounded border p-4">
+                <section th:each="user : ${users}" class="item-global">
+                    <input
                         type="text"
-                        th:text="${user.firstName} + ' ' + ${user.lastName}"
+                        th:value="${user.firstName} + ' ' + ${user.lastName}"
                         th:id="${user.id}"
-                        class="user-list"
-                    >
-                        User
-                    </div>
+                        class="user-list search-item"
+                    />
                     <a th:href="@{'/users/' + ${user.id}}" type="button" class="btn btn-info">
 						<ion-icon name="create"></ion-icon>
                     </a>
@@ -185,8 +183,8 @@
                             ></ion-icon>
                         </button>
                     </form>
-                </div>
-            </section>
+                </section>
+            </div>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>
         <div th:replace="fragments/script.html :: script"></div>
