@@ -145,10 +145,15 @@ input:disabled {
 .update-form input,
 .user-list {
     text-align: center;
-    border: 1px solid lightgray;
-    border-radius: 5px 5px 0 0;
     width: 100%;
+}
+
+.update-form input,
+.user-list,
+.check-role {
+    border: 1px solid lightgray;
     background-color: white;
+    border-radius: 5px 5px 0 0;
 }
 
 .project-attribute {
@@ -168,9 +173,6 @@ input:disabled {
 }
 
 .check-role {
-    background-color: white;
-    border: 1px solid lightgray;
-    border-radius: 5px 5px 0 0;
     margin-bottom: 3vh;
     padding-bottom: 2.5vh;
 }
@@ -237,10 +239,6 @@ input:disabled {
 .btn-room ion-icon {
     width: 50px;
     height: 50px;
-}
-
-.icon-delete {
-    color: white;
 }
 
 /* ------------- ADMIN ------------- */
@@ -344,10 +342,10 @@ input:disabled {
 }
 
 .list {
-    min-height: 300px;
-    max-height: 310px;
+    min-height: 240px;
+    max-height: 250px;
     overflow: scroll;
-    background-color: whitesmoke;
+    background: linear-gradient(whitesmoke, white);
 }
 
 /* ------------------ ION ICON ------------------ */
@@ -381,7 +379,7 @@ ion-icon:hover {
 }
 
 .navbar ul {
-    margin-left: auto;
+    margin-left: 3vw;
 }
 
 .navbar ul li {
@@ -530,7 +528,7 @@ footer .footer-link a:last-child {
 
 /* ------------------ MEDIA QUERIES ------------------ */
 
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 992px) {
     .admin-control {
         flex-direction: row;
     }
@@ -544,11 +542,16 @@ footer .footer-link a:last-child {
     .navbar {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
     }
 
     .navbar-collapse {
         padding: 1vh 0;
+        width: 50vw;
+    }
+
+    .navbar h1, .navbar .group-icon-navbar {
+        width: 15vw;
     }
 
     .navbar-collapse ul {
@@ -567,12 +570,10 @@ footer .footer-link a:last-child {
 
     .navbar h1 {
         order: 2;
-        width: 10%;
     }
 
     .group-icon-navbar {
         order: 3;
-        width: 20%;
     }
 
     .navbar-collapse ul li a {
@@ -600,7 +601,7 @@ footer .footer-link a:last-child {
     footer .footer-link {
         flex-direction: column;
     }
-    
+
     footer .footer-link a {
         margin-bottom: 1vh;
         margin-left: 0;
