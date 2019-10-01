@@ -21,7 +21,13 @@
                             Prénom
                         </label>
                     </div>
-                    <input type="text" class="form-control" th:name="firstName" th:value="*{firstName}" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        th:name="firstName"
+                        th:value="*{firstName}"
+                        placeholder="Modifiez votre prénom ..."
+                    />
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -29,7 +35,13 @@
                             Nom
                         </label>
                     </div>
-                    <input type="text" class="form-control" th:name="lastName" th:value="*{lastName}" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        th:name="lastName"
+                        placeholder="Modifiez votre nom ..."
+                        th:value="*{lastName}"
+                    />
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -37,7 +49,13 @@
                             Mail
                         </label>
                     </div>
-                    <input type="email" class="form-control" th:name="email" th:value="*{email}" />
+                    <input
+                        type="email"
+                        class="form-control"
+                        th:name="email"
+                        th:value="*{email}"
+                        placeholder="Modifiez votre adresse mail ..."
+                    />
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -45,7 +63,13 @@
                             Téléphone
                         </label>
                     </div>
-                    <input type="tel" class="form-control" th:name="phoneNumber" th:value="*{phoneNumber}" />
+                    <input
+                        type="tel"
+                        class="form-control"
+                        th:name="phoneNumber"
+                        th:value="*{phoneNumber}"
+                        placeholder="Mofidiez votre numéro de téléphone ..."
+                    />
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -53,7 +77,13 @@
                             Adresse
                         </label>
                     </div>
-                    <input type="text" class="form-control" name="address" th:value="*{address}" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        th:value="*{address}"
+                        placeholder="Modifiez votre adresse ..."
+                    />
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -61,7 +91,13 @@
                             City
                         </label>
                     </div>
-                    <input type="text" class="form-control" name="city" th:value="*{city}" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="city"
+                        th:value="*{city}"
+                        placeholder="Modifiez votre ville ..."
+                    />
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -69,7 +105,13 @@
                             Code postal
                         </label>
                     </div>
-                    <input type="text" class="form-control" name="postalCode" th:value="*{postalCode}" />
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="postalCode"
+                        th:value="*{postalCode}"
+                        placeholder="Modifiez votre code postal ..."
+                    />
                 </div>
                 <button type="submit" class="btn btn-info">Modifier vos informations</button>
                 <a th:href="@{/password}" class="btn btn-outline-info">Modifier votre mot de passe</a>

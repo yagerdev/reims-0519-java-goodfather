@@ -50,7 +50,6 @@ public class ProfileController {
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
         userToUpdate = userRepository.save(userToUpdate);
-        redirectAttributes.addAttribute("user", userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
         return "redirect:/profile";
     }

@@ -9,6 +9,11 @@
 				Dimensions
 				<span class="yellow-gf" th:text="${category.name}"></span>
 			</h2>
+
+			<section class="alert alert-info" role="alert">
+				Les dimensions sont exprimées en <span class="alert-link">centimètres</span>.
+			</section>
+
 			<form th:action="@{/rooms}" method="POST" class="rounded">
 				<input type="hidden" name="project" th:value="${project.id}">
 				<input type="hidden" name="category" th:value="${category.id}">
@@ -37,7 +42,8 @@
 						type="number"
 						class="form-control"
 						name="wallA"
-                        required
+						required
+						placeholder="Entrez une dimension ..."
 					/>
 				</div>
 				<div class="input-group mb-3">
@@ -50,7 +56,8 @@
 						type="number"
 						class="form-control"
 						name="wallB"
-                        required
+						required
+						placeholder="Entrez une dimension ..."
 					/>
 				</div>
                 <div class="input-group mb-3">
@@ -63,7 +70,8 @@
 						type="number"
 						class="form-control"
 						name="height"
-                        required
+						required
+						placeholder="Entrez une dimension ..."
 					/>
 				</div>
 				<div class="input-group mb-3">
@@ -75,6 +83,7 @@
 					<textarea 
 						class="form-control"
 						name="comment"
+						placeholder="Entrez vos remarques sur la pièce ..."
 					></textarea>
 				</div>
 				

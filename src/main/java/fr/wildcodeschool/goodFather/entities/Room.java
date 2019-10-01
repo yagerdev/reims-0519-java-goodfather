@@ -185,6 +185,15 @@ public class Room implements Comparable<Room> {
         this.upperTotalCost -= ( (double)Math.round(upperCost * 100) ) / 100;
     }
 
+    public boolean containAtLeastOneOf(Typology typology) {
+        for (Quantity quantity : quantities) {
+            if (quantity.getTask().getTypology() == typology) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     @Override
     public int compareTo(Room room) {
         return this.id.compareTo(room.getId());
