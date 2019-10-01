@@ -1,29 +1,36 @@
-/* ------------- CHARTE GRAPHIQUE ------------- */
+/* ------------------ CHARTE GRAPHIQUE ------------------ */
 
 .bg-vert-gf,
 .btn-info,
 .btn-outline-info:hover {
     background-color: #328080;
+    border-color: #328080;
 }
 
-.bg-yellow-gf {
+.bg-yellow-gf,
+.btn-warning,
+.btn-outline-warning:hover {
     background-color: #ffcc00;
 }
 
 .vert-gf,
-.btn-outline-info {
+.btn-outline-info,
+.page-link {
     color: #328080;
+    border-color: #328080;
 }
 
-.yellow-gf {
+.yellow-gf,
+.btn-outline-warning {
     color: #ffcc00;
 }
 
-.btn-warning {
+.btn-warning,
+.btn-outline-warning:hover {
     color: white;
 }
 
-/* ------------- CONFIGURATION GÉNÉRALE ------------- */
+/* ------------------ CONFIGURATION GÉNÉRALE ------------------ */
 
 body {
     display: flex;
@@ -37,38 +44,10 @@ body {
     text-align: center;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: "Montserrat", sans-serif;
-}
-
-.gf-logo {
-    max-width: 50%;
-}
-
-.jumbotron {
-    background-color: whitesmoke;
-    padding: 3vh;
-}
-
-.read-project {
-    min-width: 120px;
-}
-
-.flex-centered {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
 .container {
     margin: auto;
     padding: 2vh 0;
+    width: 90%;
 }
 
 .container h2 {
@@ -84,14 +63,33 @@ h6 {
     margin: auto auto 2vh auto;
 }
 
-@media screen and (max-width: 992px) {
-    .container {
-        width: 90%;
-    }
-}
-
 .modal-dialog form {
     background-color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat", sans-serif;
+}
+
+.gf-logo {
+    max-width: 60%;
+}
+
+.flex-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.jumbotron {
+    background-color: whitesmoke;
+    padding: 3vh;
 }
 
 input[type="number"] {
@@ -106,6 +104,18 @@ input[type="number"]::-webkit-outer-spin-button {
 input:disabled {
     color: #333333;
 }
+
+.read-project {
+    min-width: 120px;
+}
+
+.form-control::placeholder {
+    color: #333333;
+    opacity: 0.5;
+    font-size: 10pt;
+}
+
+/* ------------------ GENERALES ------------------ */
 
 .item-global {
     display: flex;
@@ -139,18 +149,6 @@ input:disabled {
     border-radius: 5px 5px 0 0;
     width: 100%;
     background-color: white;
-}
-
-@media screen and (max-width: 415px) {
-    .update-form input {
-        font-size: 9pt;
-        max-width: 75%;
-    }
-
-    .item-global .btn {
-        width: 40px;
-        height: 40px;
-    }
 }
 
 .project-attribute {
@@ -202,12 +200,6 @@ input:disabled {
     margin: auto 0 auto auto;
 }
 
-@media screen and (min-width: 700px) {
-    .check-role label {
-        width: 15%;
-    }
-}
-
 .form-control {
     height: auto;
     text-align: center;
@@ -247,228 +239,8 @@ input:disabled {
     height: 50px;
 }
 
-.btn-info {
-    border: none;
-}
-
-.btn-outline-info {
-    border-color: #328080;
-}
-
-/* ------------- ERROR ------------- */
-
-.error {
-    color: white;
-}
-
-.error-title {
-    font-size: 70pt;
-    transform: rotate(5deg);
-}
-
-/* ------------- FOOTER ------------- */
-
-footer {
-    width: 100%;
-    padding: 4vh;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #333333;
-}
-
-footer .footer-social {
-    display: flex;
-    justify-content: space-around;
-    width: 20%;
-}
-
-footer .footer-link {
-    display: flex;
-    align-items: center;
-}
-
-footer .footer-link a {
-    margin-left: 1vh;
-}
-
-@media screen and (max-width: 420px) {
-    .footer-link {
-        display: flex;
-        flex-direction: column;
-    }
-    .footer-link a {
-        margin-bottom: 1vh;
-        width: 100%;
-    }
-    footer .footer-social {
-        flex-direction: column;
-        height: 80%;
-    }
-
-    footer .footer-link {
-        width: 50%;
-    }
-}
-
-ion-icon {
-    height: 30px;
-    width: 30px;
-    color: white;
-}
-
-ion-icon:hover {
-    color: #ffcc00;
-    transition: 0.5s;
-}
-
 .icon-delete {
     color: white;
-}
-
-/* ------------- NAVBAR ------------- */
-
-.navbar {
-    width: 100%;
-}
-
-.navbar ul {
-    margin-left: auto;
-}
-
-.navbar ul li {
-    padding: 1vh 2vh;
-}
-
-.navbar ul li:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-}
-
-.navbar h1 {
-    color: white;
-    font-size: 10pt;
-    margin: 0;
-}
-
-.navbar-collapse {
-    text-align: left;
-    padding: 5vh 0;
-}
-
-.navbar-collapse ul {
-    width: 90%;
-}
-
-.navbar-collapse ul li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-@media screen and (min-width: 991px) {
-
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .navbar-collapse {
-        padding: 1vh 0;
-    }
-
-    .navbar-collapse ul {
-        width: auto;
-    }
-
-    .navbar-collapse ul li {
-        border-bottom: none;
-        padding: 0 2vh;
-        border-right: 1px solid rgba(255, 255, 255, 0.7);
-    }
-
-    .navbar-collapse ul li:last-child {
-        border: none;
-    }
-
-    .navbar h1 {
-        order: 2;
-        width: 20%;
-        font-size: 12pt;
-    }
-
-    .group-icon-navbar {
-        order: 3;
-        width: 20%;
-    }
-
-    .navbar-collapse ul li a {
-        width: 100%;
-        height: 100%;
-    }
-}
-
-/* ------------- PAGE CATEGORIES ------------- */
-
-.group-image {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.group-image .image {
-    background-size: cover;
-    background-position: center;
-    height: 270px;
-    display: flex;
-    text-decoration: none;
-    width: 180px;
-}
-
-.group-image .image:hover p {
-    background-color: #328080;
-    color: white;
-    transition: 0.5s;
-}
-
-.group-image .image p {
-    width: 90%;
-    margin: auto auto 1.5em auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 0.5em;
-    padding: 0.5em;
-    text-transform: uppercase;
-}
-
-@media screen and (max-width: 1200px) {
-    .group-image {
-        flex-direction: column;
-    }
-
-    .group-image .image {
-        width: 100%;
-        height: 200px;
-        margin-bottom: 3vh;
-    }
-}
-
-.salle-de-bain {
-    background-image: url("../IMG/sdb.jpg");
-}
-
-.couloir {
-    background-image: url("../IMG/couloir.jpg");
-}
-
-.salon-sjour {
-    background-image: url("../IMG/salonsejour.jpg");
-}
-
-.chambre {
-    background-image: url("../IMG/chambre.jpg");
-}
-
-.cuisine {
-    background-image: url("../IMG/cuisine.jpg");
 }
 
 /* ------------- ADMIN ------------- */
@@ -480,14 +252,11 @@ ion-icon:hover {
     align-items: center;
 }
 
-.admin-control a {
-    margin-bottom: 2vh;
-    width: 100%;
-}
-
 .admin-control .btn {
     width: 100%;
     padding: 2vh 0;
+    margin-bottom: 2vh;
+    width: 100%;
 }
 
 .btn-accordeon {
@@ -531,8 +300,6 @@ ion-icon:hover {
     flex-direction: column;
 }
 
-/* ------------- RECAP ROOM ------------- */
-
 .action-recap-project-container {
     display: flex;
     align-items: center;
@@ -547,18 +314,6 @@ ion-icon:hover {
     margin: 0;
 }
 
-@media screen and (max-width: 800px) {
-    .action-recap-project-container {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .action-recap-project-container .d-flex {
-        width: 100%;
-        margin-bottom: 0.8vh;
-    }
-}
-
 .quantity-selector-container {
     display: flex;
     align-items: center;
@@ -571,15 +326,6 @@ ion-icon:hover {
     width: calc(75vw / 5);
     height: auto;
     margin-bottom: 0.8vh;
-}
-
-@media screen and (min-width: 800px) {
-    .quantity-selector-container {
-        height: 10vh;
-    }
-    .quantity-selector-container .d-flex {
-        height: 100%;
-    }
 }
 
 .form-control:disabled,
@@ -597,15 +343,91 @@ ion-icon:hover {
     font-size: 12pt;
 }
 
-/* ------------- PLACEHOLDER ------------- */
-
-.form-control::placeholder {
-    color: #333333;
-    opacity: 0.5;
-    font-size: 10pt;
+.list {
+    min-height: 300px;
+    max-height: 310px;
+    overflow: scroll;
+    background-color: whitesmoke;
 }
 
-/* ------------- HELP ------------- */
+/* ------------------ ION ICON ------------------ */
+
+ion-icon {
+    height: 30px;
+    width: 30px;
+    color: white;
+}
+
+ion-icon:hover {
+    color: #ffcc00;
+    transition: 0.5s;
+}
+
+/* ------------------ ERREUR ------------------ */
+
+.error {
+    color: white;
+}
+
+.error-title {
+    font-size: 70pt;
+    transform: rotate(5deg);
+}
+
+/* ------------------ NAVIGATION ------------------ */
+
+.navbar {
+    width: 100%;
+}
+
+.navbar ul {
+    margin-left: auto;
+}
+
+.navbar ul li {
+    padding: 1vh 2vh;
+}
+
+.navbar ul li:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar h1 {
+    color: white;
+    font-size: 10pt;
+    margin: 0;
+}
+
+.navbar-collapse {
+    text-align: left;
+    padding: 5vh 0;
+}
+
+.navbar-collapse ul {
+    width: 90%;
+}
+
+.navbar-collapse ul li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ------------------ FOOTER ------------------ */
+
+footer {
+    width: 100%;
+    background-color: #333333;
+}
+
+footer .footer-social {
+    width: 10%;
+}
+
+footer .footer-link a:nth-child(2),
+footer .footer-link a:last-child {
+    margin-left: 2vh;
+}
+
+/* ------------------ AIDES ------------------ */
 
 .help p {
     margin: 0;
@@ -653,7 +475,183 @@ ion-icon:hover {
     height: 30px;
 }
 
-@media screen and (max-width: 800px) {
+/* ------------------ CATEGORIES ------------------ */
+
+.group-image {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.group-image .image {
+    background-size: cover;
+    background-position: center;
+    height: 270px;
+    display: flex;
+    text-decoration: none;
+    width: 180px;
+}
+
+.group-image .image:hover p {
+    background-color: #328080;
+    color: white;
+    transition: 0.5s;
+}
+
+.group-image .image p {
+    width: 90%;
+    margin: auto auto 1.5em auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0.5em;
+    padding: 0.5em;
+    text-transform: uppercase;
+}
+
+.salle-de-bain {
+    background-image: url("../IMG/sdb.jpg");
+}
+
+.couloir {
+    background-image: url("../IMG/couloir.jpg");
+}
+
+.salon-sjour {
+    background-image: url("../IMG/salonsejour.jpg");
+}
+
+.chambre {
+    background-image: url("../IMG/chambre.jpg");
+}
+
+.cuisine {
+    background-image: url("../IMG/cuisine.jpg");
+}
+
+/* ------------------ MEDIA QUERIES ------------------ */
+
+@media screen and (min-width: 991px) {
+    .admin-control {
+        flex-direction: row;
+    }
+
+    .admin-control .btn {
+        width: calc(80vw / 7);
+    }
+
+    /* -------------- NAVIGATION -------------- */
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-collapse {
+        padding: 1vh 0;
+    }
+
+    .navbar-collapse ul {
+        width: auto;
+    }
+
+    .navbar-collapse ul li {
+        border-bottom: none;
+        padding: 0 2vh;
+        border-right: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .navbar-collapse ul li:last-child {
+        border: none;
+    }
+
+    .navbar h1 {
+        order: 2;
+        width: 10%;
+    }
+
+    .group-icon-navbar {
+        order: 3;
+        width: 20%;
+    }
+
+    .navbar-collapse ul li a {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* -------------- TÂCHES -------------- */
+
+    .quantity-selector-container {
+        height: 10vh;
+    }
+    .quantity-selector-container .d-flex {
+        height: 100%;
+    }
+
+    .check-role label {
+        width: 15%;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    /* -------------- FOOTER -------------- */
+
+    footer .footer-link {
+        flex-direction: column;
+    }
+    
+    footer .footer-link a {
+        margin-bottom: 1vh;
+        margin-left: 0;
+        margin-left: auto;
+        width: 100%;
+    }
+
+    footer .footer-link a:last-child {
+        margin: 0;
+    }
+
+    footer .footer-link a:nth-child(2),
+    footer .footer-link a:last-child {
+        margin-left: 0;
+    }
+
+    footer .footer-social {
+        flex-direction: column;
+    }
+
+    footer .footer-link,
+    .footer-social {
+        width: calc(90vw / 2);
+    }
+
+    /* -------------- CATEGORIES -------------- */
+
+    .group-image {
+        flex-direction: column;
+    }
+
+    .group-image .image {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 3vh;
+    }
+
+    /* -------------- RECAP PROJECT -------------- */
+
+    .action-recap-project-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .action-recap-project-container .d-flex {
+        width: 100%;
+        margin-bottom: 0.8vh;
+    }
+
+    /* -------------- AIDES -------------- */
+
     .logo-help-container {
         flex-wrap: wrap;
     }
@@ -670,15 +668,14 @@ ion-icon:hover {
         margin-bottom: 1vh;
         width: 100%;
     }
-}
 
-.list {
-    min-height: 300px;
-    max-height: 310px;
-    overflow: scroll;
-    background-color: whitesmoke;
-}
+    .update-form input {
+        font-size: 9pt;
+        max-width: 75%;
+    }
 
-.page-link {
-    color: #328080;
+    .item-global .btn {
+        width: 40px;
+        height: 40px;
+    }
 }
