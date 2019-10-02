@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Project implements Comparable<Project> {
 
@@ -36,6 +38,7 @@ public class Project implements Comparable<Project> {
     @Column(length = 300)
     private String comment;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
