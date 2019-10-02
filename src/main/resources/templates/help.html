@@ -29,7 +29,10 @@
                         Profil<ion-icon class="mt-2" name="person"></ion-icon>
                     </p>
                     <p class="rounded border">
-                        Configurer<ion-icon class="mt-2" name="build"></ion-icon>
+                        Configurer<ion-icon
+                            class="mt-2"
+                            name="build"
+                        ></ion-icon>
                     </p>
                 </div>
             </section>
@@ -142,6 +145,35 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header" id="headingFour">
+                            <h2 class="mb-0">
+                                <button
+                                    class="btn btn-info btn-accordeon collapsed"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#collapseFour"
+                                    aria-expanded="false"
+                                    aria-controls="collapseFour"
+                                >
+                                    Comment me désabonner ?
+                                </button>
+                            </h2>
+                        </div>
+                        <div
+                            id="collapseFour"
+                            class="collapse"
+                            aria-labelledby="headingFour"
+                            data-parent="#accordionExample"
+                        >
+                            <div class="card-body">
+                                <p>
+                                    Vous souhaitez vous désabonner ? Merci de
+                                    <a href="https://www.goodfather.fr/contact/">nous contacter</a> afin de procéder aux formalités de désinscription.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -152,8 +184,9 @@
                 <a
                     href="https://www.goodfather.fr/contact/"
                     class="btn btn-info"
-                    >Contacter</a
                 >
+                    Contacter
+                </a>
             </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>

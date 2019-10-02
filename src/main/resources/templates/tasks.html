@@ -75,7 +75,7 @@
                     th:href="@{'/projects/' + ${project.id}}"
                     class="btn btn-outline-info d-flex justify-content-center align-items-center"
                 >
-                    Finir projet
+                    Récapitulatif projet
                 </a>
             </section>
             <form th:method="POST" th:action="@{/task/add}">
@@ -238,7 +238,7 @@
                                     <input
                                         class="update-form text-center"
                                         th:if="${quantity.task.typology.id ==  typology.id}"
-                                        th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price}"
+                                        th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price} + '€'"
                                         disabled
                                     />
                                     <form 
