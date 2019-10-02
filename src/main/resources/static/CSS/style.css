@@ -507,7 +507,7 @@ footer .footer-link a:last-child {
     text-transform: uppercase;
 }
 
-.salle-de-bain {
+.salle-de-bain-wc {
     background-image: url("../IMG/sdb.jpg");
 }
 
@@ -519,11 +519,19 @@ footer .footer-link a:last-child {
     background-image: url("../IMG/salonsejour.jpg");
 }
 
-.chambre {
+.chambres {
     background-image: url("../IMG/chambre.jpg");
 }
 
 .cuisine {
+    background-image: url("../IMG/cuisine.jpg");
+}
+
+.communs {
+    background-image: url("../IMG/cuisine.jpg");
+}
+
+.divers {
     background-image: url("../IMG/cuisine.jpg");
 }
 

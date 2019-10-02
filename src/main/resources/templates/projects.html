@@ -10,6 +10,7 @@
                 <span class="yellow-gf">projets</span>
             </h2>
             <div th:replace="fragments/alert.html :: alert"></div>
+            <a href="/projects/create" class="btn btn-info mb-3">Créer un projet</a>
             <section class="section-list">
                 <div th:each="project : ${projects}" class="item-global">
                     <div class="user-list">
