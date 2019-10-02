@@ -6,31 +6,40 @@ import fr.wildcodeschool.goodFather.repositories.UserRepository;
 import java.util.Collections;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class UserController {
+public class UserController implements WebMvcConfigurer{
     
     @Autowired
     UserRepository userRepository;
+
     
     @GetMapping("/users")
-    public String show(Model model, @RequestParam(value = "message", required = false) String message){
+    public String show(Model model, @RequestParam(value = "message", required = false) String message, @Valid User user, BindingResult bindingResult) {
+        if(user.getEmail() == null) {
+            model.addAttribute("user", new User());
+        } else { 
+            model.addAttribute("user", user);
+        }
         List<User> userList = userRepository.findAll();
         Collections.sort(userList);
         model.addAttribute("users", userList);
         model.addAttribute("message", message);
+
         return "admin/user";
     }
 
@@ -42,23 +51,23 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String create(
-        @RequestParam("firstName") String firstName,
-        @RequestParam("lastName") String lastName,
-        @RequestParam("email") String email,
-        @RequestParam("phoneNumber")String phoneNumber,
-        @RequestParam("address") String address,
-        @RequestParam("city") String city,
-        @RequestParam("postalCode") String postalCode,
-        @RequestParam("password") String password,
-        @RequestParam("role") String role,
-        RedirectAttributes redirectAttributes
-        ) { 
-            PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-            User user = new User(firstName, lastName, email, phoneNumber, address, city, postalCode, encoder.encode(password), role);
+    public String create (
+        RedirectAttributes redirectAttributes,
+        @Valid User user,
+        BindingResult bindingResult
+    ) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addAttribute("message", "invalide");
+            redirectAttributes.addFlashAttribute("user", user);
+        } else {
+            if (userRepository.findByEmail(user.getEmail()) != null) {
+                redirectAttributes.addAttribute("message", "email");
+                return "redirect:/users";
+            }
             userRepository.save(user);     
             redirectAttributes.addAttribute("message", "success");
-            return "redirect:/users";
+        }
+        return "redirect:/users";
     }
 
     @PutMapping("/users/{id}")
@@ -84,5 +93,5 @@ public class UserController {
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/users";
     }
-
 }
+
