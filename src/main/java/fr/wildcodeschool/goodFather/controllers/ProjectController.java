@@ -148,7 +148,8 @@ public class ProjectController {
     }
 
     @PutMapping("projects/{id}/update")
-    public String update(RedirectAttributes redirectAttributes,
+    public String update(
+        RedirectAttributes redirectAttributes,
         @PathVariable Long id,
         @RequestParam String name, 
         @RequestParam String address, 
@@ -170,10 +171,20 @@ public class ProjectController {
             projectToUpdate.setPostalCode(postalCode);
             projectToUpdate = projectRepository.save(projectToUpdate);
             model.addAttribute("project", projectToUpdate);
-            return"redirect:/projects/"+id;
+            return "redirect:/projects/" + id;
         }
         else {
             return"error";
         }
+    }
+
+
+    @PutMapping("projects/{id}")
+    public String updateComment(@PathVariable Long id, Project project, RedirectAttributes redirectAttributes) {
+        Project projectToUpdate = projectRepository.findById(id).get();
+        projectToUpdate.setComment(project.getComment());
+        projectRepository.save(projectToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
+        return "redirect:/projects/" + id;
     }
 }

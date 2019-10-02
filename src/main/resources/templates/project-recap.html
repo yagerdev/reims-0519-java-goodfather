@@ -11,6 +11,7 @@
                     nom projet
                 </span>
             </h2>
+
             <div th:replace="fragments/alert.html :: alert"></div>
             <section class="recap-info-project mb-3">
                 <div class="input-group mb-1">
@@ -55,17 +56,6 @@
                 </div>
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered">Commentaires</span>
-                    </div>
-                    <textarea
-                        class="form-control"
-                        aria-label="With textarea"
-                        th:text="${project.comment}"
-                        disabled
-                    ></textarea>
-                </div>
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend read-project">
                         <span class="input-group-text flex-centered">
                             Date
                         </span>
@@ -90,6 +80,39 @@
                         Coût total
                     </div>
                 </div>
+                <form
+                    th:action="@{/projects/} + ${project.id}"
+                    th:method="PUT"
+                    th:object="${project}"
+                    class="update-comment"
+                >
+                    <div class="input-group">
+                        <div class="input-group-prepend read-project">
+                            <label
+                                class="input-group-text flex-centered"
+                                th:for="comment"
+                            >
+                                Commentaire
+                            </label>
+                        </div>
+                        <textarea
+                            class="form-control"
+                            th:name="comment"
+                            th:text="${project.comment}"
+                            th:id="${project.id}"
+                            name="comment"
+                            disabled
+                        ></textarea>
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-info"
+                        th:id="${project.id + 'item'}"
+                        th:onclick="'javascript:update(\'' + ${project.id} + '\');'"
+                    >
+                        <ion-icon name="create"></ion-icon>
+                    </button>
+                </form>
             </section>
 
             <section class="action-recap-project-container mb-3">
@@ -176,7 +199,7 @@
                                         >
                                             <ion-icon name="create"></ion-icon>
                                         </a>
-                                            <button
+                                        <button
                                             type="button"
                                             class="btn btn-info"
                                             data-toggle="modal"

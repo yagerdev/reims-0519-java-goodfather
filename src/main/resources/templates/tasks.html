@@ -82,7 +82,10 @@
                 <input type="hidden" name="room" th:value="${room.id}" />
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="typology">
+                        <label
+                            class="input-group-text flex-centered"
+                            for="typology"
+                        >
                             Typologie
                         </label>
                     </div>
@@ -93,7 +96,7 @@
                         required
                         autofocus
                     >
-                        <option selected disabled >Sélectionnez...</option>
+                        <option selected disabled>Sélectionnez...</option>
                         <option
                             th:each="typology : ${typologies}"
                             th:text="${typology.name}"
@@ -105,7 +108,10 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="work">
+                        <label
+                            class="input-group-text flex-centered"
+                            for="work"
+                        >
                             Travaux
                         </label>
                     </div>
@@ -129,7 +135,10 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="material">
+                        <label
+                            class="input-group-text flex-centered"
+                            for="material"
+                        >
                             Matériaux
                         </label>
                     </div>
@@ -151,11 +160,13 @@
                         </option>
                     </select>
                 </div>
-                <div class="quantity-selector-container d-flex align-items-center justify-content-between pb-3">
-                    <button 
-                        type="button" 
-                        onclick="quantity_select(this);" 
-                        th:value="${surfaceA.toString()}" 
+                <div
+                    class="quantity-selector-container d-flex align-items-center justify-content-between pb-3"
+                >
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${surfaceA.toString()}"
                         class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
                     >
                         MUR A
@@ -176,7 +187,7 @@
                     >
                         TOTAL
                     </button>
-                    <button 
+                    <button
                         type="button"
                         onclick="quantity_select(this);"
                         th:value="${ground}"
@@ -187,7 +198,9 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="quantity">Quantité / Surface</label>
+                        <label class="input-group-text" for="quantity"
+                            >Quantité / Surface</label
+                        >
                     </div>
                     <input
                         id="quantity"
@@ -201,18 +214,40 @@
                 </div>
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
-            
-            <div class="input-group mb-3">
-                <div class="input-group-prepend read-project">
-                    <span class="input-group-text flex-centered">Commentaires</span>
+
+            <form
+                th:action="@{/rooms/} + ${room.id}"
+                th:method="PUT"
+                th:object="${room}"
+                class="update-comment"
+            >
+                <div class="input-group">
+                    <div class="input-group-prepend read-project">
+                        <label
+                            class="input-group-text flex-centered"
+                            th:for="comment"
+                        >
+                            Commentaire
+                        </label>
+                    </div>
+                    <textarea
+                        class="form-control"
+                        th:name="comment"
+                        th:text="${room.comment}"
+                        th:id="${room.id}"
+                        name="comment"
+                        disabled
+                    ></textarea>
                 </div>
-                <textarea
-                    class="form-control"
-                    aria-label="With textarea"
-                    th:text="${room.comment}"
-                    disabled
-                ></textarea>
-            </div>
+                <button
+                    type="button"
+                    class="btn btn-info"
+                    th:id="${room.id + 'item'}"
+                    th:onclick="'javascript:update(\'' + ${room.id} + '\');'"
+                >
+                    <ion-icon name="create"></ion-icon>
+                </button>
+            </form>
 
             <section class="section-list">
                 <section class="accordion" id="recapTask">
@@ -234,14 +269,17 @@
                             data-parent="#recapTask"
                         >
                             <div class="card-body">
-                                <div class="item-global" th:each="quantity : ${room.quantities}">
+                                <div
+                                    class="item-global"
+                                    th:each="quantity : ${room.quantities}"
+                                >
                                     <input
                                         class="update-form text-center"
                                         th:if="${quantity.task.typology.id ==  typology.id}"
                                         th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price} + '€'"
                                         disabled
                                     />
-                                    <form 
+                                    <form
                                         th:if="${quantity.task.typology.id ==  typology.id}"
                                         th:action="@{'/quantity'}"
                                         th:method="DELETE"
@@ -251,7 +289,10 @@
                                             th:value="${quantity.id}"
                                             th:name="quantity"
                                         />
-                                        <button type="submit" class="btn btn-info">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-info"
+                                        >
                                             <ion-icon
                                                 ios="ios-close"
                                                 md="md-close"

@@ -344,6 +344,18 @@ input:disabled {
     background: linear-gradient(whitesmoke, white);
 }
 
+.update-comment {
+    display: flex;
+    padding: 0 !important;
+    margin-bottom: 0.7vh !important;
+    justify-content: space-between;
+    background-color: transparent !important;
+}
+
+.update-comment .input-group {
+    width: 90%;
+}
+
 /* ------------------ ION ICON ------------------ */
 
 ion-icon {
@@ -544,7 +556,7 @@ footer .footer-link a:last-child {
     }
 
     .admin-control .btn {
-        width: calc(80vw / 7);
+        width: calc(60vw / 7);
     }
 
     /* -------------- NAVIGATION -------------- */

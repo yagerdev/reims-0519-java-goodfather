@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -109,5 +110,14 @@ public class RoomController {
         roomRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/projects/"+project.getId();
+    }
+
+    @PutMapping("rooms/{id}")
+    public String updateComment(@PathVariable Long id, Room room, RedirectAttributes redirectAttributes) {
+        Room roomToUpdate = roomRepository.findById(id).get();
+        roomToUpdate.setComment(room.getComment());
+        roomRepository.save(roomToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
+        return "redirect:/rooms/" + room.getId() + "/edit";
     }
 }
