@@ -60,6 +60,10 @@ public class UserController implements WebMvcConfigurer{
             redirectAttributes.addAttribute("message", "invalide");
             redirectAttributes.addFlashAttribute("user", user);
         } else {
+            if (userRepository.findByEmail(user.getEmail()) != null) {
+                redirectAttributes.addAttribute("message", "email");
+                return "redirect:/users";
+            }
             userRepository.save(user);     
             redirectAttributes.addAttribute("message", "success");
         }
