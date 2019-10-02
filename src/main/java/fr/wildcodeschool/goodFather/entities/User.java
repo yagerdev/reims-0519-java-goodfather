@@ -13,10 +13,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 public class User implements UserDetails, Comparable<User> {
@@ -25,32 +31,39 @@ public class User implements UserDetails, Comparable<User> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min=2, max=30)
     @Column(length = 100)
     private String firstName;
 
+    @Size(min=2, max=30)
     @Column(length = 100)
     private String lastName;
 
-    @Column(length = 100)
+    @Size(min=2, max=48)
+    @Email(message = "Email n'est pas valide")
     private String email;
 
     private String phoneNumber;
 
     private String address;
 
+    @Size(min=2, max=45)
     @Column(length = 45)
     private String city;
 
-    @Column(length = 5)
+    @Column(length = 10)
     private String postalCode;
 
+    @Size(min=8, max=255, message = "Veuillez indiquer un mot de passe.")
+    @NotNull(message = "Veuillez indiquer un mot de passe.")
     private String password;
 
+    @NotEmpty(message = "Veuillez choisir un rôle.")
     private String role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<Project> projects = new TreeSet<Project>();
-
+    
     public User() {
     }
 
@@ -70,6 +83,7 @@ public class User implements UserDetails, Comparable<User> {
 
     public User(String firstName, String lastName, String email, String phoneNumber, String address, String city,
             String postalCode, String password, String role) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -77,7 +91,7 @@ public class User implements UserDetails, Comparable<User> {
         this.address = address;
         this.city = city;
         this.postalCode = postalCode;
-        this.password = password;
+        this.setPassword(password);
         this.role = role;
     }
 
@@ -190,7 +204,8 @@ public class User implements UserDetails, Comparable<User> {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        this.password = encoder.encode(password);
     }
 
     public String getRole() {
