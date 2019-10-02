@@ -82,7 +82,7 @@
                             placeholder="Entrez le mail de l'utilisateur ..."
                         />
                     </div>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                    <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                         Email Error
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
