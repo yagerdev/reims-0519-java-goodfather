@@ -2,12 +2,16 @@ package fr.wildcodeschool.goodFather.controllers;
 
 import fr.wildcodeschool.goodFather.entities.Category;
 import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
+import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
+import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 
 import java.util.Collections;
 import java.util.Date;
@@ -41,6 +45,12 @@ public class ProjectController {
 
     @Autowired
     RoomRepository roomRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
+    QuantityRepository quantityRepository;
     
     @PostMapping("/projects")
     public String create(@ModelAttribute Project project, Authentication authentication) {
@@ -150,11 +160,7 @@ public class ProjectController {
     @PutMapping("projects/{id}/update")
     public String update(RedirectAttributes redirectAttributes,
         @PathVariable Long id,
-        @RequestParam String name, 
-        @RequestParam String address, 
-        @RequestParam String city, 
-        @RequestParam String postalCode, 
-        @RequestParam String comment, 
+        Project project,
         Model model,
         Authentication authentication
     ){
@@ -163,17 +169,38 @@ public class ProjectController {
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
         if(userId.equals(projectUserId)) {
-            projectToUpdate.setName(name);
-            projectToUpdate.setAddress(address);
-            projectToUpdate.setCity(city);
-            projectToUpdate.setComment(comment);
-            projectToUpdate.setPostalCode(postalCode);
+            projectToUpdate.setName(project.getName());
+            projectToUpdate.setAddress(project.getAddress());
+            projectToUpdate.setCity(project.getCity());
+            projectToUpdate.setComment(project.getComment());
+            projectToUpdate.setPostalCode(project.getPostalCode());
+            changePriceSource(projectToUpdate, projectToUpdate.getSourceId(), project.getSourceId());
+            projectToUpdate.setCreationDate(project.getCreationDate());
             projectToUpdate = projectRepository.save(projectToUpdate);
             model.addAttribute("project", projectToUpdate);
             return"redirect:/projects/"+id;
         }
         else {
             return"error";
+        }
+    }
+
+    public void changePriceSource(Project projectToUpdate, Long fromSource, Long toSource) {
+        if (fromSource != toSource) {
+            for (Room room : projectToUpdate.getRooms()) {
+                for (Quantity quantity : room.getQuantities()) {
+                    Task task = quantity.getTask();
+                    Task alternativeTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), toSource);
+                    task.update(alternativeTask.getPrice(), alternativeTask.getPercentRange(), alternativeTask.getUnit());
+                    quantity.setTask(alternativeTask);
+                    quantityRepository.save(quantity);
+                    task.getQuantities().remove(quantity);
+                    taskRepository.save(task);
+                }
+                roomRepository.save(room);
+            }
+            projectToUpdate.setSourceId(toSource);
+            projectRepository.save(projectToUpdate);
         }
     }
 }
