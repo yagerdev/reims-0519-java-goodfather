@@ -73,14 +73,19 @@ public class RoomController {
     }
 
     @GetMapping("/rooms/{id}/edit")
-    public String edit(@PathVariable("id") Long id, Model model,
-    Authentication authentication
+    public String edit(
+        Model model,
+        @PathVariable("id") Long id,
+        Authentication authentication,
+        @RequestParam(required = false) String message
     ){
+        model.addAttribute("message", message);
         Room currentRoom = roomRepository.findById(id).get();
         Project projectToUpdate = currentRoom.getProject();
         User currentUser = (User)authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
+        
         if (userId.equals(projectUserId)) {
             TreeSet<Typology> typologies = new TreeSet<Typology>(currentRoom.getCategory().getTypologies());
             List<Task> tasks = taskRepository.findAll();

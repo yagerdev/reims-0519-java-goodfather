@@ -86,15 +86,23 @@
                     th:object="${project}"
                     class="update-comment"
                 >
+                    <div class="input-group-prepend mb-1">
+                        <label
+                            class="input-group-text flex-centered"
+                            th:for="comment"
+                        >
+                            Commentaire
+                        </label>
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            th:id="${project.id + 'item'}"
+                            th:onclick="'javascript:update(\'' + ${project.id} + '\');'"
+                        >
+                            <ion-icon name="create"></ion-icon>
+                        </button>
+                    </div>
                     <div class="input-group">
-                        <div class="input-group-prepend read-project">
-                            <label
-                                class="input-group-text flex-centered"
-                                th:for="comment"
-                            >
-                                Commentaire
-                            </label>
-                        </div>
                         <textarea
                             class="form-control"
                             th:name="comment"
@@ -104,14 +112,6 @@
                             disabled
                         ></textarea>
                     </div>
-                    <button
-                        type="button"
-                        class="btn btn-info"
-                        th:id="${project.id + 'item'}"
-                        th:onclick="'javascript:update(\'' + ${project.id} + '\');'"
-                    >
-                        <ion-icon name="create"></ion-icon>
-                    </button>
                 </form>
             </section>
 

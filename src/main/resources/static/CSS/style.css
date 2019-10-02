@@ -345,15 +345,14 @@ input:disabled {
 }
 
 .update-comment {
-    display: flex;
     padding: 0 !important;
-    margin-bottom: 0.7vh !important;
+    margin-bottom: 2vh !important;
     justify-content: space-between;
     background-color: transparent !important;
 }
 
-.update-comment .input-group {
-    width: 90%;
+.update-comment .input-group-text {
+    border-radius: 0!important;
 }
 
 /* ------------------ ION ICON ------------------ */
