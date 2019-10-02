@@ -312,7 +312,7 @@ input:disabled {
 }
 
 .action-recap-project-container .d-flex {
-    width: calc(80vw / 4);
+    width: calc(82vw / 5);
     height: 100%;
     margin: 0;
 }
