@@ -477,10 +477,11 @@ footer .footer-link a:last-child {
 /* ------------------ CATEGORIES ------------------ */
 
 .group-image {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
 }
 
 .group-image .image {
@@ -489,7 +490,11 @@ footer .footer-link a:last-child {
     height: 270px;
     display: flex;
     text-decoration: none;
-    width: 180px;
+    width: calc(100vw / 4);
+}
+
+.image:first-child, .image:nth-child(2), .image:nth-child(3) {
+    margin-bottom: 2vh;
 }
 
 .group-image .image:hover p {
@@ -511,10 +516,6 @@ footer .footer-link a:last-child {
     background-image: url("../IMG/sdb.jpg");
 }
 
-.couloir {
-    background-image: url("../IMG/couloir.jpg");
-}
-
 .salon-sjour {
     background-image: url("../IMG/salonsejour.jpg");
 }
@@ -528,11 +529,11 @@ footer .footer-link a:last-child {
 }
 
 .communs {
-    background-image: url("../IMG/cuisine.jpg");
+    background-image: url("../IMG/commun.jpg");
 }
 
 .divers {
-    background-image: url("../IMG/cuisine.jpg");
+    background-image: url("../IMG/couloir.jpg");
 }
 
 /* ------------------ MEDIA QUERIES ------------------ */
