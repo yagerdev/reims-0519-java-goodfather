@@ -11,7 +11,7 @@
             </h2>
             <div th:replace="fragments/alert.html :: alert"></div>
             <section>
-                <form th:action="@{/users}" method="POST" class="rounded">
+                <form th:action="@{/users}" th:object="${user}" method="POST" class="rounded">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
                             <label class="input-group-text flex-centered" for="firstName">
@@ -21,11 +21,17 @@
                         <input
                             type="text"
                             class="form-control"
-                            name="firstName"
-                            required
+                            th:field="*{firstName}"
                             autofocus
                             placeholder="Entrez le prénom de l'utilisateur ..."
+                            required
                         />
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                        Firstname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
@@ -36,23 +42,35 @@
                         <input
                             type="text"
                             class="form-control"
-                            name="lastName"
-                            required
+                            th:field="*{lastName}"
                             placeholder="Entrez le nom de l'utilisateur ..."
+                            required
                         />
-					</div>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                        Lastname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend read-project">
 							<label class="input-group-text flex-centered" for="role">
                                 Rôle
                             </label>
 						</div>
-						<select class="custom-select" name="role" required>
-							<option selected disabled>Choisir...</option>
-							<option value="ADMIN">ADMIN</option>
-							<option value="USER">USER</option>
+						<select class="custom-select" th:field="*{role}" >
+                            <option value="" selected>Choisir...</option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="USER">USER</option>
 						</select>
-					</div>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">
+                        Role Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
                             <label class="input-group-text flex-centered" for="email">
@@ -62,10 +80,16 @@
                         <input
                             type="email"
                             class="form-control"
-                            name="email"
-                            required
+                            th:field="*{email}"
                             placeholder="Entrez le mail de l'utilisateur ..."
+                            required
                         />
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                        Email Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
@@ -76,12 +100,12 @@
                         <input
                             type="password"
                             class="form-control"
-                            name="password"
-                            required
+                            th:field="*{password}"
                             id="password"
                             placeholder="Entrez le mot de passe de l'utilisateur ..."
+                            required
                         />
-					</div>
+                    </div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<div class="input-group-text">
@@ -95,7 +119,7 @@
 						<input
 							type="text"
 							class="form-control"
-							value="Afficher le mot de passe"
+                            value="Afficher le mot de passe"
 							disabled
 						/>
                     </div>
@@ -125,7 +149,7 @@
                             <input
                                 type="tel"
                                 class="form-control"
-                                name="phoneNumber"
+                                th:field="*{phoneNumber}"
                                 placeholder="Entrez le numéro de téléphone de l'utilisateur ..."
                             />
                         </div>
@@ -138,7 +162,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                name="address"
+                                th:field="*{address}"
                                 placeholder="Entrez l'adresse de l'utilisateur ..."
                             />
                         </div>
@@ -151,7 +175,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                name="city"
+                                name="*{city}"
                                 placeholder="Entrez la ville de l'utilisateur ..."
                             />
                         </div>
@@ -164,7 +188,7 @@
                             <input
                                 type="text"
                                 class="form-control"
-                                name="postalCode"
+                                name="*{postalCode}"
                                 placeholder="Entrez le code postal de l'utilisateur ..."
                             />
                         </div>
