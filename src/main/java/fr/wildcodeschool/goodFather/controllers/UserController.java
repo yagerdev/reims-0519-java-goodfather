@@ -1,7 +1,13 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Quantity;
+import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.User;
+import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
+import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 
@@ -29,6 +35,15 @@ public class UserController {
 
     @Autowired
     TaskRepository taskRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
+
+    @Autowired
+    QuantityRepository quantityRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
     
     @GetMapping("/users")
     public String show(Model model, @RequestParam(value = "message", required = false) String message){
@@ -102,9 +117,26 @@ public class UserController {
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
         if (userToUpdate.getRole().equals("PARTNER") && !user.getRole().equals("PARTNER")) {
-            for (Task task : taskRepository.findTasksByUserId(id)) {
+            for (Project project : userToUpdate.getProjects()) {
+                for (Room room : project.getRooms()) {
+                    for (Quantity quantity : room.getQuantities()) {
+                        Task task = quantity.getTask();
+                        Task defaultTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), null);
+                        task.update(defaultTask.getPrice(), defaultTask.getPercentRange(), defaultTask.getUnit());
+                        quantity.setTask(defaultTask);
+                        quantityRepository.save(quantity);
+                        task.getQuantities().remove(quantity);
+                        taskRepository.save(task);
+                    }
+                    roomRepository.save(room);
+                }
+                project.setSourceId(null);
+                projectRepository.save(project);
+            }
+            for (Task task : taskRepository.findTasksByUserId(userToUpdate.getId())) {
                 taskRepository.delete(task);
             }
+            
         } else if (!userToUpdate.getRole().equals("PARTNER") && user.getRole().equals("PARTNER")) {
             Task copyTask;
                 for (Task task : taskRepository.findTasksByUserId(null)) {
