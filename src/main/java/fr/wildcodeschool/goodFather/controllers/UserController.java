@@ -51,26 +51,6 @@ public class UserController implements WebMvcConfigurer{
     }
 
     @PostMapping("/users")
-<<<<<<< HEAD
-    public String create(
-        @RequestParam("firstName") String firstName,
-        @RequestParam("lastName") String lastName,
-        @RequestParam("email") String email,
-        @RequestParam("phoneNumber")String phoneNumber,
-        @RequestParam("address") String address,
-        @RequestParam("city") String city,
-        @RequestParam("postalCode") String postalCode,
-        @RequestParam("password") String password,
-        @RequestParam("role") String role,
-        RedirectAttributes redirectAttributes
-        ) { 
-            if (userRepository.findByEmail(email) != null) {
-                redirectAttributes.addAttribute("message", "email");
-                return "redirect:/users";
-            }
-            PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-            User user = new User(firstName, lastName, email, phoneNumber, address, city, postalCode, encoder.encode(password), role);
-=======
     public String create (
         RedirectAttributes redirectAttributes,
         @Valid User user,
@@ -80,7 +60,6 @@ public class UserController implements WebMvcConfigurer{
             redirectAttributes.addAttribute("message", "invalide");
             redirectAttributes.addFlashAttribute("user", user);
         } else {
->>>>>>> e70f28af77de9bffbd6053ede7c698b570d748e6
             userRepository.save(user);     
             redirectAttributes.addAttribute("message", "success");
         }
