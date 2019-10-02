@@ -13,17 +13,6 @@
                     Nom de la pièce
                 </h3>
             </section>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend read-project">
-                    <span class="input-group-text flex-centered">Commentaires</span>
-                </div>
-                <textarea
-                    class="form-control"
-                    aria-label="With textarea"
-                    th:text="${room.comment}"
-                    disabled
-                ></textarea>
-            </div>
             <table class="table table-striped table-dark rounded-bottom">
                 <thead>
                     <tr>
@@ -212,6 +201,19 @@
                 </div>
                 <button type="submit" class="btn btn-info">Ajouter</button>
             </form>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend read-project">
+                    <span class="input-group-text flex-centered">Commentaires</span>
+                </div>
+                <textarea
+                    class="form-control"
+                    aria-label="With textarea"
+                    th:text="${room.comment}"
+                    disabled
+                ></textarea>
+            </div>
+
             <section class="section-list">
                 <section class="accordion" id="recapTask">
                     <div class="card" th:each="typology : ${typologies}">
