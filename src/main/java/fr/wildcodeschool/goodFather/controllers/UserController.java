@@ -116,7 +116,26 @@ public class UserController {
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
-        if (userToUpdate.getRole().equals("PARTNER") && !user.getRole().equals("PARTNER")) {
+        updatePartnerStatus(userToUpdate, userToUpdate.getRole(), user.getRole());
+        userToUpdate.setRole(user.getRole());
+        userRepository.save(userToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
+        redirectAttributes.addAttribute("user", userToUpdate);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("/users/{id}")
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        for (Task task : taskRepository.findTasksByUserId(id)) {
+            taskRepository.delete(task);
+        }
+        userRepository.deleteById(id);
+        redirectAttributes.addAttribute("message", "delete");
+        return "redirect:/users";
+    }
+
+    public void updatePartnerStatus(User userToUpdate, String from, String to) {
+        if (from.equals("PARTNER") && !to.equals("PARTNER")){
             for (Project project : userToUpdate.getProjects()) {
                 for (Room room : project.getRooms()) {
                     for (Quantity quantity : room.getQuantities()) {
@@ -136,36 +155,20 @@ public class UserController {
             for (Task task : taskRepository.findTasksByUserId(userToUpdate.getId())) {
                 taskRepository.delete(task);
             }
-            
-        } else if (!userToUpdate.getRole().equals("PARTNER") && user.getRole().equals("PARTNER")) {
+        } else if (!from.equals("PARTNER") && to.equals("PARTNER")) {
             Task copyTask;
-                for (Task task : taskRepository.findTasksByUserId(null)) {
-                    copyTask = new Task(
-                        task.getPrice(), 
-                        task.getUnit(), 
-                        task.getPercentRange(), 
-                        task.getTypology(), 
-                        task.getMaterial(), 
-                        task.getWork(), 
-                        userToUpdate.getId()
-                    );
-                    copyTask = taskRepository.save(copyTask);
-                }
+            for (Task task : taskRepository.findTasksByUserId(null)) {
+                copyTask = new Task(
+                    task.getPrice(), 
+                    task.getUnit(), 
+                    task.getPercentRange(), 
+                    task.getTypology(), 
+                    task.getMaterial(), 
+                    task.getWork(), 
+                    userToUpdate.getId()
+                );
+                copyTask = taskRepository.save(copyTask);
+            }
         }
-        userToUpdate.setRole(user.getRole());
-        userRepository.save(userToUpdate);
-        redirectAttributes.addAttribute("message", "edit");
-        redirectAttributes.addAttribute("user", userToUpdate);
-        return "redirect:/users";
-    }
-
-    @DeleteMapping("/users/{id}")
-    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-        for (Task task : taskRepository.findTasksByUserId(id)) {
-            taskRepository.delete(task);
-        }
-        userRepository.deleteById(id);
-        redirectAttributes.addAttribute("message", "delete");
-        return "redirect:/users";
     }
 }
