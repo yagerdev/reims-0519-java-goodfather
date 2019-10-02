@@ -36,7 +36,7 @@
 
             <div th:replace="fragments/search.html :: search"></div>
 
-            <div class="list rounded border p-4">
+            <div class="list rounded border-bottom p-4">
                 <section th:each="material : ${materials}" class="item-global">
                     <form
                         th:action="@{/materials/} + ${material.id}"
