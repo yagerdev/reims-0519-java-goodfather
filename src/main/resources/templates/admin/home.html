@@ -14,7 +14,7 @@
                     Nom utilisateur
                 </span>
             </h2>
-            <p>
+            <p th:if="${user.role == 'ADMIN'}">
                 Ici, vous avez accès aux différentes pages permettant la
                 création, la modification, la suppression et la lecture des
                 différents éléments nécessaires au bon fonctionnement de
