@@ -54,14 +54,8 @@ public class UserController {
         @RequestParam("role") String role,
         RedirectAttributes redirectAttributes
         ) { 
-/*             List<User> users = userRepository.findAll();
-            for (User user : users) {
-                if (email.equals(user.getEmail())) {
-                    redirectAttributes.addAttribute("message", "invalide");
-                }   
-            } */
             if (userRepository.findByEmail(email) != null) {
-                redirectAttributes.addAttribute("message", "invalide");
+                redirectAttributes.addAttribute("message", "email");
                 return "redirect:/users";
             }
             PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
