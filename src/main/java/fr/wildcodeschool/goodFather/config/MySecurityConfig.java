@@ -47,7 +47,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter implements We
             .antMatchers(HttpMethod.GET, "/CSS/**", "/IMG/**").permitAll()
             .antMatchers(HttpMethod.GET, "/").permitAll()
             .antMatchers("/admin").hasAuthority("ADMIN")
-            .antMatchers(HttpMethod.GET, "/categories/**", "/typologies/**", "/materials/**", "/works/**", "/tasks/**", "/users/**")
+            .antMatchers(HttpMethod.GET, "/categories/**", "/typologies/**", "/materials/**", "/works/**", "/tasks/**", "/users/**","/reset/**")
                 .hasAuthority("ADMIN")
             .antMatchers(HttpMethod.POST, "/categories/**", "/typologies/**", "/materials/**", "/works/**", "/tasks/**", "/users/**")
                 .hasAuthority("ADMIN")
