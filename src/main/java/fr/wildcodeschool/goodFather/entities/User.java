@@ -18,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,13 +44,17 @@ public class User implements UserDetails, Comparable<User> {
     @Email(message = "Email n'est pas valide")
     private String email;
 
+    @Nullable
     private String phoneNumber;
 
+    @Nullable
     private String address;
 
+    @Nullable
     @Column(length = 45)
     private String city;
 
+    @Nullable
     @Column(length = 10)
     private String postalCode;
 

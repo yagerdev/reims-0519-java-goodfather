@@ -9,11 +9,12 @@
 				Modification de
 				<span
 					class="yellow-gf"
-					th:text="${user.firstName} + ' ' + ${user.lastName}"
+					th:text="${userToUpdate.firstName} + ' ' + ${userToUpdate.lastName}"
 				>
 					catégories
 				</span>
 			</h2>
+			<div th:replace="fragments/alert.html :: alert"></div>
 			<section>
 				<form
 					th:action="@{/users/} + ${user.id}"
@@ -28,11 +29,16 @@
 						<input
 							type="text"
 							class="form-control"
-							th:name="firstName"
-							th:value="*{firstName}"
+							th:field="*{firstName}"
 							placeholder="Modifiez le prénom de l'utilisateur"
 						/>
 					</div>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                        Firstname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend read-project">
 							<label class="input-group-text flex-centered" for="lastName">
@@ -42,11 +48,16 @@
 						<input
 							type="text"
 							class="form-control"
-							th:name="lastName"
-							th:value="*{lastName}"
+							th:field="*{lastName}"
 							placeholder="Modifiez le nom de l'utilisateur"
 						/>
 					</div>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                        Lastname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend read-project">
 							<label class="input-group-text flex-centered" for="email">
@@ -56,11 +67,16 @@
 						<input
 							type="email"
 							class="form-control"
-							name="email"
-							th:value="*{email}"
+							th:field="*{email}"
 							placeholder="Modifiez l'email de l'utilisateur"
 						/>
 					</div>
+					<div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${emailError}" th:text="${emailError}">
+                        Email Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 					<div class="input-group mb-3">
 						<div class="input-group-prepend read-project">
 							<label class="input-group-text flex-centered" for="phoneNumber">
@@ -71,7 +87,7 @@
 							type="tel"
 							class="form-control"
 							name="phoneNumber"
-							th:value="*{phoneNumber}"
+							th:field="*{phoneNumber}"
 							placeholder="Modifiez le numéro de téléphone de l'utilisateur"
 						/>
 					</div>
@@ -85,7 +101,7 @@
 							type="text"
 							class="form-control"
 							name="address"
-							th:value="*{address}"
+							th:field="*{address}"
 							placeholder="Modifiez l'adresse de l'utilisateur"
 						/>
 					</div>
@@ -99,7 +115,7 @@
 							type="text"
 							class="form-control"
 							name="city"
-							th:value="*{city}"
+							th:field="*{city}"
 							placeholder="Modifiez la ville de l'utilisateur"
 						/>
 					</div>
@@ -113,7 +129,7 @@
 							type="text"
 							class="form-control"
 							name="postalCode"
-							th:value="${user.postalCode}"
+							th:field="*{postalCode}"
 							placeholder="Modifiez le code postal de l'utilisateur"
 						/>
 					</div>
@@ -126,7 +142,7 @@
 								id="admin"
 								name="role"
 								value="ADMIN"
-                                th:checked="${user.role == 'ADMIN'}"
+                                th:checked="${userToUpdate.role == 'ADMIN'}"
 							/>
 							<label for="role">Administrateur</label>
 						</div>
@@ -136,7 +152,7 @@
 								id="partner"
 								name="role"
 								value="PARTNER"
-								th:checked="${user.role == 'PARTNER'}"
+								th:checked="${userToUpdate.role == 'PARTNER'}"
 							/>
 							<label for="role">Partenaire</label>
 						</div>
@@ -146,11 +162,17 @@
 								id="user"
 								name="role"
 								value="USER"
-								th:checked="${user.role == 'USER'}"
+								th:checked="${userToUpdate.role == 'USER'}"
 							/>
 							<label for="role">Utilisateur</label>
 						</div>
 					</section>
+					<input
+						type="hidden"
+						class="form-control"
+						name="password"
+						value="########"
+					/>
 					<button type="submit" class="btn btn-info">Modifier</button>
 				</form>
 			</section>
