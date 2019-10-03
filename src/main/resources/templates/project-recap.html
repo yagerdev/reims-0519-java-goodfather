@@ -152,14 +152,14 @@
                 >
                     Modifier projet
                 </a>
-                <button
+                <a
                     type="button"
+                    th:href="@{'/projects/' + ${project.id} + '/resume'}"
                     class="btn btn-info d-flex justify-content-center align-items-center"
-                    onclick="print()"
                     id="generate"
                 >
                     Exporter en PDF
-                </button>
+                </a>
             </section>
 
             <section class="accordion" id="recapProject">

@@ -774,3 +774,21 @@ footer .footer-link a:last-child {
         display: none;
     }
 }
+
+.print {
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    height: 100px;
+}
+
+#content th {
+    font-weight: lighter;
+}
+
+@media print {
+    body {
+      overflow: visible !important;
+      display:block;
+    }
+  }
