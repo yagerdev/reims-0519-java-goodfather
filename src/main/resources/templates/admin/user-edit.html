@@ -76,14 +76,21 @@
                         <label for="role">Administrateur</label>
                     </div>
                     <div class="item-check">
+                        <input type="radio" id="partner" name="role" value="PARTNER" th:checked="${user.role == 'PARTNER'}" />
+                        <label for="role">Partenaire</label>
+                    </div>
+                    <div class="item-check">
                         <input type="radio" id="user" name="role" value="USER" th:checked="${user.role == 'USER'}" />
                         <label for="role">Utilisateur</label>
                     </div>
                 </section>
                 <button type="submit" class="btn btn-info">Modifier</button>
             </form>
-            <form th:action="@{/reset/} + ${user.id}" th:method="GET" th:object="${user}">Attribuer nouveau mot de passe
-                <button type="submit" class="btn btn-info">Attribuer nouveau mot de passe</button>
+            <form th:action="@{/reset/} + ${user.id}" th:method="GET" th:object="${user}">
+                Attribuer nouveau mot de passe
+                <button type="submit" class="btn btn-info">
+                        Attribuer nouveau mot de passe
+                    </button>
             </form>
         </section>
     </main>

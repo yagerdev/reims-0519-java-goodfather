@@ -7,9 +7,10 @@
         <main class="container">
             <h2 class="jumbotron mb-3">
                 Liste des
-                <span class="yellow-gf">projects</span>
+                <span class="yellow-gf">projets</span>
             </h2>
             <div th:replace="fragments/alert.html :: alert"></div>
+            <a href="/projects/create" class="btn btn-info mb-3">Créer un projet</a>
             <section class="section-list">
                 <div th:each="project : ${projects}" class="item-global">
                     <div class="user-list">

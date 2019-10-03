@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Project implements Comparable<Project> {
 
@@ -36,6 +38,7 @@ public class Project implements Comparable<Project> {
     @Column(length = 300)
     private String comment;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
@@ -44,6 +47,8 @@ public class Project implements Comparable<Project> {
 
     @ManyToOne
     private User user;
+
+    private Long sourceId;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private Set<Room> rooms = new TreeSet<Room>();
@@ -59,7 +64,8 @@ public class Project implements Comparable<Project> {
                     Date creationDate, 
                     double lowerTotalCost, 
                     double upperTotalCost, 
-                    User user
+                    User user,
+                    Long sourceId
     ) {
         this.id = id;
         this.name = name;
@@ -71,6 +77,7 @@ public class Project implements Comparable<Project> {
         this.lowerTotalCost = lowerTotalCost;
         this.upperTotalCost = upperTotalCost;
         this.user = user;
+        this.sourceId = sourceId;
     }
 
     public Project(String name, 
@@ -78,7 +85,8 @@ public class Project implements Comparable<Project> {
                     String city, 
                     String postalCode, 
                     String comment,
-                    User user
+                    User user,
+                    Long sourceId
     ) {
         this.name = name;
         this.address = address;
@@ -88,6 +96,7 @@ public class Project implements Comparable<Project> {
         this.lowerTotalCost = 0;
         this.upperTotalCost = 0;
         this.user = user;
+        this.sourceId = sourceId;
     }
 
     public Long getId() {
@@ -209,5 +218,13 @@ public class Project implements Comparable<Project> {
             }
         }
         return false;
+    }
+
+    public Long getSourceId() {
+        return sourceId;
+    }
+
+    public void setSourceId(Long sourceId) {
+        this.sourceId = sourceId;
     }
 }

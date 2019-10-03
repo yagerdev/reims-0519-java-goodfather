@@ -58,6 +58,29 @@
                     </div>
                     <input type="text" class="form-control" name="comment" th:value="*{comment}" />
                 </div>
+                <section th:if="${project.user.role == 'PARTNER'}" class="check-role">
+                    <p>Source des prix :</p>
+                    <div class="item-check">
+                        <input
+                            type="radio"
+                            id="default"
+                            name="sourceId"
+                            th:value="null"
+                            th:attr="checked=${project.sourceId == null}"
+                        />
+                        <label for="source">Goodfather</label>
+                    </div>
+                    <div class="item-check">
+                        <input
+                            type="radio"
+                            id="user"
+                            name="sourceId"
+                            th:value="${project.user.id}"
+                            th:attr="checked=${project.sourceId == project.user.id}"
+                        />
+                        <label for="source">Mes prix</label>
+                    </div>
+                </section>
                 <div class="input-group mb-3" hidden>
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="creationDate">
