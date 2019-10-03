@@ -158,7 +158,8 @@ public class ProjectController {
     }
 
     @PutMapping("projects/{id}/update")
-    public String update(RedirectAttributes redirectAttributes,
+    public String update(
+        RedirectAttributes redirectAttributes,
         @PathVariable Long id,
         Project project,
         Model model,
@@ -178,7 +179,7 @@ public class ProjectController {
             projectToUpdate.setCreationDate(project.getCreationDate());
             projectToUpdate = projectRepository.save(projectToUpdate);
             model.addAttribute("project", projectToUpdate);
-            return"redirect:/projects/"+id;
+            return "redirect:/projects/" + id;
         }
         else {
             return"error";

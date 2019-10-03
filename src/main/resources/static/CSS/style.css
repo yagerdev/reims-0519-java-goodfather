@@ -312,7 +312,7 @@ input:disabled {
 }
 
 .action-recap-project-container .d-flex {
-    width: calc(80vw / 4);
+    width: calc(82vw / 5);
     height: 100%;
     margin: 0;
 }
@@ -342,6 +342,17 @@ input:disabled {
     max-height: 250px;
     overflow: scroll;
     background: linear-gradient(whitesmoke, white);
+}
+
+.update-comment {
+    padding: 0 !important;
+    margin-bottom: 2vh !important;
+    justify-content: space-between;
+    background-color: transparent !important;
+}
+
+.update-comment .input-group-text {
+    border-radius: 0!important;
 }
 
 /* ------------------ ION ICON ------------------ */
@@ -403,6 +414,11 @@ ion-icon:hover {
 
 .navbar-collapse ul li {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.navbar ul li a {
+    width: 100%;
+    height: 100%;
 }
 
 /* ------------------ FOOTER ------------------ */
@@ -472,10 +488,11 @@ footer .footer-link a:last-child {
 /* ------------------ CATEGORIES ------------------ */
 
 .group-image {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
 }
 
 .group-image .image {
@@ -484,7 +501,11 @@ footer .footer-link a:last-child {
     height: 270px;
     display: flex;
     text-decoration: none;
-    width: 180px;
+    width: calc(100vw / 4);
+}
+
+.image:first-child, .image:nth-child(2), .image:nth-child(3) {
+    margin-bottom: 2vh;
 }
 
 .group-image .image:hover p {
@@ -502,24 +523,28 @@ footer .footer-link a:last-child {
     text-transform: uppercase;
 }
 
-.salle-de-bain {
+.salle-de-bain-wc {
     background-image: url("../IMG/sdb.jpg");
-}
-
-.couloir {
-    background-image: url("../IMG/couloir.jpg");
 }
 
 .salon-sjour {
     background-image: url("../IMG/salonsejour.jpg");
 }
 
-.chambre {
+.chambres {
     background-image: url("../IMG/chambre.jpg");
 }
 
 .cuisine {
     background-image: url("../IMG/cuisine.jpg");
+}
+
+.communs {
+    background-image: url("../IMG/commun.jpg");
+}
+
+.divers {
+    background-image: url("../IMG/couloir.jpg");
 }
 
 /* ------------------ MEDIA QUERIES ------------------ */
@@ -530,7 +555,7 @@ footer .footer-link a:last-child {
     }
 
     .admin-control .btn {
-        width: calc(80vw / 7);
+        width: calc(60vw / 7);
     }
 
     /* -------------- NAVIGATION -------------- */

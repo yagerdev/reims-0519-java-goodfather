@@ -21,7 +21,7 @@
                 l'application.
             </p>
             <section class="admin-control">
-                <a href="/projects/create" class="btn btn-info">Projets</a>
+                <a href="/projects" class="btn btn-info">Projets</a>
                 <a th:if="${user.role == 'ADMIN'}" href="/users" class="btn btn-info">Utilisateurs</a>
                 <a href="/tasks" class="btn btn-outline-info">Tâches</a>
                 <a th:if="${user.role == 'ADMIN'}" href="/works" class="btn btn-outline-info">Travaux</a>

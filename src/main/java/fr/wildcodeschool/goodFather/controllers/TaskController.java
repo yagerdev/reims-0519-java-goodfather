@@ -137,7 +137,8 @@ public class TaskController {
         @ModelAttribute Room room,
         @ModelAttribute Work work,
         @ModelAttribute Material material,
-        @RequestParam double quantityValue
+        @RequestParam double quantityValue,
+        RedirectAttributes redirectAttributes
     ) {
         Task task = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(work.getId(), material.getId(), typology.getId(), room.getProject().getSourceId());
         Quantity quantity = new Quantity(room, task, quantityValue);
@@ -149,6 +150,7 @@ public class TaskController {
             project.addCost(task.getPrice()*quantity.getQuantity(), task.getPercentRange());
             project = projectRepository.save(project);
         }
+        redirectAttributes.addAttribute("message", "success");
         return "redirect:/rooms/" + room.getId() + "/edit";
     }
 
