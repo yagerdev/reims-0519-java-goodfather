@@ -81,7 +81,9 @@
                     </div>
                 </section>
                 <button type="submit" class="btn btn-info">Modifier</button>
-                <a href="/reset" type="button" class="btn btn-outline-info">Attribuer nouveau mot de passe</a>
+            </form>
+            <form th:action="@{/reset/} + ${user.id}" th:method="GET" th:object="${user}">Attribuer nouveau mot de passe
+                <button type="submit" class="btn btn-info">Attribuer nouveau mot de passe</button>
             </form>
         </section>
     </main>
