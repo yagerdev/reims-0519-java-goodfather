@@ -1,6 +1,14 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import fr.wildcodeschool.goodFather.entities.Project;
+import fr.wildcodeschool.goodFather.entities.Quantity;
+import fr.wildcodeschool.goodFather.entities.Room;
+import fr.wildcodeschool.goodFather.entities.Task;
 import fr.wildcodeschool.goodFather.entities.User;
+import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
+import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
+import fr.wildcodeschool.goodFather.repositories.RoomRepository;
+import fr.wildcodeschool.goodFather.repositories.TaskRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 
 import java.util.Collections;
@@ -27,6 +35,17 @@ public class UserController implements WebMvcConfigurer{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
+
+    @Autowired
+    QuantityRepository quantityRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
     
     @GetMapping("/users")
     public String show(Model model, @RequestParam(value = "message", required = false) String message, @Valid User user, BindingResult bindingResult) {
@@ -64,14 +83,29 @@ public class UserController implements WebMvcConfigurer{
                 redirectAttributes.addAttribute("message", "email");
                 return "redirect:/users";
             }
-            userRepository.save(user);     
+            user = userRepository.save(user);
+            if (user.getRole().equals("PARTNER")) {
+                Task copyTask;
+                for (Task task : taskRepository.findTasksByUserId(null)) {
+                    copyTask = new Task(
+                        task.getPrice(), 
+                        task.getUnit(), 
+                        task.getPercentRange(), 
+                        task.getTypology(), 
+                        task.getMaterial(), 
+                        task.getWork(), 
+                        user.getId()
+                    );
+                    copyTask = taskRepository.save(copyTask);
+                }
+            }    
             redirectAttributes.addAttribute("message", "success");
         }
         return "redirect:/users";
     }
 
     @PutMapping("/users/{id}")
-    public String update(@PathVariable Long id, User user, RedirectAttributes redirectAttributes) {
+    public String update(@PathVariable Long id, @Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         User userToUpdate = userRepository.findById(id).get();
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
@@ -80,6 +114,7 @@ public class UserController implements WebMvcConfigurer{
         userToUpdate.setAddress(user.getAddress());
         userToUpdate.setCity(user.getCity());
         userToUpdate.setPostalCode(user.getPostalCode());
+        updatePartnerStatus(userToUpdate, userToUpdate.getRole(), user.getRole());
         userToUpdate.setRole(user.getRole());
         userRepository.save(userToUpdate);
         redirectAttributes.addAttribute("message", "edit");
@@ -89,9 +124,49 @@ public class UserController implements WebMvcConfigurer{
 
     @DeleteMapping("/users/{id}")
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        for (Task task : taskRepository.findTasksByUserId(id)) {
+            taskRepository.delete(task);
+        }
         userRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/users";
     }
-}
 
+    public void updatePartnerStatus(User userToUpdate, String from, String to) {
+        if (from.equals("PARTNER") && !to.equals("PARTNER")){
+            for (Project project : userToUpdate.getProjects()) {
+                for (Room room : project.getRooms()) {
+                    for (Quantity quantity : room.getQuantities()) {
+                        Task task = quantity.getTask();
+                        Task defaultTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), null);
+                        task.update(defaultTask.getPrice(), defaultTask.getPercentRange(), defaultTask.getUnit());
+                        quantity.setTask(defaultTask);
+                        quantityRepository.save(quantity);
+                        task.getQuantities().remove(quantity);
+                        taskRepository.save(task);
+                    }
+                    roomRepository.save(room);
+                }
+                project.setSourceId(null);
+                projectRepository.save(project);
+            }
+            for (Task task : taskRepository.findTasksByUserId(userToUpdate.getId())) {
+                taskRepository.delete(task);
+            }
+        } else if (!from.equals("PARTNER") && to.equals("PARTNER")) {
+            Task copyTask;
+            for (Task task : taskRepository.findTasksByUserId(null)) {
+                copyTask = new Task(
+                    task.getPrice(), 
+                    task.getUnit(), 
+                    task.getPercentRange(), 
+                    task.getTypology(), 
+                    task.getMaterial(), 
+                    task.getWork(), 
+                    userToUpdate.getId()
+                );
+                copyTask = taskRepository.save(copyTask);
+            }
+        }
+    }
+}

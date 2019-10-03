@@ -82,6 +82,28 @@
                             placeholder="Notez des remarques sur le projet ..."
                         ></textarea>
                     </div>
+                    <section th:if="${user.role == 'PARTNER'}" class="check-role">
+						<p>Sélectionner la source des prix :</p>
+						<div class="item-check">
+							<input
+								type="radio"
+								id="default"
+								name="sourceId"
+								th:value="null"
+                                checked=true
+							/>
+							<label for="source">Goodfather</label>
+						</div>
+						<div class="item-check">
+							<input
+								type="radio"
+								id="user"
+								name="sourceId"
+								th:value="${user.id}"
+							/>
+							<label for="source">Mes prix</label>
+						</div>
+					</section>
                     <button type="submit" class="btn btn-info">Créer un projet</button>
                     <a href="/projects" type="button" class="btn btn-outline-info">Vos projets</a>
                 </form>
