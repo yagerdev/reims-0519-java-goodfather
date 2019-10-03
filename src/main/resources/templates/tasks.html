@@ -259,10 +259,10 @@
                             data-toggle="collapse"
                             th:attr="data-target='#typo'+${typology.id}"
                             aria-expanded="false"
-                            th:text="${typology.name.toUpperCase()}"
                             th:if="${room.containAtLeastOneOf(typology)}"
                         >
-                            Nom d'une typologie
+                            <span th:text="${typology.name.toUpperCase()}"></span>
+                            <span th:text="${room.getTotalCostPerTypology(typology) + '€'}" class="float-right"></span>
                         </button>
                         <div
                             th:id="'typo'+${typology.id}"
