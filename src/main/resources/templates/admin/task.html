@@ -7,7 +7,7 @@
         <main class="container">
             <h2 class="jumbotron mb-3">Gestion des<span class="yellow-gf">tâches</span></h2>
             <div th:replace="fragments/alert.html :: alert"></div>
-            <section>
+            <section th:if="${isAdmin}">
                 <form th:action="@{/tasks}" method="POST" class="rounded">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend read-project">
@@ -171,6 +171,7 @@
                                 <div
                                     th:each="task : *{typology.getTasks()}"
                                     class="item-global"
+                                    th:if="${task.userId == null ? user.role == 'ADMIN' : task.userId == user.id}"
                                 >
                                     <div
                                         th:object="${task}"
@@ -266,6 +267,7 @@
                                     </div>
 
                                     <form
+                                        th:if="${isAdmin}"
                                         th:action="@{/tasks/} + ${task.id}"
                                         th:method="DELETE"
                                     >
