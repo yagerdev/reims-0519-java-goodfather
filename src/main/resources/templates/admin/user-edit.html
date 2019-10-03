@@ -87,7 +87,6 @@
                 <button type="submit" class="btn btn-info">Modifier</button>
             </form>
             <form th:action="@{/reset/} + ${user.id}" th:method="GET" th:object="${user}">
-                Attribuer nouveau mot de passe
                 <button type="submit" class="btn btn-info">
                         Attribuer nouveau mot de passe
                     </button>
