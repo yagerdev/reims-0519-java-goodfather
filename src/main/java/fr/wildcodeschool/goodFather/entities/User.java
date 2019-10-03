@@ -47,7 +47,6 @@ public class User implements UserDetails, Comparable<User> {
 
     private String address;
 
-    @Size(min=2, max=45)
     @Column(length = 45)
     private String city;
 
