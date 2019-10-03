@@ -36,6 +36,8 @@ public class Task implements Comparable<Task> {
     @OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE)
     private Set<Quantity> quantities = new TreeSet<Quantity>();
 
+    private Long userId;
+
     public Task(
         Long id, 
         double price, 
@@ -43,7 +45,8 @@ public class Task implements Comparable<Task> {
         double percentRange, 
         Typology typology, 
         Material material, 
-        Work work
+        Work work,
+        Long userId
     ) {
         this.setId(id);
         this.setPrice(price);
@@ -52,6 +55,7 @@ public class Task implements Comparable<Task> {
         this.setTypology(typology);
         this.setMaterial(material);
         this.setWork(work);
+        this.setUserId(userId);
     }
 
     public Task(
@@ -60,7 +64,8 @@ public class Task implements Comparable<Task> {
         double percentRange,
         Typology typology,
         Material material, 
-        Work work
+        Work work,
+        Long userId
     ) {
         this.setPrice(price);
         this.setUnit(unit);
@@ -68,20 +73,7 @@ public class Task implements Comparable<Task> {
         this.setTypology(typology);
         this.setMaterial(material);
         this.setWork(work);
-    }
-
-    public Task(
-        double price,
-        String unit,
-        double percentRange,
-        Material material, 
-        Work work
-    ) {
-        this.setPrice(price);
-        this.setUnit(unit);
-        this.setPercentRange(percentRange);
-        this.setMaterial(material);
-        this.setWork(work);
+        this.setUserId(userId);
     }
 
     public Task() {
@@ -159,5 +151,32 @@ public class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task task) {
         return this.constructName().compareTo(task.constructName());
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void deleteQuantities() {
+        for (Quantity quantity : this.quantities) {
+            quantity.getRoom().reduceCost(this.price * quantity.getQuantity(), this.percentRange);
+            quantity.getRoom().getProject().reduceCost(this.price * quantity.getQuantity(), this.percentRange);
+        }
+    }
+
+    public void update(double price, double percentRange, String unit) {
+        for (Quantity quantity : this.quantities) {
+            quantity.getRoom().reduceCost(this.price * quantity.getQuantity(), this.percentRange);
+            quantity.getRoom().addCost(price * quantity.getQuantity(), percentRange);
+            quantity.getRoom().getProject().reduceCost(this.price * quantity.getQuantity(), this.percentRange);
+            quantity.getRoom().getProject().addCost(price * quantity.getQuantity(), percentRange);
+        }
+        this.setPrice(price);
+        this.setPercentRange(percentRange);
+        this.setUnit(unit);
     }
 }

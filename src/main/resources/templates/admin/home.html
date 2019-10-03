@@ -14,20 +14,20 @@
                     Nom utilisateur
                 </span>
             </h2>
-            <p>
+            <p th:if="${user.role == 'ADMIN'}">
                 Ici, vous avez accès aux différentes pages permettant la
                 création, la modification, la suppression et la lecture des
                 différents éléments nécessaires au bon fonctionnement de
                 l'application.
             </p>
             <section class="admin-control">
-                <a href="/projects/create" class="btn btn-info">Projets</a>
-                <a href="/users" class="btn btn-info">Utilisateurs</a>
+                <a href="/projects" class="btn btn-info">Projets</a>
+                <a th:if="${user.role == 'ADMIN'}" href="/users" class="btn btn-info">Utilisateurs</a>
                 <a href="/tasks" class="btn btn-outline-info">Tâches</a>
-                <a href="/works" class="btn btn-outline-info">Travaux</a>
-                <a href="/materials" class="btn btn-outline-info">Matériaux</a>
-                <a href="/typologies" class="btn btn-outline-info">Typologies</a>
-                <a href="/categories" class="btn btn-outline-info">Catégories</a>
+                <a th:if="${user.role == 'ADMIN'}" href="/works" class="btn btn-outline-info">Travaux</a>
+                <a th:if="${user.role == 'ADMIN'}" href="/materials" class="btn btn-outline-info">Matériaux</a>
+                <a th:if="${user.role == 'ADMIN'}" href="/typologies" class="btn btn-outline-info">Typologies</a>
+                <a th:if="${user.role == 'ADMIN'}" href="/categories" class="btn btn-outline-info">Catégories</a>
             </section>
         </main>
         <div th:replace="fragments/footer.html :: footer"></div>

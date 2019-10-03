@@ -133,6 +133,16 @@
 						<div class="item-check">
 							<input
 								type="radio"
+								id="partner"
+								name="role"
+								value="PARTNER"
+								th:checked="${user.role == 'PARTNER'}"
+							/>
+							<label for="role">Partenaire</label>
+						</div>
+						<div class="item-check">
+							<input
+								type="radio"
 								id="user"
 								name="role"
 								value="USER"

@@ -11,6 +11,7 @@
                     nom projet
                 </span>
             </h2>
+
             <div th:replace="fragments/alert.html :: alert"></div>
             <section class="recap-info-project mb-3">
                 <div class="input-group mb-1">
@@ -56,16 +57,6 @@
                 <div class="input-group mb-1">
                     <div class="input-group-prepend read-project">
                         <span class="input-group-text flex-centered">
-                            Commentaire
-                        </span>
-                    </div>
-                    <div class="form-control" th:text="${project.comment}">
-                        Commentaire
-                    </div>
-                </div>
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend read-project">
-                        <span class="input-group-text flex-centered">
                             Date
                         </span>
                     </div>
@@ -89,6 +80,39 @@
                         Coût total
                     </div>
                 </div>
+                <form
+                    th:action="@{/projects/} + ${project.id}"
+                    th:method="PUT"
+                    th:object="${project}"
+                    class="update-comment"
+                >
+                    <div class="input-group-prepend mb-1">
+                        <label
+                            class="input-group-text flex-centered"
+                            th:for="comment"
+                        >
+                            Commentaire
+                        </label>
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            th:id="${project.id + 'item'}"
+                            th:onclick="'javascript:update(\'' + ${project.id} + '\');'"
+                        >
+                            <ion-icon name="create"></ion-icon>
+                        </button>
+                    </div>
+                    <div class="input-group">
+                        <textarea
+                            class="form-control"
+                            th:name="comment"
+                            th:text="${project.comment}"
+                            th:id="${project.id}"
+                            name="comment"
+                            disabled
+                        ></textarea>
+                    </div>
+                </form>
             </section>
 
             <section class="action-recap-project-container mb-3">
@@ -128,7 +152,10 @@
                 >
                     Modifier projet
                 </a>
+                <button type="button" class="btn btn-info d-flex justify-content-center align-items-center">Exporter en PDF</button>
             </section>
+
+            
 
             <section class="accordion" id="recapProject">
                 <div class="card" th:each="category : ${categories}">
@@ -175,7 +202,7 @@
                                         >
                                             <ion-icon name="create"></ion-icon>
                                         </a>
-                                            <button
+                                        <button
                                             type="button"
                                             class="btn btn-info"
                                             data-toggle="modal"

@@ -22,7 +22,7 @@ public class LoginController {
     @GetMapping("/home")
     public String forwardByRole(Authentication authentication) {
         User currentUser = (User)authentication.getPrincipal();
-        if (currentUser.getRole().equals("ADMIN")) {
+        if (currentUser.getRole().equals("ADMIN") || currentUser.getRole().equals("PARTNER")) {
             return "forward:/admin";
         } else {
             return "forward:/projects/create";

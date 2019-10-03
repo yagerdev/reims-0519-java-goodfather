@@ -1,11 +1,14 @@
 package fr.wildcodeschool.goodFather.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,20 +40,26 @@ public class ProfileController {
 
     @PutMapping("/profile")
     public String update(
-        User user,
+        @Valid User user,
+        BindingResult bindingResult,
         RedirectAttributes redirectAttributes,
-        Authentication authentication
+        Authentication authentication 
     ) {
-        User userToUpdate = (User) authentication.getPrincipal();
-        userToUpdate.setFirstName(user.getFirstName());
-        userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPhoneNumber(user.getPhoneNumber());
-        userToUpdate.setAddress(user.getAddress());
-        userToUpdate.setCity(user.getCity());
-        userToUpdate.setPostalCode(user.getPostalCode());
-        userToUpdate = userRepository.save(userToUpdate);
-        redirectAttributes.addAttribute("message", "edit");
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addAttribute("message", "invalide");
+            redirectAttributes.addFlashAttribute("user", user);
+        } else {
+            User userToUpdate = (User) authentication.getPrincipal();
+            userToUpdate.setFirstName(user.getFirstName());
+            userToUpdate.setLastName(user.getLastName());
+            userToUpdate.setEmail(user.getEmail());
+            userToUpdate.setPhoneNumber(user.getPhoneNumber());
+            userToUpdate.setAddress(user.getAddress());
+            userToUpdate.setCity(user.getCity());
+            userToUpdate.setPostalCode(user.getPostalCode());
+            userToUpdate = userRepository.save(userToUpdate);
+            redirectAttributes.addAttribute("message", "edit");
+        }
         return "redirect:/profile";
     }
 
