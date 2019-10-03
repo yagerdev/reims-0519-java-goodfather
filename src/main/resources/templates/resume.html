@@ -132,9 +132,17 @@
             </main>
         </div>
         <script th:src="@{/JS/print.min.js}"></script>
-        <div id="editor"></div>
-        <button class="btn btn-info print" onclick="printJS('content', 'html')">
-            <ion-icon name="download"></ion-icon>
-        </button>
+        <div class="print">
+            <button class="btn btn-info" onclick="printJS('content', 'html')">
+                <ion-icon name="download"></ion-icon>
+            </button>
+            <button
+                class="btn btn-info"
+                value="Retour!"
+                onclick="history.back()"
+            >
+                <ion-icon name="undo"></ion-icon>
+            </button>
+        </div>
     </body>
 </html>
