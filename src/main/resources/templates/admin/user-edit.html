@@ -1,151 +1,92 @@
 <!DOCTYPE html>
 <html lang="FR">
-    <div th:replace="fragments/head.html :: head"></div>
-    <body>
-        <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
-		<main class="container">
-			<h2 class="jumbotron mb-3">
-				Modification de
-				<span
-					class="yellow-gf"
-					th:text="${user.firstName} + ' ' + ${user.lastName}"
-				>
+<div th:replace="fragments/head.html :: head"></div>
+
+<body>
+    <div th:replace="fragments/header.html :: header"></div>
+    <div th:replace="fragments/nav.html :: nav"></div>
+    <main class="container">
+        <h2 class="jumbotron mb-3">
+            Modification de
+            <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
 					catégories
 				</span>
-			</h2>
-			<section>
-				<form
-					th:action="@{/users/} + ${user.id}"
-					th:method="PUT"
-					th:object="${user}"
-					class="rounded"
-				>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="firstName">Prénom</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							th:name="firstName"
-							th:value="*{firstName}"
-							placeholder="Modifiez le prénom de l'utilisateur"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="lastName">
+        </h2>
+        <section>
+            <form th:action="@{/users/} + ${user.id}" th:method="PUT" th:object="${user}" class="rounded">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="firstName">Prénom</label>
+                    </div>
+                    <input type="text" class="form-control" th:name="firstName" th:value="*{firstName}" placeholder="Modifiez le prénom de l'utilisateur" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="lastName">
 								Nom
 							</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							th:name="lastName"
-							th:value="*{lastName}"
-							placeholder="Modifiez le nom de l'utilisateur"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="email">
+                    </div>
+                    <input type="text" class="form-control" th:name="lastName" th:value="*{lastName}" placeholder="Modifiez le nom de l'utilisateur" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="email">
 								Mail
 							</label>
-						</div>
-						<input
-							type="email"
-							class="form-control"
-							name="email"
-							th:value="*{email}"
-							placeholder="Modifiez l'email de l'utilisateur"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="phoneNumber">
+                    </div>
+                    <input type="email" class="form-control" name="email" th:value="*{email}" placeholder="Modifiez l'email de l'utilisateur" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="phoneNumber">
 								Téléphone
 							</label>
-						</div>
-						<input
-							type="tel"
-							class="form-control"
-							name="phoneNumber"
-							th:value="*{phoneNumber}"
-							placeholder="Modifiez le numéro de téléphone de l'utilisateur"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="address">
+                    </div>
+                    <input type="tel" class="form-control" name="phoneNumber" th:value="*{phoneNumber}" placeholder="Modifiez le numéro de téléphone de l'utilisateur" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="address">
 								Adresse
 							</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							name="address"
-							th:value="*{address}"
-							placeholder="Modifiez l'adresse de l'utilisateur"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="city">
+                    </div>
+                    <input type="text" class="form-control" name="address" th:value="*{address}" placeholder="Modifiez l'adresse de l'utilisateur" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="city">
 								City
 							</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							name="city"
-							th:value="*{city}"
-							placeholder="Modifiez la ville de l'utilisateur"
-						/>
-					</div>
-					<div class="input-group mb-3">
-						<div class="input-group-prepend read-project">
-							<label class="input-group-text flex-centered" for="postalCode">
+                    </div>
+                    <input type="text" class="form-control" name="city" th:value="*{city}" placeholder="Modifiez la ville de l'utilisateur" />
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label class="input-group-text flex-centered" for="postalCode">
 								Code postal
 							</label>
-						</div>
-						<input
-							type="text"
-							class="form-control"
-							name="postalCode"
-							th:value="${user.postalCode}"
-							placeholder="Modifiez le code postal de l'utilisateur"
-						/>
-					</div>
+                    </div>
+                    <input type="text" class="form-control" name="postalCode" th:value="${user.postalCode}" placeholder="Modifiez le code postal de l'utilisateur" />
+                </div>
 
-					<section class="check-role">
-						<p>Sélectionner le rôle de l'utilisateur :</p>
-						<div class="item-check">
-							<input
-								type="radio"
-								id="admin"
-								name="role"
-								value="ADMIN"
-                                th:checked="${user.role == 'ADMIN'}"
-							/>
-							<label for="role">Administrateur</label>
-						</div>
-						<div class="item-check">
-							<input
-								type="radio"
-								id="user"
-								name="role"
-								value="USER"
-								th:checked="${user.role == 'USER'}"
-							/>
-							<label for="role">Utilisateur</label>
-						</div>
-					</section>
-					<button type="submit" class="btn btn-info">Modifier</button>
-				</form>
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+                <section class="check-role">
+                    <p>Sélectionner le rôle de l'utilisateur :</p>
+                    <div class="item-check">
+                        <input type="radio" id="admin" name="role" value="ADMIN" th:checked="${user.role == 'ADMIN'}" />
+                        <label for="role">Administrateur</label>
+                    </div>
+                    <div class="item-check">
+                        <input type="radio" id="user" name="role" value="USER" th:checked="${user.role == 'USER'}" />
+                        <label for="role">Utilisateur</label>
+                    </div>
+                </section>
+                <button type="submit" class="btn btn-info">Modifier</button>
+                <a href="/reset" type="button" class="btn btn-outline-info">Attribuer nouveau mot de passe</a>
+            </form>
+        </section>
+    </main>
+    <div th:replace="fragments/footer.html :: footer"></div>
+    <div th:replace="fragments/script.html :: script"></div>
+</body>
+
 </html>
