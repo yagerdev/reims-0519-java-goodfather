@@ -45,7 +45,6 @@ public class User implements UserDetails, Comparable<User> {
     private String email;
 
     @Nullable
-
     private String phoneNumber;
 
     @Nullable
