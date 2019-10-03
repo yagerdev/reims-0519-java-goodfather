@@ -4,7 +4,7 @@
     <body>
         <div th:replace="fragments/header.html :: header"></div>
         <div th:replace="fragments/nav.html :: nav"></div>
-        <main class="container">
+        <main class="container" id="project">
             <h2 class="mb-3 jumbotron">
                 Récapitulatif
                 <span class="yellow-gf" th:text="${project.name}">
@@ -152,10 +152,15 @@
                 >
                     Modifier projet
                 </a>
-                <button type="button" class="btn btn-info d-flex justify-content-center align-items-center">Exporter en PDF</button>
+                <button
+                    type="button"
+                    class="btn btn-info d-flex justify-content-center align-items-center"
+                    onclick="print()"
+                    id="generate"
+                >
+                    Exporter en PDF
+                </button>
             </section>
-
-            
 
             <section class="accordion" id="recapProject">
                 <div class="card" th:each="category : ${categories}">

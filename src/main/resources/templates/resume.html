@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+
+        <main class="container-fluid">
+            <p class="alert mb-1 bg-vert-gf">Résumé du projet</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom du projet</th>
+                        <th scope="col">Date de création</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Ville</th>
+                        <th scope="col">Code postal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${project.name}"></td>
+                        <td
+                            th:text="${#dates.format(project.creationDate, 'dd / MM / yyyy')}"
+                        ></td>
+                        <td th:text="${project.address}"></td>
+                        <td th:text="${project.city}"></td>
+                        <td th:text="${project.postalCode}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="alert mb-1 bg-vert-gf">Commentaire sur le projet</p>
+            <p class="form-control p-4" th:text="${project.comment}"></p>
+
+            <p class="alert mb-1 bg-vert-gf">Estimation du projet</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Estimation total</th>
+                        <th scope="col">Fourchette haute</th>
+                        <th scope="col">Fourchette basse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td
+                            th:text="${T(Math).round((project.lowerTotalCost + project.upperTotalCost)/2) + '€'}"
+                        ></td>
+                        <td
+                            th:text="${T(Math).round(project.upperTotalCost) + '€'}"
+                        ></td>
+                        <td
+                            th:text="${T(Math).round(project.lowerTotalCost) + '€'}"
+                        ></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="alert mb-1 bg-vert-gf">Liste des pièces du projet</p>
+            <section
+                th:each="category : ${categories}"
+                th:if="${project.containAtLeastOneOf(category)}"
+                class="mb-5"
+            >
+                <p
+                    class="alert alert-primary mb-1 font-weight-bold"
+                    th:text="'Catégorie : ' + ${category.name.toUpperCase()}"
+                ></p>
+                <table class="table table-bordered mb-1">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Nom de la pièce</th>
+                            <th scope="col">Estimation total</th>
+                            <th scope="col">Fourchette haute</th>
+                            <th scope="col">Fourchette basse</th>
+                            <th scope="col">Commentaire</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="room : ${category.getRooms()}">
+                        <tr>
+                            <td th:text="${room.name}"></td>
+                            <td
+                                th:text="${T(Math).round((room.lowerTotalCost + room.upperTotalCost)/2) + '€'}"
+                            ></td>
+                            <td
+                                th:text="${T(Math).round(room.upperTotalCost) + '€'}"
+                            ></td>
+                            <td
+                                th:text="${T(Math).round(room.lowerTotalCost) + '€'}"
+                            ></td>
+                            <td th:text="${room.comment}"></td>
+                        </tr>
+                        <tr>
+                            <th>Travaux</th>
+                            <td colspan="4">
+                                <table
+                                    class="table"
+                                    th:each="typology : ${typologies}"
+                                    th:if="${room.containAtLeastOneOf(typology)}"
+                                >
+                                    <thead>
+                                        <p
+                                            class="alert alert-info mb-1"
+                                            th:text="${typology.name}"
+                                        >
+                                            Typologie
+                                        </p>
+                                        <tr>
+                                            <th scope="col">Nom de la tâche</th>
+                                            <th scope="col">Coût</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            th:each="quantity : ${room.quantities}"
+                                        >
+                                            <td
+                                                th:text="${quantity.task.constructName()}"
+                                            ></td>
+                                            <td
+                                                th:text="${quantity.quantity*quantity.task.price} + '€'"
+                                            ></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>
