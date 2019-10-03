@@ -28,6 +28,12 @@
                         th:value="*{firstName}"
                         placeholder="Modifiez votre prénom ..."
                     />
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                        Firstname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -42,6 +48,12 @@
                         placeholder="Modifiez votre nom ..."
                         th:value="*{lastName}"
                     />
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                        Lastname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -56,6 +68,12 @@
                         th:value="*{email}"
                         placeholder="Modifiez votre adresse mail ..."
                     />
+                    <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                        Email Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend read-project">
@@ -111,6 +129,18 @@
                         name="postalCode"
                         th:value="*{postalCode}"
                         placeholder="Modifiez votre code postal ..."
+                    />
+                    <input
+                        type="hidden"
+                        class="form-control"
+                        name="password"
+                        value="********"
+                    />
+                    <input
+                        type="hidden"
+                        class="form-control"
+                        name="role"
+                        value="********"
                     />
                 </div>
                 <button type="submit" class="btn btn-info">Modifier vos informations</button>
