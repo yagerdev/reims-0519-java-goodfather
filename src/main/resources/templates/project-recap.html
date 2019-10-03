@@ -165,12 +165,11 @@
                         data-toggle="collapse"
                         th:attr="data-target='#cat'+${category.id}"
                         aria-expanded="false"
-                        th:text="${category.name.toUpperCase()}"
                         th:if="${project.containAtLeastOneOf(category)}"
                     >
-                        Nom d'une categorie
+                        <span th:text="${category.name.toUpperCase()}"></span>
+                        <span th:text="${project.getTotalCostPerCategory(category) + '€'}" class="float-right"></span>
                     </button>
-
                     <div
                         th:id="'cat'+${category.id}"
                         class="collapse"
