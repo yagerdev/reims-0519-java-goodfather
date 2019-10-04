@@ -198,4 +198,14 @@ public class Room implements Comparable<Room> {
     public int compareTo(Room room) {
         return this.id.compareTo(room.getId());
     }
+
+    public long getTotalCostPerTypology(Typology typology) {
+        double total = 0;
+        for(Quantity quantity : this.quantities) {
+            if (quantity.getTask().getTypology().equals(typology)) {
+                total += quantity.getQuantity() * quantity.getTask().getPrice();
+            }
+        }
+        return Math.round(total);
+    }
 }

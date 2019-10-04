@@ -227,4 +227,14 @@ public class Project implements Comparable<Project> {
     public void setSourceId(Long sourceId) {
         this.sourceId = sourceId;
     }
+
+    public long getTotalCostPerCategory(Category category) {
+        double total = 0;
+        for (Room room : this.rooms) {
+            if (room.getCategory().equals(category)) {
+                total += (room.getLowerTotalCost() + room.getUpperTotalCost()) / 2;
+            }
+        }
+        return Math.round(total);
+    }
 }
