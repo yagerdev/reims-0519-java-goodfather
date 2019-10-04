@@ -192,6 +192,15 @@ public class ProjectController {
         }
     }
 
+    @PutMapping("projects/{id}")
+    public String updateComment(@PathVariable Long id, Project project, RedirectAttributes redirectAttributes) {
+        Project projectToUpdate = projectRepository.findById(id).get();
+        projectToUpdate.setComment(project.getComment());
+        projectRepository.save(projectToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
+        return "redirect:/projects/" + id;
+    }
+
     public void changePriceSource(Project projectToUpdate, Long fromSource, Long toSource) {
         if (fromSource != toSource) {
             for (Room room : projectToUpdate.getRooms()) {
