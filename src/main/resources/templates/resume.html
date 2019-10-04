@@ -148,11 +148,10 @@
             </main>
             <script>
                 function pdf() {
-                    var pdf = new jsPDF("p", "pt", "a4");
-                    pdf.internal.scaleFactor = 2;
-
+                    var pdf = new jsPDF("m", "pt", "a4");
+                    pdf.internal.scaleFactor = 2.1;
                     var options = {
-                        pagesplit: true
+                        pagesplit: true,
                     };
                     pdf.addHTML(document.body, options, function() {
                         pdf.save("project-GoodFather.pdf");
