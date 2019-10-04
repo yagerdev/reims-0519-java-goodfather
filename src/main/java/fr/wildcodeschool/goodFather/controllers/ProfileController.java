@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -32,9 +33,16 @@ public class ProfileController {
         Authentication authentication,
         @RequestParam(value = "message", required = false) String message
     ) {
-        User userToUpdate = (User) authentication.getPrincipal();
-        model.addAttribute("user", userToUpdate);
-        model.addAttribute("message", message);
+        if(user == null) {
+            System.out.println("IF");
+        } else {
+            System.out.println("ELSE");
+            User userToUpdate = (User) authentication.getPrincipal();
+            model.addAttribute("user", userToUpdate);
+            model.addAttribute("userToUpdate", userToUpdate);
+            model.addAttribute("message", message);
+
+        }
         return "profile";
     }
 
@@ -47,7 +55,7 @@ public class ProfileController {
     ) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addAttribute("message", "invalide");
-            redirectAttributes.addFlashAttribute("user", user);
+            redirectAttributes.addFlashAttribute("userToUpdate", user);
         } else {
             User userToUpdate = (User) authentication.getPrincipal();
             userToUpdate.setFirstName(user.getFirstName());
@@ -77,7 +85,7 @@ public class ProfileController {
         @RequestParam("repeatpsw") String password,
         RedirectAttributes redirectAttributes,
         Authentication authentication,
-        User user
+        @Valid User user
     ) {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
