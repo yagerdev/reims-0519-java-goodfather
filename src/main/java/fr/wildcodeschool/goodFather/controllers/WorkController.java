@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,10 +34,13 @@ public class WorkController {
     }
 
     @PostMapping("/works")
-    public String create(@RequestParam String name, RedirectAttributes redirectAttributes) {
-        Work work = new Work(name);
-        workRepository.save(work);
-        redirectAttributes.addAttribute("message", "success");
+    public String create(@ModelAttribute Work work, RedirectAttributes redirectAttributes) {
+        if (workRepository.findByName(work.getName()) == null) {
+            workRepository.save(work);
+            redirectAttributes.addAttribute("message", "success");
+        } else {
+            redirectAttributes.addAttribute("message", "doublon");
+        }
         return "redirect:/works";
     }
 
