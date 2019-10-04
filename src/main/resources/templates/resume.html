@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="FR">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <div th:replace="fragments/head.html :: head"></div>
     <body>
-        <div id="content">
-            <div th:replace="fragments/head.html :: head"></div>
+        <div id="content" class="pdf-wrapper">
             <div th:replace="fragments/header.html :: header"></div>
-            <main class="container">
+            <main class="container-fluid">
                 <p class="alert mb-1 bg-vert-gf">Résumé du projet</p>
                 <table class="table table-bordered">
                     <thead>
@@ -60,23 +62,26 @@
                 <section
                     th:each="category : ${categories}"
                     th:if="${project.containAtLeastOneOf(category)}"
-                    class="mb-5"
+                    class="mb-4"
                 >
                     <p
                         class="alert alert-primary mb-1"
                         th:text="'Catégorie : ' + ${category.name.toUpperCase()}"
                     ></p>
-                    <table class="table table-bordered mb-1">
+                    <table
+                        class="table table-bordered mb-4"
+                        th:each="room : ${category.getRooms()}"
+                    >
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Nom de la pièce</th>
                                 <th scope="col">Estimation total</th>
                                 <th scope="col">Fourchette haute</th>
                                 <th scope="col">Fourchette basse</th>
-                                <th scope="col">Commentaire</th>
+                                <th scope="col">Commentaires</th>
                             </tr>
                         </thead>
-                        <tbody th:each="room : ${category.getRooms()}">
+                        <tbody>
                             <tr>
                                 <td th:text="${room.name}"></td>
                                 <td
@@ -130,19 +135,26 @@
                     </table>
                 </section>
             </main>
-        </div>
-        <script th:src="@{/JS/print.min.js}"></script>
-        <div class="print">
-            <button class="btn btn-info" onclick="printJS('content', 'html')">
-                <ion-icon name="download"></ion-icon>
-            </button>
-            <button
-                class="btn btn-info"
-                value="Retour!"
-                onclick="history.back()"
-            >
-                <ion-icon name="undo"></ion-icon>
-            </button>
+            <script>
+                function pdf() {
+                    var pdf = new jsPDF();
+                    pdf.addHTML(document.body, function() {
+                        pdf.save("web.pdf");
+                    });
+                }
+            </script>
+            <div class="print">
+                <button class="btn btn-info" onclick="pdf()">
+                    <ion-icon name="download"></ion-icon>
+                </button>
+                <button
+                    class="btn btn-info"
+                    value="Retour!"
+                    onclick="history.back()"
+                >
+                    <ion-icon name="undo"></ion-icon>
+                </button>
+            </div>
         </div>
     </body>
 </html>

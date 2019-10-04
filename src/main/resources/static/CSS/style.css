@@ -788,7 +788,6 @@ footer .footer-link a:last-child {
 
 @media print {
     body {
-      overflow: visible !important;
-      display:block;
+        display: block;
     }
-  }
+}
