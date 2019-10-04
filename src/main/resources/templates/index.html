@@ -3,99 +3,148 @@
     <div th:replace="fragments/head.html :: head"></div>
     <body>
         <div th:replace="fragments/header.html :: header"></div>
-		<div th:replace="fragments/nav.html :: nav"></div>
-		<main class="container">
-			<h2 class="jumbotron mb-3">
-				Investir avec
-				<span class="yellow-gf">GoodFather</span>
-			</h2>
-			<section>
-				<p>
-					Nous sommes heureux de vous accueillir sur notre site ! Notre passion
-					pour l’immobilier et l’architecture nous ont conduit à créer notre
-					métier d’accompagnateurs à l’investissement locatif !
-				</p>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+                Bienvenue sur
+                <span class="yellow-gf">J'estime mes travaux</span>
+            </h2>
+            <div class="presentation-global d-flex align-items-center justify-content-between">
+                <section class="presentation-section">
+                    <div class="text-center">
+                        <img
+                            src="../IMG/team.jpg"
+                            class="rounded team img-fluid"
+                            alt="Pauline Ancel et Matthieu Klose"
+                        />
+                    </div>
+                    <section
+                        class="presentation-conclusion d-flex align-items-center pt-3"
+                    >
+                        <div class="message">
+                            <p class="font-italic">
+                                Nous vous souhaitons une excellente expérience !
+                            </p>
+                            <p class="vert-gf">Pauline & Matthieu</p>
+                        </div>
+                        <button
+                            type="button"
+                            class="btn btn-info"
+                            data-toggle="modal"
+                            data-target="#loginModal"
+                        >
+                            Se connecter
+                        </button>
+                    </section>
+                </section>
+                <article class="presentation-content">
+                    <p>
+                        Nous sommes heureux de pouvoir mettre à votre
+                        disposition ce formidable outil d’estimation de travaux !
+                    </p>
+                    <p>
+                        Que vous soyez investisseur, particulier ou
+                        professionnel de l’immobilier, nous l’avons conçu de
+                        manière ludique et intuitive avec notre équipe de
+                        développeurs ! Sa base de prix est régulièrement mise à
+                        jour avec les dernières données de nos partenaires
+                        artisans, courtiers et maîtres d’œuvre.
+                    </p>
+                    <p>
+                        Si besoin, une page d’aide est disponible dans le menu
+                        ci-dessus ainsi qu’une vidéo démo dans le mail de
+                        confirmation d’inscription qui vous a été envoyé.
+                    </p>
+                    <p>
+                        Si vous avez des suggestions, des questions ou des bugs
+                        à nous signaler, vous pouvez nous contacter
+                        <a href="https://www.goodfather.fr/contact/">ici</a>.
+                        Cet outil bénéficiera d’améliorations régulières dont
+                        vous profiterez automatiquement tant que votre compte
+                        sera activé.
+                    </p>
+                </article>
+            </div>
 
-				<p>
-					Quel que soit votre niveau d’expérience, nous vous aidons à passer la
-					prochaine marche et vous formons avec toute notre expertise combinée
-					pour sécuriser votre prochaine acquisition !
-				</p>
-			</section>
-				<button 
-				type="button"
-				class="btn btn-info"
-				data-toggle="modal"
-				data-target="#loginModal"
-			>
-				Se connecter
-			</button>
-			<section
-				class="modal fade"
-				id="loginModal"
-				tabindex="-1"
-				role="dialog"
-				aria-hidden="true"
-			>
-				<div class="modal-dialog modal-dialog-centered" role="document">
-					<div class="modal-content">
-						<header class="modal-header">
-							<h5 class="modal-title">Connexion</h5>
-							<button
-								type="button"
-								class="close"
-								data-dismiss="modal"
-								aria-label="Close"
-							>
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</header>
-						<form
-							name="form "
-							action="/login"
-							method="POST"
-							class="form-group modal-body"
-						>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend read-project">
-									<span class="input-group-text flex-centered" id="user_mail">
-										Mail
-									</span>
-								</div>
-								<input
-									type="text"
-									class="form-control"
-									name="username"
+            <section
+                class="modal fade"
+                id="loginModal"
+                tabindex="-1"
+                role="dialog"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <header class="modal-header">
+                            <h5 class="modal-title">Connexion</h5>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </header>
+                        <form
+                            name="form "
+                            action="/login"
+                            method="POST"
+                            class="form-group modal-body"
+                        >
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend read-project">
+                                    <span
+                                        class="input-group-text flex-centered"
+                                        id="user_mail"
+                                    >
+                                        Mail
+                                    </span>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="username"
                                     required
-								/>
-							</div>
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="user_mdp">
-										Mot de passe
-									</span>
-								</div>
-								<input
-									type="password"
-									class="form-control"
-									name="password"
+                                />
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span
+                                        class="input-group-text"
+                                        id="user_mdp"
+                                    >
+                                        Mot de passe
+                                    </span>
+                                </div>
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    name="password"
                                     required
-								/>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-outline-danger" data-dismiss="modal">
-									Annuler
-								</button>
-								<button type="submit" class="btn btn-outline-info">
-									Se connecter
-								</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</section>
-		</main>
-		<div th:replace="fragments/footer.html :: footer"></div>
-		<div th:replace="fragments/script.html :: script"></div>
-	</body>
+                                />
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-danger"
+                                    data-dismiss="modal"
+                                >
+                                    Annuler
+                                </button>
+                                <button
+                                    type="submit"
+                                    class="btn btn-outline-info"
+                                >
+                                    Se connecter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>
