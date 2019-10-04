@@ -149,8 +149,11 @@ public class TaskController {
             room = roomRepository.save(room);
             project.addCost(task.getPrice()*quantity.getQuantity(), task.getPercentRange());
             project = projectRepository.save(project);
+            redirectAttributes.addAttribute("message", "success");
+        } else {
+            redirectAttributes.addAttribute("message", "doublon");
         }
-        redirectAttributes.addAttribute("message", "success");
+    
         return "redirect:/rooms/" + room.getId() + "/edit";
     }
 
