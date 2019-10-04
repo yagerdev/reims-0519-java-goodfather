@@ -48,7 +48,12 @@ public class UserController implements WebMvcConfigurer{
     RoomRepository roomRepository;
     
     @GetMapping("/users")
-    public String show(Model model, @RequestParam(value = "message", required = false) String message, @Valid User user, BindingResult bindingResult) {
+    public String show(
+        Model model, 
+        @RequestParam(value = "message", required = false) String message,
+        @Valid User user, 
+        BindingResult bindingResult
+    ) {
         if(user.getEmail() == null) {
             model.addAttribute("user", new User());
         } else { 
@@ -63,8 +68,14 @@ public class UserController implements WebMvcConfigurer{
     }
 
     @GetMapping("/users/{id}")
-    public String edit(@PathVariable Long id, Model model) {
+    public String edit(
+        @PathVariable Long id, 
+        Model model,
+        @RequestParam(value = "message", required = false) String message
+    ) {
         User userToUpdate = userRepository.findById(id).get();
+        model.addAttribute("message", message);
+        model.addAttribute("userToUpdate", userToUpdate);
         model.addAttribute("user", userToUpdate);
         return "admin/user-edit";
     }
@@ -105,21 +116,39 @@ public class UserController implements WebMvcConfigurer{
     }
 
     @PutMapping("/users/{id}")
-    public String update(@PathVariable Long id, @Valid User user, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String update(
+        Model model,
+        @PathVariable Long id, 
+        @Valid User user, 
+        BindingResult bindingResult, 
+        RedirectAttributes redirectAttributes
+    ) {
         User userToUpdate = userRepository.findById(id).get();
-        userToUpdate.setFirstName(user.getFirstName());
-        userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPhoneNumber(user.getPhoneNumber());
-        userToUpdate.setAddress(user.getAddress());
-        userToUpdate.setCity(user.getCity());
-        userToUpdate.setPostalCode(user.getPostalCode());
-        updatePartnerStatus(userToUpdate, userToUpdate.getRole(), user.getRole());
-        userToUpdate.setRole(user.getRole());
-        userRepository.save(userToUpdate);
-        redirectAttributes.addAttribute("message", "edit");
-        redirectAttributes.addAttribute("user", userToUpdate);
-        return "redirect:/users";
+        Boolean mailAlreadyUsed = userRepository.findByEmail(user.getEmail()) != null && !user.getEmail().equals(userToUpdate.getEmail());
+        if (!mailAlreadyUsed && !bindingResult.hasErrors()) {
+            userToUpdate.setFirstName(user.getFirstName());
+            userToUpdate.setLastName(user.getLastName());
+            userToUpdate.setEmail(user.getEmail());
+            userToUpdate.setPhoneNumber(user.getPhoneNumber());
+            userToUpdate.setAddress(user.getAddress());
+            userToUpdate.setCity(user.getCity());
+            userToUpdate.setPostalCode(user.getPostalCode());
+            updatePartnerStatus(userToUpdate, userToUpdate.getRole(), user.getRole());
+            userToUpdate.setRole(user.getRole());
+            userRepository.save(userToUpdate);
+            redirectAttributes.addAttribute("message", "edit");
+            return "redirect:/users";
+        }
+        if (mailAlreadyUsed) {
+            model.addAttribute("message", "email");
+            model.addAttribute("emailError", "Email déjà utilisé");
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("message", "invalide");
+        model.addAttribute("userToUpdate", userToUpdate);
+        return "admin/user-edit";
     }
 
     @DeleteMapping("/users/{id}")
