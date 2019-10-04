@@ -30,11 +30,16 @@ public class ProfileController {
     public String loadProfile(
         Model model, 
         Authentication authentication,
-        @RequestParam(value = "message", required = false) String message
+        @RequestParam(value = "message", required = false) String message, 
+        @RequestParam(value = "emailError", required = false) String email
     ) {
-        User userToUpdate = (User) authentication.getPrincipal();
-        model.addAttribute("user", userToUpdate);
-        model.addAttribute("message", message);
+            User userToUpdate = (User) authentication.getPrincipal();
+            model.addAttribute("user", userToUpdate);
+            model.addAttribute("userToUpdate", userToUpdate);
+            model.addAttribute("message", message);
+            model.addAttribute("emailError", email);
+            System.out.println(email);
+
         return "profile";
     }
 
@@ -47,9 +52,14 @@ public class ProfileController {
     ) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addAttribute("message", "invalide");
-            redirectAttributes.addFlashAttribute("user", user);
+            redirectAttributes.addFlashAttribute("userToUpdate", user);
         } else {
             User userToUpdate = (User) authentication.getPrincipal();
+            if (userRepository.findByEmail(user.getEmail()) != null && !user.getEmail().equals(userToUpdate.getEmail())) {
+                redirectAttributes.addAttribute("message", "invalide");
+                redirectAttributes.addAttribute("emailError", "Email déjà utilisé");
+                return "redirect:/profile";
+            }
             userToUpdate.setFirstName(user.getFirstName());
             userToUpdate.setLastName(user.getLastName());
             userToUpdate.setEmail(user.getEmail());
@@ -77,7 +87,7 @@ public class ProfileController {
         @RequestParam("repeatpsw") String password,
         RedirectAttributes redirectAttributes,
         Authentication authentication,
-        User user
+        @Valid User user
     ) {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
