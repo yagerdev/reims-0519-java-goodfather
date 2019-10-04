@@ -32,7 +32,6 @@ public class ProfileController {
         Authentication authentication,
         @RequestParam(value = "message", required = false) String message
     ) {
-
             User userToUpdate = (User) authentication.getPrincipal();
             model.addAttribute("user", userToUpdate);
             model.addAttribute("userToUpdate", userToUpdate);

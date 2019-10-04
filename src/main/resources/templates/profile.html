@@ -27,6 +27,7 @@
                         th:name="firstName"
                         th:value="*{firstName}"
                         placeholder="Modifiez votre prénom ..."
+                        required
                     />
                     <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
                         Firstname Error
