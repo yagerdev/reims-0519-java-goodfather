@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <body>
+        <section th:fragment="search" class="search m-auto">
+            <div class="input-group mb-3">
+                <input
+                    type="search"
+                    id="searchBar"
+                    class="form-control rounded mr-1"
+                    placeholder="Recherchez ..."
+                    onkeyup="search()"
+                />
+                <button
+                    class="btn btn-warning d-flex justify-content-center align-items-center"
+                >
+                    <ion-icon name="search"></ion-icon>
+                </button>
+            </div>
+        </section>
+    </body>
+</html>

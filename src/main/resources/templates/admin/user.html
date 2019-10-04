@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+				Gestion des
+				<span class="yellow-gf">utilisateurs</span>
+            </h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form th:action="@{/users}" th:object="${user}" method="POST" class="rounded">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="firstName">
+								Prénom
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{firstName}"
+                            autofocus
+                            placeholder="Entrez le prénom de l'utilisateur ..."
+                            required
+                        />
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                        Firstname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="lastName">
+								Nom
+							</label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:field="*{lastName}"
+                            placeholder="Entrez le nom de l'utilisateur ..."
+                            required
+                        />
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+                        Lastname Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend read-project">
+							<label class="input-group-text flex-centered" for="role">
+                                Rôle
+                            </label>
+						</div>
+						<select class="custom-select" th:field="*{role}" >
+                            <option value="" selected>Choisir...</option>
+                            <option value="ADMIN">ADMINISTRATEUR</option>
+							<option value="PARTNER">PARTENAIRE</option>
+							<option value="USER">UTILISATEUR</option>
+						</select>
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">
+                        Role Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="email">
+								Mail
+							</label>
+                        </div>
+                        <input
+                            type="email"
+                            class="form-control"
+                            th:field="*{email}"
+                            placeholder="Entrez le mail de l'utilisateur ..."
+                            required
+                        />
+                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                        Email Error
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="password">
+								Mot de passe
+							</label>
+                        </div>
+                        <input
+                            type="password"
+                            class="form-control"
+                            th:field="*{password}"
+                            id="password1"
+                            placeholder="Entrez le mot de passe de l'utilisateur ..."
+                            required
+                        />
+                    </div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<input
+									type="checkbox"
+									id="show-password"
+									onchange="showAndHidePassword()"
+								/>
+							</div>
+						</div>
+						<input
+							type="text"
+							class="form-control"
+                            value="Afficher le mot de passe"
+							disabled
+						/>
+                    </div>
+
+                    <div class="user-button d-flex justify-content-around align-items-center col-12 mb-3">
+                        <button type="submit" class="btn btn-info">Créer</button>
+                
+                        <button
+                            class="btn btn-info"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#additionnalInformation"
+                            aria-expanded="false"
+                            aria-controls="collapseExample"
+                        >
+                            Informations complémentaires
+                        </button>
+                    </div>
+
+                    <section class="collapse" id="additionnalInformation">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="phoneNumber">
+                                    Téléphone
+                                </label>
+                            </div>
+                            <input
+                                type="tel"
+                                class="form-control"
+                                th:field="*{phoneNumber}"
+                                placeholder="Entrez le numéro de téléphone de l'utilisateur ..."
+                            />
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="address">
+                                    Adresse
+                                </label>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                th:field="*{address}"
+                                placeholder="Entrez l'adresse de l'utilisateur ..."
+                            />
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="city">
+                                    City
+                                </label>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="*{city}"
+                                placeholder="Entrez la ville de l'utilisateur ..."
+                            />
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <label class="input-group-text flex-centered" for="postalCode">
+                                    Code postal
+                                </label>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="*{postalCode}"
+                                placeholder="Entrez le code postal de l'utilisateur ..."
+                            />
+                        </div>
+                    </section>
+                </form>
+            </section>
+            <div th:replace="fragments/search.html :: search"></div>
+            <section class="list rounded border-bottom p-4">
+                <section th:each="user : ${users}" class="item-global">
+                    <input
+                        type="text"
+                        th:value="${user.firstName} + ' ' + ${user.lastName}"
+                        th:id="${user.id}"
+                        class="user-list search-item"
+                    />
+                    <a th:href="@{'/users/' + ${user.id}}" class="btn btn-info">
+						<ion-icon name="create"></ion-icon>
+                    </a>
+                    <form
+                        th:action="@{/users/} + ${user.id}"
+                        th:method="DELETE"
+                    >
+                        <input
+                            type="hidden"
+                            th:value="${user.id}"
+                            th:name="id"
+                        />
+                        <button type="submit" class="btn btn-info">
+                            <ion-icon
+                                ios="ios-close"
+                                md="md-close"
+                                class="icon-delete"
+                            ></ion-icon>
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>

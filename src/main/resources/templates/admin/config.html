@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+                Configuration de
+                <span class="yellow-gf" th:text="${categoryName}"></span>
+            </h2>
+            <section>
+                <p>
+                    Merci de sélectionner les typologies rattachées à
+                    <span th:text="${categoryName}"></span>
+                </p>
+                <form
+                    th:action="@{'/categories/' + ${categoryId}}"
+                    th:method="PUT"
+                >
+                    <div th:each="mySet : ${myMap}">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend read-project">
+                                <div class="input-group-text flex-centered">
+                                    <input
+                                        type="checkbox"
+                                        name="typologies"
+                                        th:id="${mySet.key.id}"
+                                        th:value="${mySet.key.id}"
+                                        th:checked="${mySet.value}"
+                                        class="checkbox-config"
+                                    />
+                                </div>
+                            </div>
+                            <label
+                                class="form-control"
+                                h:for="${mySet.key.id}"
+                                th:text="${mySet.key.name}"
+                            >
+                                Item
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info">Filtrer</button>
+                </form>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>

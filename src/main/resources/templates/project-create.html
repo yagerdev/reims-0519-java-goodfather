@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+                Bienvenue
+                <span class="yellow-gf" th:text="${user.firstName}">
+                    Nom utilisateur
+                </span>
+            </h2>
+            <section>
+                <form th:action="@{/projects}" method="POST" class="rounded">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="name">
+                                Nom
+                            </label>
+                        </div>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            required
+                            autofocus
+                            placeholder="Saisissez un nom de projet ..."
+                        >
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="address">
+                                Adresse
+                            </label>
+                        </div>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="address"
+                            required
+                            placeholder="Saisissez l'adresse ..."
+                        >
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="postalCode">
+                                Code postal
+                            </label>
+                        </div>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="postalCode"
+                            required
+                            placeholder="Saisissez le code postal ..."
+                        >
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="city">
+                                Ville
+                            </label>
+                        </div>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            required
+                            placeholder="Saisissez la ville ..."
+                        >
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="comment">
+                                Commentaire
+                            </label>
+                        </div>
+                        <textarea 
+                            class="form-control"
+                            name="comment"
+                            placeholder="Notez des remarques sur le projet ..."
+                        ></textarea>
+                    </div>
+                    <section th:if="${user.role == 'PARTNER'}" class="check-role">
+						<p>Sélectionner la source des prix :</p>
+						<div class="item-check">
+							<input
+								type="radio"
+								id="default"
+								name="sourceId"
+								th:value="null"
+                                checked=true
+							/>
+							<label for="source">Goodfather</label>
+						</div>
+						<div class="item-check">
+							<input
+								type="radio"
+								id="user"
+								name="sourceId"
+								th:value="${user.id}"
+							/>
+							<label for="source">Mes prix</label>
+						</div>
+					</section>
+                    <button type="submit" class="btn btn-info">Créer un projet</button>
+                    <a href="/projects" type="button" class="btn btn-outline-info">Vos projets</a>
+                </form>
+            </section>
+        </main>
+		<div th:replace="fragments/footer.html :: footer"></div>
+		<div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>

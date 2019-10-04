@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">Gestion des<span class="yellow-gf">tâches</span></h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section th:if="${isAdmin}">
+                <form th:action="@{/tasks}" method="POST" class="rounded">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="typologyId">
+                                Typologies
+                            </label>
+                        </div>
+                        <select
+                            class="custom-select"
+                            id="typologyId"
+                            th:name="typologyId"
+                            required
+                            autofocus
+                        >
+                            <option disabled selected>Sélectionnez une typologie ...</option>
+                            <option
+                                th:each="typology : ${typologies}"
+                                th:text="${typology.name}"
+                                th:value="${typology.id}"
+                            >
+                                Option
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="WorkId">
+                                Travaux
+                            </label>
+                        </div>
+                        <select
+                            class="custom-select"
+                            id="workId"
+                            th:name="workId"
+                            required
+                        >
+                            <option disabled selected>Sélectionnez un travail ...</option>
+                            <option
+                                th:each="work : ${works}"
+                                th:text="${work.name}"
+                                th:value="${work.id}"
+                            >
+                                Option
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="materialId">
+                                Matériaux
+                            </label>
+                        </div>
+                        <select
+                            class="custom-select"
+                            id="materialId"
+                            name="materialId"
+                            required
+                        >
+                            <option disabled selected>Sélectionnez un matériau ...</option>
+                            <option
+                                th:each="material : ${materials}"
+                                th:text="${material.name}"
+                                th:value="${material.id}"
+                            >
+                                Option
+                            </option>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <span class="input-group-text flex-centered" id="price">
+                                Prix
+                            </span>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:name="price"
+                            required
+                            placeholder="Entrez un prix ..."
+                        />
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            th:name="unit"
+                            id="perUnit"
+                            value="au m²"
+                            required
+                        />
+                        <label class="form-check-label" for="perUnit">
+                            au m²
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            th:name="unit"
+                            id="perUnit"
+                            value="à l'unité"
+                            required
+                        />
+                        <label class="form-check-label" for="perUnit">
+                            à l'unité
+                        </label>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="percentRange">
+                                Fourchette de prix
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            value="5"
+                            name="result"
+                        />
+                    </div>
+                    <input
+                        type="range"
+                        class="form-control-range mb-4"
+                        min="0"
+                        max="20"
+                        step="1"
+                        value="5"
+                        th:name="percentRange"
+                        oninput="result.value = percentRange.value"
+                    />
+                    <div class="btn-section">
+                        <button type="submit" class="btn btn-info">
+                            Créer
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="accordion" id="recapTask">
+                <div class="card" th:each="typology : ${typologies}">
+                    <button
+                        class="btn btn-info btn-accordeon p-2"
+                        type="button"
+                        data-toggle="collapse"
+                        th:attr="data-target='#typo'+${typology.id}"
+                        aria-expanded="false"
+                        th:text="${typology.name.toUpperCase()}"
+                    >
+                        Nom d'une typologie
+                    </button>
+
+                    <div
+                        th:id="'typo'+${typology.id}"
+                        class="collapse"
+                        data-parent="#recapTask"
+                    >
+                        <div class="card-body">
+                            <section class="section-list">
+                                <div
+                                    th:each="task : *{typology.getTasks()}"
+                                    class="item-global"
+                                    th:if="${task.userId == null ? user.role == 'ADMIN' : task.userId == user.id}"
+                                >
+                                    <div
+                                        th:object="${task}"
+                                        class="update-form"
+                                    >
+                                        <input
+                                            type="text"
+                                            th:value="*{constructName()}"
+                                            th:id="${task.id}"
+                                            name="name"
+                                            disabled
+                                        />
+
+                                        <a
+                                            th:href="@{/tasks/} + ${task.id}"
+                                            class="btn btn-info"
+                                        >
+                                            <ion-icon name="create"></ion-icon>
+                                        </a>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-info"
+                                        data-toggle="modal"
+                                        th:attr="data-target='#task'+${task.id}"
+                                    >
+                                        <ion-icon name="eye"></ion-icon>
+                                    </button>
+
+                                    <div
+                                        class="modal fade"
+                                        th:id="'task'+${task.id}"
+                                        tabindex="-1"
+                                        role="dialog"
+                                        aria-hidden="true"
+                                    >
+                                        <div
+                                            class="modal-dialog modal-dialog-centered"
+                                            role="document"
+                                        >
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">
+                                                        Donnée de la tâche
+                                                    </h5>
+                                                    <button
+                                                        type="button"
+                                                        class="close"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close"
+                                                    >
+                                                        <span aria-hidden="true">
+                                                            &times;
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table">
+                                                        <thead
+                                                            class="thead-dark"
+                                                        >
+                                                            <tr>
+                                                                <th>Nom</th>
+                                                                <th>Prix</th>
+                                                                <th>Marge</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td
+                                                                    th:text="*{task.constructName()}"
+                                                                >
+                                                                    price
+                                                                </td>
+                                                                <td
+                                                                    th:text="${task.price} + '€'"
+                                                                >
+                                                                    price
+                                                                </td>
+                                                                <td
+                                                                    th:text="${task.percentRange} + '%'"
+                                                                >
+                                                                    %
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form
+                                        th:if="${isAdmin}"
+                                        th:action="@{/tasks/} + ${task.id}"
+                                        th:method="DELETE"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            th:value="${task.id}"
+                                            th:name="id"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="btn btn-info"
+                                        >
+                                            <ion-icon
+                                                ios="ios-close"
+                                                md="md-close"
+                                                class="icon-delete"
+                                            ></ion-icon>
+                                        </button>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>

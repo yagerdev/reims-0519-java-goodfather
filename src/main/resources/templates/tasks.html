@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <section class="jumbotron">
+                <h2 th:text="'Projet : ' + ${project.name}" class="yellow-gf">
+                    Nom du projet
+                </h2>
+                <h3 th:text="${room.name}">
+                    Nom de la pièce
+                </h3>
+            </section>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <table class="table table-striped table-dark rounded-bottom">
+                <thead>
+                    <tr>
+                        <th>MUR A</th>
+                        <th>MUR B</th>
+                        <th>Sol / Plafond</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${room.wallA + ' cm'}">item</td>
+                        <td th:text="${room.wallB + ' cm'}">item</td>
+                        <td th:text="${room.height + ' cm'}">item</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${surfaceA + ' m²'}">
+                            item
+                        </td>
+                        <td th:text="${surfaceB + ' m²'}">
+                            item
+                        </td>
+                        <td th:text="${ground + ' m²'}">
+                            item
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <section class="action-recap-project-container mb-3">
+                <div
+                    class="alert alert-info d-flex flex-column align-items-center"
+                    role="alert"
+                >
+                    Fourchette basse :
+                    <span
+                        class="alert-link"
+                        th:text="${T(Math).round(room.lowerTotalCost) + ' €'}"
+                    >
+                        prix
+                    </span>
+                </div>
+                <div
+                    class="alert alert-warning d-flex flex-column align-items-center"
+                    role="alert"
+                >
+                    Fourchette haute :
+                    <span
+                        class="alert-link"
+                        th:text="${T(Math).round(room.upperTotalCost) + ' €'}"
+                    >
+                        prix
+                    </span>
+                </div>
+                <a
+                    th:href="@{'/projects/' + ${project.id} + '/edit'}"
+                    class="btn btn-outline-info d-flex justify-content-center align-items-center"
+                >
+                    Nouvelle pièce
+                </a>
+                <a
+                    th:href="@{'/projects/' + ${project.id}}"
+                    class="btn btn-outline-info d-flex justify-content-center align-items-center"
+                >
+                    Récapitulatif projet
+                </a>
+            </section>
+            <form th:method="POST" th:action="@{/task/add}">
+                <input type="hidden" name="room" th:value="${room.id}" />
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label
+                            class="input-group-text flex-centered"
+                            for="typology"
+                        >
+                            Typologie
+                        </label>
+                    </div>
+                    <select
+                        class="custom-select"
+                        id="typology"
+                        th:name="typology"
+                        required
+                        autofocus
+                    >
+                        <option selected disabled>Sélectionnez...</option>
+                        <option
+                            th:each="typology : ${typologies}"
+                            th:text="${typology.name}"
+                            th:value="${typology.id}"
+                        >
+                            item
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label
+                            class="input-group-text flex-centered"
+                            for="work"
+                        >
+                            Travaux
+                        </label>
+                    </div>
+                    <select
+                        class="custom-select"
+                        id="work"
+                        th:name="work"
+                        disabled
+                        required
+                    >
+                        <option selected disabled>Sélectionnez...</option>
+                        <option
+                            th:each="task : ${tasks}"
+                            th:text="${task.work.name}"
+                            th:value="${task.work.id}"
+                            th:attr="filter=${task.typology.id}"
+                        >
+                            item
+                        </option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend read-project">
+                        <label
+                            class="input-group-text flex-centered"
+                            for="material"
+                        >
+                            Matériaux
+                        </label>
+                    </div>
+                    <select
+                        class="custom-select"
+                        id="material"
+                        th:name="material"
+                        disabled
+                        required
+                    >
+                        <option selected disabled>Sélectionnez...</option>
+                        <option
+                            th:each="task : ${tasks}"
+                            th:text="${task.material.name}"
+                            th:value="${task.material.id}"
+                            th:attr="filter=${task.typology.id + ' ' + task.work.id}"
+                        >
+                            item
+                        </option>
+                    </select>
+                </div>
+                <div
+                    class="quantity-selector-container d-flex align-items-center justify-content-between pb-3"
+                >
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${surfaceA.toString()}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        MUR A
+                    </button>
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${surfaceB}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        MUR B
+                    </button>
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${surfaceA*2 + surfaceB*2}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        TOTAL
+                    </button>
+                    <button
+                        type="button"
+                        onclick="quantity_select(this);"
+                        th:value="${ground}"
+                        class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
+                    >
+                        Sol / Plafond
+                    </button>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="quantity"
+                            >Quantité / Surface</label
+                        >
+                    </div>
+                    <input
+                        id="quantity"
+                        type="number"
+                        class="form-control"
+                        name="quantityValue"
+                        step="0.01"
+                        required
+                        placeholder="Entrez la quantité spécifique à votre tâche"
+                    />
+                </div>
+                <button type="submit" class="btn btn-info">Ajouter</button>
+            </form>
+
+            <form
+                th:action="@{/rooms/} + ${room.id}"
+                th:method="PUT"
+                th:object="${room}"
+                class="update-comment"
+            >
+                <div class="input-group-prepend mb-1">
+                    <label
+                        class="flex-centered input-group-text"
+                        th:for="comment"
+                    >
+                        Commentaires
+                    </label>
+                    <button
+                        type="button"
+                        class="btn btn-info d-flex"
+                        th:id="${room.id + 'item'}"
+                        th:onclick="'javascript:update(\'' + ${room.id} + '\');'"
+                    >
+                        <ion-icon name="create"></ion-icon>
+                    </button>
+                </div>
+                <div class="input-group">
+                    <textarea
+                        class="form-control"
+                        th:name="comment"
+                        th:text="${room.comment}"
+                        th:id="${room.id}"
+                        name="comment"
+                        disabled
+                    ></textarea>
+                </div>
+            </form>
+
+            <section class="section-list">
+                <section class="accordion" id="recapTask">
+                    <div class="card" th:each="typology : ${typologies}">
+                        <button
+                            class="btn btn-info btn-accordeon rounded p-2"
+                            type="button"
+                            data-toggle="collapse"
+                            th:attr="data-target='#typo'+${typology.id}"
+                            aria-expanded="false"
+                            th:if="${room.containAtLeastOneOf(typology)}"
+                        >
+                            <span th:text="${typology.name.toUpperCase()}"></span>
+                            <span th:text="${room.getTotalCostPerTypology(typology) + '€'}" class="float-right"></span>
+                        </button>
+                        <div
+                            th:id="'typo'+${typology.id}"
+                            class="collapse"
+                            data-parent="#recapTask"
+                        >
+                            <div class="card-body">
+                                <div
+                                    class="item-global"
+                                    th:each="quantity : ${room.quantities}"
+                                >
+                                    <div class="update-form">
+                                        <input
+                                            th:if="${quantity.task.typology.id ==  typology.id}"
+                                            th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price} + '€'"
+                                            disabled
+                                        />
+                                        <form
+                                            th:if="${quantity.task.typology.id ==  typology.id}"
+                                            th:action="@{'/quantity'}"
+                                            th:method="DELETE"
+                                        >
+                                            <input
+                                                type="hidden"
+                                                th:value="${quantity.id}"
+                                                th:name="quantity"
+                                            />
+                                            <button
+                                                type="submit"
+                                                class="btn btn-info"
+                                            >
+                                                <ion-icon
+                                                    ios="ios-close"
+                                                    md="md-close"
+                                                    class="icon-delete"
+                                                ></ion-icon>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script th:src="@{/JS/filter_task.js}"></script>
+        <script th:src="@{/JS/quantity_selector.js}"></script>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+spring.datasource.url = jdbc:mysql://localhost:3306/nom_BDD?serverTimezone=UTC
+spring.datasource.username = #######
+spring.datasource.password = #######
+
+spring.jpa.hibernate.ddl-auto = update
+
+# Custom property
+user.email = ########@######.##
+user.password = ########
+user.role = ADMIN
+user.firstname = #########
+user.lastname = #########

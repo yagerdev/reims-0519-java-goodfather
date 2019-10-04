@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="FR">
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+		<div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+                Liste des
+                <span class="yellow-gf">projets</span>
+            </h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <a href="/projects/create" class="btn btn-info mb-3">Créer un projet</a>
+            <section class="section-list">
+                <div th:each="project : ${projects}" class="item-global">
+                    <div class="user-list">
+                        <span th:text="${project.name}" class="project-attribute">
+                            Nom
+                        </span>
+						<span 
+							th:text="${#dates.format(project.creationDate, 'dd/MM/yyyy')}"
+							class="project-attribute"
+                        >
+                            Date
+						</span>
+                    </div>
+                    <form
+                        th:action="@{/projects/} + ${project.id}"
+                        th:method="DELETE"
+                    >
+                        <input
+                            type="hidden"
+                            th:value="${project.id}"
+                            th:name="id"
+                        />
+                        <button type="submit" class="btn btn-info">
+                            <ion-icon
+                                ios="ios-close"
+                                md="md-close"
+                                class="icon-delete"
+                            ></ion-icon>
+                        </button>
+                    </form>
+                    <a th:href="@{'/projects/' + ${project.id}}" class="btn btn-info">
+                        <ion-icon name="eye"></ion-icon>
+                    </a>
+                </div>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
+</html>
