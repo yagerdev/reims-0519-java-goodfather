@@ -90,6 +90,7 @@ public class ProjectController {
             model.addAttribute("project", project);
             model.addAttribute("rooms", rooms);
             model.addAttribute("categories", categoryList);
+            model.addAttribute("user", currentUser);
             return "resume";
         }
         return "error";

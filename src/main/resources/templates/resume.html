@@ -7,6 +7,31 @@
         <div id="content" class="pdf-wrapper">
             <div th:replace="fragments/header.html :: header"></div>
             <main class="container-fluid">
+                <p class="alert mb-1 bg-vert-gf">Informations du client</p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Adresse</th>
+                            <th scope="col">Ville</th>
+                            <th scope="col">Code postal</th>
+                            <th scope="col">Mail</th>
+                            <th scope="col">Téléphone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.address}"></td>
+                            <td th:text="${user.city}"></td>
+                            <td th:text="${user.postalCode}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.phoneNumber}"></td>
+                        </tr>
+                    </tbody>
+                </table>
                 <p class="alert mb-1 bg-vert-gf">Résumé du projet</p>
                 <table class="table table-bordered">
                     <thead>
@@ -52,7 +77,7 @@
                 >
                     <p
                         class="alert alert-primary mb-1"
-                        th:text="'Catégorie : ' + ${category.name.toUpperCase()}"
+                        th:text="'Catégorie : ' + ${category.name.toUpperCase() + ' - ' + project.getTotalCostPerCategory(category) + '€'}"
                     ></p>
                     <table
                         class="table table-bordered mb-4"
@@ -91,7 +116,7 @@
                                         <thead>
                                             <p
                                                 class="alert alert-info mb-1"
-                                                th:text="${typology.name}"
+                                                th:text="${typology.name + ' - ' + room.getTotalCostPerTypology(typology) + '€'}"
                                             >
                                                 Typologie
                                             </p>
@@ -125,7 +150,7 @@
                 function pdf() {
                     var pdf = new jsPDF("p", "pt", "a4");
                     pdf.internal.scaleFactor = 2;
-                    
+
                     var options = {
                         pagesplit: true
                     };
