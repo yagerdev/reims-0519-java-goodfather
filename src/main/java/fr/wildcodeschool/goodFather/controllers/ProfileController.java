@@ -30,12 +30,15 @@ public class ProfileController {
     public String loadProfile(
         Model model, 
         Authentication authentication,
-        @RequestParam(value = "message", required = false) String message
+        @RequestParam(value = "message", required = false) String message, 
+        @RequestParam(value = "emailError", required = false) String email
     ) {
             User userToUpdate = (User) authentication.getPrincipal();
             model.addAttribute("user", userToUpdate);
             model.addAttribute("userToUpdate", userToUpdate);
             model.addAttribute("message", message);
+            model.addAttribute("emailError", email);
+            System.out.println(email);
 
         return "profile";
     }
@@ -53,7 +56,8 @@ public class ProfileController {
         } else {
             User userToUpdate = (User) authentication.getPrincipal();
             if (userRepository.findByEmail(user.getEmail()) != null && !user.getEmail().equals(userToUpdate.getEmail())) {
-                redirectAttributes.addAttribute("message", "email");
+                redirectAttributes.addAttribute("message", "invalide");
+                redirectAttributes.addAttribute("emailError", "Email déjà utilisé");
                 return "redirect:/profile";
             }
             userToUpdate.setFirstName(user.getFirstName());
