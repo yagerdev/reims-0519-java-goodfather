@@ -47,6 +47,7 @@
                         th:name="lastName"
                         placeholder="Modifiez votre nom ..."
                         th:value="*{lastName}"
+                        required
                     />
                     <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
                         Lastname Error
@@ -67,6 +68,7 @@
                         th:name="email"
                         th:value="*{email}"
                         placeholder="Modifiez votre adresse mail ..."
+                        required
                     />
                     <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
                         Email Error

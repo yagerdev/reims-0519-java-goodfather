@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -33,16 +32,12 @@ public class ProfileController {
         Authentication authentication,
         @RequestParam(value = "message", required = false) String message
     ) {
-        if(user == null) {
-            System.out.println("IF");
-        } else {
-            System.out.println("ELSE");
+
             User userToUpdate = (User) authentication.getPrincipal();
             model.addAttribute("user", userToUpdate);
             model.addAttribute("userToUpdate", userToUpdate);
             model.addAttribute("message", message);
 
-        }
         return "profile";
     }
 
@@ -58,6 +53,10 @@ public class ProfileController {
             redirectAttributes.addFlashAttribute("userToUpdate", user);
         } else {
             User userToUpdate = (User) authentication.getPrincipal();
+            if (userRepository.findByEmail(user.getEmail()) != null && !user.getEmail().equals(userToUpdate.getEmail())) {
+                redirectAttributes.addAttribute("message", "email");
+                return "redirect:/profile";
+            }
             userToUpdate.setFirstName(user.getFirstName());
             userToUpdate.setLastName(user.getLastName());
             userToUpdate.setEmail(user.getEmail());
