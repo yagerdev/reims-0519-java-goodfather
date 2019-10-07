@@ -86,8 +86,12 @@ public class CategoryController {
 
     @PostMapping("/categories")
     public String create(@ModelAttribute Category category, RedirectAttributes redirectAttributes) {
-        categoryRepository.save(category);
-        redirectAttributes.addAttribute("message", "success");
+        if (categoryRepository.findByName(category.getName()) == null) {
+            categoryRepository.save(category);
+            redirectAttributes.addAttribute("message", "success");
+        } else {
+            redirectAttributes.addAttribute("message", "doublon");
+        }
         return "redirect:/categories";
     }
 

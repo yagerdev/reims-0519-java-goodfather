@@ -35,8 +35,12 @@ public class MaterialController {
 
     @PostMapping("/materials")
     public String create(@ModelAttribute Material material, RedirectAttributes redirectAttributes) {
-        materialRepository.save(material);
-        redirectAttributes.addAttribute("message", "success");
+        if (materialRepository.findByName(material.getName()) == null) {
+            materialRepository.save(material);
+            redirectAttributes.addAttribute("message", "success");
+        } else {
+            redirectAttributes.addAttribute("message", "doublon");
+        }
         return "redirect:/materials";
     }
 
@@ -50,7 +54,7 @@ public class MaterialController {
     }
 
     @DeleteMapping("/materials/{id}")
-    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+    public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         materialRepository.deleteById(id);
         redirectAttributes.addAttribute("message", "delete");
         return "redirect:/materials";

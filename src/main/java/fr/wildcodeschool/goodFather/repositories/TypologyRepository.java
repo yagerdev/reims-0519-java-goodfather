@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TypologyRepository extends JpaRepository<Typology, Long> {
+    Typology findByName(String name);
 }

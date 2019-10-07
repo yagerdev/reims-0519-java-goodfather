@@ -5,6 +5,7 @@ import fr.wildcodeschool.goodFather.entities.Project;
 import fr.wildcodeschool.goodFather.entities.Quantity;
 import fr.wildcodeschool.goodFather.entities.Room;
 import fr.wildcodeschool.goodFather.entities.Task;
+import fr.wildcodeschool.goodFather.entities.Typology;
 import fr.wildcodeschool.goodFather.entities.User;
 import fr.wildcodeschool.goodFather.repositories.CategoryRepository;
 import fr.wildcodeschool.goodFather.repositories.ProjectRepository;
@@ -12,6 +13,7 @@ import fr.wildcodeschool.goodFather.repositories.QuantityRepository;
 import fr.wildcodeschool.goodFather.repositories.UserRepository;
 import fr.wildcodeschool.goodFather.repositories.RoomRepository;
 import fr.wildcodeschool.goodFather.repositories.TaskRepository;
+import fr.wildcodeschool.goodFather.repositories.TypologyRepository;
 
 import java.util.Collections;
 import java.util.Date;
@@ -36,7 +38,7 @@ public class ProjectController {
 
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     ProjectRepository projectRepository;
 
@@ -51,7 +53,10 @@ public class ProjectController {
 
     @Autowired
     QuantityRepository quantityRepository;
-    
+
+    @Autowired
+    TypologyRepository typologyRepository;
+
     @PostMapping("/projects")
     public String create(@ModelAttribute Project project, Authentication authentication) {
         User currentUser = (User) authentication.getPrincipal();
@@ -63,20 +68,39 @@ public class ProjectController {
 
     @GetMapping("/projects/create")
     public String showCreateProjectForm(Model model, Authentication authentication) {
-        User currentUser = (User)authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
         model.addAttribute("user", currentUser);
         return "project-create";
     }
 
+    @GetMapping("/projects/{id}/resume")
+    public String readAllProject(Model model, @PathVariable Long id, Authentication authentication) {
+        Project project = projectRepository.findById(id).get();
+        User currentUser = (User) authentication.getPrincipal();
+        Long userId = currentUser.getId();
+        Long projectUserId = project.getUser().getId();
+        if (userId.equals(projectUserId)) {
+            project = projectRepository.findById(id).get();
+            List<Category> categoryList = categoryRepository.findAll();
+            Collections.sort(categoryList);
+            List<Typology> typologies = typologyRepository.findAll();
+            Collections.sort(typologies);
+            model.addAttribute("typologies", typologies);
+            TreeSet<Room> rooms = new TreeSet<Room>(project.getRooms());
+            model.addAttribute("project", project);
+            model.addAttribute("rooms", rooms);
+            model.addAttribute("categories", categoryList);
+            model.addAttribute("user", currentUser);
+            return "resume";
+        }
+        return "error";
+    }
+
     @GetMapping("projects/{id}")
-    public String read(
-        @PathVariable Long id,
-        Model model,
-        @RequestParam(value = "message", required = false) String message,
-        Authentication authentication
-    ) {
+    public String read(@PathVariable Long id, Model model, @RequestParam(required = false) String message,
+            Authentication authentication) {
         Project projectToUpdate = projectRepository.findById(id).get();
-        User currentUser = (User)authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
         if (userId.equals(projectUserId)) {
@@ -94,11 +118,8 @@ public class ProjectController {
     }
 
     @GetMapping("/projects")
-    public String showAllProjectsByUser(
-        Model model,
-        Authentication authentication,
-        @RequestParam(value = "message", required = false) String message
-    ) {
+    public String showAllProjectsByUser(Model model, Authentication authentication,
+            @RequestParam(required = false) String message) {
         List<Project> projectsList = projectRepository.findAllByUser(authentication.getPrincipal());
         Collections.sort(projectsList);
         model.addAttribute("projects", projectsList);
@@ -107,17 +128,13 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{projectId}/edit")
-    public String show(
-        Model model, 
-        @PathVariable("projectId") Long projectId,
-        @RequestParam(required = false) Long categoryId,
-        Authentication authentication
-    ) {
+    public String show(Model model, @PathVariable("projectId") Long projectId,
+            @RequestParam(required = false) Long categoryId, Authentication authentication) {
         Project projectToUpdate = projectRepository.findById(projectId).get();
-        User currentUser = (User)authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(userId.equals(projectUserId)) {
+        if (userId.equals(projectUserId)) {
             if (categoryId == null) {
                 List<Category> categoryList = categoryRepository.findAll();
                 Collections.sort(categoryList);
@@ -128,7 +145,7 @@ public class ProjectController {
                 return "redirect:/rooms/create?projectId=" + projectId + "&categoryId=" + categoryId;
             }
         }
-        return"error";   
+        return "error";
     }
 
     @DeleteMapping("/projects/{id}")
@@ -139,14 +156,9 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}/update")
-    public String update(
-        @PathVariable Long id,
-        Long projectId,
-        Model model,
-        Authentication authentication
-    ){
+    public String update(@PathVariable Long id, Long projectId, Model model, Authentication authentication) {
         Project projectToUpdate = projectRepository.findById(id).get();
-        User currentUser = (User)authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
         Project project = projectRepository.findById(id).get();
@@ -154,22 +166,17 @@ public class ProjectController {
             model.addAttribute("project", project);
             return "project-edit";
         }
-        return"error";
+        return "error";
     }
 
     @PutMapping("projects/{id}/update")
-    public String update(
-        RedirectAttributes redirectAttributes,
-        @PathVariable Long id,
-        Project project,
-        Model model,
-        Authentication authentication
-    ){
+    public String update(RedirectAttributes redirectAttributes, @PathVariable Long id, Project project, Model model,
+            Authentication authentication) {
         Project projectToUpdate = projectRepository.findById(id).get();
-        User currentUser = (User)authentication.getPrincipal();
+        User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();
         Long projectUserId = projectToUpdate.getUser().getId();
-        if(userId.equals(projectUserId)) {
+        if (userId.equals(projectUserId)) {
             projectToUpdate.setName(project.getName());
             projectToUpdate.setAddress(project.getAddress());
             projectToUpdate.setCity(project.getCity());
@@ -180,10 +187,18 @@ public class ProjectController {
             projectToUpdate = projectRepository.save(projectToUpdate);
             model.addAttribute("project", projectToUpdate);
             return "redirect:/projects/" + id;
+        } else {
+            return "error";
         }
-        else {
-            return"error";
-        }
+    }
+
+    @PutMapping("projects/{id}")
+    public String updateComment(@PathVariable Long id, Project project, RedirectAttributes redirectAttributes) {
+        Project projectToUpdate = projectRepository.findById(id).get();
+        projectToUpdate.setComment(project.getComment());
+        projectRepository.save(projectToUpdate);
+        redirectAttributes.addAttribute("message", "edit");
+        return "redirect:/projects/" + id;
     }
 
     public void changePriceSource(Project projectToUpdate, Long fromSource, Long toSource) {
@@ -191,8 +206,10 @@ public class ProjectController {
             for (Room room : projectToUpdate.getRooms()) {
                 for (Quantity quantity : room.getQuantities()) {
                     Task task = quantity.getTask();
-                    Task alternativeTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), toSource);
-                    task.update(alternativeTask.getPrice(), alternativeTask.getPercentRange(), alternativeTask.getUnit());
+                    Task alternativeTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(
+                            task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), toSource);
+                    task.update(alternativeTask.getPrice(), alternativeTask.getPercentRange(),
+                            alternativeTask.getUnit());
                     quantity.setTask(alternativeTask);
                     quantityRepository.save(quantity);
                     task.getQuantities().remove(quantity);
