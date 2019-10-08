@@ -66,8 +66,12 @@ public class TypologyController {
 
     @PostMapping("/typologies")
     public String create(@ModelAttribute Typology typology, RedirectAttributes redirectAttributes) {
-        typologyRepository.save(typology);
-        redirectAttributes.addAttribute("message", "success");
+        if (typologyRepository.findByName(typology.getName()) == null) {
+            typologyRepository.save(typology);
+            redirectAttributes.addAttribute("message", "success");
+        } else {
+            redirectAttributes.addAttribute("message", "doublon");
+        }
         return "redirect:/typologies";
     }
 

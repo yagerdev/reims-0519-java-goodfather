@@ -130,6 +130,7 @@
                                         <tbody>
                                             <tr
                                                 th:each="quantity : ${room.quantities}"
+                                                th:if="${quantity.task.typology.id ==  typology.id}"
                                             >
                                                 <td
                                                     th:text="${quantity.task.constructName()}"
