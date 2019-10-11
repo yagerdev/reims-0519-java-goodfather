@@ -277,7 +277,7 @@
                                     <div class="update-form">
                                         <input
                                             th:if="${quantity.task.typology.id ==  typology.id}"
-                                            th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price} + '€'"
+                                            th:value="${quantity.task.constructName() + ' - ' + T(Math).round(quantity.quantity*quantity.task.price)} + '€'"
                                             disabled
                                         />
                                         <form

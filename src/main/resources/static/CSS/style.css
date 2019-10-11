@@ -837,4 +837,14 @@ footer .footer-link a:last-child {
         border-top-right-radius: 0 !important;
         border-bottom-left-radius: 0.25rem !important;
     }
+
+    .quantity-selector-container {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .quantity-selector-container .dimensions {
+        width: 100%;
+        margin-bottom: 2vh;
+    }
 }
