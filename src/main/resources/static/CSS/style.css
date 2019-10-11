@@ -527,13 +527,7 @@ footer .footer-link a:last-child {
     height: 300px;
     display: flex;
     text-decoration: none;
-    width: calc(100vw / 4);
-}
-
-.image:first-child,
-.image:nth-child(2),
-.image:nth-child(3) {
-    margin-bottom: 2vh;
+    width: calc(90% / 3);
 }
 
 .group-image .image:hover p {
@@ -553,26 +547,35 @@ footer .footer-link a:last-child {
 
 .salle-de-bain-wc {
     background-image: url("../IMG/sdb.jpg");
+    order: 4;
 }
 
 .salon-sjour {
     background-image: url("../IMG/salonsejour.jpg");
+    order: 1;
+    margin-bottom: 2vh;
 }
 
 .chambres {
     background-image: url("../IMG/chambre.jpg");
+    order: 3;
+    margin-bottom: 2vh;
 }
 
 .cuisine {
     background-image: url("../IMG/cuisine.jpg");
+    order: 2;
+    margin-bottom: 2vh;
 }
 
 .communs {
     background-image: url("../IMG/commun.jpg");
+    order: 5;
 }
 
 .divers {
     background-image: url("../IMG/divers.jpg");
+    order: 6;
 }
 
 /* ------------------ MEDIA QUERIES ------------------ */
@@ -679,13 +682,9 @@ footer .footer-link a:last-child {
 
     /* -------------- CATEGORIES -------------- */
 
-    .group-image {
-        flex-direction: column;
-    }
-
     .group-image .image {
-        width: 100%;
-        height: 200px;
+        width: calc(90% / 2);
+        height: 240px;
         margin-bottom: 3vh;
     }
 
@@ -789,5 +788,16 @@ footer .footer-link a:last-child {
 @media print {
     body {
         display: block;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .group-image {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .group-image .image {
+        width: 100%;
     }
 }
