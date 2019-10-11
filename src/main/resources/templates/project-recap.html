@@ -172,7 +172,10 @@
                         th:if="${project.containAtLeastOneOf(category)}"
                     >
                         <span th:text="${category.name.toUpperCase()}"></span>
-                        <span th:text="${project.getTotalCostPerCategory(category) + '€'}" class="float-right"></span>
+                        <span
+                            th:text="${project.getTotalCostPerCategory(category) + '€'}"
+                            class="float-right"
+                        ></span>
                     </button>
                     <div
                         th:id="'cat'+${category.id}"
@@ -187,7 +190,7 @@
                                 >
                                     <div
                                         th:object="${room}"
-                                        class="update-form"
+                                        class="update-form recap-update-form"
                                         th:if="${room.getProject().getId()} == ${project.id}"
                                     >
                                         <input
@@ -212,6 +215,28 @@
                                         >
                                             <ion-icon name="eye"></ion-icon>
                                         </button>
+
+                                        <form
+                                            th:action="@{/rooms/} + ${room.id}"
+                                            th:method="DELETE"
+                                            th:if="${room.getProject().getId()} == ${project.id}"
+                                        >
+                                            <input
+                                                type="hidden"
+                                                th:value="${room.id}"
+                                                th:name="id"
+                                            />
+                                            <button
+                                                type="submit"
+                                                class="btn btn-info"
+                                            >
+                                                <ion-icon
+                                                    ios="ios-close"
+                                                    md="md-close"
+                                                    class="icon-delete"
+                                                ></ion-icon>
+                                            </button>
+                                        </form>
                                     </div>
                                     <div
                                         class="modal fade"
@@ -275,28 +300,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <form
-                                        th:action="@{/rooms/} + ${room.id}"
-                                        th:method="DELETE"
-                                        th:if="${room.getProject().getId()} == ${project.id}"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            th:value="${room.id}"
-                                            th:name="id"
-                                        />
-                                        <button
-                                            type="submit"
-                                            class="btn btn-info"
-                                        >
-                                            <ion-icon
-                                                ios="ios-close"
-                                                md="md-close"
-                                                class="icon-delete"
-                                            ></ion-icon>
-                                        </button>
-                                    </form>
                                 </div>
                             </section>
                         </div>
