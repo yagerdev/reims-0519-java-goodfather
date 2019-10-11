@@ -804,4 +804,37 @@ footer .footer-link a:last-child {
     .group-image .image {
         width: 100%;
     }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .search .input-group {
+        flex-direction: row;
+    }
+
+    .search .form-control {
+        width: auto !important;
+    }
+
+    .input-group .input-group-text,
+    .input-group .form-control,
+    .input-group > .custom-select:not(:first-child),
+    .input-group > .form-control:not(:first-child) {
+        width: 100%;
+    }
+
+    .input-group .input-group-text {
+        border-top-right-radius: 0.25rem !important;
+        border-bottom-left-radius: 0 !important;
+        border-bottom: none !important;
+    }
+
+    .input-group .form-control,
+    .input-group > .custom-select:not(:first-child),
+    .input-group > .form-control:not(:first-child) {
+        border-top-right-radius: 0 !important;
+        border-bottom-left-radius: 0.25rem !important;
+    }
 }
