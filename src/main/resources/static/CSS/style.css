@@ -273,22 +273,6 @@ input:disabled {
     letter-spacing: 4px;
 }
 
-.form-control-range {
-    height: 10px;
-    border-radius: 5px;
-    background: #d3d3d3;
-}
-
-.form-control-range::-webkit-slider-thumb,
-.form-control-range::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background: #328080;
-    cursor: pointer;
-    border: none;
-}
-
 .recap-update-form {
     justify-content: space-around;
 }
@@ -855,4 +839,58 @@ footer .footer-link a:last-child {
     .edit-info-btn {
         margin-bottom: 1vh;
     }
+}
+
+/* ------- CUSTOM RANGE CSS ------- */
+
+input[type="range"] {
+    -webkit-appearance: none;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #328080;
+    cursor: pointer;
+    border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #328080;
+    cursor: pointer;
+    border: none;
+}
+
+input[type="range"]::-ms-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #328080;
+    cursor: pointer;
+    border: none;
 }
