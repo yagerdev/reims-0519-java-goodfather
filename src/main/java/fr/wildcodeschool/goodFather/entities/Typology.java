@@ -28,8 +28,7 @@ public class Typology implements Comparable<Typology> {
     @ManyToMany
     private Set<Category> categories = new TreeSet<>();
 
-    public Typology() {
-    }
+    public Typology() {}
 
     public Typology(Long id, String name) {
         this.id = id;

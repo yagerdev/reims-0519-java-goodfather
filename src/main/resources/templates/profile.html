@@ -1,157 +1,170 @@
 <!DOCTYPE html>
 <html lang="FR">
-<div th:replace="fragments/head.html :: head"></div>
-
-<body>
-    <div th:replace="fragments/header.html :: header"></div>
-    <div th:replace="fragments/nav.html :: nav"></div>
-    <main class="container">
-        <h2 class="jumbotron mb-3">
-            Profil de
-            <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
-                catégories
-            </span>
-        </h2>
-        <div th:replace="fragments/alert.html :: alert"></div>
-        <section>
-            <form th:action="@{/profile/}" th:method="PUT" th:object="${user}" class="rounded">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="firstName">
-                            Prénom
-                        </label>
+    <div th:replace="fragments/head.html :: head"></div>
+    <body>
+        <div th:replace="fragments/header.html :: header"></div>
+        <div th:replace="fragments/nav.html :: nav"></div>
+        <main class="container">
+            <h2 class="jumbotron mb-3">
+                Profil de
+                <span class="yellow-gf" th:text="${user.firstName} + ' ' + ${user.lastName}">
+                    catégories
+                </span>
+            </h2>
+            <div th:replace="fragments/alert.html :: alert"></div>
+            <section>
+                <form th:action="@{/profile/}" th:method="PUT" th:object="${user}" class="rounded">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="firstName">
+                                Prénom
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:name="firstName"
+                            th:value="*{firstName}"
+                            placeholder="Modifiez votre prénom ..."
+                            required
+                        />
+                        <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        role="alert"
+                        th:if="${#fields.hasErrors('firstName')}"
+                        th:errors="*{firstName}"
+                        >
+                            Erreur prénom
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
-                    <input
-                        type="text"
-                        class="form-control"
-                        th:name="firstName"
-                        th:value="*{firstName}"
-                        placeholder="Modifiez votre prénom ..."
-                        required
-                    />
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
-                        Firstname Error
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="lastName">
+                                Nom
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            th:name="lastName"
+                            placeholder="Modifiez votre nom ..."
+                            th:value="*{lastName}"
+                            required
+                        />
+                        <div
+                            class="alert alert-warning alert-dismissible fade show"
+                            role="alert"
+                            th:if="${#fields.hasErrors('lastName')}"
+                            th:errors="*{lastName}"
+                        >
+                            Erreur nom
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="email">
+                                Mail
+                            </label>
+                        </div>
+                        <input
+                            type="email"
+                            class="form-control"
+                            th:name="email"
+                            th:value="*{email}"
+                            placeholder="Modifiez votre adresse mail ..."
+                            required
+                        />
+                    </div>
+                    <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        th:role="alert"
+                        th:if="${emailError}"
+                        th:text="${emailError}"
+                    >
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="lastName">
-                            Nom
-                        </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="phoneNumber">
+                                Téléphone
+                            </label>
+                        </div>
+                        <input
+                            type="tel"
+                            class="form-control"
+                            th:name="phoneNumber"
+                            th:value="*{phoneNumber}"
+                            placeholder="Mofidiez votre numéro de téléphone ..."
+                        />
                     </div>
-                    <input
-                        type="text"
-                        class="form-control"
-                        th:name="lastName"
-                        placeholder="Modifiez votre nom ..."
-                        th:value="*{lastName}"
-                        required
-                    />
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
-                        Lastname Error
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="address">
+                                Adresse
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="address"
+                            th:value="*{address}"
+                            placeholder="Modifiez votre adresse ..."
+                        />
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="email">
-                            Mail
-                        </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="city">
+                                City
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            th:value="*{city}"
+                            placeholder="Modifiez votre ville ..."
+                        />
                     </div>
-                    <input
-                        type="email"
-                        class="form-control"
-                        th:name="email"
-                        th:value="*{email}"
-                        placeholder="Modifiez votre adresse mail ..."
-                        required
-                    />
-                </div>
-                <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${emailError}" th:text="${emailError}">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="phoneNumber">
-                            Téléphone
-                        </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend read-project">
+                            <label class="input-group-text flex-centered" for="postalCode">
+                                Code postal
+                            </label>
+                        </div>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="postalCode"
+                            th:value="*{postalCode}"
+                            placeholder="Modifiez votre code postal ..."
+                        />
+                        <input
+                            type="hidden"
+                            class="form-control"
+                            name="password"
+                            value="********"
+                        />
+                        <input
+                            type="hidden"
+                            class="form-control"
+                            name="role"
+                            value="********"
+                        />
                     </div>
-                    <input
-                        type="tel"
-                        class="form-control"
-                        th:name="phoneNumber"
-                        th:value="*{phoneNumber}"
-                        placeholder="Mofidiez votre numéro de téléphone ..."
-                    />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="address">
-                            Adresse
-                        </label>
-                    </div>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="address"
-                        th:value="*{address}"
-                        placeholder="Modifiez votre adresse ..."
-                    />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="city">
-                            City
-                        </label>
-                    </div>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="city"
-                        th:value="*{city}"
-                        placeholder="Modifiez votre ville ..."
-                    />
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend read-project">
-                        <label class="input-group-text flex-centered" for="postalCode">
-                            Code postal
-                        </label>
-                    </div>
-                    <input
-                        type="text"
-                        class="form-control"
-                        name="postalCode"
-                        th:value="*{postalCode}"
-                        placeholder="Modifiez votre code postal ..."
-                    />
-                    <input
-                        type="hidden"
-                        class="form-control"
-                        name="password"
-                        value="********"
-                    />
-                    <input
-                        type="hidden"
-                        class="form-control"
-                        name="role"
-                        value="********"
-                    />
-                </div>
-                <button type="submit" class="btn btn-info edit-info-btn">Modifier vos informations</button>
-                <a th:href="@{/password}" class="btn btn-outline-info">Modifier votre mot de passe</a>
-            </form>
-        </section>
-    </main>
-    <div th:replace="fragments/footer.html :: footer"></div>
-    <div th:replace="fragments/script.html :: script"></div>
-</body>
-
+                    <button type="submit" class="btn btn-info edit-info-btn">Modifier vos informations</button>
+                    <a th:href="@{/password}" class="btn btn-outline-info">Modifier votre mot de passe</a>
+                </form>
+            </section>
+        </main>
+        <div th:replace="fragments/footer.html :: footer"></div>
+        <div th:replace="fragments/script.html :: script"></div>
+    </body>
 </html>

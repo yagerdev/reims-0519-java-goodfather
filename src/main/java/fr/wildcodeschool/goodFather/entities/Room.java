@@ -38,16 +38,16 @@ public class Room implements Comparable<Room> {
 	@OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
     private Set<Quantity> quantities = new TreeSet<Quantity>();
 
-    public Room() {
-    }
+    public Room() {}
 
-    public Room(String name,
-                double wallA, 
-                double wallB, 
-                double height, 
-                String comment,
-                Category category, 
-                Project project
+    public Room(
+        String name,
+        double wallA, 
+        double wallB, 
+        double height, 
+        String comment,
+        Category category, 
+        Project project
     ) {
         this.setName(name);
         this.setWallA(wallA);
@@ -60,16 +60,17 @@ public class Room implements Comparable<Room> {
 		this.setProject(project);
     }
 
-    public Room(Long id, 
-                String name,
-                double wallA, 
-                double wallB, 
-                double height, 
-                String comment,
-                double lowerTotalCost, 
-                double upperTotalCost, 
-                Category category, 
-                Project project
+    public Room(
+        Long id, 
+        String name,
+        double wallA, 
+        double wallB, 
+        double height, 
+        String comment,
+        double lowerTotalCost, 
+        double upperTotalCost, 
+        Category category, 
+        Project project
     ) {
         this.setId(id);
         this.setName(name);

@@ -76,9 +76,7 @@ public class Task implements Comparable<Task> {
         this.setUserId(userId);
     }
 
-    public Task() {
-
-    }
+    public Task() {}
 
     public Long getId() {
         return id;

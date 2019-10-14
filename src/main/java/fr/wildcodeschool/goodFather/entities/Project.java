@@ -53,7 +53,7 @@ public class Project implements Comparable<Project> {
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private Set<Room> rooms = new TreeSet<Room>();
 
-    public Project() { }
+    public Project() {}
 
     public Project(
         Long id, 
