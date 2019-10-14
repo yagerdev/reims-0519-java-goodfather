@@ -120,6 +120,10 @@ input:disabled {
     font-size: 10pt;
 }
 
+.comment {
+    width: 100%;
+}
+
 /* ------------------ GENERALES ------------------ */
 
 .item-global {

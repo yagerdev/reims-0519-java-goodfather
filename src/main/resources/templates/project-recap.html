@@ -88,19 +88,19 @@
                 >
                     <div class="input-group-prepend mb-1">
                         <label
-                            class="input-group-text flex-centered"
+                            class="comment d-flex justify-content-between align-items-center input-group-text"
                             th:for="comment"
                         >
                             Commentaire
+                            <button
+                                type="button"
+                                class="btn btn-info"
+                                th:id="${project.id + 'item'}"
+                                th:onclick="'javascript:update(\'' + ${project.id} + '\');'"
+                            >
+                                <ion-icon name="create"></ion-icon>
+                            </button>
                         </label>
-                        <button
-                            type="button"
-                            class="btn btn-info"
-                            th:id="${project.id + 'item'}"
-                            th:onclick="'javascript:update(\'' + ${project.id} + '\');'"
-                        >
-                            <ion-icon name="create"></ion-icon>
-                        </button>
                     </div>
                     <div class="input-group">
                         <textarea
