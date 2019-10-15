@@ -80,30 +80,25 @@ public class ProfileController {
 
     @PutMapping("/password")
     public String updatePass(
-        @RequestParam("psw") String actualPassword,
-        @RequestParam("newpsw")String repeatPassword,
-        @RequestParam("repeatpsw") String password,
+        @RequestParam("currentPassword") String currentPassword,
+        @RequestParam("newPassword")String newPassword,
+        @RequestParam("repeatPassword") String repeatPassword,
         RedirectAttributes redirectAttributes,
-        Authentication authentication,
-        @Valid User user
+        Authentication authentication
     ) {
 
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         User userToUpdate = (User) authentication.getPrincipal();
 
-        if( !encoder.matches(actualPassword, userToUpdate.getPassword()) ) {
+        if( !encoder.matches(currentPassword, userToUpdate.getPassword()) ) {
             redirectAttributes.addAttribute("message", "erreur");
             return"redirect:/password";
         }       
-        if (encoder.matches(repeatPassword, encoder.encode(password))) 
-            {   
-            userToUpdate.setPassword(password);
-            userRepository.save(userToUpdate);
-            redirectAttributes.addAttribute("user", userToUpdate);
+        if (encoder.matches(newPassword, encoder.encode(repeatPassword))) {  
             redirectAttributes.addAttribute("message", "edit");
-            return "redirect:/password";
-            }
+            return "redirect:/profile";
+        }
         redirectAttributes.addAttribute("message", "erreur");
-        return "redirect:/profile";
+        return "redirect:/password";
     }
 }
