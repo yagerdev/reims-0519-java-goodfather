@@ -53,19 +53,20 @@ public class Project implements Comparable<Project> {
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private Set<Room> rooms = new TreeSet<Room>();
 
-    public Project() { }
+    public Project() {}
 
-    public Project(Long id, 
-                    String name, 
-                    String address, 
-                    String city, 
-                    String postalCode, 
-                    String comment,
-                    Date creationDate, 
-                    double lowerTotalCost, 
-                    double upperTotalCost, 
-                    User user,
-                    Long sourceId
+    public Project(
+        Long id, 
+        String name, 
+        String address, 
+        String city, 
+        String postalCode, 
+        String comment,
+        Date creationDate, 
+        double lowerTotalCost, 
+        double upperTotalCost, 
+        User user,
+        Long sourceId
     ) {
         this.id = id;
         this.name = name;
@@ -80,13 +81,14 @@ public class Project implements Comparable<Project> {
         this.sourceId = sourceId;
     }
 
-    public Project(String name, 
-                    String address, 
-                    String city, 
-                    String postalCode, 
-                    String comment,
-                    User user,
-                    Long sourceId
+    public Project(
+        String name, 
+        String address, 
+        String city, 
+        String postalCode, 
+        String comment,
+        User user,
+        Long sourceId
     ) {
         this.name = name;
         this.address = address;

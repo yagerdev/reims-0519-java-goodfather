@@ -22,8 +22,7 @@ public class Material implements Comparable<Material> {
     @OneToMany(mappedBy = "material", cascade = CascadeType.REMOVE)
     private Set<Task> tasks = new TreeSet<Task>();
 
-    public Material() {
-    }
+    public Material() {}
 
     public Material(Long id, String name) {
         this.id = id;

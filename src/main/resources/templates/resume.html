@@ -4,69 +4,85 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <div th:replace="fragments/head.html :: head"></div>
     <body>
-        <div id="content" class="pdf-wrapper">
+        <div id="content" class="pdf-wrapper container">
             <div th:replace="fragments/header.html :: header"></div>
+            <div class="print mb-2">
+                <button class="btn btn-info" onclick="pdf()">
+                    <ion-icon name="download"></ion-icon>
+                </button>
+                <button
+                    class="btn btn-info"
+                    value="Retour!"
+                    onclick="history.back()"
+                >
+                    <ion-icon name="undo"></ion-icon>
+                </button>
+            </div>
             <main class="container-fluid">
                 <p class="alert mb-1 bg-vert-gf">Informations du client</p>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Prénom</th>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Adresse</th>
-                            <th scope="col">Ville</th>
-                            <th scope="col">Code postal</th>
-                            <th scope="col">Mail</th>
-                            <th scope="col">Téléphone</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td th:text="${user.firstName}"></td>
-                            <td th:text="${user.lastName}"></td>
-                            <td th:text="${user.address}"></td>
-                            <td th:text="${user.city}"></td>
-                            <td th:text="${user.postalCode}"></td>
-                            <td th:text="${user.email}"></td>
-                            <td th:text="${user.phoneNumber}"></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Code postal</th>
+                                <th scope="col">Mail</th>
+                                <th scope="col">Téléphone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${user.firstName}"></td>
+                                <td th:text="${user.lastName}"></td>
+                                <td th:text="${user.address}"></td>
+                                <td th:text="${user.city}"></td>
+                                <td th:text="${user.postalCode}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.phoneNumber}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <p class="alert mb-1 bg-vert-gf">Résumé du projet</p>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nom du projet</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">Adresse</th>
-                            <th scope="col">Ville</th>
-                            <th scope="col">Code postal</th>
-                            <th scope="col">Estimation total</th>
-                            <th scope="col">Fourchette haute</th>
-                            <th scope="col">Fourchette basse</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td th:text="${project.name}"></td>
-                            <td
-                                th:text="${#dates.format(project.creationDate, 'dd / MM / yyyy')}"
-                            ></td>
-                            <td th:text="${project.address}"></td>
-                            <td th:text="${project.city}"></td>
-                            <td th:text="${project.postalCode}"></td>
-                            <td
-                                th:text="${T(Math).round((project.lowerTotalCost + project.upperTotalCost)/2) + '€'}"
-                            ></td>
-                            <td
-                                th:text="${T(Math).round(project.upperTotalCost) + '€'}"
-                            ></td>
-                            <td
-                                th:text="${T(Math).round(project.lowerTotalCost) + '€'}"
-                            ></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nom du projet</th>
+                                <th scope="col">Date de création</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Code postal</th>
+                                <th scope="col">Estimation total</th>
+                                <th scope="col">Fourchette haute</th>
+                                <th scope="col">Fourchette basse</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${project.name}"></td>
+                                <td
+                                    th:text="${#dates.format(project.creationDate, 'dd / MM / yyyy')}"
+                                ></td>
+                                <td th:text="${project.address}"></td>
+                                <td th:text="${project.city}"></td>
+                                <td th:text="${project.postalCode}"></td>
+                                <td
+                                    th:text="${T(Math).round((project.lowerTotalCost + project.upperTotalCost)/2) + '€'}"
+                                ></td>
+                                <td
+                                    th:text="${T(Math).round(project.upperTotalCost) + '€'}"
+                                ></td>
+                                <td
+                                    th:text="${T(Math).round(project.lowerTotalCost) + '€'}"
+                                ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <p class="form-control p-4" th:text="${project.comment}"></p>
 
                 <p class="alert mb-1 bg-vert-gf">Liste des pièces du projet</p>
@@ -79,98 +95,88 @@
                         class="alert alert-primary mb-1"
                         th:text="'Catégorie : ' + ${category.name.toUpperCase() + ' - ' + project.getTotalCostPerCategory(category) + '€'}"
                     ></p>
-                    <table
-                        class="table table-bordered mb-4"
-                        th:each="room : ${category.getRooms()}"
-                    >
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Nom de la pièce</th>
-                                <th scope="col">Estimation total</th>
-                                <th scope="col">Fourchette haute</th>
-                                <th scope="col">Fourchette basse</th>
-                                <th scope="col">Commentaires</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td th:text="${room.name}"></td>
-                                <td
-                                    th:text="${T(Math).round((room.lowerTotalCost + room.upperTotalCost)/2) + '€'}"
-                                ></td>
-                                <td
-                                    th:text="${T(Math).round(room.upperTotalCost) + '€'}"
-                                ></td>
-                                <td
-                                    th:text="${T(Math).round(room.lowerTotalCost) + '€'}"
-                                ></td>
-                                <td th:text="${room.comment}"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <table
-                                        class="table"
-                                        th:each="typology : ${typologies}"
-                                        th:if="${room.containAtLeastOneOf(typology)}"
-                                    >
-                                        <thead>
-                                            <p
-                                                class="alert alert-info mb-1"
-                                                th:text="${typology.name + ' - ' + room.getTotalCostPerTypology(typology) + '€'}"
-                                            >
-                                                Typologie
-                                            </p>
-                                            <tr>
-                                                <th scope="col">
-                                                    Nom de la tâche
-                                                </th>
-                                                <th scope="col">Coût</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr
-                                                th:each="quantity : ${room.quantities}"
-                                                th:if="${quantity.task.typology.id ==  typology.id}"
-                                            >
-                                                <td
-                                                    th:text="${quantity.task.constructName()}"
-                                                ></td>
-                                                <td
-                                                    th:text="${quantity.quantity*quantity.task.price} + '€'"
-                                                ></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table
+                            class="table table-bordered mb-4"
+                            th:each="room : ${category.getRooms()}"
+                        >
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Nom de la pièce</th>
+                                    <th scope="col">Estimation total</th>
+                                    <th scope="col">Fourchette haute</th>
+                                    <th scope="col">Fourchette basse</th>
+                                    <th scope="col">Commentaires</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td th:text="${room.name}"></td>
+                                    <td
+                                        th:text="${T(Math).round((room.lowerTotalCost + room.upperTotalCost)/2) + '€'}"
+                                    ></td>
+                                    <td
+                                        th:text="${T(Math).round(room.upperTotalCost) + '€'}"
+                                    ></td>
+                                    <td
+                                        th:text="${T(Math).round(room.lowerTotalCost) + '€'}"
+                                    ></td>
+                                    <td th:text="${room.comment}"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <table
+                                            class="table"
+                                            th:each="typology : ${typologies}"
+                                            th:if="${room.containAtLeastOneOf(typology)}"
+                                        >
+                                            <thead>
+                                                <p
+                                                    class="alert alert-info mb-1"
+                                                    th:text="${typology.name + ' - ' + room.getTotalCostPerTypology(typology) + '€'}"
+                                                >
+                                                    Typologie
+                                                </p>
+                                                <tr>
+                                                    <th scope="col">
+                                                        Nom de la tâche
+                                                    </th>
+                                                    <th scope="col">Coût</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    th:each="quantity : ${room.quantities}"
+                                                    th:if="${quantity.task.typology.id ==  typology.id}"
+                                                >
+                                                    <td
+                                                        th:text="${quantity.task.constructName()}"
+                                                    ></td>
+                                                    <td
+                                                        th:text="${quantity.quantity*quantity.task.price} + '€'"
+                                                    ></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </main>
             <script>
                 function pdf() {
                     var pdf = new jsPDF("m", "pt", "a4");
-                    pdf.internal.scaleFactor = 2.1;
+                    pdf.internal.scaleFactor = 2.5;
                     var options = {
-                        pagesplit: true,
+                        pagesplit: true
                     };
                     pdf.addHTML(document.body, options, function() {
                         pdf.save("project-GoodFather.pdf");
                     });
                 }
             </script>
-            <div class="print">
-                <button class="btn btn-info" onclick="pdf()">
-                    <ion-icon name="download"></ion-icon>
-                </button>
-                <button
-                    class="btn btn-info"
-                    value="Retour!"
-                    onclick="history.back()"
-                >
-                    <ion-icon name="undo"></ion-icon>
-                </button>
-            </div>
         </div>
     </body>
 </html>

@@ -61,7 +61,7 @@ public class TaskController {
     UserRepository userRepository;
 
     @GetMapping("/tasks")
-    public String show(Authentication authentication, Model model, @RequestParam(value = "message", required = false) String message) {
+    public String show(Authentication authentication, Model model, @RequestParam(required = false) String message) {
         User currentUser = (User)authentication.getPrincipal();
         if (currentUser.getRole().equals("ADMIN")) {
             model.addAttribute("isAdmin", true);

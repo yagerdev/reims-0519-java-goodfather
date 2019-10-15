@@ -97,8 +97,12 @@ public class ProjectController {
     }
 
     @GetMapping("projects/{id}")
-    public String read(@PathVariable Long id, Model model, @RequestParam(required = false) String message,
-            Authentication authentication) {
+    public String read(
+        @PathVariable Long id,
+        Model model,
+        @RequestParam(required = false) String message,
+        Authentication authentication
+    ) {
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();
@@ -128,8 +132,12 @@ public class ProjectController {
     }
 
     @GetMapping("/projects/{projectId}/edit")
-    public String show(Model model, @PathVariable("projectId") Long projectId,
-            @RequestParam(required = false) Long categoryId, Authentication authentication) {
+    public String show(
+        Model model,
+        @PathVariable("projectId") Long projectId,
+        @RequestParam(required = false) Long categoryId,
+        Authentication authentication
+    ) {
         Project projectToUpdate = projectRepository.findById(projectId).get();
         User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();
@@ -170,8 +178,13 @@ public class ProjectController {
     }
 
     @PutMapping("projects/{id}/update")
-    public String update(RedirectAttributes redirectAttributes, @PathVariable Long id, Project project, Model model,
-            Authentication authentication) {
+    public String update(
+        RedirectAttributes redirectAttributes,
+        @PathVariable Long id,
+        Project project,
+        Model model,
+        Authentication authentication
+    ) {
         Project projectToUpdate = projectRepository.findById(id).get();
         User currentUser = (User) authentication.getPrincipal();
         Long userId = currentUser.getId();

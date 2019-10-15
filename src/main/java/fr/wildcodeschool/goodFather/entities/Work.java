@@ -23,8 +23,7 @@ public class Work implements Comparable<Work>{
     @OneToMany(mappedBy = "work", cascade = CascadeType.REMOVE)
     private Set<Task> tasks = new TreeSet<Task>();
 
-    public Work() {
-    }
+    public Work() {}
 
     public Work(Long id, String name) {
         this.id = id;
