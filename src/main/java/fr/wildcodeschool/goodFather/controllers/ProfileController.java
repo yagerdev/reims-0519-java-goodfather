@@ -94,7 +94,9 @@ public class ProfileController {
             redirectAttributes.addAttribute("message", "erreur");
             return"redirect:/password";
         }       
-        if (encoder.matches(newPassword, encoder.encode(repeatPassword))) {  
+        if (encoder.matches(newPassword, encoder.encode(repeatPassword))) {
+            userToUpdate.setPassword(newPassword);
+            userRepository.save(userToUpdate);
             redirectAttributes.addAttribute("message", "edit");
             return "redirect:/profile";
         }
