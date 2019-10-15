@@ -33,13 +33,11 @@ public class ProfileController {
         @RequestParam(value = "message", required = false) String message, 
         @RequestParam(value = "emailError", required = false) String email
     ) {
-            User userToUpdate = (User) authentication.getPrincipal();
-            model.addAttribute("user", userToUpdate);
-            model.addAttribute("userToUpdate", userToUpdate);
-            model.addAttribute("message", message);
-            model.addAttribute("emailError", email);
-            System.out.println(email);
-
+        User userToUpdate = (User) authentication.getPrincipal();
+        model.addAttribute("user", userToUpdate);
+        model.addAttribute("userToUpdate", userToUpdate);
+        model.addAttribute("message", message);
+        model.addAttribute("emailError", email);
         return "profile";
     }
 

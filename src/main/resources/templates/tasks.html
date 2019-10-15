@@ -95,7 +95,6 @@
                         id="typology"
                         th:name="typology"
                         required
-                        autofocus
                     >
                         <option selected disabled>Sélectionnez...</option>
                         <option
@@ -186,7 +185,7 @@
                         th:value="${surfaceA*2 + surfaceB*2}"
                         class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
                     >
-                        TOTAL
+                        4 MURS
                     </button>
                     <button
                         type="button"
@@ -194,14 +193,17 @@
                         th:value="${ground}"
                         class="btn btn-outline-info dimensions d-flex justify-content-center align-items-center"
                     >
-                        Sol / Plafond
+                        Sol ou Plafond
                     </button>
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <label class="input-group-text" for="quantity"
-                            >Quantité / Surface</label
+                        <label
+                            class="d-flex justify-content-center align-items-center text-center input-group-text"
+                            for="quantity"
                         >
+                            Quantité / Surface
+                        </label>
                     </div>
                     <input
                         id="quantity"
@@ -224,19 +226,19 @@
             >
                 <div class="input-group-prepend mb-1">
                     <label
-                        class="flex-centered input-group-text"
+                        class="comment d-flex justify-content-between align-items-center input-group-text"
                         th:for="comment"
                     >
                         Commentaires
+                        <button
+                            type="button"
+                            class="btn btn-info d-flex"
+                            th:id="${room.id + 'item'}"
+                            th:onclick="'javascript:update(\'' + ${room.id} + '\');'"
+                        >
+                            <ion-icon name="create"></ion-icon>
+                        </button>
                     </label>
-                    <button
-                        type="button"
-                        class="btn btn-info d-flex"
-                        th:id="${room.id + 'item'}"
-                        th:onclick="'javascript:update(\'' + ${room.id} + '\');'"
-                    >
-                        <ion-icon name="create"></ion-icon>
-                    </button>
                 </div>
                 <div class="input-group">
                     <textarea
@@ -261,8 +263,13 @@
                             aria-expanded="false"
                             th:if="${room.containAtLeastOneOf(typology)}"
                         >
-                            <span th:text="${typology.name.toUpperCase()}"></span>
-                            <span th:text="${room.getTotalCostPerTypology(typology) + '€'}" class="float-right"></span>
+                            <span
+                                th:text="${typology.name.toUpperCase()}"
+                            ></span>
+                            <span
+                                th:text="${room.getTotalCostPerTypology(typology) + '€'}"
+                                class="float-right"
+                            ></span>
                         </button>
                         <div
                             th:id="'typo'+${typology.id}"
@@ -277,7 +284,7 @@
                                     <div class="update-form">
                                         <input
                                             th:if="${quantity.task.typology.id ==  typology.id}"
-                                            th:value="${quantity.task.constructName() + ' - ' + quantity.quantity*quantity.task.price} + '€'"
+                                            th:value="${quantity.task.constructName() + ' - ' + T(Math).round(quantity.quantity*quantity.task.price)} + '€'"
                                             disabled
                                         />
                                         <form

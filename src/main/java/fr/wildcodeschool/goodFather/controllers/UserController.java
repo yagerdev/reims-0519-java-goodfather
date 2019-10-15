@@ -50,7 +50,7 @@ public class UserController implements WebMvcConfigurer{
     @GetMapping("/users")
     public String show(
         Model model, 
-        @RequestParam(value = "message", required = false) String message,
+        @RequestParam(required = false) String message,
         @Valid User user, 
         BindingResult bindingResult
     ) {
@@ -71,7 +71,7 @@ public class UserController implements WebMvcConfigurer{
     public String edit(
         @PathVariable Long id, 
         Model model,
-        @RequestParam(value = "message", required = false) String message
+        @RequestParam(required = false) String message
     ) {
         User userToUpdate = userRepository.findById(id).get();
         model.addAttribute("message", message);
@@ -167,7 +167,12 @@ public class UserController implements WebMvcConfigurer{
                 for (Room room : project.getRooms()) {
                     for (Quantity quantity : room.getQuantities()) {
                         Task task = quantity.getTask();
-                        Task defaultTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), null);
+                        Task defaultTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(
+                            task.getWork().getId(),
+                            task.getMaterial().getId(),
+                            task.getTypology().getId(),
+                            null
+                        );
                         task.update(defaultTask.getPrice(), defaultTask.getPercentRange(), defaultTask.getUnit());
                         quantity.setTask(defaultTask);
                         quantityRepository.save(quantity);

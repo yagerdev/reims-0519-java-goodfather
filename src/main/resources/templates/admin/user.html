@@ -27,8 +27,13 @@
                             required
                         />
                     </div>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
-                        Firstname Error
+                    <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        role="alert"
+                        th:if="${#fields.hasErrors('firstName')}"
+                        th:errors="*{firstName}"
+                    >
+                        Erreur prénom
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -47,8 +52,13 @@
                             required
                         />
                     </div>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
-                        Lastname Error
+                    <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        role="alert"
+                        th:if="${#fields.hasErrors('lastName')}"
+                        th:errors="*{lastName}"
+                    >
+                        Erreur nom
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,8 +76,13 @@
 							<option value="USER">UTILISATEUR</option>
 						</select>
                     </div>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${#fields.hasErrors('role')}" th:errors="*{role}">
-                        Role Error
+                    <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        role="alert"
+                        th:if="${#fields.hasErrors('role')}"
+                        th:errors="*{role}"
+                    >
+                        Erreur rôle
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -86,8 +101,13 @@
                             required
                         />
                     </div>
-                    <div class="alert alert-warning alert-dismissible fade show" th:role="alert" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
-                        Email Error
+                    <div
+                        class="alert alert-warning alert-dismissible fade show"
+                        th:role="alert"
+                        th:if="${#fields.hasErrors('email')}"
+                        th:errors="*{email}"
+                    >
+                        Erreur email
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

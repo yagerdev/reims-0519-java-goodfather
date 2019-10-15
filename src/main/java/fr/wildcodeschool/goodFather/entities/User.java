@@ -68,11 +68,20 @@ public class User implements UserDetails, Comparable<User> {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private Set<Project> projects = new TreeSet<Project>();
     
-    public User() {
-    }
+    public User() {}
 
-    public User(Long id, String firstName, String lastName, String email, String phoneNumber, String address,
-            String city, String postalCode, String password, String role) {
+    public User(
+        Long id,
+        String firstName,
+        String lastName,
+        String email,
+        String phoneNumber,
+        String address,
+        String city,
+        String postalCode,
+        String password,
+        String role
+    ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -85,9 +94,17 @@ public class User implements UserDetails, Comparable<User> {
         this.role = role;
     }
 
-    public User(String firstName, String lastName, String email, String phoneNumber, String address, String city,
-            String postalCode, String password, String role) {
-
+    public User(
+        String firstName,
+        String lastName,
+        String email,
+        String phoneNumber,
+        String address,
+        String city,
+        String postalCode,
+        String password,
+        String role
+    ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

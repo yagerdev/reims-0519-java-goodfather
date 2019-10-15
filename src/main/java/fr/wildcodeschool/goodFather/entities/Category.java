@@ -27,9 +27,7 @@ public class Category implements Comparable<Category>{
     @ManyToMany
     private Set<Typology> typologies = new TreeSet<Typology>();
 
-    public Category(){
-
-    }
+    public Category() {}
     
     public Category(String name){
         this.name= name;

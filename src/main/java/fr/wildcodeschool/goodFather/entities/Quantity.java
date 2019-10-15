@@ -21,8 +21,7 @@ public class Quantity implements Comparable<Quantity>{
     @ManyToOne
     private Task task;
     
-    public Quantity() {
-    }
+    public Quantity() {}
 
     public Quantity(Room room, Task task, double quantity) {
         this.room = room;

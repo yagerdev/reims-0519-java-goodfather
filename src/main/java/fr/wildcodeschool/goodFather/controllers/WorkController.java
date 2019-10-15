@@ -25,7 +25,7 @@ public class WorkController {
     WorkRepository workRepository;
 
     @GetMapping("/works")
-    public String show(Model model, @RequestParam(value = "message", required = false) String message) {
+    public String show(Model model, @RequestParam(required = false) String message) {
         List<Work> workList = workRepository.findAll();
         Collections.sort(workList);
         model.addAttribute("works", workList);
