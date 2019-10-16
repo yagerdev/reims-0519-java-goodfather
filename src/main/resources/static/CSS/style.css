@@ -107,7 +107,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input:disabled {
-    color: #333333;
+    color: black;
 }
 
 .read-project {
