@@ -2,54 +2,59 @@ let typology = document.getElementById("typology");
 let work = document.getElementById("work");
 let material = document.getElementById("material");
 
+let works = [].slice.call(work);
+let materials = [].slice.call(material);
+
 typology.addEventListener("change", function() {
     work.disabled = false;
-    for (const option of work) {
-        option.style.display = "none";
+    work.selectedIndex = 0;
+    material.disabled = true;
+    material.selectedIndex = 0;
+    for (i = 1; i < works.length; i ++) {
+        work.options[1] = null;
     }
-    work.value = "Sélectionnez...";
-    let material = document.getElementById("material");
-    material.disabled = false;
-    for (const option of material) {
-        option.style.display = "none";
+    for (i = 1; i < materials.length; i++) {
+        material.options[1] = null;
     }
-    material.value = "Sélectionnez...";
+    let optionValues = [];
     if (typology.value != "Sélectionnez...") {
-        for (const option of work) {
+        for(const option of works) {
             if (option.getAttribute("filter") != null) {
                 if (option.getAttribute("filter") == typology.value) {
-                    option.style.display = "block";
-                }
-            }
-            
-        }
-        let optionValues = [];
-        for (const option of work) {
-            if (option.getAttribute("filter") != null) {
-                if (option.getAttribute("filter") == typology.value) {
-                    if (optionValues.indexOf(option.value) > -1) {
-                        option.style.display = "none";
-                    } else {
-                        optionValues.push(option.value);
+                    if (optionValues.indexOf(option.value) == -1) {
+                        work.add(option);
                     }
-                }
+                    optionValues.push(option.value);
+                } 
             }
+        }
+        if (work.options.length == 1) {
+            work.disabled = true;
         }
     }
 });
 
 work.addEventListener("change", function() {
     material.disabled = false;
-    for (const option of material) {
-        option.style.display = "none";
+    material.selectedIndex = 0;
+    for (i = 1; i < materials.length; i++) {
+        material.options[1] = null;
     }
-    material.value = "Sélectionnez...";
+    let optionValues = [];
     if (work.value != "Sélectionnez...") {
-        for (const option of material) {
-            if (option.getAttribute("filter") == (typology.value + " " + work.value)) {
-                option.style.display = "block";
-                option.selected = true;
+        for (const option of materials) {
+            if(option.getAttribute("filter") != null) {
+                if (option.getAttribute("filter") == (typology.value + " " + work.value)) {
+                    if (optionValues.indexOf(option.value) == -1) {
+                        material.add(option);
+                    }
+                    optionValues.push(option.value);
+                }
             }
+            
+        }
+        if (material.options.length == 1) {
+            material.disabled = true;
         }
     }
 });
