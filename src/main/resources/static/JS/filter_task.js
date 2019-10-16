@@ -1,37 +1,55 @@
-$("#typology").on("change", function() {
-    let typology = $(this).val();
-    $("#work").prop('disabled', false);
-    $("#work").find("option").hide();
-    $("#work").val('Sélectionnez...');
-    $("#material").find("option").hide();
-    $("#material").val('Sélectionnez...');
-    if (typology) {
-        $("#work").find("option[filter='" + typology + "']")
-                .show();
+let typology = document.getElementById("typology");
+let work = document.getElementById("work");
+let material = document.getElementById("material");
 
-        let optionValues =[];
-        $("#work option").each(function(){
-            if (this.getAttribute('filter') == $("#typology").val()) {
-                if($.inArray(this.value, optionValues) >-1){
-                    $(this).hide();
-                }
-                else {
-                    optionValues.push(this.value);
+typology.addEventListener("change", function() {
+    work.disabled = false;
+    for (const option of work) {
+        option.style.display = "none";
+    }
+    work.value = "Sélectionnez...";
+    let material = document.getElementById("material");
+    material.disabled = false;
+    for (const option of material) {
+        option.style.display = "none";
+    }
+    material.value = "Sélectionnez...";
+    if (typology.value != "Sélectionnez...") {
+        for (const option of work) {
+            if (option.getAttribute("filter") != null) {
+                if (option.getAttribute("filter") == typology.value) {
+                    option.style.display = "block";
                 }
             }
-        });
+            
+        }
+        let optionValues = [];
+        for (const option of work) {
+            if (option.getAttribute("filter") != null) {
+                if (option.getAttribute("filter") == typology.value) {
+                    if (optionValues.indexOf(option.value) > -1) {
+                        option.style.display = "none";
+                    } else {
+                        optionValues.push(option.value);
+                    }
+                }
+            }
+        }
     }
 });
 
-$("#work").on("change", function() {
-    let typology = $("#typology").val();
-    let work = $(this).val().toLowerCase();
-    $("#material").prop('disabled', false);
-    $("#material").find("option").hide();
-    $("#material").val('Sélectionnez...');
-    if (work) {
-        $("#material").find("option[filter='" + typology + " " + work + "']")
-                    .show()
-                    .prop('selected', true);
+work.addEventListener("change", function() {
+    material.disabled = false;
+    for (const option of material) {
+        option.style.display = "none";
+    }
+    material.value = "Sélectionnez...";
+    if (work.value != "Sélectionnez...") {
+        for (const option of material) {
+            if (option.getAttribute("filter") == (typology.value + " " + work.value)) {
+                option.style.display = "block";
+                option.selected = true;
+            }
+        }
     }
 });
