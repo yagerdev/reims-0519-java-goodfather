@@ -166,15 +166,19 @@ public class Task implements Comparable<Task> {
         }
     }
 
-    public void update(double price, double percentRange, String unit) {
+    public void updateTask(double price, double percentRange, String unit) {
+        this.updateSource(price, percentRange, unit);
+        this.setPrice(price);
+        this.setPercentRange(percentRange);
+        this.setUnit(unit);
+    }
+
+    public void updateSource(double price, double percentRange, String unit) {
         for (Quantity quantity : this.quantities) {
             quantity.getRoom().reduceCost(this.price * quantity.getQuantity(), this.percentRange);
             quantity.getRoom().addCost(price * quantity.getQuantity(), percentRange);
             quantity.getRoom().getProject().reduceCost(this.price * quantity.getQuantity(), this.percentRange);
             quantity.getRoom().getProject().addCost(price * quantity.getQuantity(), percentRange);
         }
-        this.setPrice(price);
-        this.setPercentRange(percentRange);
-        this.setUnit(unit);
     }
 }
