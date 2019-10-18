@@ -141,9 +141,9 @@
                                                     Typologie
                                                 </p>
                                                 <tr>
-                                                    <th scope="col">
-                                                        Nom de la tâche
-                                                    </th>
+                                                    <th scope="col">Nom de la tâche</th>
+                                                    <th scope="col">Prix de la tâche</th>
+                                                    <th scope="col">Surface / Quantité</th>
                                                     <th scope="col">Coût</th>
                                                 </tr>
                                             </thead>
@@ -155,6 +155,8 @@
                                                     <td
                                                         th:text="${quantity.task.constructName()}"
                                                     ></td>
+                                                    <td th:text="${quantity.task.price} + '€'"></td>
+                                                    <td th:text="${quantity.quantity}"></td>
                                                     <td
                                                         th:text="${quantity.quantity*quantity.task.price} + '€'"
                                                     ></td>
