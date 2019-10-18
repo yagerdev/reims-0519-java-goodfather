@@ -221,8 +221,7 @@ public class ProjectController {
                     Task task = quantity.getTask();
                     Task alternativeTask = taskRepository.findTaskByWorkIdAndMaterialIdAndTypologyIdAndUserId(
                             task.getWork().getId(), task.getMaterial().getId(), task.getTypology().getId(), toSource);
-                    task.update(alternativeTask.getPrice(), alternativeTask.getPercentRange(),
-                            alternativeTask.getUnit());
+                    task.updateSource(alternativeTask.getPrice(), alternativeTask.getPercentRange(), alternativeTask.getUnit());
                     quantity.setTask(alternativeTask);
                     quantityRepository.save(quantity);
                     task.getQuantities().remove(quantity);

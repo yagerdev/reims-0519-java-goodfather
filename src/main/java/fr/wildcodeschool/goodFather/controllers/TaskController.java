@@ -176,7 +176,7 @@ public class TaskController {
     @PutMapping("/tasks/{id}")
     public String update(@PathVariable Long id, Task task, RedirectAttributes redirectAttributes) {
         Task taskToUpdate = taskRepository.findById(id).get();
-        taskToUpdate.update(task.getPrice(), task.getPercentRange(), task.getUnit());
+        taskToUpdate.updateTask(task.getPrice(), task.getPercentRange(), task.getUnit());
         taskRepository.save(taskToUpdate);
         redirectAttributes.addAttribute("message", "edit");
         return "redirect:/tasks";

@@ -173,7 +173,7 @@ public class UserController implements WebMvcConfigurer{
                             task.getTypology().getId(),
                             null
                         );
-                        task.update(defaultTask.getPrice(), defaultTask.getPercentRange(), defaultTask.getUnit());
+                        task.updateTask(defaultTask.getPrice(), defaultTask.getPercentRange(), defaultTask.getUnit());
                         quantity.setTask(defaultTask);
                         quantityRepository.save(quantity);
                         task.getQuantities().remove(quantity);
