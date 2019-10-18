@@ -179,7 +179,7 @@
                                     >
                                         <input
                                             type="text"
-                                            th:value="*{constructName()}"
+                                            th:value="*{constructName()} + ${' - ' + task.price + '€'}"
                                             th:id="${task.id}"
                                             name="name"
                                             disabled

@@ -120,7 +120,7 @@
                     class="alert alert-info d-flex flex-column align-items-center"
                     role="alert"
                 >
-                    Fourchette basse :
+                    Estimation basse :
                     <span
                         class="alert-link"
                         th:text="${T(Math).round(project.lowerTotalCost) + ' €'}"
@@ -132,7 +132,7 @@
                     class="alert alert-warning d-flex flex-column align-items-center"
                     role="alert"
                 >
-                    Fourchette haute :
+                    Estimation haute :
                     <span
                         class="alert-link"
                         th:text="${T(Math).round(project.upperTotalCost) + ' €'}"
@@ -272,11 +272,11 @@
                                                         >
                                                             <tr>
                                                                 <th>
-                                                                    Fourchette
+                                                                    Estimation
                                                                     haute
                                                                 </th>
                                                                 <th>
-                                                                    Fourchette
+                                                                    Estimation
                                                                     basse
                                                                 </th>
                                                             </tr>
