@@ -19,10 +19,10 @@
                 </button>
             </div>
             <main class="container-fluid">
-                <p class="alert mb-1 bg-vert-gf">Informations du client</p>
+                <div class="alert alert-info mb-2" role="alert">Informations client</div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
                                 <th scope="col">Prénom</th>
                                 <th scope="col">Nom</th>
@@ -46,10 +46,11 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="alert mb-1 bg-vert-gf">Résumé du projet</p>
+
+                <div class="alert alert-info mb-2" role="alert">Informations projet</div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
                                 <th scope="col">Nom du projet</th>
                                 <th scope="col">Date de création</th>
@@ -57,8 +58,8 @@
                                 <th scope="col">Ville</th>
                                 <th scope="col">Code postal</th>
                                 <th scope="col">Estimation total</th>
-                                <th scope="col">Fourchette haute</th>
-                                <th scope="col">Fourchette basse</th>
+                                <th scope="col">Estimation haute</th>
+                                <th scope="col">Estimation basse</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,16 +81,17 @@
                                     th:text="${T(Math).round(project.lowerTotalCost) + '€'}"
                                 ></td>
                             </tr>
+                            <tr>
+                                <td colspan="8" th:text="${project.comment}"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <p class="form-control p-4" th:text="${project.comment}"></p>
 
-                <p class="alert mb-1 bg-vert-gf">Liste des pièces du projet</p>
+                <div class="alert alert-info mb-2" role="alert">Liste des pièces du projet</div>
                 <section
                     th:each="category : ${categories}"
                     th:if="${project.containAtLeastOneOf(category)}"
-                    class="mb-4"
                 >
                     <p
                         class="alert alert-primary mb-1"
@@ -98,14 +100,15 @@
                     <div class="table-responsive">
                         <table
                             class="table table-bordered mb-4"
-                            th:each="room : ${project.getRooms()}"
+                            th:each="room : ${category.getRooms()}"
+                            th:if="${room.getProject().getId()} == ${project.id}"
                         >
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Nom de la pièce</th>
                                     <th scope="col">Estimation total</th>
-                                    <th scope="col">Fourchette haute</th>
-                                    <th scope="col">Fourchette basse</th>
+                                    <th scope="col">Estimation haute</th>
+                                    <th scope="col">Estimation basse</th>
                                     <th scope="col">Commentaires</th>
                                 </tr>
                             </thead>
@@ -130,7 +133,7 @@
                                             th:each="typology : ${typologies}"
                                             th:if="${room.containAtLeastOneOf(typology)}"
                                         >
-                                            <thead>
+                                            <thead class="thead-light">
                                                 <p
                                                     class="alert alert-info mb-1"
                                                     th:text="${typology.name + ' - ' + room.getTotalCostPerTypology(typology) + '€'}"
@@ -164,6 +167,9 @@
                         </table>
                     </div>
                 </section>
+
+
+
             </main>
             <script>
                 function pdf() {
