@@ -18,7 +18,7 @@
 
 - 👤 **Clement Bouakil** - [GitHub](https://github.com/clementbouakil) - [LinkedIn](https://www.linkedin.com/in/cl%C3%A9ment-bouakil/)
 - 👤 **Furkan Celik** - [GitHub](https://github.com/yagerdev) - [LinkedIn](https://www.linkedin.com/in/furkan-celik-8950a8138/)
-- 👤 **Youssef Sabouni** - [GitHub](https://github.com/Youssef51) - [LinkedIn](https://www.linkedin.com/in/youssefsabouni/)
+- 👤 **Youssef Sabouni** - [GitHub](https://github.com/YoussefSabouni) - [LinkedIn](https://www.linkedin.com/in/youssefsabouni/)
 - 👤 **Remy Trohel** - [GitHub](https://github.com/RemyTrohel) - [LinkedIn](https://www.linkedin.com/in/remytrohel/)
 
 ## DATABASE
